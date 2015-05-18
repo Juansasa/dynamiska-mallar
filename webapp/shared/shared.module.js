@@ -12,18 +12,13 @@
         'ngSanitize',
         'ngResource',
         'ui.bootstrap',
-        'geolocation', 
-        'angularSpinner', 
-        'ngMap',
+        'angularSpinner',
+        'formly',
 
         'exception',
         'router'
     ]).run(['gettextCatalog',
         function(gettextCatalog) {
-            $.stellar({
-                horizontalScrolling: false,
-                responsive: true
-            });
             gettextCatalog.currentLanguage = 'sv';
             //gettextCatalog.debug = true;
         }
