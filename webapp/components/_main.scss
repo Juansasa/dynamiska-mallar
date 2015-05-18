@@ -22,7 +22,8 @@ p {
 
 .header-nav {
     @include container;
-    $header-bg: lighten(black, 20%);
+    $header-bg: lighten(black, 15%);
+    $hover-coolor: red;
     background-color: $header-bg;
     ul {
         margin: 0;
@@ -33,6 +34,16 @@ p {
             a {
                 color: text-contrast(black, white, 7);
                 text-decoration: none;
+            }
+
+            &:hover {
+                background-color: $hover-coolor;
+                color: text-contrast($hover-coolor, white, 7);
+            }
+
+            &:active {
+                background-color: darken($hover-coolor, 10%);
+                color: text-contrast(darken($hover-coolor, 10%), white, 7);
             }
         }
     }

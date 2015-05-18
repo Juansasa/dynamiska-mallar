@@ -11,7 +11,8 @@
             url: '/home',
             templateUrl: 'components/home/home.html',
             title: gettext('Home'),
-            controller: 'HomeController'
+            controller: 'HomeController',
+            controllerAs: 'vm'
         };
 
         routeHelper.registerState(stateName, stateConfig);
