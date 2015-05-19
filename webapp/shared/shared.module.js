@@ -7,7 +7,7 @@
      */
     angular.module('shared', [
         'gettext',
-        'ngAnimate',
+        //'ngAnimate',
         'ngCookies',
         'ngSanitize',
         'ngResource',
@@ -17,7 +17,8 @@
         'formlyBootstrap',
 
         'exception',
-        'router'
+        'router',
+        'data',
     ]).run(['gettextCatalog',
         function(gettextCatalog) {
             gettextCatalog.currentLanguage = 'sv';
