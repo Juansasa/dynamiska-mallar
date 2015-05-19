@@ -1,7 +1,7 @@
 (function() {
     'use strict';
-    angular.module('home')
-        .controller('HomeController', homeCtrl);
+    angular.module('newEmployment')
+        .controller('NewEmploymentController', homeCtrl);
 
     /*@ngInject*/
     function homeCtrl($scope, usSpinnerService) {

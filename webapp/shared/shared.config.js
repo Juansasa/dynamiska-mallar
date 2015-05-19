@@ -12,9 +12,9 @@
     function configure($logProvider, customExceptionHandlerProvider, routehelperConfigProvider, gettext, $urlRouterProvider, $stateProvider, $animateProvider) {
         sharedModule.value('config', config);
         var config = {
-            appErrorPrefix: '[FMU Error]: ',
-            appTitle: gettext('fmu-title/Fördjupad medicinsk utredning'),
-            version: gettext('fmu-version/0.0.1')
+            appErrorPrefix: '[Previa Error]: ',
+            appTitle: gettext('Previa dynamiska mallar'),
+            version: gettext('previa-version/0.0.0')
         };
 
         // turn debugging off/on (no info or warn)
@@ -25,7 +25,7 @@
         // Configure the common route provider
         routehelperConfigProvider.config.$urlRouterProvider = $urlRouterProvider;
         routehelperConfigProvider.config.$stateProvider = $stateProvider;
-        routehelperConfigProvider.config.docTitle = gettext('fmu-route-title/Fmu');
+        routehelperConfigProvider.config.docTitle = gettext('Previa');
 
         // Configure the common exception handler
         customExceptionHandlerProvider.configure(config.appErrorPrefix);

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
-    angular.module('home')
-        .controller('HomeController', homeCtrl);
+    angular.module('existingEmployment')
+        .controller('ExistingEmploymentController', homeCtrl);
 
     /*@ngInject*/
     function homeCtrl($scope, usSpinnerService) {
@@ -56,7 +56,7 @@
         }];
 
         vm.onSubmit = function() {
-            console.log(vm.model);
+            console.log($scope.title);
         };
     }
 })();

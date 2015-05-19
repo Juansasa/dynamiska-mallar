@@ -8,6 +8,8 @@
     angular.module('previa.order', [
         'shared',
 
-        'home'
+        'home',
+        'newEmployment',
+        'existingEmployment'
     ]);
 })();

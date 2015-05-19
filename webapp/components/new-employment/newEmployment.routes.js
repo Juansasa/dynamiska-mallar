@@ -1,22 +1,21 @@
 (function() {
     'use strict';
 
-    angular.module('home')
+    angular.module('newEmployment')
         .run(setUpRoutes);
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
-        var stateName = gettext('home');
+        var stateName = gettext('newEmployment');
         var stateConfig = {
-            url: '/home',
-            templateUrl: 'components/home/home.html',
-            title: gettext('Home'),
-            controller: 'HomeController',
+            url: '/new',
+            templateUrl: 'components/new-employment/newEmployment.html',
+            title: gettext('New employment'),
+            controller: 'NewEmploymentController',
             controllerAs: 'vm'
         };
 
         routeHelper.registerState(stateName, stateConfig);
-        routeHelper.setDefaultState(stateConfig.url);
     }
     setUpRoutes.$inject = ['routeHelper', 'gettext'];
 })();
