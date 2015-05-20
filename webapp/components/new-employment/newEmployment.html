@@ -1,25 +1,22 @@
 <div class="container">
-	<h1>Beställning ny anställd</h1>
+	<h1>Anställningsavtal</h1>
 </div>
-<br>
+<hr>
 <div class="container">
 	<div class="wizard">
 		<a ng-repeat="step in vm.steps" 
 			ng-click="vm.setActive($index)"
 			ng-class="{current:$index === vm.activeStep}"><span class="badge">{{$index + 1}}</span> {{step.name}}</a>
 	</div>
-	<br>
-	<div class="container">
-		<form name="vm.form" ng-submit="vm.onSubmit()" novalidate>
-			<fieldset>
-				<legend translate>Beställare</legend>
-				<formly-form model="vm.steps[vm.activeStep].model" fields="vm.steps[vm.activeStep].fields"></form-form>
-			</fieldset>
-			<fieldset>
-				<legend translate>Person ärende gäller</legend>
-				<formly-form model="vm.steps[vm.activeStep].model" fields="vm.steps[vm.activeStep].fields"></form-form>
-				<button class="btn btn-success btn-form" type="submit" submit-button>Submit</button>
-			</fieldset>
-		</form>
-	</div>
 </div>
+<hr>
+<div class="container">
+	<form name="vm.form" ng-submit="vm.onSubmit()" novalidate>
+		<fieldset ng-repeat="field in vm.steps[vm.activeStep].fields">
+			<legend>{{field.groupName}}</legend>
+			<formly-form model="vm.model" fields="field.formfields"></form-form>
+		</fieldset>
+		<button type="submit" class="btn btn-primary btn-form">Submit</button>
+	</form>
+</div>
+<hr>

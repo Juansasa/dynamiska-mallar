@@ -19,6 +19,7 @@
         'exception',
         'router',
         'data',
+        'forms'
     ]).run(['gettextCatalog',
         function(gettextCatalog) {
             gettextCatalog.currentLanguage = 'sv';

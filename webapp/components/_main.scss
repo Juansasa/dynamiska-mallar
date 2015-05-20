@@ -24,6 +24,20 @@ p {
     float: right;
 }
 
+.radio {
+    display: inline-block;
+    margin: 1em 1em 0 1em;
+}
+
+.form-group-label {
+    margin-left: 1em;
+    font-style: italic;
+}
+
+.row {
+    @include clearfix;
+}
+
 .wizard {
     $step-color: #efefef;
     $hover-color: darken($previa-red, 5);
