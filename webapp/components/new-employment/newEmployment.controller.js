@@ -33,7 +33,10 @@
         };
 
         vm.onSubmit = function() {
-            console.log(vm.steps);
+            var pdf = new jsPDF('p', 'pt', 'A4');
+            pdf.addHTML($('#print-content'),15,15, function() {
+                pdf.save('Test.pdf');
+            });
         };
 
         function getNewAccountFields() {

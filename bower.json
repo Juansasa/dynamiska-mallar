@@ -19,7 +19,10 @@
     "angular-spinner": "~0.6.1",
     "api-check": "~7.2.3",
     "angular-formly": "~6.5.0",
-    "angular-formly-templates-bootstrap": "~4.1.0"
+    "angular-formly-templates-bootstrap": "~4.1.0",
+    "jspdf": "~1.1.135",
+    "jquery": "~2.1.4",
+    "html2canvas": "~0.4.1"
   },
   "devDependencies": {
     "susy": "~2.2.2",

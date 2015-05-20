@@ -56,7 +56,10 @@
         }];
 
         vm.onSubmit = function() {
-            console.log(vm.model);
+            var pdf = new jsPDF('p', 'pt', 'A4');
+            pdf.addHTML($('.container').first(), function() {
+                pdf.save('Test.pdf');
+            });
         };
     }
 })();

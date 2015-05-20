@@ -10,8 +10,8 @@
 	</div>
 </div>
 <hr>
-<div class="container">
-	<form name="vm.form" ng-submit="vm.onSubmit()">
+<div class="container" id="print-content">
+	<form name="vm.form" ng-submit="vm.onSubmit()" noValidate>
 		<fieldset ng-repeat="field in vm.steps[vm.activeStep].fields">
 			<legend>{{field.groupName}}</legend>
 			<formly-form model="vm.model" fields="field.formfields"></form-form>
