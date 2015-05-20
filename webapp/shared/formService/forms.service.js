@@ -32,9 +32,9 @@
             return [{
                 key: FORMKEYS.person.employmentType,
                 type: 'radio',
+                defaultValue: 'employee',
                 templateOptions: {
                     label: 'Tjänstetyp',
-                    default: 'no',
                     options: [{
                         name: 'Konsult',
                         value: 'consultant'
@@ -386,10 +386,84 @@
         }
 
         function getOrderEmployeeAccountForm() {
-            return {
-                firstname: 'Per',
-                lastname: 'Persson'
-            };
+            return [{
+                template: '<div><strong>Kompletterande personuppgifter</strong></div><br>'
+            }, {
+                className: 'col-md-12',
+                type: 'select',
+                templateOptions: {
+                    label: 'MO (Marknadsområde)',
+                    options: [{
+                        name: 'Mo 1',
+                        value: 'mo1'
+                    }, {
+                        name: 'Mo 2',
+                        value: 'mo2'
+                    }, {
+                        name: 'Mo 3',
+                        value: 'mo3'
+                    }]
+                }
+            }, {
+                className: 'col-md-12',
+                type: 'select',
+                templateOptions: {
+                    label: 'Huvud-RE',
+                    options: [{
+                        name: 'RE 1',
+                        value: 'RE1'
+                    }, {
+                        name: 'RE 2',
+                        value: 'RE2'
+                    }, {
+                        name: 'RE 3',
+                        value: 'RE3'
+                    }]
+                }
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-8',
+                    type: 'select',
+                    templateOptions: {
+                        label: 'Tillhör även RE',
+                        options: [{
+                            name: 'RE 1',
+                            value: 'RE1'
+                        }, {
+                            name: 'RE 2',
+                            value: 'RE2'
+                        }, {
+                            name: 'RE 3',
+                            value: 'RE3'
+                        }]
+                    }
+                }, {
+                    template: '<button type="submit" class="btn btn-success">Lägg till</button>'
+                }]
+            }, {
+                className: 'col-md-12',
+                type: 'input',
+                templateOptions: {
+                    label: 'Tjänsteställe / Enhetens namn'
+                }
+            }, {
+                template: '<div><strong>Befattning / Roll / Behörighet / Licenser</strong></div><br>'
+            }, {
+                className: 'col-md-12',
+                type: 'radio',
+                templateOptions: {
+                    label: 'Befattningen är en Tf roll',
+                    defaultValue: false,
+                    options: [{
+                        name: 'Ja',
+                        value: true
+                    }, {
+                        name: 'Nej',
+                        value: false
+                    }]
+                }
+            }];
         }
 
         function getOrderPersonForm() {
