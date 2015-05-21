@@ -21,7 +21,7 @@
     "angular-formly": "~6.5.0",
     "angular-formly-templates-bootstrap": "~4.1.0",
     "jquery": "~2.1.4",
-    "html2canvas": "~0.4.1"
+    "html2canvas": "https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"
   },
   "devDependencies": {
     "susy": "~2.2.2",
