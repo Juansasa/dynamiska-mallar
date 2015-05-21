@@ -45,6 +45,9 @@
     		// Change employment conditions
     		changeDate: 'pchangeDate',
     		changeCondition: 'pchangeCondition'
+    	},
+    	newAccount: {
+    		role: 'titel/roll'
     	}
     });
 })();

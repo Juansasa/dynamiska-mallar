@@ -463,6 +463,528 @@
                         value: false
                     }]
                 }
+            }, {
+                template: '<div><strong>Standardbehörighet för samtliga roller och befattningar:</strong></div>'
+            }, {
+                type: 'titleRadio',
+                templateOptions: {
+                    label: 'test',
+                    noRadio: true,
+                    options: [{
+                        explainations: [
+                            '3Q användarbehörighet( QV & Quando)',
+                            'Läsrättigheter till Internwebben',
+                            'E-post konto (konsult...)',
+                            'Hemkatalog H:',
+                            'Access till G:',
+                            'Improof',
+                            'Handboken',
+                            'Agda Entré',
+                            'Access till Kuben',
+                            'Lync'
+                        ]
+                    }]
+                }
+            }, {
+                template: '<div><strong>Välj Befattning, roll och behörighet:</strong></div>'
+            }, {
+                type: 'titleRadio',
+                key: FORMKEYS.newAccount.role,
+                templateOptions: {
+                    label: 'test',
+                    options: [{
+                        name: 'Account Manager',
+                        value: 'accountManager',
+                        explainations: [
+                            'Försäljningsrapportering och försäljningsstatistik',
+                            'CRM'
+                        ]
+                    }, {
+                        name: 'Affärscontroller',
+                        value: 'affarscontroller',
+                        explainations: [
+                            'Visma', 'Mercur', 'Adm access till kuben'
+                        ]
+                    }, {
+                        name: 'Affärsutvecklingschef',
+                        value: 'affarsutvecklingschef',
+                        explainations: [
+                            'Visma', 'Mercur', 'Agda PS'
+                        ]
+                    }, {
+                        name: 'Affärsområdeschef',
+                        value: 'affarsomradeschef',
+                        explainations: [
+                            'Visma', 'Mercur', 'Agda PS'
+                        ]
+                    }, {
+                        name: 'Affärsstöd - Admin & Service',
+                        value: 'affaradminservice',
+                        explainations: [
+                            'Visma', 'Mercur', 'Agda PS'
+                        ]
+                    }, {
+                        name: 'Affärsstöd – Ekonomi',
+                        value: 'affarstodekonomi',
+                        explainations: [
+                            'Visma', 'Mercur', 'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
+                        ]
+                    }, {
+                        name: 'Affärsstöd - Sälj & Marknad',
+                        value: 'affarstodsaljmarknad',
+                        explainations: [
+                            'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
+                        ]
+                    }, {
+                        name: 'Affärsutvecklingschef',
+                        value: 'Affärsutvecklingschef'
+                    }, {
+                        name: 'Anbudsansvarig',
+                        value: 'Anbudsansvarig'
+                    }, {
+                        name: 'Anbudskoordinator',
+                        value: 'Anbudskoordinator'
+                    }, {
+                        name: 'Arbetsmiljöingenjör',
+                        value: 'Arbetsmiljöingenjör'
+                    }, {
+                        name: 'Arbetsmiljökonsult',
+                        value: 'Arbetsmiljökonsult'
+                    }, {
+                        name: 'Arbetsmiljötekniker',
+                        value: 'Arbetsmiljötekniker'
+                    }, {
+                        name: 'Barnmorska – Ej obligatorisk förskrivarkod',
+                        value: 'Barnmorska – Ej obligatorisk förskrivarkod',
+                        explainations: [
+                            'Quid Agis'
+                        ]
+                    }, {
+                        name: 'Beteendevetare',
+                        value: 'Beteendevetare',
+                        explainations: [
+                            'Quid Agis'
+                        ],
+                        subOptions: [{
+                            key: 'Beteendevetare-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Beteendevetare');
+                            }
+                        }]
+                    }, {
+                        name: 'Callcenteragent',
+                        value: 'Callcenteragent',
+                        explainations: [
+                            'Se specifik lista för roller inom KSC'
+                        ]
+                    }, {
+                        name: 'CFO',
+                        value: 'CFO',
+                        explainations: [
+                            'Agda PS', 'Visma', 'Mercur'
+                        ]
+                    }, {
+                        name: 'Chef Previa Trygghetstjänster',
+                        value: 'Chef Previa Trygghetstjänster'
+                    }, {
+                        name: 'Drift och förvaltningsansvarig',
+                        value: 'Drift och förvaltningsansvarig',
+                        explainations: [
+                            'IT Kontakt'
+                        ]
+                    }, {
+                        name: 'Drogterapeut',
+                        value: 'Drogterapeut',
+                        explainations: [
+                            'Quid Agis'
+                        ]
+                    }, {
+                        name: 'Ekonomiassistent',
+                        value: 'Ekonomiassistent',
+                        explainations: [
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'Ekonomichef',
+                        value: 'Ekonomichef',
+                        explainations: [
+                            'Agda PS', 'Visma', 'Mercur'
+                        ]
+                    }, {
+                        name: 'Faktureringsekonom',
+                        value: 'Faktureringsekonom',
+                        explainations: [
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'Fysioterapeut',
+                        value: 'Fysioterapeut',
+                        explainations: [
+                            'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
+                        ],
+                        subOptions: [{
+                            key: 'Fysioterapeut-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Fysioterapeut');
+                            }
+                        }]
+                    }, {
+                        name: 'Företagsläkare',
+                        value: 'Företagsläkare',
+                        explainations: [
+                            'Quid Agis', 'Cardio Controll - EKG/Spiro (OBS! Se handboken för installationsinstruktion)',
+                            'CareTalk - Digital diktering (OBS! Se handboken för installationsinstruktion)'
+                        ],
+                        subInput: [{
+                            type: 'input',
+                            key: 'Obligatorisk förskrivarkod',
+                            templateOptions: {
+                                label: '',
+                                required: true,
+                                placeholder: 'Förskrivarkod xxx-xxxxx'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Företagsläkare');
+                            }
+                        }]
+                    }, {
+                        name: 'Företagssköterska',
+                        value: 'Företagssköterska',
+                        explainations: [
+                            'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
+                        ],
+                        subOptions: [{
+                            key: 'Företagssköterska-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Företagssköterska');
+                            }
+                        }],
+                        subInput: [{
+                            type: 'input',
+                            key: 'Obligatorisk förskrivarkod',
+                            templateOptions: {
+                                label: '',
+                                placeholder: 'Förskrivarkod xxx-xxxxx'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Företagssköterska');
+                            }
+                        }]
+                    }, {
+                        name: 'Försäljnings- och Marknadschef (FMC)',
+                        value: 'Försäljnings- och Marknadschef (FMC)',
+                        explainations: [
+                            'Försäljningsrapportering och försäljningsstatistik',
+                            'Agda PS',
+                            'CRM',
+                            'Visma',
+                            'Mercur'
+                        ]
+                    }, {
+                        name: 'Försäljningschef',
+                        value: 'Försäljningschef',
+                        explainations: [
+                            'Försäljningsrapportering och försäljningsstatistik',
+                            'Agda PS',
+                            'Mercur',
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'HR-ansvarig',
+                        value: 'HR-ansvarig',
+                        explainations: [
+                            'Agda PS'
+                        ]
+                    }, {
+                        name: 'HR-chef',
+                        value: 'HR-chef',
+                        explainations: [
+                            'Agda PS',
+                            'Mercur',
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'Hälsoutvecklare',
+                        value: 'Hälsoutvecklare',
+                        explainations: [
+                            'Quid Agis'
+                        ]
+                    }, {
+                        name: 'Informationschef',
+                        value: 'Informationschef',
+                        explainations: [
+                            'Agda PS',
+                            'Mercur',
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'IT-chef',
+                        value: 'IT-chef',
+                        explainations: [
+                            'Agda PS',
+                            'Mercur',
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'IT-koordinator',
+                        value: 'IT-koordinator'
+                    }, {
+                        name: 'Key Account Manager',
+                        value: 'Key Account Manager',
+                        explainations: [
+                            'Försäljningsrapportering och försäljningsstatistik',
+                            'CRM'
+                        ]
+                    }, {
+                        name: 'Kundservicehandläggare',
+                        value: 'Kundservicehandläggare',
+                        explainations: [
+                            'Se specifik lista för roller inom KSC'
+                        ]
+                    }, {
+                        name: 'Konsultchef',
+                        value: 'Konsultchef',
+                        explainations: [
+                            'Agda PS',
+                            'Mercur',
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'Kvalitets- och miljösamordnare',
+                        value: 'Kvalitets- och miljösamordnare'
+                    }, {
+                        name: 'Kvalitets-och miljöansvarig',
+                        value: 'Kvalitets-och miljöansvarig'
+                    }, {
+                        name: 'Leg psykolog',
+                        value: 'Leg psykolog',
+                        explainations: [
+                            'Quid Agis'
+                        ],
+                        subOptions: [{
+                            key: 'Leg psykolog-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Leg psykolog');
+                            }
+                        }]
+                    }, {
+                        name: 'Löneadministratör',
+                        value: 'Löneadministratör',
+                        explainations: [
+                            'Agda PS'
+                        ]
+                    }, {
+                        name: 'Marknadsområdeschef (MOC)',
+                        value: 'Marknadsområdeschef (MOC)',
+                        explainations: [
+                            'Agda PS',
+                            'Mercur',
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'Operativ samordnare',
+                        value: 'Operativ samordnare',
+                        subOptions: [{
+                            key: 'Operativ samordnare option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'Agda PS'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Operativ samordnare');
+                            }
+                        }]
+                    }, {
+                        name: 'Organisationskonsult',
+                        value: 'Organisationskonsult',
+                        explainations: [
+                            'Quid Agis'
+                        ],
+                        subOptions: [{
+                            key: 'Organisationskonsult-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Organisationskonsult');
+                            }
+                        }]
+                    }, {
+                        name: 'Produktionsplanerare',
+                        value: 'Produktionsplanerare'
+                    }, {
+                        name: 'Projektledare',
+                        value: 'Projektledare'
+                    }, {
+                        name: 'Projektsamordnare',
+                        value: 'Projektsamordnare'
+                    }, {
+                        name: 'PTP-psykolog',
+                        value: 'PTP-psykolog',
+                        explainations: [
+                            'Quid Agis'
+                        ],
+                        subOptions: [{
+                            key: 'PTP-psykolog-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'PTP-psykolog');
+                            }
+                        }]
+                    }, {
+                        name: 'Receptionist',
+                        value: 'Receptionist',
+                        subOptions: [{
+                            key: 'Receptionist-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'Quid Agis'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Receptionist');
+                            }
+                        }]
+                    }, {
+                        name: 'Redovisningscontroller',
+                        value: 'Redovisningscontroller',
+                        explainations: [
+                            'Visma'
+                        ]
+                    }, {
+                        name: 'Sales Executive',
+                        value: 'Sales Executive',
+                        explainations: [
+                            'Försäljningsrapportering och försäljningsstatistik',
+                            'CRM'
+                        ]
+                    }, {
+                        name: 'S&F Agent',
+                        value: 'S&F Agent',
+                        explainations: [
+                            'Se specifik lista för roller inom KSC'
+                        ]
+                    }, {
+                        name: 'Systemkoordinator',
+                        value: 'Systemkoordinator'
+                    }, {
+                        name: 'Telefonsjuksköterska',
+                        value: 'Telefonsjuksköterska',
+                        explainations: [
+                            'Se specifik lista för roller inom KSC'
+                        ]
+                    }, {
+                        name: 'Undersköterska',
+                        value: 'Undersköterska',
+                        explainations: [
+                            'Quid Agis',
+                            'Cardio Controll - EKG/Spiro'
+                        ],
+                        subOptions: [{
+                            key: 'Undersköterska-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Undersköterska');
+                            }
+                        }]
+                    }, {
+                        name: 'Vaktmästare',
+                        value: 'Vaktmästare'
+                    }, {
+                        name: 'VD',
+                        value: 'VD',
+                        explainations: [
+                            'Agda PS'
+                        ]
+                    }, {
+                        name: 'Växeltelefonist',
+                        value: 'Växeltelefonist',
+                        explainations: [
+                            'Se specifik lista för roller inom KSC'
+                        ]
+                    }, {
+                        name: 'Övrig kontorspersonal',
+                        value: 'Övrig kontorspersonal',
+                        explainations: [
+                            'Quid Agis',
+                            'Cardio Controll - EKG/Spiro'
+                        ],
+                        subOptions: [{
+                            key: 'Övrig kontorspersonal-option',
+                            type: 'checkbox',
+                            templateOptions: {
+                                label: 'Quid Agis'
+                            },
+                            hideExpression: function(vv, mv, scope) {
+                                return (scope.model[FORMKEYS.newAccount.role] !== 'Övrig kontorspersonal');
+                            }
+                        }]
+                    }]
+                }
+            }, {
+                template: '<hr>'
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    templateOptions: {
+                        label: 'Övrig information',
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Dagens datum',
+                        type: 'date',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Rapporterar till (chef)',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Namn på behörig beställare',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'E-postadress på behörig beställare',
+                        required: true
+                    }
+                }]
+            }, {
+                template: '<hr>'
             }];
         }
 

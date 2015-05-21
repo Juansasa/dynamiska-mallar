@@ -23,6 +23,7 @@
     "angular": false,
     "_": false,
     "$": false,
-    "google": false
+    "google": false,
+    "html2canvas": false
   }
 }

@@ -33,10 +33,19 @@
         };
 
         vm.onSubmit = function() {
-            var pdf = new jsPDF('p', 'pt', 'A4');
-            pdf.addHTML($('#print-content'),15,15, function() {
-                pdf.save('Test.pdf');
-            });
+            // $('header').hide();
+            // $('.wizard').hide();
+            // $('button').hide();
+
+            // html2canvas($('body').first(), {
+            //     onrendered: function(canvas) {
+            //         window.location = canvas.toDataURL('image/png');
+            //         $('header').show();
+            //         $('.wizard').show();
+            //         $('button').show();
+            //     }
+            // });
+            console.log(vm.model);
         };
 
         function getNewAccountFields() {

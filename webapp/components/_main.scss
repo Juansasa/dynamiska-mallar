@@ -29,6 +29,18 @@ p {
     margin: 1em 1em 0 1em;
 }
 
+.title-radio {
+    display: block;
+    p {
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    margin-bottom: 1em;
+}
+
+.suboption {
+    margin-top: 0;
+}
 
 .form-group-label {
     margin-left: 1em;
@@ -37,6 +49,31 @@ p {
 
 .container {
     background-color: white;
+}
+
+.print-container {
+    padding: 3em;
+    margin: 3em;
+}
+
+.fa-check {
+    color: green;
+}
+
+.subinput {
+    display: inline-block;
+    width: 20em;
+    margin-left: 1em;
+    label {
+        display: none;
+    }
+    input {
+        height: 2em;
+    }
+}
+
+.suboptions {
+    margin-left: 1em;
 }
 
 .wizard {
@@ -79,7 +116,7 @@ p {
         }
         &:hover {
             background-color: $hover-color;
-            color: text-constrast($hover-color,white, 7);
+            color: text-constrast($hover-color, white, 7);
             &:after {
                 border-left-color: $hover-color;
             }
