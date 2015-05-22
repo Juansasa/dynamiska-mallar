@@ -18,8 +18,11 @@
             name: 'Konto beställning',
             fields: []
         }, {
-            name: 'Telefoni',
-            fields: []
+            name: 'Förlängning Anställd Konto',
+            fields: [{
+                groupName: 'Person ärende gäller',
+                formfields: forms.extendEmployeeAccount()
+            }]
         }];
 
         vm.setActive = function(index, step) {
@@ -33,18 +36,18 @@
         };
 
         vm.onSubmit = function() {
-            $('header').hide();
-            $('.wizard').hide();
-            $('button').hide();
+            // $('header').hide();
+            // $('.wizard').hide();
+            // $('button').hide();
 
-            html2canvas($('body').first(), {
-                onrendered: function(canvas) {
-                    window.location = canvas.toDataURL('image/png');
-                    $('header').show();
-                    $('.wizard').show();
-                    $('button').show();
-                }
-            });
+            // html2canvas($('body').first(), {
+            //     onrendered: function(canvas) {
+            //         window.location = canvas.toDataURL('image/png');
+            //         $('header').show();
+            //         $('.wizard').show();
+            //         $('button').show();
+            //     }
+            // });
             console.log(vm.model);
         };
 

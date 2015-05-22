@@ -10,6 +10,7 @@
 
         'home',
         'newEmployment',
-        'existingEmployment'
+        'existingEmployment',
+        'newConsultantAccount'
     ]);
 })();

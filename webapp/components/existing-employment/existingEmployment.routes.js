@@ -8,6 +8,9 @@
     function setUpRoutes(routeHelper, gettext) {
         var stateName = gettext('existingEmployment');
         var stateConfig = {
+            data: {
+                model: {}
+            },
             url: '/existing',
             templateUrl: 'components/existing-employment/existingEmployment.html',
             title: gettext('Existing employment'),
