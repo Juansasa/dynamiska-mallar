@@ -4,13 +4,11 @@
         .controller('NewConsultantAccountController', homeCtrl);
 
     /*@ngInject*/
-    function homeCtrl($scope, forms) {
+    function homeCtrl($scope, forms, $state) {
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};
         $scope.fields = forms.newConsultantAccount();
         
-        $scope.onSubmit = function() {
-            console.log($scope);
-        };
+        console.log($state);
     }
 })();

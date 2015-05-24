@@ -5,11 +5,8 @@
     sharedModule.config(configure);
 
     /*@ngInject*/
-    configure.$inject = ['$logProvider', 'customExceptionHandlerProvider', 'routehelperConfigProvider',
-        'gettext', '$urlRouterProvider', '$stateProvider', '$animateProvider'
-    ];
-
-    function configure($logProvider, customExceptionHandlerProvider, routehelperConfigProvider, gettext, $urlRouterProvider, $stateProvider, $animateProvider) {
+    function configure($logProvider, customExceptionHandlerProvider, routehelperConfigProvider,
+        gettext, $urlRouterProvider, $stateProvider, $animateProvider) {
         sharedModule.value('config', config);
         var config = {
             appErrorPrefix: '[Previa Error]: ',

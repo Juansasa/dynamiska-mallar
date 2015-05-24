@@ -25,6 +25,7 @@
 
         return service;
 
+
         function getConsultantNewAccountState() {
             return {
                 stateName: 'newAccount',

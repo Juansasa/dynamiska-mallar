@@ -26,16 +26,23 @@
         var service = {
             registerState: registerState,
             registerStates: registerStates,
-            setDefaultState: setDefaultState
+            setDefaultState: setDefaultState,
+            redirect: redirect
         };
 
         init();
         return service;
 
+
+        function redirect(from, to) {
+            routehelperConfig.config.$urlRouterProvider.when(from, to);
+            routehelperConfig.config.$urlRouterProvider.otherwise(to);
+        }
+
         function registerStates(routeStates) {
             var routes;
             _.forEach(routeStates, function(state) {
-                if(!routes) {
+                if (!routes) {
                     routes = registerState(state.stateName, state.stateConfig);
                 } else {
                     routes.state(state.stateName, state.stateConfig);
@@ -61,10 +68,10 @@
         function handleErrors() {
             $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
                 logger.error('Failed to route', {
-                    event: event, 
-                    toState: toState, 
-                    toParams: toParams, 
-                    fromState: fromState, 
+                    event: event,
+                    toState: toState,
+                    toParams: toParams,
+                    fromState: fromState,
                     fromParams: fromParams,
                     error: error
                 });

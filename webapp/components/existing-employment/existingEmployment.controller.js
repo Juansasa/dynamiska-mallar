@@ -7,9 +7,16 @@
     function homeCtrl($scope) {
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};
+        $scope.steps = [{
+            name: 'start',
+            route: '.start'
+        }, {
+            name: 'New account',
+            route: '.newConsultantAccount'
+        }];
 
         $scope.onSubmit = function() {
-            console.log($scope);
+            console.log($scope.model);
         };
     }
 })();
