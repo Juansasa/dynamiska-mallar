@@ -20,6 +20,27 @@ p {
     font-family: 'Droid Sans', serif;
 }
 
+.plainInput {
+    .form-group {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}
+
+.equipmentTable {
+    td {
+        &:last-child {
+            width: 10%;
+        }
+
+        &:first-child {
+            width: 50%;
+            font-weight: bold;
+            font-style: italic;
+        }
+    }
+}
+
 .btn-form {
     float: right;
 }
@@ -74,6 +95,10 @@ p {
 
 .suboptions {
     margin-left: 1em;
+}
+
+input::-webkit-input-placeholder {
+   font-style: italic;
 }
 
 .wizard {

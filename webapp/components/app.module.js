@@ -11,6 +11,9 @@
         'home',
         'newEmployment',
         'existingEmployment',
-        'newConsultantAccount'
+        'newConsultantAccount',
+        'mobileBroadband',
+        'phoneEquipment',
+        'subscription'
     ]);
 })();
