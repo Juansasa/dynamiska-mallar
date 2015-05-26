@@ -7,25 +7,43 @@
     function ctrl($scope, $state) {
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};
-        $scope.currentState = $state.current;
 
         $scope.previous = function() {
-            var index = findStateIndex($scope.currentState);
-            if (index < 0) {
-                $state.go('existingEmployment.start');
+            var index = findStateIndex($state.current);
+            if(index < 0) {
+                if($state.current.name.endsWith('.summary')) {
+                    $state.go('existingEmployment' + $scope.model.wizard[$scope.model.wizard.length - 1].route);
+                }
             } else {
-                $state.go($scope.model.wizard[index < $scope.model.wizard.length ? index + 1 : index].route);
+                if(index === 0) {
+                    $state.go('existingEmployment.start');
+                } else {
+                    $state.go('existingEmployment' + $scope.model.wizard[index - 1].route);
+                }
             }
         };
 
         $scope.next = function() {
-        	if(!$scope.model.wizard.length) {
-        		return;
-        	}
+            var index = findStateIndex($state.current);
+            if(index < 0) {
+                if($state.current.name.endsWith('.personInfo')) {
+                    $state.go('existingEmployment' + $scope.model.wizard[0].route);
+                }
+            } else {
+                if(index === ($scope.model.wizard.length - 1)) {
+                    $state.go('existingEmployment.summary');
+                } else {
+                    $state.go('existingEmployment' + $scope.model.wizard[index + 1].route);
+                }
+            }
+        };
 
-            var index = findStateIndex($scope.currentState);
-            index = index === $scope.model.wizard.length ? index : index + 1;
-            $state.go($scope.model.wizard[index].route);
+        $scope.checkGoBack = function() {
+            return $state.current.name.endsWith('.personInfo') || $state.current.name.endsWith('.start');
+        };
+
+        $scope.checkGoForward = function() {
+            return !$scope.model.wizard || !$scope.model.wizard.length || $state.current.name.endsWith('.summary');
         };
 
 

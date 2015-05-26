@@ -3,12 +3,12 @@
 		ui-sref-active="current">
 		<span class="badge">1</span> Start</a>
 
-	<a ng-repeat="step in steps.wizard"
+	<a ng-repeat="step in model.wizard"
 		ui-sref="{{step.route}}"
-		ui-sref-active-eq="current"><span class="badge">{{$index + 2}}</span> {{step.name}}</a>
+		ui-sref-active="current"><span class="badge">{{$index + 2}}</span> {{step.name}}</a>
 
-	<a  ng-if="steps.wizard.length > 0"
+	<a  ng-if="model.wizard.length > 0"
 		ui-sref=".summary" 
 		ui-sref-active="current">
-		<span class="badge">{{steps.wizard.length + 2}}</span> Summary</a>
+		<span class="badge">{{model.wizard.length + 2}}</span> Summary</a>
 </div>

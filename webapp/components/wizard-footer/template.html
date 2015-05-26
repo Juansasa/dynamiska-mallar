@@ -1,4 +1,4 @@
 <div class="wizard-footer">
-	<button ng-click="previous()" class="btn btn-primary" translate>Previous</button>
-	<button ng-click="next()" class="btn btn-primary" translate>Next</button>
+	<button ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success" translate>Previous</button>
+	<button ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success" translate>Next</button>
 </div>

@@ -235,9 +235,9 @@ header.navigation {
         float: none;
         min-height: $navigation-height;
         z-index: 9999999;
-        @include respond-to("desktop") {
+        //@include respond-to("desktop") {
             float: left;
-        }
+        //}
     }
     ul.navigation-menu {
         -webkit-transform-style: preserve-3d;
@@ -269,13 +269,13 @@ header.navigation {
         text-align: right;
         width: 100%;
         z-index: 9999;
-        @include respond-to("desktop") {
+        //@include respond-to("desktop") {
             background: transparent;
             display: inline;
             line-height: $navigation-height;
             text-decoration: none;
             width: auto;
-        }
+        //}
 
         a {
             color: $navigation-color;

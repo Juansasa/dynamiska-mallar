@@ -19,21 +19,34 @@
                 key: 'wizard',
                 templateOptions: {
                     label: 'Välj blanket eller blanketter som ska utföras',
-                    options: [{
-                        name: 'Nytt konto',
-                        value: {
-                            name: 'Nytt konto',
-                            route: '.newConsultantAccount'
-                        }
-                    }, {
-                        name: 'Mobil bredband',
-                        value: {
-                            name: 'Mobil bredband',
-                            route: '.mobileBroadband'
-                        }
-                    }]
+                    options: getFormOptions()
                 }
             }]
         };
+
+        $scope.search = function() {
+            $state.go('existingEmployment.start.personInfo');
+        };
+
+
+        function getFormOptions() {
+            if ($scope.model.employmentType === 'konsult') {
+                return [{
+                    name: 'Nytt konto',
+                    value: {
+                        name: 'Nytt konto',
+                        route: '.newConsultantAccount'
+                    }
+                }, {
+                    name: 'Mobil bredband',
+                    value: {
+                        name: 'Mobil bredband',
+                        route: '.mobileBroadband'
+                    }
+                }];
+            } else {
+                return [];
+            }
+        }
     }
 })();

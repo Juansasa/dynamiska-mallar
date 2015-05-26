@@ -3,13 +3,10 @@
 		<div class="col-md-12">
 			<h4>Personal sök</h4>
 			<div class="search-bar">
-				<input type="search" placeholder="Fyll i namn, personnr ... " />
-				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+				<input ng-model="$parent.searchboxValue" type="search" placeholder="Fyll i namn, personnr ... " />
+				<button class="btn btn-primary" type="submit" ng-click="search()"><i class="fa fa-search"></i></button>
 			</div>
 		</div>
 	</div>
-	<hr>
-	<formly-form model="model" fields="fields"></formly-form>
-	<hr>
-	<formly-form model="steps" fields="steps.fields"></formly-form>
+	<div ui-view="personalInfo"></div>
 </div>

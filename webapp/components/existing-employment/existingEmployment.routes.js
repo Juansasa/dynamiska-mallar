@@ -10,6 +10,7 @@
             stateName: 'existingEmployment',
             stateConfig: {
                 url: '/existing',
+                abstract: true,
                 views: {
                     '': {
                         templateUrl: 'components/existing-employment/existingEmployment.html',
@@ -39,7 +40,6 @@
                     'wizContent@existingEmployment': {
                         templateUrl: 'components/existing-employment/start.html',
                         title: gettext('Existing employment'),
-                        //controller: 'ExistingEmploymentController'
                     }
                 }
             }
@@ -58,10 +58,13 @@
         }, {
             stateName: 'existingEmployment.newConsultantAccount',
             stateConfig: {
-                url: '/new-caccount',
+                url: '/account',
                 views: {
                     'wizContent@existingEmployment': {
-                        templateUrl: 'components/consultantNewAccount/template.html',
+                        templateUrl: function($stateParams) {
+                            console.log($stateParams);
+                            return 'components/consultantNewAccount/template.html';
+                        },
                         title: gettext('New consultant account'),
                         controller: 'NewConsultantAccountController'
                     }
@@ -76,6 +79,16 @@
                         templateUrl: 'components/mobileBroadband/template.html',
                         title: gettext('New mobile broadband'),
                         controller: 'MobileBroadbandController'
+                    }
+                }
+            }
+        }, {
+            stateName: 'existingEmployment.start.personInfo',
+            stateConfig: {
+                url: '',
+                views: {
+                    'personalInfo@existingEmployment.start': {
+                        templateUrl: 'components/existing-employment/person-info.html'
                     }
                 }
             }
