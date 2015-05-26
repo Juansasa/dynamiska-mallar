@@ -10,7 +10,6 @@
             stateName: 'existingEmployment',
             stateConfig: {
                 url: '/existing',
-                abstract: true,
                 views: {
                     '': {
                         templateUrl: 'components/existing-employment/existingEmployment.html',
@@ -61,10 +60,7 @@
                 url: '/account',
                 views: {
                     'wizContent@existingEmployment': {
-                        templateUrl: function($stateParams) {
-                            console.log($stateParams);
-                            return 'components/consultantNewAccount/template.html';
-                        },
+                        templateUrl: 'components/consultantNewAccount/template.html',
                         title: gettext('New consultant account'),
                         controller: 'NewConsultantAccountController'
                     }
