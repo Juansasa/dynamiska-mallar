@@ -1,17 +1,11 @@
 <div class="container">
-	<h1 translate>Existing employment</h1>
-</div>
-
-<div class="container wizard">
+	<h2 translate>Existing employment</h2>
 	<hr>
-		<a ng-repeat="step in steps" 
-			ui-sref="{{step.route}}"
-			ui-sref-active="current"><span class="badge">{{$index + 1}}</span> {{step.name}}</a>
+	<div ui-view="wizHeader"></div>
 	<hr>
-</div>
-
-<div class="container" ui-view></div>
-
-<div class="container">
-	<button ng-click="onSubmit()" class="btn btn-sm btn-success" type="submit" submit-button>Submit</button>
+	<form name="form" ng-submit="next()" noValidate>
+		<div ui-view="wizContent"></div>
+	</form>
+	<hr>
+	<div ui-view="wizFooter"></div>
 </div>

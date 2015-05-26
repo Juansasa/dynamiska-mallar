@@ -4,38 +4,23 @@
         .controller('NewEmploymentController', homeCtrl);
 
     /*@ngInject*/
-    function homeCtrl($scope, usSpinnerService, forms, FORMKEYS) {
-        var vm = this;
-        vm.activeStep = 0;
-        vm.model = {};
-        vm.steps = [{
-            name: 'Anställningsavtal',
-            fields: [{
-                groupName: 'Person ärende gäller',
-                formfields: forms.newPerson()
-            }]
+    function homeCtrl($scope, forms) {
+        // Make sure to only use one model for all states
+        $scope.model = $scope.model || {};
+        $scope.fields = forms.newPerson();
+
+        $scope.steps = [{
+            name: 'start',
+            route: '.start'
         }, {
-            name: 'Konto beställning',
-            fields: []
+            name: 'New account',
+            route: '.newConsultantAccount'
         }, {
-            name: 'Förlängning Anställd Konto',
-            fields: [{
-                groupName: 'Person ärende gäller',
-                formfields: forms.extendEmployeeAccount()
-            }]
+            name: 'Summary',
+            route: '.summary'
         }];
 
-        vm.setActive = function(index, step) {
-            vm.activeStep = index;
-            if (step.name === 'Konto beställning') {
-                step.fields = [{
-                    groupName: 'Nytt konto',
-                    formfields: getNewAccountFields()
-                }];
-            }
-        };
-
-        vm.onSubmit = function() {
+        $scope.onSubmit = function() {
             // $('header').hide();
             // $('.wizard').hide();
             // $('button').hide();
@@ -48,12 +33,7 @@
             //         $('button').show();
             //     }
             // });
-            console.log(vm.model);
+            console.log($scope.model);
         };
-
-        function getNewAccountFields() {
-            return vm.model[FORMKEYS.person.employmentType] && vm.model[FORMKEYS.person.employmentType] === 'employee' ?
-                forms.newEmployeeAccount() : forms.newConsultantAccount();
-        }
     }
 })();

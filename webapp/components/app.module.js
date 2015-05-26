@@ -9,6 +9,8 @@
         'shared',
 
         'home',
+        'wizard',
+        'wizard-footer',
         'newEmployment',
         'existingEmployment',
         'newConsultantAccount',

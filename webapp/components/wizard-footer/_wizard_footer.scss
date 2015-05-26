@@ -1,0 +1,11 @@
+.wizard-footer {
+	button {
+		min-width: 5em;
+		&:first-child {
+			float: left;
+		}
+		&:last-child {
+			float: right;
+		}
+	}
+}

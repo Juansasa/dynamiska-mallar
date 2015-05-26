@@ -10,25 +10,74 @@
             stateName: 'existingEmployment',
             stateConfig: {
                 url: '/existing',
-                templateUrl: 'components/existing-employment/existingEmployment.html',
-                title: gettext('Existing employment'),
-                controller: 'ExistingEmploymentController'
+                views: {
+                    '': {
+                        templateUrl: 'components/existing-employment/existingEmployment.html',
+                        title: gettext('Existing employment'),
+                        controller: 'ExistingEmploymentController',
+                    },
+                    'wizHeader@existingEmployment': {
+                        templateUrl: 'components/wizard/template.html',
+                        controller: 'WizardController'
+                    },
+                    'wizContent@existingEmployment': {
+                        templateUrl: 'components/existing-employment/start.html',
+                        title: gettext('Existing employment'),
+                        controller: 'ExistingEmploymentController'
+                    },
+                    'wizFooter@existingEmployment': {
+                        templateUrl: 'components/wizard-footer/template.html',
+                        controller: 'WizardFooterController'
+                    }
+                }
             }
         }, {
             stateName: 'existingEmployment.start',
             stateConfig: {
                 url: '/start',
-                templateUrl: 'components/existing-employment/start.html',
-                title: gettext('Existing employment'),
-                controller: 'ExistingEmploymentController'
+                views: {
+                    'wizContent@existingEmployment': {
+                        templateUrl: 'components/existing-employment/start.html',
+                        title: gettext('Existing employment'),
+                        //controller: 'ExistingEmploymentController'
+                    }
+                }
+            }
+        }, {
+            stateName: 'existingEmployment.summary',
+            stateConfig: {
+                url: '/summary',
+                views: {
+                    'wizContent@existingEmployment': {
+                        templateUrl: 'components/existing-employment/summary.html',
+                        title: gettext('Summary'),
+                        controller: 'ExistingEmploymentController'
+                    }
+                }
             }
         }, {
             stateName: 'existingEmployment.newConsultantAccount',
             stateConfig: {
                 url: '/new-caccount',
-                templateUrl: 'components/consultantNewAccount/template.html',
-                title: gettext('New consultant account'),
-                controller: 'NewConsultantAccountController'
+                views: {
+                    'wizContent@existingEmployment': {
+                        templateUrl: 'components/consultantNewAccount/template.html',
+                        title: gettext('New consultant account'),
+                        controller: 'NewConsultantAccountController'
+                    }
+                }
+            }
+        }, {
+            stateName: 'existingEmployment.mobileBroadband',
+            stateConfig: {
+                url: '/mobile-broadband',
+                views: {
+                    'wizContent@existingEmployment': {
+                        templateUrl: 'components/mobileBroadband/template.html',
+                        title: gettext('New mobile broadband'),
+                        controller: 'MobileBroadbandController'
+                    }
+                }
             }
         }];
 
