@@ -9,6 +9,7 @@
         'shared',
 
         'home',
+        'bestallning',
         'wizard',
         'wizard-footer',
         'newEmployment',

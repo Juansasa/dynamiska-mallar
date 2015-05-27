@@ -10,7 +10,7 @@
         $scope.fields = forms.newPerson();
 
         $scope.steps = [{
-            name: 'start',
+            name: 'Start',
             route: '.start'
         }, {
             name: 'New account',
