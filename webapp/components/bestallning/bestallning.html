@@ -1,6 +1,18 @@
 <div class="container">
 	<h2>Beställning</h2>
-	<div>wizard</div>
+	<hr>
+	<div class="wizard" ng-if="steps.length > 0">
+		<a ng-repeat="step in steps"
+			ui-sref="{{step.route}}"
+			ui-sref-active-eq="current"><span class="badge">{{$index + 1}}</span> {{step.name}}</a>
+		<hr>
+	</div>
+
 	<div ui-view="wizardContent"></div>
-	<div>wizard control</div>
+
+	<hr>
+	<div class="wizard-footer">
+		<button ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success" translate>Previous</button>
+		<button ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success" translate>Next</button>
+	</div>
 </div>
