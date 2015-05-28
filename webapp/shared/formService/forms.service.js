@@ -1671,7 +1671,7 @@
                                 type: 'input',
                                 key: 'Obligatorisk förskrivarkod',
                                 templateOptions: {
-                                    label: '',
+                                    label: 'Obligatorisk förskrivarkod',
                                     required: true,
                                     placeholder: 'Förskrivarkod xxx-xxxxx'
                                 },
@@ -1699,7 +1699,7 @@
                                 type: 'input',
                                 key: 'Obligatorisk förskrivarkod',
                                 templateOptions: {
-                                    label: '',
+                                    label: 'Frivillig förskrivarkod',
                                     placeholder: 'Förskrivarkod xxx-xxxxx'
                                 },
                                 hideExpression: function(vv, mv, scope) {

@@ -45,18 +45,13 @@ p {
     float: right;
 }
 
-.radio {
-    display: inline-block;
-    margin: 1em 1em 0 0em;
+.radio-group {
+    @extend .well;
 }
 
-.title-radio {
-    display: block;
-    p {
-        margin-left: 1em;
-        margin-bottom: 0.5em;
-    }
-    margin-bottom: 1em;
+.radio {
+    display: inline-block;
+    margin-right: 1em;
 }
 
 .suboption {
@@ -84,10 +79,7 @@ p {
 .subinput {
     display: inline-block;
     width: 20em;
-    margin-left: 1em;
-    label {
-        display: none;
-    }
+    margin-top: 1em;
     input {
         height: 2em;
     }
