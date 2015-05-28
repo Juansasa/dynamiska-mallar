@@ -484,7 +484,7 @@ header.navigation {
   $search-bar-background: lighten($search-bar-border-color, 10%);
   position: relative;
 
-  input[type=search] {
+  input {
     @include appearance(none);
     @include box-sizing(border-box);
     @include transition(border-color);
@@ -501,7 +501,7 @@ header.navigation {
     width: 100%;
   }
 
-  button[type=submit] {
+  button {
     @include button(flat, $action-color);
     @include position(absolute, 0em 0em 0em null);
     border-bottom-left-radius: 0;

@@ -3,10 +3,10 @@
 		<div class="col-md-12">
 			<h4>Personal sök</h4>
 			<div class="search-bar">
-				<input ng-model="searchboxValue" type="search" placeholder="Fyll i namn, personnr ... " />
-				<button class="btn btn-primary" type="submit" ng-click="sok()"><i class="fa fa-search"></i></button>
+				<input ng-model="searchboxValue" placeholder="Fyll i namn, personnr ... " />
+				<button class="btn btn-primary" ng-click="sok()"><i class="fa fa-search"></i></button>
 			</div>
 		</div>
 	</div>
-	<div ng-if="!model.person" ui-view="person-info"></div>
+	<div ui-view="personinfo"></div>
 </div>

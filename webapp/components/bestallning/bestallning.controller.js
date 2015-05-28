@@ -5,15 +5,16 @@
 
     /*@ngInject*/
     function ctrl($scope) {
-        $scope.currentStep = -1;   
-        $scope.steps = [];
+        $scope.currentStep = -1;
         $scope.fields = {};
         $scope.model = $scope.model || {
-            person: null,  // Personinformation
-            chef: null,    // Chef information
-            konsult: null, // Konsult formulärer
-            anstalld: null,// Previa anställda formulär
-            generell: null // Generella formulärer
+            person: null, // Personinformation
+            chef: null, // Chef information
+            forms: null,
+            steps: [{
+                name: 'Start',
+                route: 'bestallning.nuvarande.personinfo'
+            }]
         };
     }
 })();

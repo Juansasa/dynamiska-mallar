@@ -5,7 +5,7 @@
         .run(setUpRoutes);
 
     /*@ngInject*/
-    function setUpRoutes(routeHelper) {
+    function setUpRoutes(routeHelper, gettext) {
         var states = [{
             stateName: 'bestallning.nuvarande',
             stateConfig: {
@@ -47,6 +47,26 @@
                 views: {
                     'wizardContent@bestallning': {
                         templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html'
+                    }
+                }
+            }
+        }, {
+            stateName: 'bestallning.nuvarande.personinfo',
+            stateConfig: {
+                views: {
+                    'personinfo@bestallning.nuvarande': {
+                        templateUrl: 'components/bestallning/nuvarande-anstalld/person-info.html'
+                    }
+                }
+            }
+        }, {
+            stateName: 'bestallning.nuvarande.mobilbredband',
+            stateConfig: {
+                views: {
+                    'wizardContent@bestallning': {
+                        templateUrl: 'components/mobileBroadband/template.html',
+                        title: gettext('New mobile broadband'),
+                        controller: 'MobileBroadbandController'
                     }
                 }
             }
