@@ -5,7 +5,7 @@
         .run(setUpRoutes);
 
     /*@ngInject*/
-    function setUpRoutes(routeHelper) {
+    function setUpRoutes(routeHelper, gettext) {
         var states = [{
             stateName: 'bestallning.ny',
             stateConfig: {
@@ -13,12 +13,17 @@
                 views: {
                     'wizardContent@bestallning': {
                         templateUrl: 'components/bestallning/ny-anstalld/ny.html',
-                        controller: function(){
-                            // populate wizard data with service
-                            // display personal form
-                            // modify wizardsteps
-                            // add wizard navigation
-                        }
+                        controller: 'NyAnstalldController'
+                    }
+                }
+            }
+        }, {
+            stateName: 'bestallning.ny.sammanfattning',
+            stateConfig: {
+                url: '/sammanfattning',
+                views: {
+                    'wizardContent@bestallning': {
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html'
                     }
                 }
             }
@@ -26,25 +31,23 @@
             stateName: 'bestallning.ny.konsult',
             stateConfig: {
                 url: '/konsult',
-                views: {
-                    'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/ny-anstalld/konsult.html'
-                    }
-                }
+                abstract: true
             }
         }, {
-            stateName: 'bestallning.ny.previa',
+            stateName: 'bestallning.ny.konsult.nytt-konto',
             stateConfig: {
-                url: '/previa',
+                url: '/nytt-konto',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/ny-anstalld/previa.html'
+                        url: '/new-caccount',
+                        templateUrl: 'components/consultantNewAccount/template.html',
+                        title: gettext('New consultant account'),
+                        controller: 'NewConsultantAccountController'
                     }
                 }
             }
         }];
 
-        //routeHelper.redirect('/existing', 'existing/start');
         routeHelper.registerStates(states);
     }
 })();

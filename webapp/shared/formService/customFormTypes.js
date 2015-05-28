@@ -11,6 +11,20 @@
             extends: 'checkbox',
             templateUrl: 'shared/formService/titleRadio.html'
         }, {
+            name: 'roleSelect',
+            extends: 'select',
+            templateUrl: 'shared/formService/roleSelect.html',
+            wrapper: ['bootstrapHasError'],
+            defaultOptions: {
+                expressionProperties: {
+                    'ngChange': function(v, m, scope) {
+                        scope.options.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
+                            return option.value === m;
+                        });
+                    }
+                }
+            }
+        }, {
             name: 'plainInput',
             template: '<input class="form-control" ng-model="model[options.key]">',
             wrapper: ['bootstrapHasError']
@@ -50,11 +64,11 @@
                         }
                     });
 
-                    if(to.pre){
+                    if (to.pre) {
                         checked = [to.pre].concat(checked);
                     }
 
-                    if(to.post) {
+                    if (to.post) {
                         checked = checked.concat(to.post);
                     }
                     $scope.model[opts.key] = checked;

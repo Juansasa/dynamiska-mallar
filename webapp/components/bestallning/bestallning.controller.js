@@ -11,10 +11,7 @@
             person: null, // Personinformation
             chef: null, // Chef information
             forms: null,
-            steps: [{
-                name: 'Start',
-                route: 'bestallning.nuvarande.personinfo'
-            }]
+            steps: null
         };
     }
 })();

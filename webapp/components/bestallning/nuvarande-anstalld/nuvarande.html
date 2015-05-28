@@ -1,12 +1,10 @@
-<div class="container">
-	<div class="employee-search row">
-		<div class="col-md-12">
-			<h4>Personal sök</h4>
-			<div class="search-bar">
-				<input ng-model="searchboxValue" placeholder="Fyll i namn, personnr ... " />
-				<button class="btn btn-primary" ng-click="sok()"><i class="fa fa-search"></i></button>
-			</div>
+<div class="employee-search row">
+	<div class="col-md-12">
+		<h4>Personal sök</h4>
+		<div class="search-bar">
+			<input ng-model="searchboxValue" placeholder="Fyll i namn, personnr ... " />
+			<button class="btn btn-primary" ng-click="sok()"><i class="fa fa-search"></i></button>
 		</div>
 	</div>
-	<div ui-view="personinfo"></div>
 </div>
+<div ui-view="personinfo"></div>

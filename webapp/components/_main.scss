@@ -33,7 +33,6 @@ p {
         &:last-child {
             width: 10%;
         }
-
         &:first-child {
             width: 50%;
             font-weight: bold;
@@ -48,7 +47,7 @@ p {
 
 .radio {
     display: inline-block;
-    margin: 1em 1em 0 1em;
+    margin: 1em 1em 0 0em;
 }
 
 .title-radio {
@@ -98,64 +97,90 @@ p {
     margin-left: 1em;
 }
 
+.employee-search {
+    text-align: center;
+    margin: 1em auto;
+    max-width: 35em;
+}
+
 input::-webkit-input-placeholder {
-   font-style: italic;
+    font-style: italic;
+}
+
+.wizard-footer {
+    button {
+        min-width: 5em;
+        &:first-child {
+            float: left;
+        }
+        &:last-child {
+            float: right;
+        }
+    }
 }
 
 .wizard {
     $step-color: #efefef;
     $hover-color: darken($previa-red, 5);
     $active-color: $previa-red;
-    a {
-        padding: 12px 12px 10px 12px;
-        margin-right: 5px;
-        background: $step-color;
-        position: relative;
-        display: inline-block;
-        text-decoration: none;
-        cursor: pointer;
-        &:before {
-            width: 0px;
-            height: 0px;
-            border-top: 20px inset transparent;
-            border-bottom: 20px inset transparent;
-            border-left: 20px solid #fff;
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 0;
-        }
-        &:after {
-            width: 0px;
-            height: 0px;
-            border-top: 20px inset transparent;
-            border-bottom: 20px inset transparent;
-            border-left: 20px solid $step-color;
-            position: absolute;
-            content: "";
-            top: 0;
-            right: -20px;
-            z-index: 2;
-        }
-        &:first-child:before {
-            display: none;
-        }
-        &:hover {
-            background-color: $hover-color;
-            color: text-constrast($hover-color, white, 7);
-            &:after {
-                border-left-color: $hover-color;
+    white-space: nowrap;
+    overflow: scroll;
+    table {
+        tbody {
+            tr {
+                td {
+                    a {
+                        padding: 12px 12px 10px 25px;
+                        margin-right: 5px;
+                        background: $step-color;
+                        position: relative;
+                        display: inline-block;
+                        text-decoration: none;
+                        cursor: pointer;
+                        &:before {
+                            width: 0px;
+                            height: 0px;
+                            border-top: 20px inset transparent;
+                            border-bottom: 20px inset transparent;
+                            border-left: 20px solid #fff;
+                            position: absolute;
+                            content: "";
+                            top: 0;
+                            left: 0;
+                        }
+                        &:after {
+                            width: 0px;
+                            height: 0px;
+                            border-top: 20px inset transparent;
+                            border-bottom: 20px inset transparent;
+                            border-left: 20px solid $step-color;
+                            position: absolute;
+                            content: "";
+                            top: 0;
+                            right: -20px;
+                            z-index: 2;
+                        }
+                        &:hover {
+                            background-color: $hover-color;
+                            color: text-constrast($hover-color, white, 7);
+                            &:after {
+                                border-left-color: $hover-color;
+                            }
+                        }
+                    }
+                    &:first-child {
+                        a:before {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
-    }
-    .badge {
-        margin: 0 5px 0 18px;
-        position: relative;
-        top: -1px;
     }
     .current {
         background: $previa-red;
         color: white;
+        visibility: visible;
         &:after {
             border-left-color: $previa-red;
         }
@@ -236,8 +261,9 @@ header.navigation {
         min-height: $navigation-height;
         z-index: 9999999;
         //@include respond-to("desktop") {
-            float: left;
+        float: left;
         //}
+   
     }
     ul.navigation-menu {
         -webkit-transform-style: preserve-3d;
@@ -270,13 +296,12 @@ header.navigation {
         width: 100%;
         z-index: 9999;
         //@include respond-to("desktop") {
-            background: transparent;
-            display: inline;
-            line-height: $navigation-height;
-            text-decoration: none;
-            width: auto;
+        background: transparent;
+        display: inline;
+        line-height: $navigation-height;
+        text-decoration: none;
+        width: auto;
         //}
-
         a {
             color: $navigation-color;
             display: inline-block;
@@ -468,45 +493,41 @@ header.navigation {
     }
 }
 
-
-.search-bar {  
-  ///////////////////////////////////////////////////////////////////////////////////
-  $base-border-color: gainsboro !default;
-  $base-border-radius: 3px !default;
-  $base-line-height: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $base-spacing: 1em;
-  //////////////////////////////////////////////////////////////////////////////////
-
-  $search-bar-border-color: $base-border-color;
-  $search-bar-border: 1px solid $search-bar-border-color;
-  $search-bar-background: lighten($search-bar-border-color, 10%);
-  position: relative;
-
-  input {
-    @include appearance(none);
-    @include box-sizing(border-box);
-    @include transition(border-color);
-    background-color: white;
-    border-radius: $base-border-radius;
-    border-radius: $base-border-radius;
-    border: 1px solid $base-border-color;
-    display: block;
-    font-size: 1em;
-    font-style: italic;
-    margin: 0;
-    padding: ($base-spacing / 3) ($base-spacing / 3);
+.search-bar {
+    ///////////////////////////////////////////////////////////////////////////////////
+    $base-border-color: gainsboro !default;
+    $base-border-radius: 3px !default;
+    $base-line-height: 1.5em !default;
+    $action-color: #477DCA !default;
+    $dark-gray: #333 !default;
+    $base-spacing: 1em;
+    //////////////////////////////////////////////////////////////////////////////////
+    $search-bar-border-color: $base-border-color;
+    $search-bar-border: 1px solid $search-bar-border-color;
+    $search-bar-background: lighten($search-bar-border-color, 10%);
     position: relative;
-    width: 100%;
-  }
-
-  button {
-    @include button(flat, $action-color);
-    @include position(absolute, 0em 0em 0em null);
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    outline: none;
-    padding: 5px 10px;
-  }
+    input {
+        @include appearance(none);
+        @include box-sizing(border-box);
+        @include transition(border-color);
+        background-color: white;
+        border-radius: $base-border-radius;
+        border-radius: $base-border-radius;
+        border: 1px solid $base-border-color;
+        display: block;
+        font-size: 1em;
+        font-style: italic;
+        margin: 0;
+        padding: $base-spacing / 3 $base-spacing / 3;
+        position: relative;
+        width: 100%;
+    }
+    button {
+        @include button(flat, $action-color);
+        @include position(absolute, 0em 0em 0em null);
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        outline: none;
+        padding: 5px 10px;
+    }
 }

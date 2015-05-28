@@ -10,10 +10,6 @@
 
         'home',
         'bestallning',
-        'wizard',
-        'wizard-footer',
-        'newEmployment',
-        'existingEmployment',
         'newConsultantAccount',
         'mobileBroadband',
         'phoneEquipment',

@@ -1,0 +1,13 @@
+<div class="well">
+	<select class="form-control" ng-model="model[options.key]"></select>
+	
+	<div class="subinput">
+		<formly-form model="model" fields="to.options[options.selectedValueIndex].subInput"></form-form>
+	</div>
+
+	<p ng-repeat="spec in to.options[options.selectedValueIndex].explainations"><i class="fa fa-check fa-lg"></i>{{spec}}</p>
+
+	<div class="suboptions">
+		<formly-form model="model" fields="to.options[options.selectedValueIndex].subOptions"></form-form>
+	</div>
+</div>

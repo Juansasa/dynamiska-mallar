@@ -44,10 +44,7 @@
                         value: 'employee'
                     }]
                 }
-            },*/
-                {
-                    template: '<div><strong>Personuppgifter</strong></div><br>'
-                }, {
+            },*/{
                     className: 'col-md-12',
                     type: 'input',
                     key: FORMKEYS.person.personalNo,
@@ -177,7 +174,7 @@
                         }
                     }]
                 }, {
-                    template: '<div class="form-group-label"><strong>Tjänsteställe</strong></div>'
+                    template: '<div class="form-group-label"><strong>Tjänsälle</strong></div>'
                 }, {
                     type: 'input',
                     className: 'col-md-12',
@@ -920,13 +917,7 @@
                 .concat(getConsultantEmploymentPeriod())
                 .concat(getAccountMOPart())
                 .concat(getAccountPermissionPart(false))
-                .concat([{
-                    template: '<hr>'
-                }])
-                .concat(getAccountSignaturePart())
-                .concat([{
-                    template: '<hr>'
-                }]);
+                .concat(getAccountSignaturePart());
         }
 
         function getOrderModifyConsultantAccountForm() {
@@ -1136,11 +1127,10 @@
         }
 
         function getOrderEmployeeAccountForm() {
-            return getAccountMOPart().concat(getAccountPermissionPart(true)).concat([{
-                template: '<hr>'
-            }]).concat(getAccountSignaturePart()).concat([{
-                template: '<hr>'
-            }]);
+            return getAccountMOPart()
+            .concat(getAccountPermissionPart(true))
+            .concat([{template: '<hr>'}])
+            .concat(getAccountSignaturePart());
         }
 
         function getOrderPersonForm() {
@@ -1164,8 +1154,6 @@
                 }
             },*/
                 {
-                    template: '<div><strong>Personlig information</strong></div><br>'
-                }, {
                     className: 'col-md-12',
                     type: 'input',
                     key: 'ppersonalNo',
@@ -1474,7 +1462,7 @@
                 className: 'col-md-12',
                 type: 'input',
                 templateOptions: {
-                    label: 'Tjänsteställe / Enhetens namn'
+                    label: 'Tjänsälle / Enhetens namn'
                 }
             }];
         }
@@ -1499,9 +1487,10 @@
             }, {
                 template: '<div><strong>Standardbehörighet för samtliga roller och befattningar:</strong></div>'
             }, {
+                className: 'col-md-12',
                 type: 'titleRadio',
                 templateOptions: {
-                    label: 'test',
+                    label: '',
                     noRadio: true,
                     options: [{
                         explainations: [
@@ -1520,12 +1509,13 @@
                     }]
                 }
             }, {
-                template: '<div><strong>Välj Befattning, roll och behörighet:</strong></div>'
+                template: '<div><strong>Välj Befattning, roll och behörighet:</strong></div><br>'
             }, {
-                type: 'titleRadio',
+                className: 'col-md-12',
+                type: 'roleSelect',
                 key: FORMKEYS.newAccount.role,
                 templateOptions: {
-                    label: 'test',
+                    label: '',
                     options: [{
                             name: 'Account Manager',
                             value: 'accountManager',
