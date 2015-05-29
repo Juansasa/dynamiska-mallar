@@ -5,21 +5,159 @@
         .run(register);
 
     /*@ngInject*/
-    function register(formlyConfig) {
+    function register(formlyConfig, gettext) {
         formlyConfig.setType([{
             name: 'titleRadio',
             extends: 'checkbox',
             templateUrl: 'shared/formService/titleRadio.html'
         }, {
-            name: 'roleSelect',
-            extends: 'select',
-            templateUrl: 'shared/formService/roleSelect.html',
-            wrapper: ['bootstrapHasError'],
+            name: 'personNo',
+            extends: 'input',
             defaultOptions: {
-                expressionProperties: {
-                    'ngChange': function(v, m, scope) {
-                        scope.options.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
-                            return option.value === m;
+                className: 'col-md-12',
+                type: 'input',
+                key: 'Personnummer',
+                templateOptions: {
+                    label: gettext('Personnummer'),
+                    required: true,
+                    placeholder: 'ååmmdd-xxxx',
+                    pattern: '[0-9]{6}-[0-9]{4}'
+                }
+            }
+        }, {
+            name: 'personName',
+            template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
+            defaultOptions: {
+                data: {
+                    forms: [{
+                        className: 'row',
+                        fieldGroup: [{
+                            className: 'col-md-4',
+                            type: 'input',
+                            key: 'förnamn',
+                            templateOptions: {
+                                label: 'Förnamn',
+                                required: true
+                            }
+                        }, {
+                            className: 'col-md-4',
+                            type: 'input',
+                            key: 'mellannamn',
+                            templateOptions: {
+                                label: 'Mellannamn'
+                            }
+                        }, {
+                            className: 'col-md-4',
+                            type: 'input',
+                            key: 'Efternamn',
+                            templateOptions: {
+                                label: 'efternamn',
+                                required: true
+                            }
+                        }]
+                    }]
+                }
+            }
+        }, {
+            name: 'adress',
+            template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
+            defaultOptions: {
+                data: {
+                    forms: [{
+                        className: 'row',
+                        fieldGroup: [{
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'gata',
+                            templateOptions: {
+                                label: 'Gata',
+                                required: true
+                            }
+                        }, {
+                            className: 'col-md-3',
+                            type: 'input',
+                            key: 'postnummer',
+                            templateOptions: {
+                                type: 'number',
+                                required: true,
+                                label: 'Postnummer',
+                                max: 99999,
+                                min: 0,
+                                pattern: '\\d{5}'
+                            }
+                        }, {
+                            className: 'col-md-3',
+                            type: 'input',
+                            key: 'ort',
+                            templateOptions: {
+                                label: 'Ort',
+                                required: true
+                            }
+                        }]
+                    }, {
+                        className: 'col-md-12',
+                        type: 'input',
+                        key: 'c/o',
+                        templateOptions: {
+                            label: 'Ev c/o adress',
+                            required: true
+                        }
+                    }]
+                }
+            }
+        }, {
+            name: 'telefon',
+            template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
+            defaultOptions: {
+                data: {
+                    forms: [{
+                        className: 'row',
+                        fieldGroup: [{
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'hem',
+                            templateOptions: {
+                                label: 'Hem telefon',
+                                type: 'tel',
+                                placeholder: 'xxxx-xxxxx',
+                                pattern: '[0-9]{0,4}-[0-9]{5,8}'
+                            }
+                        }, {
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'mobil',
+                            templateOptions: {
+                                label: 'Mobil',
+                                type: 'tel',
+                                placeholder: 'xxxx-xxxxx',
+                                pattern: '[0-9]{0,4}-[0-9]{5,8}'
+                            }
+                        }]
+                    }]
+                }
+            }
+        }, {
+            name: 'tjanstestalleSelect',
+            templateUrl: 'shared/formService/tjanstestalle.html',
+            wrapper: ['bootstrapLabel'],
+            defaultOptions: {
+                templateOptions: {
+                    onChange: function(v, m, scope) {
+                        scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
+                            return option.value === m.value();
+                        });
+                    }
+                }
+            }
+        }, {
+            name: 'roleSelect',
+            templateUrl: 'shared/formService/roleSelect.html',
+            wrapper: ['bootstrapLabel'],
+            defaultOptions: {
+                templateOptions: {
+                    onChange: function(v, m, scope) {
+                        scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
+                            return option.value === m.value();
                         });
                     }
                 }
@@ -74,6 +212,21 @@
                     $scope.model[opts.key] = checked;
                 }
             }
+        }, {
+            name: 'autoCompleteAdd',
+            extends: 'tjanstestalleSelect',
+            templateUrl: 'shared/formService/secondary-tjanstestalle.html',
+            defaultOptions: {
+                templateOptions: {
+                    addCallback: function(value, model) {
+                        console.log(model);
+                    },
+                    removeCallback: function(value, model) {
+                        console.log(value);
+                    }
+                }
+            }
+
         }]);
     }
 })();

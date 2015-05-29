@@ -1,21 +1,15 @@
 <div class="radio-group">
-	<div class="radio title-radio well" ng-repeat="(key, option) in to.options">
-		<label ng-if="!to.noRadio">
-			<input type="radio"
-			id="{{id + '_'+ $index}}"
-			tabindex="0"
-			ng-value="option[to.valueProp || 'value']"
-			ng-model="model[options.key]">
-			<b><i>{{option[to.labelProp || 'name']}}</i></b>
-		</label>
-
-		<div class="subinput" ng-if="option.subInput">
-			<formly-form model="model" fields="option.subInput"></form-form>
-		</div>
-
-		<p ng-repeat="spec in option.explainations"><i class="fa fa-check fa-lg"></i>{{spec}}</p>
-		<div class="suboptions">
-			<formly-form model="model" fields="option.subOptions"></form-form>
-		</div>
-	</div>
+    <div class="radio title-radio well" ng-repeat="(key, option) in to.options">
+        <label ng-if="!to.noRadio">
+            <input type="radio" id="{{id + '_'+ $index}}" tabindex="0" ng-value="option[to.valueProp || 'value']" ng-model="model[options.key]">
+            <b><i>{{option[to.labelProp || 'name']}}</i></b>
+        </label>
+        <div class="subinput" ng-if="option.subInput">
+            <formly-form model="model" fields="option.subInput"></formly-form>
+        </div>
+        <p ng-repeat="spec in option.explainations"><i class="fa fa-check fa-lg"></i>{{spec}}</p>
+        <div class="suboptions">
+            <formly-form model="model" fields="option.subOptions"></formly-form>
+        </div>
+    </div>
 </div>

@@ -15,6 +15,7 @@
         'angularSpinner',
         'formly',
         'formlyBootstrap',
+        'ui.select',
 
         'exception',
         'router',

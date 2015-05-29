@@ -54,10 +54,8 @@
                             name: 'Previa anställd',
                             value: 'previa anställd'
                         }],
-                        required: true
-                    },
-                    expressionProperties: {
-                        ngChange: function() {
+                        required: true,
+                        onChange: function() {
                             if ($scope.model.person.anstallningstyp) {
                                 getPageDataByEmploymentType();
                             }

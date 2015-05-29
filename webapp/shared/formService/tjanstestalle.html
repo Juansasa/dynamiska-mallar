@@ -1,0 +1,24 @@
+<ui-select ng-model="model[options.key]" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
+    <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="option.value as option in to.options | propsFilter: {name: $select.search}">
+        <div ng-bind-html="option.name | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
+<div class="adress col-md-12">
+    <div class="col-md-6" ng-if="to.options[to.selectedValueIndex].besokadress">
+        <div class="adress-content">
+            <label>Besökadress:</label>
+            <p><b>Gata: </b>{{to.options[to.selectedValueIndex].besokadress.gata}}</p>
+            <p><b>Postnummer: </b>{{to.options[to.selectedValueIndex].besokadress.postnummer}}</p>
+            <p><b>Ort: </b>{{to.options[to.selectedValueIndex].besokadress.ort}}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="adress-content" ng-if="to.options[to.selectedValueIndex].postadress">
+            <label>Postadress:</label>
+            <p><b>Gata: </b>{{to.options[to.selectedValueIndex].postadress.gata}}</p>
+            <p><b>Postnummer: </b>{{to.options[to.selectedValueIndex].postadress.postnummer}}</p>
+            <p><b>Ort: </b>{{to.options[to.selectedValueIndex].postadress.ort}}</p>
+        </div>
+    </div>
+</div>

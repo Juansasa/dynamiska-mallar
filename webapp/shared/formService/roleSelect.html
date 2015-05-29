@@ -1,13 +1,19 @@
-<div class="well">
-	<select class="form-control" ng-model="model[options.key]"></select>
-	
-	<div class="subinput">
-		<formly-form model="model" fields="to.options[options.selectedValueIndex].subInput"></form-form>
-	</div>
-
-	<p ng-repeat="spec in to.options[options.selectedValueIndex].explainations"><i class="fa fa-check fa-lg"></i>{{spec}}</p>
-
-	<div class="suboptions">
-		<formly-form model="model" fields="to.options[options.selectedValueIndex].subOptions"></form-form>
-	</div>
+<div class="befattning-selection">
+    <ui-select ng-model="model[options.key]" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
+        <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="option.value as option in to.options | propsFilter: {value: $select.search}">
+            <div ng-bind-html="option.name | highlight: $select.search"></div>
+        </ui-select-choices>
+    </ui-select>
+    <div ng-if="!to.disableExplanations" class="subsection">
+        <div class="subinput" ng-if="to.options[to.selectedValueIndex].subInput">
+            <formly-form model="model" fields="to.options[to.selectedValueIndex].subInput">
+            </formly-form>
+        </div>
+        <p ng-repeat="spec in to.options[to.selectedValueIndex].explanations"><i class="fa fa-check fa-lg"></i>{{spec}}</p>
+        <div class="suboptions" ng-if="to.options[to.selectedValueIndex].subOptions">
+            <formly-form model="model" fields="to.options[to.selectedValueIndex].subOptions">
+            </formly-form>
+        </div>
+    </div>
 </div>

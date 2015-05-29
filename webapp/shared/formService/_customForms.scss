@@ -1,0 +1,36 @@
+.adress {
+    margin-top: 1em;
+    .adress-content {
+        display: inline-block;
+    }
+}
+
+.subsection {
+	margin-left: 1em;
+    .subinput {
+        display: inline-block;
+        width: 20em;
+        margin-top: 1em;
+        input {
+            height: 2em;
+        }
+    }
+}
+
+.ui-select-container {
+    margin-bottom: 1em;
+}
+
+.ui-select-dropdown {
+    top: 2.5em !important;
+}
+
+.table-tjanstestalle {
+    td {
+        &:last-child {
+            vertical-align: middle;
+            text-align: right;
+        }
+    }
+}
+

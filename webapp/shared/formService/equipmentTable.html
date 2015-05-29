@@ -1,16 +1,17 @@
 <div class="equipmentTable" ng-class="{{className}}">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th ng-repeat="header in to.headers">{{header}}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="row in to.rowFields">
-				<td ng-repeat="f in row">
-					<formly-form model="model" fields="[f]"></form-form>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th ng-repeat="header in to.headers">{{header}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in to.rowFields">
+                <td ng-repeat="f in row">
+                    <formly-form model="model" fields="[f]">
+                    </formly-form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
