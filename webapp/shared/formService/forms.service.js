@@ -9,11 +9,18 @@
     function exception(FORMKEYS, gettext, autocomplete) {
         var service = {
             manager: getOrderManagerForm,
+
             newConsultantPersonalInfo: getNewConsultantPersonalInfo,
             newEmployeePersonalInfo: getNewPreviaEmployeePersonalInfo,
+
             newEmployeeAccount: getOrderEmployeeAccountForm,
             modifyEmployeeAccount: getOrderModifyEmployeeAccountForm,
             extendEmployeeAccount: getOrderExtendEmployeeAccountForm,
+
+            newConsultantAccount: getOrderConsultantAccountForm,
+            modifyConsultantAccount: getOrderModifyConsultantAccountForm,
+            extendConsultantAccount: getOrderExtendConsultantAccountForm,
+
             terminateAccount: getOrderTerminateAccountForm,
             subscription: getOrderSubscriptionForm,
             careTalk: getOrderCareTalkForm,
@@ -21,9 +28,6 @@
             prodoc: getOrderProdocForm,
             mobileBroadband: getOrderMobileBroadbandForm,
             phoneEquipment: getOrderPhoneEquipmentForm,
-            newConsultantAccount: getOrderConsultantAccountForm,
-            modifyConsultantAccount: getOrderModifyConsultantAccountForm,
-            extendConsultantAccount: getOrderExtendConsultantAccountForm,
         };
 
         return service;
@@ -72,7 +76,7 @@
         }
 
         // Personliga info som är specifik för ny previa anställd
-        function getNewConsultantPersonalInfo () {
+        function getNewConsultantPersonalInfo() {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -129,7 +133,7 @@
                         }
                     }
                 }]
-            },{
+            }, {
                 className: 'row',
                 fieldGroup: [{
                     className: 'col-md-12',
@@ -310,7 +314,7 @@
 
 
 
-        
+
         function getOrderMobileBroadbandForm() {
             return [{
                 template: '<div><i>Frågor kring beställning av Mobilt bredband mailas till DM IT Order</i></div>'
@@ -875,11 +879,36 @@
         }
 
         function getOrderConsultantAccountForm() {
-            return getOrderPersonForm()
-                .concat(getConsultantEmploymentPeriod())
-                .concat(getAccountMOPart())
-                .concat(getAccountPermissionPart(false))
-                .concat(getAccountSignaturePart());
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    type: 'autoCompleteAdd',
+                    key: 'Sekundär tjänsteställe',
+                    templateOptions: {
+                        label: gettext('Tillhör även RE'),
+                        placeholder: 'Lägga till en eller fler RE',
+                        options: autocomplete.getRE('All')
+                    }
+                }, {
+                    template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'select',
+                    key: 'Befattningen är en Tf roll',
+                    templateOptions: {
+                        label: 'Befattningen är en Tf roll',
+                        options: [{
+                            name: 'Ja',
+                            value: 'ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'nej'
+                        }]
+                    }
+                }]
+
+            }];
         }
 
         function getOrderModifyConsultantAccountForm() {
@@ -1089,12 +1118,9 @@
         }
 
         function getOrderEmployeeAccountForm() {
-            return getAccountMOPart()
-                .concat(getAccountPermissionPart(true))
-                .concat([{
-                    template: '<hr>'
-                }])
-                .concat(getAccountSignaturePart());
+            return [{
+
+            }];
         }
 
         function getOrderPersonForm() {

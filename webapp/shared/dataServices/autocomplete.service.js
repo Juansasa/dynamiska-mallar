@@ -90,37 +90,37 @@
                     ]
                 }, {
                     name: 'Affärscontroller',
-                    value: 'affarscontroller',
+                    value: 'Affärscontroller',
                     explanations: [
                         'Visma', 'Mercur', 'Adm access till kuben'
                     ]
                 }, {
                     name: 'Affärsutvecklingschef',
-                    value: 'affarsutvecklingschef',
+                    value: 'Affärsutvecklingschef',
                     explanations: [
                         'Visma', 'Mercur', 'Agda PS'
                     ]
                 }, {
                     name: 'Affärsområdeschef',
-                    value: 'affarsomradeschef',
+                    value: 'Affärsområdeschef',
                     explanations: [
                         'Visma', 'Mercur', 'Agda PS'
                     ]
                 }, {
                     name: 'Affärsstöd - Admin & Service',
-                    value: 'affaradminservice',
+                    value: 'Affärsstöd - Admin & Service',
                     explanations: [
                         'Visma', 'Mercur', 'Agda PS'
                     ]
                 }, {
                     name: 'Affärsstöd – Ekonomi',
-                    value: 'affarstodekonomi',
+                    value: 'Affärsstöd – Ekonomi',
                     explanations: [
                         'Visma', 'Mercur', 'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
                     ]
                 }, {
                     name: 'Affärsstöd - Sälj & Marknad',
-                    value: 'affarstodsaljmarknad',
+                    value: 'Affärsstöd - Sälj & Marknad',
                     explanations: [
                         'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
                     ]
