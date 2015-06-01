@@ -9,38 +9,69 @@
     function exception() {
         var service = {
             getTjanstestalleOptions: getToptions,
-            getBefattningOptions: getBefattningOptions
+            getBefattningOptions: getBefattningOptions,
+            getAllMO: getMO,
+            getRE: getRE
         };
         return service;
 
+        function getRE(MO) {
+            if (!MO) {
+                return [];
+            }
+            return [{
+                name: MO + '-' + '124124214',
+                value: MO + '-' + '124124214'
+            }, {
+                name: MO + '-' + '141432535',
+                value: MO + '-' + '141432535'
+            }, {
+                name: MO + '-' + '452252',
+                value: MO + '-' + '452252'
+            }, {
+                name: MO + '-' + '324523552',
+                value: MO + '-' + '324523552'
+            }];
+        }
+
+        function getMO() {
+            return [{
+                name: 'MO 1'
+            }, {
+                name: 'MO 2'
+            }, {
+                name: 'MO 3'
+            }];
+        }
+
         function getToptions() {
             return [{
-                name: 'Odensplan 1',
-                value: 'Tjänsteställe 1',
+                name: 'Odensplan',
+                value: 'Odensplan',
                 besokadress: {
-                    gata: 'gata 1',
+                    gata: 'gata',
                     postnummer: '33333',
                     ort: 'Stockholm'
                 }
             }, {
-                name: 'Tumba 2',
-                value: 'Tjänsteställe 2',
+                name: 'Tumba',
+                value: 'Tumba',
                 besokadress: {
                     gata: 'St eriksplan',
                     postnummer: '33353',
                     ort: 'Linköping'
                 }
             }, {
-                name: 'Kumla 3',
-                value: 'Tjänsteställe 3',
+                name: 'Kumla',
+                value: 'Kumla',
                 besokadress: {
                     gata: 'Brogatan',
                     postnummer: '13414',
                     ort: 'Malmö'
                 }
             }, {
-                name: 'Summa 4',
-                value: 'Tjänsteställe 4',
+                name: 'Summa',
+                value: 'Summa',
                 besokadress: {
                     gata: 'Trägården',
                     postnummer: '55533',

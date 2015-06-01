@@ -9,8 +9,8 @@
     function exception(FORMKEYS, gettext, autocomplete) {
         var service = {
             manager: getOrderManagerForm,
-            person: getHRpersoninfo, //getOrderPersonForm,
-            newPerson: getOrderNewPersonForm,
+            newConsultantPersonalInfo: getNewConsultantPersonalInfo,
+            newEmployeePersonalInfo: getNewPreviaEmployeePersonalInfo,
             newEmployeeAccount: getOrderEmployeeAccountForm,
             modifyEmployeeAccount: getOrderModifyEmployeeAccountForm,
             extendEmployeeAccount: getOrderExtendEmployeeAccountForm,
@@ -28,7 +28,8 @@
 
         return service;
 
-        function getHRpersoninfo() {
+        // Personliga info som är samma för både ny konsult och previa anställd
+        function getGeneralPersonInfo() {
             return [{
                 fieldGroup: [{
                     type: 'personNo',
@@ -48,7 +49,7 @@
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter<b></div>'
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-6',
                     type: 'roleSelect',
                     key: 'befattning',
                     templateOptions: {
@@ -58,356 +59,258 @@
                         disableExplanations: true
                     }
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-6',
                     type: 'tjanstestalleSelect',
                     key: 'tjänsteställe',
                     templateOptions: {
-                        label: gettext('Tjänsteställe (Primärt)'),
+                        label: gettext('Tjänsteställe'),
                         placeholder: 'Välj ett tjänsteställe',
-                        options: autocomplete.getTjanstestalleOptions()
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'autoCompleteAdd',
-                    key: 'Sekundär tjänsteställe',
-                    templateOptions: {
-                        label: gettext('Tjänsteställe (Sekundärt)'),
                         options: autocomplete.getTjanstestalleOptions()
                     }
                 }]
             }];
         }
 
-
-
-
-
-
-
-
-
-        function getOrderNewPersonForm() {
-            return [
-                /*{
-                key: FORMKEYS.person.employmentType,
-                type: 'radio',
-                defaultValue: 'Anställd',
-                templateOptions: {
-                    label: 'Tjänstetyp',
-                    options: [{
-                        name: 'Konsult',
-                        value: 'consultant'
-                    }, {
-                        name: 'Anställd',
-                        value: 'employee'
-                    }]
-                }
-            },*/
-                {
+        // Personliga info som är specifik för ny previa anställd
+        function getNewConsultantPersonalInfo () {
+            var specific = [{
+                className: 'row',
+                fieldGroup: [{
                     className: 'col-md-12',
-                    type: 'input',
-                    key: FORMKEYS.person.personalNo,
+                    type: 'select',
+                    key: 'huvud-RE',
                     templateOptions: {
-                        label: 'Personnummer',
-                        placeholder: 'xxxxxx-xxxx',
+                        label: 'Resultatenhet',
+                        options: autocomplete.getRE('All re')
+                    }
+                }]
+            }];
+
+            return getGeneralPersonInfo().concat(specific);
+        }
+
+        // Personliga info som är specifik för ny konsult
+        function getNewPreviaEmployeePersonalInfo() {
+            var specific = [{
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    type: 'autoCompleteAdd',
+                    key: 'Sekundär tjänsteställe',
+                    templateOptions: {
+                        label: gettext('Tjänsteställe (Sekundärt)'),
+                        placeholder: 'Lägga till ett eller fler sekundär tjänsteställe',
+                        options: autocomplete.getTjanstestalleOptions()
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'MO',
+                    templateOptions: {
+                        label: 'MO (Marknadsområde)',
+                        placeholder: 'Välj ett marknadsåmråde',
+                        options: autocomplete.getAllMO(),
+                        onChange: function(v, m, s) {
+                            s.model['Huvud-RE'] = null;
+                        }
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'huvud-RE',
+                    templateOptions: {
+                        label: 'Huvud-RE',
+                        placeholder: 'Välj en RE',
                         required: true
+                    },
+                    expressionProperties: {
+                        'templateOptions.options': function(v, m, s) {
+                            return autocomplete.getRE(s.model.MO);
+                        }
                     }
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-4',
-                        type: 'input',
-                        key: FORMKEYS.person.firstname,
-                        templateOptions: {
-                            label: 'Förnamn',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-4',
-                        type: 'input',
-                        key: FORMKEYS.person.middlename,
-                        templateOptions: {
-                            label: 'Mellannamn'
-                        }
-                    }, {
-                        className: 'col-md-4',
-                        type: 'input',
-                        key: FORMKEYS.person.lastname,
-                        templateOptions: {
-                            label: 'Efternamn',
-                            required: true
-                        }
-                    }]
-                }, {
-                    template: '<div class="form-group-label"><strong>Adress</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: FORMKEYS.person.street,
-                        templateOptions: {
-                            'label': 'Gata',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: FORMKEYS.person.zip,
-                        templateOptions: {
-                            type: 'number',
-                            required: true,
-                            'label': 'Postnummer',
-                            'max': 99999,
-                            'min': 0,
-                            'pattern': '\\d{5}'
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: FORMKEYS.person.city,
-                        templateOptions: {
-                            'label': 'Ort',
-                            required: true
-                        }
-                    }]
-                }, {
+                }]
+            },{
+                className: 'row',
+                fieldGroup: [{
                     className: 'col-md-12',
-                    type: 'input',
-                    key: FORMKEYS.person.evCoAddress,
-                    templateOptions: {
-                        label: 'Ev c/o adress',
-                        required: true
-                    }
-                }, {
-                    template: '<br><div class="form-group-label"><strong>Telefon</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: FORMKEYS.person.homePhone,
-                        templateOptions: {
-                            label: 'Hem telefon',
-                            type: 'tel',
-                            pattern: '[0-9]{10}'
-                        }
-                    }, {
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: FORMKEYS.person.mobile,
-                        templateOptions: {
-                            label: 'Mobil',
-                            type: 'tel',
-                            pattern: '[0-9]{10}'
-                        }
-                    }]
-                }, {
-                    template: '<div><strong>Tjänsteuppgifter</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        type: 'input',
-                        className: 'col-md-6',
-                        key: FORMKEYS.person.jobTitle,
-                        templateOptions: {
-                            label: 'Befattning'
-                        }
-                    }, {
-                        type: 'input',
-                        className: 'col-md-4',
-                        key: FORMKEYS.person.resultUnit,
-                        templateOptions: {
-                            label: 'Resultatenhet'
-                        }
-                    }, {
-                        type: 'input',
-                        className: 'col-md-2',
-                        key: FORMKEYS.person.serviceGrade,
-                        templateOptions: {
-                            label: 'Tjänstgöringsgrad',
-                            placeholder: '%',
-                            type: 'number',
-                            min: 0,
-                            max: 100
-                        }
-                    }]
-                }, {
-                    template: '<div class="form-group-label"><strong>Tjänsälle</strong></div>'
-                }, {
-                    type: 'input',
-                    className: 'col-md-12',
-                    templateOptions: {
-                        label: ''
-                    }
-                }, {
-                    key: FORMKEYS.person.employmentForm,
+                    key: 'anställningsform',
                     type: 'radio',
                     templateOptions: {
                         label: 'Anställningsform (se om möjligt till att startdatum inte är en arbetsfri dag)',
-                        default: 'longterm',
                         options: [{
                             name: 'Tillsvidareanställning',
-                            value: 'longterm'
+                            value: 'tillsvidareanställning'
                         }, {
                             name: 'Provanställning (högst 6 månader)',
-                            value: 'tryout'
+                            value: 'provanställning'
                         }, {
                             name: 'Vikariat',
-                            value: 'substitute'
+                            value: 'vikariat'
                         }, {
                             name: 'Visstidanställning',
-                            value: 'shortterm'
+                            value: 'visstidanställning'
                         }, {
                             name: 'Anställd med timlön',
-                            value: 'employedByHour'
+                            value: 'anställd med timlön'
                         }]
                     }
                 }, {
-                    className: 'row',
-
-                    fieldGroup: [{
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: FORMKEYS.person.employedFrom,
-                        templateOptions: {
-                            label: 'fr o m',
-                            type: 'date',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: FORMKEYS.person.employedTo,
-                        expressionProperties: {
-                            'templateOptions.disabled': function(vv, mv, scope) {
-                                return scope.model[FORMKEYS.person.employmentForm] === 'longterm';
-                            }
-                        },
-                        templateOptions: {
-                            label: 't o m',
-                            type: 'date',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: FORMKEYS.person.substituteFor,
-                        expressionProperties: {
-                            'templateOptions.disabled': function(vv, mv, scope) {
-                                return scope.model[FORMKEYS.person.employmentForm] !== 'substitute';
-                            }
-                        },
-                        templateOptions: {
-                            label: 'vikariat för',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: FORMKEYS.person.substituteReason,
-                        expressionProperties: {
-                            'templateOptions.disabled': function(vv, mv, scope) {
-                                return scope.model[FORMKEYS.person.employmentForm] !== 'substitute';
-                            }
-                        },
-                        templateOptions: {
-                            label: 'pga',
-                            required: true
-                        }
-                    }]
+                    className: 'col-md-3',
+                    type: 'input',
+                    key: 'fr o m',
+                    templateOptions: {
+                        label: 'fr o m',
+                        type: 'date',
+                        required: true
+                    }
                 }, {
-                    template: '<div><strong>Lön</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: FORMKEYS.person.monthlySalary,
-                        templateOptions: {
-                            label: 'Månadslön, heltid',
-                            required: true
+                    className: 'col-md-3',
+                    type: 'input',
+                    key: 't o m',
+                    expressionProperties: {
+                        'templateOptions.disabled': function(vv, mv, scope) {
+                            return scope.model['anställningsform'] === 'tillsvidareanställning';
                         }
-                    }, {
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: FORMKEYS.person.hourlySalary,
-                        templateOptions: {
-                            label: 'Timlön, exkl semesterlön',
-                            required: true
-                        },
-                        expressionProperties: {
-                            'templateOptions.disabled': function(vv, mv, scope) {
-                                return scope.model[FORMKEYS.person.employmentForm] !== 'employedByHour';
-                            }
-                        }
-                    }]
+                    },
+                    templateOptions: {
+                        label: 't o m',
+                        type: 'date',
+                        required: true
+                    }
                 }, {
-                    key: FORMKEYS.person.independentSalary,
-                    type: 'radio',
+                    className: 'col-md-3',
+                    type: 'input',
+                    key: 'vikariat för',
+                    expressionProperties: {
+                        'templateOptions.disabled': function(vv, mv, scope) {
+                            return scope.model['anställningsform'] !== 'vikariat';
+                        }
+                    },
+                    templateOptions: {
+                        label: 'vikariat för',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-3',
+                    type: 'input',
+                    key: 'pga',
+                    expressionProperties: {
+                        'templateOptions.disabled': function(vv, mv, scope) {
+                            return scope.model['anställningsform'] !== 'vikariat';
+                        }
+                    },
+                    templateOptions: {
+                        label: 'pga',
+                        required: true
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Lön<b></div>'
+                }, {
+                    className: 'col-md-3',
+                    type: 'input',
+                    key: 'Månadslön, heltid',
+                    templateOptions: {
+                        label: 'Månadslön, heltid',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-3',
+                    type: 'input',
+                    key: 'Timlön, exkl semesterlön',
+                    templateOptions: {
+                        label: 'Timlön, exkl semesterlön',
+                        required: true
+                    },
+                    expressionProperties: {
+                        'templateOptions.disabled': function(vv, mv, scope) {
+                            return scope.model['anställningsform'] !== 'anställd med timlön';
+                        }
+                    }
+                }, {
+                    className: 'col-md-6',
+                    key: 'om begynnelselönen gäller oberoende av årets lönerevision',
+                    type: 'select',
                     templateOptions: {
                         label: 'Om begynnelselönen gäller oberoende av årets lönerevision',
-                        default: null,
                         options: [{
                             name: 'Ja',
-                            value: true
+                            value: 'ja'
                         }, {
                             name: 'Nej',
-                            value: false
+                            value: 'nej'
+                        }]
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Allmänna anställningsvillkor<b></div>'
+                }, {
+                    className: 'col-md-4',
+                    type: 'select',
+                    key: 'semesterrätt',
+                    templateOptions: {
+                        label: 'Semesterrätt',
+                        options: [{
+                            name: '25',
+                            value: 25
+                        }, {
+                            name: '28',
+                            value: 28
+                        }, {
+                            name: '30',
+                            value: 30
                         }]
                     }
                 }, {
-                    template: '<div><strong>Allmänna anställningsvillkor</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-3',
-                        type: 'select',
-                        key: FORMKEYS.person.hollydays,
-                        templateOptions: {
-                            label: 'Semesterrätt',
-                            options: [{
-                                name: '25',
-                                value: 25
-                            }, {
-                                name: '28',
-                                value: 28
-                            }, {
-                                name: '30',
-                                value: 30
-                            }]
-                        }
-                    }, {
-                        className: 'col-md-6',
-                        type: 'radio',
-                        key: FORMKEYS.person.overtime,
-                        templateOptions: {
-                            label: 'Rätt till övertids-, restidsersättning',
-                            options: [{
-                                name: 'ja',
-                                value: true
-                            }, {
-                                name: 'nej',
-                                value: false
-                            }]
-                        },
-                        expressionProperties: {
-                            'templateOptions.disabled': function(vv, mv, scope) {
-                                return scope.model[FORMKEYS.person.hollydays] !== 25;
-                            }
-                        }
-                    }]
-                }, {
-                    className: 'col-md-12',
-                    key: FORMKEYS.person.ownCar,
-                    type: 'checkbox',
+                    className: 'col-md-4',
+                    type: 'select',
+                    key: 'Rätt till övertids-, restidsersättning',
                     templateOptions: {
-                        label: 'Egen bil i tjänsten'
+                        label: 'Rätt till övertids-, restidsersättning',
+                        options: [{
+                            name: 'ja',
+                            value: 'ja'
+                        }, {
+                            name: 'nej',
+                            value: 'nej'
+                        }]
+                    },
+                    expressionProperties: {
+                        'templateOptions.disabled': function(vv, mv, scope) {
+                            return scope.model['semesterrätt'] !== 25;
+                        }
                     }
-                }
-            ];
+                }, {
+                    className: 'col-md-4',
+                    key: 'egen bil i tjänsten',
+                    type: 'select',
+                    templateOptions: {
+                        label: 'Egen bil i tjänsten',
+                        options: [{
+                            name: 'ja',
+                            value: 'ja'
+                        }, {
+                            name: 'nej',
+                            value: 'nej'
+                        }]
+                    }
+                }]
+            }];
+
+            return getGeneralPersonInfo().concat(specific);
         }
 
+
+
+
+
+
+
+        
         function getOrderMobileBroadbandForm() {
             return [{
                 template: '<div><i>Frågor kring beställning av Mobilt bredband mailas till DM IT Order</i></div>'

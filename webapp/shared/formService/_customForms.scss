@@ -1,12 +1,9 @@
-.adress {
-    margin-top: 1em;
-    .adress-content {
-        display: inline-block;
-    }
+.adress-content {
+    display: inline-block;
 }
 
 .subsection {
-	margin-left: 1em;
+    margin-left: 1em;
     .subinput {
         display: inline-block;
         width: 20em;
@@ -25,12 +22,23 @@
     top: 2.5em !important;
 }
 
+.btn-list {
+    float: right;
+}
+
 .table-tjanstestalle {
-    td {
-        &:last-child {
-            vertical-align: middle;
-            text-align: right;
+    margin: 0;
+    tbody {
+        tr {
+            td {
+                &:last-child {
+                    vertical-align: middle;
+                    text-align: right;
+                }
+            }
+            .ui-select-container {
+                margin-bottom: 0;
+            }
         }
     }
 }
-

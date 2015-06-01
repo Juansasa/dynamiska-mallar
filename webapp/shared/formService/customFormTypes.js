@@ -218,14 +218,29 @@
             templateUrl: 'shared/formService/secondary-tjanstestalle.html',
             defaultOptions: {
                 templateOptions: {
-                    addCallback: function(value, model) {
-                        console.log(model);
+                    onChange: function(v, options, scope) {
+                        var model = scope.model;
+                        model[options.key] = model[options.key] || [];
+                        if (_.indexOf(model[options.key], options.templateOptions.selectedValue.name) > -1) {
+                            return;
+                        }
+
+                        model[options.key].push(options.templateOptions.selectedValue.name);
+                        options.templateOptions.selectedValue = null;
                     },
-                    removeCallback: function(value, model) {
-                        console.log(value);
+                    removeCallback: function(elem, key, model) {
+                        _.remove(model[key], function(v) {
+                            return v === elem;
+                        });
                     }
                 }
             }
+
+        }, {
+            name: 'autocomplete-select',
+            templateUrl: 'shared/formService/autocompleteSelect.html',
+            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+            defaultOptions: {}
 
         }]);
     }

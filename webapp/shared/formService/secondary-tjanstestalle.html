@@ -1,33 +1,18 @@
-<ui-select ng-model="model[options.key]" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
+<table ng-if="model[options.key] && model[options.key].length > 0" class="table table-bordered table-list">
+    <tbody>
+        <tr ng-repeat="value in model[options.key]" class="alert alert-success">
+            <td>
+                <span>
+                    {{value}}
+                </span>
+                <button ng-click="to.removeCallback(value, options.key, model)" class="btn btn-danger btn-sm btn-list"><i class="fa fa-remove"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ui-select ng-model="to.selectedValue" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
     <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
-    <ui-select-choices repeat="option.value as option in to.options | propsFilter: {name: $select.search}">
+    <ui-select-choices repeat="option in to.options | propsFilter: {name: $select.search}">
         <div ng-bind-html="option.name | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>
-<div class="{{options.className}}">
-    <table class="table table-tjanstestalle">
-        <tbody>
-            <tr>
-                <td colspan="5">
-                    <div class="adress-content">
-                        <label>Besökadress:</label>
-                        <p><b>Gata: </b>{{to.options[to.selectedValueIndex].besokadress.gata}}</p>
-                        <p><b>Postnummer: </b>{{to.options[to.selectedValueIndex].besokadress.postnummer}}</p>
-                        <p><b>Ort: </b>{{to.options[to.selectedValueIndex].besokadress.ort}}</p>
-                    </div>
-                </td>
-                <td colspan="5">
-                    <div class="adress-content" >
-                        <label>Postadress:</label>
-                        <p><b>Gata: </b>{{to.options[to.selectedValueIndex].postadress.gata}}</p>
-                        <p><b>Postnummer: </b>{{to.options[to.selectedValueIndex].postadress.postnummer}}</p>
-                        <p><b>Ort: </b>{{to.options[to.selectedValueIndex].postadress.ort}}</p>
-                    </div>
-                </td>
-                <td colspan="1">
-                    <button ng-click="to.addCallback(options.value(), model)" class="btn btn-success"><i class="fa fa-plus"></i> Lägg till</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>

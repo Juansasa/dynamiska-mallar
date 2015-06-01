@@ -31,10 +31,14 @@
 
         function init() {
             // initialize wizardsteps
-            $scope.model.steps = [{
+            $scope.model.steps = $scope.model.steps || [{
                 name: 'Start',
                 route: $state.current.name
             }];
+
+            if ($scope.model.person && $scope.model.person.anstallningstyp) {
+                getPageDataByEmploymentType();
+            }
 
             // initialize employmenttype radio
             $scope.fields.anstallningstyp = [{
@@ -72,7 +76,7 @@
 
             var wizardSteps = [];
             if ($scope.model.person.anstallningstyp === 'konsult') {
-                $scope.fields.personinfo = forms.person();
+                $scope.fields.personinfo = forms.newConsultantPersonalInfo();
                 wizardSteps = [{
                     name: 'Person information',
                     route: 'bestallning.ny'
@@ -81,7 +85,7 @@
                     route: 'bestallning.ny.konsult.nytt-konto'
                 }];
             } else if ($scope.model.person.anstallningstyp === 'previa anställd') {
-                $scope.fields.personinfo = forms.newPerson();
+                $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{
                     name: 'Anställningsavtal - HR',
                     route: 'bestallning.ny'
