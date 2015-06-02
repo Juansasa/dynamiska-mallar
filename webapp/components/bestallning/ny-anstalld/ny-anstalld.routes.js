@@ -34,17 +34,10 @@
                 abstract: true
             }
         }, {
-            stateName: 'bestallning.ny.konsult.nytt-konto',
+            stateName: 'bestallning.ny.anstalld',
             stateConfig: {
-                url: '/nytt-konto',
-                views: {
-                    'wizardContent@bestallning': {
-                        url: '/new-caccount',
-                        templateUrl: 'components/consultantNewAccount/template.html',
-                        title: gettext('New consultant account'),
-                        controller: 'NewConsultantAccountController'
-                    }
-                }
+                url: '/anstalld',
+                abstract: true
             }
         }];
 

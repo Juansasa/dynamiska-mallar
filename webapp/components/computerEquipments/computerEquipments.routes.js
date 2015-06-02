@@ -7,14 +7,14 @@
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
         var state = [{
-            stateName: 'bestallning.ny.konsult.nytt-konto',
+            stateName: 'bestallning.ny.datorutrustning',
             stateConfig: {
-                url: '/nytt-konto',
+                url: '/datorutrustning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/consultantNewAccount/template.html',
-                        title: gettext('New consultant account'),
-                        controller: 'NewConsultantAccountController'
+                        templateUrl: 'components/computerEquipments/template.html',
+                        title: gettext('Datorutrustning'),
+                        controller: 'ComputerEquipmentsController'
                     }
                 }
             }

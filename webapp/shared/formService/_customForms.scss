@@ -27,7 +27,6 @@
 }
 
 .table-tjanstestalle {
-    margin: 0;
     tbody {
         tr {
             td {
@@ -38,6 +37,31 @@
             }
             .ui-select-container {
                 margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.table-equipment-list {
+    margin: 0;
+    tbody {
+        tr {
+            td {
+                width: 10%;
+                &:first-child {
+                    width: 80%;
+                    vertical-align: middle;
+                    padding-left: 1em;
+                    font-weight: bold;
+                    text-transform: capitalize;
+
+                }
+
+                &:last-child {
+                    width: 10%;
+                    vertical-align: middle;
+                    text-align: center;
+                }
             }
         }
     }

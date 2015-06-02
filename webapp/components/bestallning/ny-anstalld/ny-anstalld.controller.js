@@ -91,7 +91,7 @@
                     route: 'bestallning.ny'
                 }, {
                     name: 'Nytt konto',
-                    route: 'bestallning.ny.konsult.nytt-konto'
+                    route: 'bestallning.ny.anstalld.nytt-konto'
                 }];
             } else {
                 return;
@@ -108,16 +108,16 @@
         function getCommonFormsteps() {
             return [{
                 name: 'Abonnemang',
-                route: '^'
+                route: 'bestallning.ny.abonnemang'
             }, {
                 name: 'Mobilbredband',
-                route: '^'
+                route: 'bestallning.ny.mobilbredband'
             }, {
                 name: 'Datorutrustning',
-                route: '^'
+                route: 'bestallning.ny.datorutrustning'
             }, {
                 name: 'Telefonutrustning',
-                route: '^'
+                route: 'bestallning.ny.telefoniutrustning'
             }, {
                 name: 'Digital diktering',
                 route: '^'

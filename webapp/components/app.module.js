@@ -13,6 +13,8 @@
         'newConsultantAccount',
         'mobileBroadband',
         'phoneEquipment',
-        'subscription'
+        'subscription',
+        'employeeNewAccount',
+        'computerEquipments'
     ]);
 })();

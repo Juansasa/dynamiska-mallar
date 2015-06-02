@@ -47,6 +47,7 @@ p {
 
 .radio-group {
     @extend .well;
+    padding: 1em;
 }
 
 .radio {
@@ -99,7 +100,8 @@ input::-webkit-input-placeholder {
     $hover-color: darken($previa-red, 5);
     $active-color: $previa-red;
     white-space: nowrap;
-    overflow: scroll;
+    overflow-x: scroll;
+
     table {
         tbody {
             tr {

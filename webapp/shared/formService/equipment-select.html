@@ -1,0 +1,22 @@
+<table class="table table-list table-equipment-list">
+    <tbody>
+        <tr ng-repeat="value in model[options.key]" class="alert alert-success">
+            <td>
+                <h4>{{value.beteckning}}</h4>
+            </td>
+            <td>
+                <formly-form model="value" fields="to.ammountField"></formly-form>
+            </td>
+            <td>
+                <button ng-click="to.removeCallback(value, options.key, model)" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ui-select ng-model="to.selectedValue" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
+    <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="option in to.options | propsFilter: {name: $select.search}">
+        <div ng-bind-html="option.name | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>

@@ -6,15 +6,20 @@
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
-        var stateName = 'mobileBroadband';
-        var stateConfig = {
-            url: '/mobile-broadband',
-            templateUrl: 'components/mobileBroadband/template.html',
-            title: gettext('New mobile broadband'),
-            controller: 'MobileBroadbandController'
-        };
+        var state = [{
+            stateName: 'bestallning.ny.mobilbredband',
+            stateConfig: {
+                url: '/mobilbredband',
+                views: {
+                    'wizardContent@bestallning': {
+                        templateUrl: 'components/mobileBroadband/template.html',
+                        title: gettext('New mobile broadband'),
+                        controller: 'MobileBroadbandController'
+                    }
+                }
+            }
+        }];
 
-        routeHelper.registerState(stateName, stateConfig);
-        //routeHelper.setDefaultState(stateConfig.url);
+        routeHelper.registerStates(state);
     }
 })();

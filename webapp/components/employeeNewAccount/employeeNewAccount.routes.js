@@ -1,25 +1,26 @@
 (function() {
     'use strict';
 
-    angular.module('newConsultantAccount')
+    angular.module('employeeNewAccount')
         .run(setUpRoutes);
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
-        var state = [{
-            stateName: 'bestallning.ny.konsult.nytt-konto',
+        var states = [{
+            stateName: 'bestallning.ny.anstalld.nytt-konto',
             stateConfig: {
                 url: '/nytt-konto',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/consultantNewAccount/template.html',
+                        url: '/new-caccount',
+                        templateUrl: 'components/employeeNewAccount/template.html',
                         title: gettext('New consultant account'),
-                        controller: 'NewConsultantAccountController'
+                        controller: 'NewEmployeeAccountController'
                     }
                 }
             }
         }];
 
-        routeHelper.registerStates(state);
+        routeHelper.registerStates(states);
     }
 })();

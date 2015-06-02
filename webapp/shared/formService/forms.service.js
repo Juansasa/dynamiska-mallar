@@ -25,7 +25,6 @@
             subscription: getOrderSubscriptionForm,
             careTalk: getOrderCareTalkForm,
             computerAccessories: getOrderComputerAccessoriesForm,
-            prodoc: getOrderProdocForm,
             mobileBroadband: getOrderMobileBroadbandForm,
             phoneEquipment: getOrderPhoneEquipmentForm,
         };
@@ -60,7 +59,7 @@
                         label: gettext('Befattning'),
                         options: autocomplete.getBefattningOptions(false),
                         placeholder: 'Välj befattning/roll/titel',
-                        disableExplanations: true
+                        showPrevileges: true
                     }
                 }, {
                     className: 'col-md-6',
@@ -308,54 +307,27 @@
             return getGeneralPersonInfo().concat(specific);
         }
 
-
-
-
-
-
-
-
-        function getOrderMobileBroadbandForm() {
-            return [{
-                template: '<div><i>Frågor kring beställning av Mobilt bredband mailas till DM IT Order</i></div>'
-            }, {
+        // Nytt konto för ny konsult
+        function getOrderConsultantAccountForm() {
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-6',
-                    type: 'input',
+                    className: 'col-md-12',
+                    type: 'autoCompleteAdd',
+                    key: 'Sekundär tjänsteställe',
                     templateOptions: {
-                        label: 'Nytt Mobilt bredband, f r o m ',
-                        type: 'date'
+                        label: gettext('Tillhör även RE'),
+                        placeholder: 'Lägga till en eller fler RE',
+                        options: autocomplete.getRE('All')
                     }
                 }, {
-                    className: 'col-md-6',
+                    template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
+                }, {
+                    className: 'col-md-12',
                     type: 'select',
-                    //defaultValue: 'Mobilt bredband 4G',
+                    key: 'Befattningen är en Tf roll',
                     templateOptions: {
-                        label: 'Bredbandstyp',
-                        options: [{
-                            name: 'Mobilt bredband 3G ',
-                            value: 'Mobilt bredband 3G '
-                        }, {
-                            name: 'Mobilt bredband 4G (för priser se prislista i handboken)',
-                            value: 'Mobilt bredband 4G'
-                        }]
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Beställningsdatum',
-                        type: 'date'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'radio',
-                    templateOptions: {
-                        label: 'USB modem önskas',
+                        label: 'Befattningen är en Tf roll',
                         options: [{
                             name: 'Ja',
                             value: 'ja'
@@ -364,236 +336,424 @@
                             value: 'nej'
                         }]
                     }
+                }, {
+                    className: 'col-md-12',
+                    type: 'infoList',
+                    templateOptions: {
+                        label: 'Standardbehörighet för samtliga roller och befattningar',
+                        options: [
+                            '3Q användarbehörighet( QV & Quando)',
+                            'Läsrättigheter till Internwebben',
+                            'E-post konto (konsult...)',
+                            'Hemkatalog H',
+                            'Improof',
+                            'Handboken',
+                            'Agda Entré',
+                            'Access till Kuben',
+                            'Lync'
+                        ]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'roleSelect',
+                    key: 'befattning',
+                    templateOptions: {
+                        label: 'Välj Befattning, roll och behörighet',
+                        options: autocomplete.getBefattningOptions()
+                    }
+                }, {
+                    type: 'signature'
                 }]
-            }, {
+
+            }];
+
+            return specific;
+        }
+
+        // Nytt konto för ny anställd
+        function getOrderEmployeeAccountForm() {
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-6',
+                    className: 'col-md-12',
+                    type: 'autoCompleteAdd',
+                    key: 'Sekundär tjänsteställe',
+                    templateOptions: {
+                        label: gettext('Tillhör även RE'),
+                        placeholder: 'Lägga till en eller fler RE',
+                        options: autocomplete.getRE('All')
+                    }
+                }, {
+                    template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'select',
+                    key: 'Befattningen är en Tf roll',
+                    templateOptions: {
+                        label: 'Befattningen är en Tf roll',
+                        options: [{
+                            name: 'Ja',
+                            value: 'ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'infoList',
+                    templateOptions: {
+                        label: 'Standardbehörighet för samtliga roller och befattningar',
+                        options: [
+                            '3Q användarbehörighet( QV & Quando)',
+                            'Läsrättigheter till Internwebben',
+                            'E-post konto (konsult...)',
+                            'Hemkatalog H:',
+                            'Access till G:',
+                            'Improof',
+                            'Handboken',
+                            'Agda Entré',
+                            'Access till Kuben',
+                            'Lync'
+                        ]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'roleSelect',
+                    key: 'befattning',
+                    templateOptions: {
+                        label: 'Välj Befattning, roll och behörighet',
+                        options: autocomplete.getBefattningOptions(true)
+                    }
+                }, {
+                    type: 'signature'
+                }]
+
+            }];
+
+            return specific;
+        }
+
+        // Person-info part of subscrition form
+        function getSubscriptionPersonInfo() {
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Personinformation</b></div>',
+                    templateOptions: {
+                        description: 'Om information om personen saknas var vänlig och fylla in i förregående steg. TODO bind data'
+                    }
+                }, {
+                    className: 'col-md-12',
                     type: 'input',
                     templateOptions: {
-                        label: 'Namn'
+                        label: 'Namn',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Resultatenhet',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'RE-nr',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Previa enhet',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Postadress',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Postnummer',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Ort',
+                        disabled: true
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'input',
                     templateOptions: {
-                        label: 'Alias',
-                        placeholder: 'personens användarnamn i Previas domän',
+                        label: 'Kontaktperson',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Telefonnr',
+                        type: 'tel',
                         required: true
                     }
                 }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    template: '<div><b>Resultatenhet:</b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'RE-nr'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Re-namn'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-12',
-                    templateOptions: {
-                        label: 'Postadress'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Postnummer'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Ort'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Kontaktperson'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Telefonnr',
-                        type: 'tel'
-                    }
-                }]
-            }, {
-                template: '<hr>'
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Flytt av Mobilt bredband till annan användare fr o m',
-                        placeholder: 'ange datum för flytt'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-12',
-                    templateOptions: {
-                        label: 'Telefonnr',
-                        type: 'tel'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Ny abonnent – Namn'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Alias',
-                        required: true
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    template: '<div><b>Resultatenhet:</b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'RE-nr'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Re-namn'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-12',
-                    templateOptions: {
-                        label: 'Postadress'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Postnummer'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Ort'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Kontaktperson'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Telefonnr',
-                        type: 'tel'
-                    }
-                }]
-            }, {
-                className: 'col-md-12',
-                type: 'input',
-                templateOptions: {
-                    label: 'Uppsägning av Mobilt bredband fr o m',
-                    type: 'date'
-                }
-            }, {
-                type: 'input',
-                className: 'col-md-12',
-                templateOptions: {
-                    label: 'Telefonnr',
-                    type: 'tel'
-                }
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    template: '<div><b>Resultatenhet:</b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'RE-nr'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Re-namn'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Kontaktperson'
-                    }
-                }, {
-                    type: 'input',
-                    className: 'col-md-6',
-                    templateOptions: {
-                        label: 'Telefonnr',
-                        type: 'tel'
-                    }
-                }]
-            }, {
-                className: 'col-md-12',
-                type: 'textarea',
-                templateOptions: {
-                    label: 'Övriga upplysningar'
-                }
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Godkänt för beställning',
-                        type: 'date'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namnförtydligande'
-                    }
-                }]
-            }, {
-                template: '<h1 style="background-color: red">Underskrift ???</h1>'
             }];
         }
 
+        // Nyt abonnemang
+        function getOrderSubscriptionForm() {
+            var specific = [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Nytt abonnemang</b></div>'
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    key: 'Datum då abonnemanget ska börja gälla',
+                    templateOptions: {
+                        label: 'Datum då abonnemanget ska börja gälla'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'select',
+                    key: 'Ny Anknytning med tillhörande mobilnr',
+                    templateOptions: {
+                        label: 'Ny Anknytning med tillhörande mobilnr',
+                        options: [{
+                            name: 'Endast fast ankn',
+                            value: 'Endast fast ankn'
+                        }, {
+                            name: 'Endast mobilabonnemang',
+                            value: 'Endast mobilabonnemang'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    key: 'Beställningsdatum',
+                    templateOptions: {
+                        label: 'Beställningsdatum',
+                        required: true
+                    }
+                }, {
+                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för ändring',
+                    templateOptions: {
+                        label: 'Datum för ändring'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'select',
+                    key: 'Behövs nytt simkort',
+                    templateOptions: {
+                        label: 'Behövs nytt simkort',
+                        required: true,
+                        options: [{
+                            name: 'Ja',
+                            value: 'Ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'Nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Anknytning',
+                    templateOptions: {
+                        label: 'Anknytning',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Ny användare',
+                    templateOptions: {
+                        label: 'Ny användare',
+                        required: true
+                    }
+                }, {
+                    template: '<div><b>Uppsägning av abonnemang</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för uppsägning',
+                    templateOptions: {
+                        label: 'Datum för uppsägning'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'select',
+                    key: ' Anknytning med tillhörande mobilnr',
+                    templateOptions: {
+                        label: ' Anknytning med tillhörande mobilnr',
+                        required: true,
+                        options: [{
+                            name: 'Endast Fast Abonnemang',
+                            value: 'Endast Fast Abonnemang'
+                        }, {
+                            name: 'Endast mobilabonnemang',
+                            value: 'Endast mobilabonnemang'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Telefonnummer',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Anknytning',
+                    templateOptions: {
+                        label: 'Anknytning',
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Mobilnummer',
+                    templateOptions: {
+                        label: 'Mobilnummer',
+                        type: 'tel',
+                    }
+                }]
+            }];
+
+            return getSubscriptionPersonInfo().concat(specific).concat(getOrderSignaturePart());
+        }
+
+        // Nytt mobilt bredband formulär
+        function getOrderMobileBroadbandForm() {
+            var specific = [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Nytt Mobilt bredband</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum då abonnemanget ska börja gälla',
+                    templateOptions: {
+                        label: 'Datum då abonnemanget ska börja gälla'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'select',
+                    key: 'Typ av mobilt bredband',
+                    templateOptions: {
+                        label: 'Typ av mobilt bredband',
+                        options: [{
+                            name: 'Mobilt bredband 3G',
+                            value: 'Mobilt bredband 3G'
+                        }, {
+                            name: 'Mobilt bredband 4G',
+                            value: 'Mobilt bredband 4G'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'radio',
+                    key: 'USB modem önskas',
+                    templateOptions: {
+                        label: 'USB modem önskas',
+                        options: [{
+                            name: 'Ja',
+                            value: 'Ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'Nej'
+                        }]
+                    },
+                    hideExpression: 'model["Typ av mobilt bredband"] !== "Mobilt bredband 4G"'
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för flytt',
+                    templateOptions: {
+                        label: 'Datum för flytt'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Telefonnummer',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Ny abonnent – Namn',
+                    templateOptions: {
+                        label: 'Ny abonnent – Namn',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Alias',
+                    templateOptions: {
+                        label: 'Alias',
+                        disabled: true
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Uppsägning av Mobilt bredband</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för uppsägning',
+                    templateOptions: {
+                        label: 'Datum för uppsägning'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Telefonnummer',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel'
+                    }
+                }]
+            }];
+
+            return getSubscriptionPersonInfo().concat(specific).concat(getOrderSignaturePart());
+        }
+
+        // Nytt telefonutrustning formulär
         function getOrderPhoneEquipmentForm() {
             return [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'col-md-12',
-                    type: 'input',
+                    type: 'today-date',
+                    key: 'Beställningsdatum',
                     templateOptions: {
                         label: 'Beställningsdatum',
-                        type: 'date',
-                        required: true
+                        disabled: true,
                     }
                 }, {
                     className: 'col-md-6',
@@ -650,12 +810,20 @@
                 }, {
                     template: '<div class="col-md-12"><label>Fakturaadress</label><p><b><i>AB Previa</i></b></p></div>'
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-6',
                     type: 'input',
                     templateOptions: {
                         label: 'Fakturaref',
                         placeholder: 'Sign på den personen som har rollen som godkännare i Batlzar',
                         required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Fakturaadress',
+                        placeholder: 'PAA 04220  FE 533,  105 69 STOCKHOLM',
+                        disabled: true
                     }
                 }]
             }, {
@@ -869,46 +1037,154 @@
                     }
                 }, {
                     className: 'col-md-4',
-                    type: 'input',
+                    type: 'today-date',
                     templateOptions: {
                         label: 'Datum',
-                        type: 'date'
+                        disabled: true
                     }
                 }]
             }];
         }
 
-        function getOrderConsultantAccountForm() {
-            return [{
+        // Datorutrustning formulär
+        function getOrderComputerAccessoriesForm() {
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'autoCompleteAdd',
-                    key: 'Sekundär tjänsteställe',
+                    template: '<div><b>Beställare</b></div>'
+                },{
+                    className: 'col-md-4',
+                    type: 'input',
                     templateOptions: {
-                        label: gettext('Tillhör även RE'),
-                        placeholder: 'Lägga till en eller fler RE',
-                        options: autocomplete.getRE('All')
+                        label: 'Namn',
+                        disabled: true,
                     }
                 }, {
-                    template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Resultatenhet',
+                        disabled: true,
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Mailadress',
+                        type: 'mail',
+                        placeholder: 'Mottagare av orderbekräftelse'
+                    }
+                }, {
+                    template: '<div><b>Mottagare</b></div>'
                 }, {
                     className: 'col-md-12',
-                    type: 'select',
-                    key: 'Befattningen är en Tf roll',
+                    type: 'input',
                     templateOptions: {
-                        label: 'Befattningen är en Tf roll',
-                        options: [{
-                            name: 'Ja',
-                            value: 'ja'
-                        }, {
-                            name: 'Nej',
-                            value: 'nej'
-                        }]
+                        label: 'Namn',
+                        disabled: true,
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Leveransadress',
+                        disabled: true,
+                    }
+                },{
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Postnummer',
+                        disabled: true,
+                    }
+                },{
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Ort',
+                        disabled: true,
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Fakturareferens',
+                        placeholder: '(Sign på den personen som har rollen som ”Godkännare” i Palette)'
                     }
                 }]
-
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Utrustning</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'equipment-select',
+                    key: 'Dator – Leasing 36 mån',
+                    templateOptions: {
+                        label: 'Dator – Leasing 36 mån',
+                        options: autocomplete.getComputerLeasingOptions()
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'equipment-select',
+                    key: 'iPad – Leasing 12 mån',
+                    templateOptions: {
+                        label: 'iPad – Leasing 12 mån',
+                        options: autocomplete.getIpadLeasingOptions()
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'equipment-select',
+                    key: 'Tillbehör – Leasing 36 mån',
+                    templateOptions: {
+                        label: 'Tillbehör – Leasing 36 mån',
+                        options: autocomplete.getComputerEquipmentLeasingOptions()
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'equipment-select',
+                    key: 'Tillbehör - EJ leasing',
+                    templateOptions: {
+                        label: 'Tillbehör - EJ leasing',
+                        options: autocomplete.getComputerEquipmentOptions()
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    templateOptions: {
+                        label: 'Övrig information'
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Godkänt för inköp</b></div>'
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    key: 'Datum',
+                    templateOptions: {
+                        label: 'Datum',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Ort',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Behörig beställare',
+                        disabled: true
+                    }
+                }]
             }];
+
+            return specific;
         }
 
         function getOrderModifyConsultantAccountForm() {
@@ -921,327 +1197,6 @@
 
         function getOrderCareTalkForm() {
             return [];
-        }
-
-        function getOrderSubscriptionForm() {
-            return [{
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Nytt abonnemang f r o m (ange datum då abonnemanget ska börja gälla)',
-                        type: 'date'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ny Anknytning med tillhörande mobilnr',
-                        type: 'tel'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'radio',
-                    templateOptions: {
-                        label: '',
-                        options: [{
-                            name: 'Endast fast ankn',
-                            value: 'Endast fast ankn'
-                        }, {
-                            name: 'Endast mobilabonnemang',
-                            value: 'Endast mobilabonnemang'
-                        }]
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namn',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Beställningsdatum',
-                        type: 'date',
-                        required: true
-                    }
-                }].concat(getOrderAdressPart())
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Flytt av abonnemang till annan användare fr o m: (ange datum för ändring)',
-                        type: 'date'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Anknytning med tillhörande mobilnr',
-                        type: 'tel'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'radio',
-                    templateOptions: {
-                        label: 'Behövs nytt simkort',
-                        options: [{
-                            name: 'Ja',
-                            value: true
-                        }, {
-                            name: 'Nej',
-                            value: false
-                        }]
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namn',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Beställningsdatum',
-                        type: 'date',
-                        required: true
-                    }
-                }].concat(getOrderAdressPart())
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Uppsägning av abonnemang fr o m (ange datum för uppsägning)',
-                        type: 'date'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Anknytning med tillhörande mobilnr',
-                        type: 'tel'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'radio',
-                    templateOptions: {
-                        label: '',
-                        options: [{
-                            name: 'Endast Fast Abonnemang',
-                            value: 'Endast Fast Abonnemang'
-                        }, {
-                            name: 'Endast mobilabonnemang',
-                            value: 'Endast mobilabonnemang'
-                        }]
-                    }
-                }]
-            }, {
-                className: 'col-md-6',
-                type: 'input',
-                templateOptions: {
-                    label: 'Telefonnummer',
-                    required: true,
-                    type: 'tel'
-                }
-            }, {
-                className: 'col-md-3',
-                type: 'input',
-                templateOptions: {
-                    label: 'Anknytning',
-                    required: true
-                }
-            }, {
-                className: 'col-md-3',
-                type: 'input',
-                templateOptions: {
-                    label: 'Mobilnummer',
-                    required: true,
-                    type: 'tel'
-                }
-            }, {
-                className: 'col-md-12',
-                template: '<div><p><b>Resultatenhet</b></p></div>'
-            }, {
-                className: 'col-md-6',
-                type: 'input',
-                templateOptions: {
-                    label: 'RE-nr',
-                    required: true
-                }
-            }, {
-                className: 'col-md-6',
-                type: 'input',
-                templateOptions: {
-                    label: 'Previa enhet',
-                    required: true
-                }
-            }, {
-                className: 'col-md-8',
-                type: 'input',
-                templateOptions: {
-                    label: 'Kontaktperson',
-                    required: true
-                }
-            }, {
-                className: 'col-md-4',
-                type: 'input',
-                templateOptions: {
-                    label: 'Telefonnr',
-                    type: 'tel',
-                    pattern: '[0-9]{10}',
-                    required: true
-                }
-            }].concat(getOrderSignaturePart());
-        }
-
-        function getOrderComputerAccessoriesForm() {
-            return [];
-        }
-
-        function getOrderProdocForm() {
-            return [];
-        }
-
-        function getOrderEmployeeAccountForm() {
-            return [{
-
-            }];
-        }
-
-        function getOrderPersonForm() {
-            return [
-                /*{
-                template: '<div><strong>Tjänstetyp</strong></div>'
-            }, {
-                className: 'col-md-12',
-                key: 'employmentType',
-                type: 'radio',
-                templateOptions: {
-                    label: '',
-                    defaultValue: 'employee',
-                    options: [{
-                        name: 'Konsult',
-                        value: 'consultant'
-                    }, {
-                        name: 'Anställd',
-                        value: 'employee'
-                    }]
-                }
-            },*/
-                {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'ppersonalNo',
-                    templateOptions: {
-                        label: 'Personnummer',
-                        required: true
-                    }
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-4',
-                        type: 'input',
-                        key: 'pfirstname',
-                        templateOptions: {
-                            label: 'Förnamn',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-4',
-                        type: 'input',
-                        key: 'pmiddleName',
-                        templateOptions: {
-                            label: 'Mellannamn'
-                        }
-                    }, {
-                        className: 'col-md-4',
-                        type: 'input',
-                        key: 'plastName',
-                        templateOptions: {
-                            label: 'Efternamn',
-                            required: true
-                        }
-                    }]
-                }, {
-                    template: '<div><strong>Tjänställets besöksadress</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: 'pwstreet',
-                        templateOptions: {
-                            'label': 'Gata',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: 'pwzip',
-                        templateOptions: {
-                            type: 'number',
-                            required: true,
-                            'label': 'Postnummer',
-                            'max': 99999,
-                            'min': 0,
-                            'pattern': '\\d{5}'
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: 'pwcityName',
-                        templateOptions: {
-                            'label': 'Ort',
-                            required: true
-                        }
-                    }]
-                }, {
-                    template: '<div><strong>Tjänställets postadress</strong></div>'
-                }, {
-                    className: 'row',
-                    fieldGroup: [{
-                        className: 'col-md-6',
-                        type: 'input',
-                        key: 'ppStreet',
-                        templateOptions: {
-                            label: 'Gata/box',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: 'ppZip',
-                        templateOptions: {
-                            label: 'Postnummer',
-                            required: true
-                        }
-                    }, {
-                        className: 'col-md-3',
-                        type: 'input',
-                        key: 'ppCity',
-                        templateOptions: {
-                            label: 'Ort',
-                            type: 'text',
-                            required: true
-                        }
-                    }]
-                }
-            ];
         }
 
         function getOrderModifyEmployeeAccountForm() {
@@ -1308,736 +1263,38 @@
 
         function getOrderSignaturePart() {
             return [{
-                className: 'col-md-12',
-                type: 'textarea',
-                templateOptions: {
-                    label: 'Övriga upplysningar'
-                }
+                template: '<hr>'
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-6',
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    templateOptions: {
+                        label: 'Övriga upplysningar'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    templateOptions: {
+                        label: 'Beställningsdatum',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
                     type: 'input',
                     templateOptions: {
                         label: 'Godkänt för beställning',
                         type: 'date'
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-4',
                     type: 'input',
                     templateOptions: {
                         label: 'Namnförtydligande'
                     }
                 }]
-            }, {
-                template: '<h1 style="background-color: red">Underskrift ???</h1>'
             }];
         }
 
-        function getOrderAdressPart() {
-            return [{
-                className: 'col-md-12',
-                template: '<div><p><b>Resultatenhet</b></p></div>'
-            }, {
-                className: 'col-md-6',
-                type: 'input',
-                templateOptions: {
-                    label: 'RE-nr',
-                    required: true
-                }
-            }, {
-                className: 'col-md-6',
-                type: 'input',
-                templateOptions: {
-                    label: 'Previa enhet',
-                    required: true
-                }
-            }, {
-                className: 'col-md-6',
-                type: 'input',
-                templateOptions: {
-                    label: 'Postadress',
-                    required: true
-                }
-            }, {
-                className: 'col-md-3',
-                type: 'input',
-                templateOptions: {
-                    label: 'Postnummer',
-                    required: true
-                }
-            }, {
-                className: 'col-md-3',
-                type: 'input',
-                templateOptions: {
-                    label: 'Ort',
-                    required: true
-                }
-            }, {
-                className: 'col-md-8',
-                type: 'input',
-                templateOptions: {
-                    label: 'Kontaktperson',
-                    required: true
-                }
-            }, {
-                className: 'col-md-4',
-                type: 'input',
-                templateOptions: {
-                    label: 'Telefonnr',
-                    type: 'tel',
-                    pattern: '[0-9]{10}',
-                    required: true
-                }
-            }];
-        }
-
-        function getAccountMOPart() {
-            return [{
-                template: '<div><strong>Kompletterande personuppgifter</strong></div><br>'
-            }, {
-                className: 'col-md-12',
-                type: 'select',
-                templateOptions: {
-                    label: 'MO (Marknadsområde)',
-                    options: [{
-                        name: 'Mo 1',
-                        value: 'mo1'
-                    }, {
-                        name: 'Mo 2',
-                        value: 'mo2'
-                    }, {
-                        name: 'Mo 3',
-                        value: 'mo3'
-                    }]
-                }
-            }, {
-                className: 'col-md-12',
-                type: 'select',
-                templateOptions: {
-                    label: 'Huvud-RE',
-                    options: [{
-                        name: 'RE 1',
-                        value: 'RE1'
-                    }, {
-                        name: 'RE 2',
-                        value: 'RE2'
-                    }, {
-                        name: 'RE 3',
-                        value: 'RE3'
-                    }]
-                }
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-8',
-                    type: 'select',
-                    templateOptions: {
-                        label: 'Tillhör även RE',
-                        options: [{
-                            name: 'RE 1',
-                            value: 'RE1'
-                        }, {
-                            name: 'RE 2',
-                            value: 'RE2'
-                        }, {
-                            name: 'RE 3',
-                            value: 'RE3'
-                        }]
-                    }
-                }, {
-                    template: '<button type="submit" class="btn btn-success">Lägg till</button>'
-                }]
-            }, {
-                className: 'col-md-12',
-                type: 'input',
-                templateOptions: {
-                    label: 'Tjänsälle / Enhetens namn'
-                }
-            }];
-        }
-
-        function getAccountPermissionPart(isEmployee) {
-            return [{
-                template: '<div><strong>Befattning / Roll / Behörighet / Licenser</strong></div><br>'
-            }, {
-                className: 'col-md-12',
-                type: 'radio',
-                templateOptions: {
-                    label: 'Befattningen är en Tf roll',
-                    defaultValue: false,
-                    options: [{
-                        name: 'Ja',
-                        value: true
-                    }, {
-                        name: 'Nej',
-                        value: false
-                    }]
-                }
-            }, {
-                template: '<div><strong>Standardbehörighet för samtliga roller och befattningar:</strong></div>'
-            }, {
-                className: 'col-md-12',
-                type: 'titleRadio',
-                templateOptions: {
-                    label: '',
-                    noRadio: true,
-                    options: [{
-                        explanations: [
-                            '3Q användarbehörighet( QV & Quando)',
-                            'Läsrättigheter till Internwebben',
-                            'E-post konto (konsult...)',
-                            'Hemkatalog H'
-                        ].concat(
-                            isEmployee ? ['Access till G'] : []).concat([
-                            'Improof',
-                            'Handboken',
-                            'Agda Entré',
-                            'Access till Kuben',
-                            'Lync'
-                        ])
-                    }]
-                }
-            }, {
-                template: '<div><strong>Välj Befattning, roll och behörighet:</strong></div><br>'
-            }, {
-                className: 'col-md-12',
-                type: 'roleSelect',
-                key: FORMKEYS.newAccount.role,
-                templateOptions: {
-                    label: '',
-                    options: [{
-                            name: 'Account Manager',
-                            value: 'accountManager',
-                            explanations: [
-                                'Försäljningsrapportering och försäljningsstatistik',
-                                'CRM'
-                            ]
-                        }, {
-                            name: 'Affärscontroller',
-                            value: 'affarscontroller',
-                            explanations: [
-                                'Visma', 'Mercur', 'Adm access till kuben'
-                            ]
-                        }, {
-                            name: 'Affärsutvecklingschef',
-                            value: 'affarsutvecklingschef',
-                            explanations: [
-                                'Visma', 'Mercur', 'Agda PS'
-                            ]
-                        }, {
-                            name: 'Affärsområdeschef',
-                            value: 'affarsomradeschef',
-                            explanations: [
-                                'Visma', 'Mercur', 'Agda PS'
-                            ]
-                        }, {
-                            name: 'Affärsstöd - Admin & Service',
-                            value: 'affaradminservice',
-                            explanations: [
-                                'Visma', 'Mercur', 'Agda PS'
-                            ]
-                        }, {
-                            name: 'Affärsstöd – Ekonomi',
-                            value: 'affarstodekonomi',
-                            explanations: [
-                                'Visma', 'Mercur', 'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
-                            ]
-                        }, {
-                            name: 'Affärsstöd - Sälj & Marknad',
-                            value: 'affarstodsaljmarknad',
-                            explanations: [
-                                'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
-                            ]
-                        }, {
-                            name: 'Affärsutvecklingschef',
-                            value: 'Affärsutvecklingschef'
-                        }, {
-                            name: 'Anbudsansvarig',
-                            value: 'Anbudsansvarig'
-                        }, {
-                            name: 'Anbudskoordinator',
-                            value: 'Anbudskoordinator'
-                        }, {
-                            name: 'Arbetsmiljöingenjör',
-                            value: 'Arbetsmiljöingenjör'
-                        }, {
-                            name: 'Arbetsmiljökonsult',
-                            value: 'Arbetsmiljökonsult'
-                        }, {
-                            name: 'Arbetsmiljötekniker',
-                            value: 'Arbetsmiljötekniker'
-                        }, {
-                            name: 'Barnmorska – Ej obligatorisk förskrivarkod',
-                            value: 'Barnmorska – Ej obligatorisk förskrivarkod',
-                            explanations: [
-                                'Quid Agis'
-                            ]
-                        }, {
-                            name: 'Beteendevetare',
-                            value: 'Beteendevetare',
-                            explanations: [
-                                'Quid Agis'
-                            ],
-                            subOptions: [{
-                                key: 'Beteendevetare-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Beteendevetare');
-                                }
-                            }]
-                        }, {
-                            name: 'Callcenteragent',
-                            value: 'Callcenteragent',
-                            explanations: [
-                                'Se specifik lista för roller inom KSC'
-                            ]
-                        }, {
-                            name: 'CFO',
-                            value: 'CFO',
-                            explanations: [
-                                'Agda PS', 'Visma', 'Mercur'
-                            ]
-                        }, {
-                            name: 'Chef Previa Trygghetstjänster',
-                            value: 'Chef Previa Trygghetstjänster'
-                        }, {
-                            name: 'Drift och förvaltningsansvarig',
-                            value: 'Drift och förvaltningsansvarig',
-                            explanations: [
-                                'IT Kontakt'
-                            ]
-                        }, {
-                            name: 'Drogterapeut',
-                            value: 'Drogterapeut',
-                            explanations: [
-                                'Quid Agis'
-                            ]
-                        }, {
-                            name: 'Ekonomiassistent',
-                            value: 'Ekonomiassistent',
-                            explanations: [
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'Ekonomichef',
-                            value: 'Ekonomichef',
-                            explanations: [
-                                'Agda PS', 'Visma', 'Mercur'
-                            ]
-                        }, {
-                            name: 'Faktureringsekonom',
-                            value: 'Faktureringsekonom',
-                            explanations: [
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'Fysioterapeut',
-                            value: 'Fysioterapeut',
-                            explanations: [
-                                'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
-                            ],
-                            subOptions: [{
-                                key: 'Fysioterapeut-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Fysioterapeut');
-                                }
-                            }]
-                        }, {
-                            name: 'Företagsläkare',
-                            value: 'Företagsläkare',
-                            explanations: [
-                                'Quid Agis', 'Cardio Controll - EKG/Spiro (OBS! Se handboken för installationsinstruktion)',
-                                'CareTalk - Digital diktering (OBS! Se handboken för installationsinstruktion)'
-                            ],
-                            subInput: [{
-                                type: 'input',
-                                key: 'Obligatorisk förskrivarkod',
-                                templateOptions: {
-                                    label: 'Obligatorisk förskrivarkod',
-                                    required: true,
-                                    placeholder: 'Förskrivarkod xxx-xxxxx'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Företagsläkare');
-                                }
-                            }]
-                        }, {
-                            name: 'Företagssköterska',
-                            value: 'Företagssköterska',
-                            explanations: [
-                                'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
-                            ],
-                            subOptions: [{
-                                key: 'Företagssköterska-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Företagssköterska');
-                                }
-                            }],
-                            subInput: [{
-                                type: 'input',
-                                key: 'Obligatorisk förskrivarkod',
-                                templateOptions: {
-                                    label: 'Frivillig förskrivarkod',
-                                    placeholder: 'Förskrivarkod xxx-xxxxx'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Företagssköterska');
-                                }
-                            }]
-                        }, {
-                            name: 'Försäljnings- och Marknadschef (FMC)',
-                            value: 'Försäljnings- och Marknadschef (FMC)',
-                            explanations: [
-                                'Försäljningsrapportering och försäljningsstatistik',
-                                'Agda PS',
-                                'CRM',
-                                'Visma',
-                                'Mercur'
-                            ]
-                        }, {
-                            name: 'Försäljningschef',
-                            value: 'Försäljningschef',
-                            explanations: [
-                                'Försäljningsrapportering och försäljningsstatistik',
-                                'Agda PS',
-                                'Mercur',
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'HR-ansvarig',
-                            value: 'HR-ansvarig',
-                            explanations: [
-                                'Agda PS'
-                            ]
-                        }, {
-                            name: 'HR-chef',
-                            value: 'HR-chef',
-                            explanations: [
-                                'Agda PS',
-                                'Mercur',
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'Hälsoutvecklare',
-                            value: 'Hälsoutvecklare',
-                            explanations: [
-                                'Quid Agis'
-                            ]
-                        }, {
-                            name: 'Informationschef',
-                            value: 'Informationschef',
-                            explanations: [
-                                'Agda PS',
-                                'Mercur',
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'IT-chef',
-                            value: 'IT-chef',
-                            explanations: [
-                                'Agda PS',
-                                'Mercur',
-                                'Visma'
-                            ]
-                        },
-                        isEmployee ? {
-                            name: 'IT-koordinator',
-                            value: 'IT-koordinator'
-                        } : {
-                            name: 'IT-konsult',
-                            value: 'IT-konsult'
-                        }, {
-                            name: 'Key Account Manager',
-                            value: 'Key Account Manager',
-                            explanations: [
-                                'Försäljningsrapportering och försäljningsstatistik',
-                                'CRM'
-                            ]
-                        }, {
-                            name: 'Kundservicehandläggare',
-                            value: 'Kundservicehandläggare',
-                            explanations: [
-                                'Se specifik lista för roller inom KSC'
-                            ]
-                        }, {
-                            name: 'Konsultchef',
-                            value: 'Konsultchef',
-                            explanations: [
-                                'Agda PS',
-                                'Mercur',
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'Kvalitets- och miljösamordnare',
-                            value: 'Kvalitets- och miljösamordnare'
-                        }, {
-                            name: 'Kvalitets-och miljöansvarig',
-                            value: 'Kvalitets-och miljöansvarig'
-                        }, {
-                            name: 'Leg psykolog',
-                            value: 'Leg psykolog',
-                            explanations: [
-                                'Quid Agis'
-                            ],
-                            subOptions: [{
-                                key: 'Leg psykolog-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Leg psykolog');
-                                }
-                            }]
-                        }, {
-                            name: 'Löneadministratör',
-                            value: 'Löneadministratör',
-                            explanations: [
-                                'Agda PS'
-                            ]
-                        }, {
-                            name: 'Marknadsområdeschef (MOC)',
-                            value: 'Marknadsområdeschef (MOC)',
-                            explanations: [
-                                'Agda PS',
-                                'Mercur',
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'Operativ samordnare',
-                            value: 'Operativ samordnare',
-                            subOptions: [{
-                                key: 'Operativ samordnare option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'Agda PS'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Operativ samordnare');
-                                }
-                            }]
-                        }, {
-                            name: 'Organisationskonsult',
-                            value: 'Organisationskonsult',
-                            explanations: [
-                                'Quid Agis'
-                            ],
-                            subOptions: [{
-                                key: 'Organisationskonsult-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Organisationskonsult');
-                                }
-                            }]
-                        }, {
-                            name: 'Produktionsplanerare',
-                            value: 'Produktionsplanerare'
-                        }, {
-                            name: 'Projektledare',
-                            value: 'Projektledare'
-                        }, {
-                            name: 'Projektsamordnare',
-                            value: 'Projektsamordnare'
-                        }, {
-                            name: 'PTP-psykolog',
-                            value: 'PTP-psykolog',
-                            explanations: [
-                                'Quid Agis'
-                            ],
-                            subOptions: [{
-                                key: 'PTP-psykolog-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'PTP-psykolog');
-                                }
-                            }]
-                        }, {
-                            name: 'Receptionist',
-                            value: 'Receptionist',
-                            subOptions: [{
-                                key: 'Receptionist-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'Quid Agis'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Receptionist');
-                                }
-                            }]
-                        }, {
-                            name: 'Redovisningscontroller',
-                            value: 'Redovisningscontroller',
-                            explanations: [
-                                'Visma'
-                            ]
-                        }, {
-                            name: 'Sales Executive',
-                            value: 'Sales Executive',
-                            explanations: [
-                                'Försäljningsrapportering och försäljningsstatistik',
-                                'CRM'
-                            ]
-                        }, {
-                            name: 'S&F Agent',
-                            value: 'S&F Agent',
-                            explanations: [
-                                'Se specifik lista för roller inom KSC'
-                            ]
-                        }, {
-                            name: 'Systemkoordinator',
-                            value: 'Systemkoordinator'
-                        }, {
-                            name: 'Telefonsjuksköterska',
-                            value: 'Telefonsjuksköterska',
-                            explanations: [
-                                'Se specifik lista för roller inom KSC'
-                            ]
-                        }, {
-                            name: 'Undersköterska',
-                            value: 'Undersköterska',
-                            explanations: [
-                                'Quid Agis',
-                                'Cardio Controll - EKG/Spiro'
-                            ],
-                            subOptions: [{
-                                key: 'Undersköterska-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Undersköterska');
-                                }
-                            }]
-                        }, {
-                            name: 'Vaktmästare',
-                            value: 'Vaktmästare'
-                        }, {
-                            name: 'VD',
-                            value: 'VD',
-                            explanations: [
-                                'Agda PS'
-                            ]
-                        }, {
-                            name: 'Växeltelefonist',
-                            value: 'Växeltelefonist',
-                            explanations: [
-                                'Se specifik lista för roller inom KSC'
-                            ]
-                        }, {
-                            name: 'Övrig kontorspersonal',
-                            value: 'Övrig kontorspersonal',
-                            explanations: [
-                                'Quid Agis',
-                                'Cardio Controll - EKG/Spiro'
-                            ],
-                            subOptions: [{
-                                key: 'Övrig kontorspersonal-option',
-                                type: 'checkbox',
-                                templateOptions: {
-                                    label: 'Quid Agis'
-                                },
-                                hideExpression: function(vv, mv, scope) {
-                                    return (scope.model[FORMKEYS.newAccount.role] !== 'Övrig kontorspersonal');
-                                }
-                            }]
-                        }
-                    ]
-                }
-            }];
-        }
-
-        function getAccountSignaturePart() {
-            return [{
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'textarea',
-                    templateOptions: {
-                        label: 'Övrig information',
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Dagens datum',
-                        type: 'date',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Rapporterar till (chef)',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namn på behörig beställare',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'E-postadress på behörig beställare',
-                        required: true
-                    }
-                }]
-            }];
-        }
-
-        function getConsultantEmploymentPeriod() {
-            return [{
-                template: '<div><strong>Tidsperiod enligt konsultavtalet</strong></div>'
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Fr.o.m',
-                        type: 'date',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'T.o.m',
-                        type: 'date',
-                        required: true
-                    }
-                }]
-            }, {
-                type: 'checkbox',
-                templateOptions: {
-                    label: 'Mailkonto för konsult',
-                    options: [{
-                        name: 'ja'
-                    }]
-                }
-            }];
-        }
     }
 })();

@@ -6,15 +6,20 @@
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
-        var stateName = 'subscription';
-        var stateConfig = {
-            url: '/subscription',
-            templateUrl: 'components/subscription/template.html',
-            title: gettext('New subscription'),
-            controller: 'SubscriptionController'
-        };
+        var state = [{
+            stateName: 'bestallning.ny.abonnemang',
+            stateConfig: {
+                url: '/abonnemang',
+                views: {
+                    'wizardContent@bestallning': {
+                        templateUrl: 'components/subscription/template.html',
+                        title: gettext('Abonnemang'),
+                        controller: 'SubscriptionController'
+                    }
+                }
+            }
+        }];
 
-        routeHelper.registerState(stateName, stateConfig);
-        //routeHelper.setDefaultState(stateConfig.url);
+        routeHelper.registerStates(state);
     }
 })();

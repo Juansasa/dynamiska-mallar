@@ -63,7 +63,6 @@
         };
 
         function init() {
-            $scope.fields.person = forms.person();
             $scope.model.steps = [{
                 name: 'Start',
                 route: 'bestallning.nuvarande.personinfo'

@@ -7,9 +7,9 @@
     /*@ngInject*/
     function register(formlyConfig, gettext) {
         formlyConfig.setType([{
-            name: 'titleRadio',
-            extends: 'checkbox',
-            templateUrl: 'shared/formService/titleRadio.html'
+            name: 'infoList',
+            wrapper: ['bootstrapLabel'],
+            templateUrl: 'shared/formService/infoList.html'
         }, {
             name: 'personNo',
             extends: 'input',
@@ -154,10 +154,14 @@
             templateUrl: 'shared/formService/roleSelect.html',
             wrapper: ['bootstrapLabel'],
             defaultOptions: {
+                key: 'befattning',
                 templateOptions: {
-                    onChange: function(v, m, scope) {
+                    showPrevileges: true
+                },
+                expressionProperties: {
+                    'generateIndex': function(v, m, scope) {
                         scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
-                            return option.value === m.value();
+                            return option.value === m;
                         });
                     }
                 }
@@ -221,7 +225,12 @@
                     onChange: function(v, options, scope) {
                         var model = scope.model;
                         model[options.key] = model[options.key] || [];
-                        if (_.indexOf(model[options.key], options.templateOptions.selectedValue.name) > -1) {
+
+                        var index = _.findIndex(scope.model[options.key], function(item) {
+                            return item.beteckning === scope.to.selectedValue.name;
+                        });
+
+                        if (index > -1) {
                             return;
                         }
 
@@ -232,6 +241,9 @@
                         _.remove(model[key], function(v) {
                             return v === elem;
                         });
+
+                        // Perhaps its better to pass in the templateOptions instance instead
+                        this.selectedValue = null;
                     }
                 }
             }
@@ -239,9 +251,110 @@
         }, {
             name: 'autocomplete-select',
             templateUrl: 'shared/formService/autocompleteSelect.html',
-            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-            defaultOptions: {}
+            wrapper: ['bootstrapLabel', 'bootstrapHasError']
+        }, {
+            name: 'signature',
+            templateUrl: 'shared/formService/signature.html',
+            defaultOptions: {
+                templateOptions: {
+                    formfields: [{
+                        className: 'row',
+                        fieldGroup: [{
+                            className: 'col-md-12',
+                            type: 'textarea',
+                            key: 'Övrig information',
+                            templateOptions: {
+                                label: 'Övrig information',
+                                placeholder: 'Övriga information'
+                            }
+                        }, {
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'Dagens datum',
+                            templateOptions: {
+                                label: 'Dagens datum',
+                                type: 'date',
+                                disabled: true
+                            },
+                            expressionProperties: {
+                                'init': function(v, m, scope) {
+                                    scope.model['Dagens datum'] = new Date();
+                                }
+                            }
+                        }, {
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'Rapporterar till (chef)',
+                            templateOptions: {
+                                label: 'Rapporterar till (chef)',
+                                required: true
+                            }
+                        }, {
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'Namn på behörig beställare',
+                            templateOptions: {
+                                label: 'Namn på behörig beställare',
+                                required: true
+                            }
+                        }, {
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'E-postadress på behörig beställare',
+                            templateOptions: {
+                                label: 'E-postadress på behörig beställare',
+                                required: true
+                            }
+                        }]
+                    }]
+                }
+            }
+        }, {
+            name: 'today-date',
+            extends: 'input',
+            defaultOptions: {
+                templateOptions: {
+                    type: 'date',
+                },
+                controller: function($scope) {
+                    $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || new Date();
+                }
+            }
+        }, {
+            name: 'equipment-select',
+            extends: 'autoCompleteAdd',
+            templateUrl: 'shared/formService/equipment-select.html',
+            defaultOptions: {
+                controller: function($scope) {
+                    $scope.to.ammountField = [{
+                        type: 'input',
+                        key: 'Antal',
+                        templateOptions: {
+                            label: 'Antal',
+                            type: 'number',
+                            min: 0
+                        }
+                    }];
+                },
+                templateOptions: {
+                    onChange: function(v, options, scope) {
+                        var model = scope.model;
+                        model[options.key] = model[options.key] || [];
 
+                        var index = _.findIndex(scope.model[options.key], function(item) {
+                            return item.beteckning === scope.to.selectedValue.name;
+                        });
+
+                        if (index > -1) {
+                            return;
+                        }
+
+                        model[options.key].push({
+                            'beteckning': options.templateOptions.selectedValue.name
+                        });
+                    },
+                }
+            }
         }]);
     }
 })();

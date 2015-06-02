@@ -16,5 +16,21 @@
 
         routeHelper.registerState(stateName, stateConfig);
         //routeHelper.setDefaultState(stateConfig.url);
+
+        var state = [{
+            stateName: 'bestallning.ny.telefoniutrustning',
+            stateConfig: {
+                url: '/telefoniutrustning',
+                views: {
+                    'wizardContent@bestallning': {
+                        templateUrl: 'components/phoneEquipment/template.html',
+                        title: gettext('Telefonutrustning'),
+                        controller: 'PhoneEquipmentController'
+                    }
+                }
+            }
+        }];
+
+        routeHelper.registerStates(state);
     }
 })();

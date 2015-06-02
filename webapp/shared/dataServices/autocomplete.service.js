@@ -11,9 +11,99 @@
             getTjanstestalleOptions: getToptions,
             getBefattningOptions: getBefattningOptions,
             getAllMO: getMO,
-            getRE: getRE
+            getRE: getRE,
+            getComputerLeasingOptions: getComputerLeasingOptions,
+            getComputerEquipmentLeasingOptions: getComputerEquipmentLeasingOptions,
+            getComputerEquipmentOptions: getComputerEquipmentNoLeasingOptions,
+            getIpadLeasingOptions: getIpadLeasingOptions
         };
         return service;
+
+        function getComputerEquipmentNoLeasingOptions() {
+            return [{
+                name: 'Ryggsäck - Targus Backpack Black',
+                value: 'Ryggsäck - Targus Backpack Black'
+            }, {
+                name: 'Väska - Targus Notepac Black',
+                value: 'Väska - Targus Notepac Black'
+            },{
+                name: 'Kabelansluten mus',
+                value: 'Kabelansluten mus'
+            },{
+                name: 'Tangentbord',
+                value: 'Tangentbord'
+            },{
+                name: 'USB-Hub 4 portar - Targus Travel USB 4-Port hub',
+                value: 'USB-Hub 4 portar - Targus Travel USB 4-Port hub'
+            },{
+                name: 'Webbkamera - Logitech HD Webcam C270',
+                value: 'Webbkamera - Logitech HD Webcam C270'
+            },{
+                name: 'Säkerhetslås till dator - Kensington Lås',
+                value: 'Säkerhetslås till dator - Kensington Lås'
+            },{
+                name: 'Lokal skrivare - HP LaserJet Pro P1606dn',
+                value: 'Lokal skrivare - HP LaserJet Pro P1606dn'
+            },{
+                name: 'Strömkabel HP EliteBook 2570p',
+                value: 'Strömkabel HP EliteBook 2570p'
+            },{
+                name: 'Strömkabel HP EliteBook 8470p',
+                value: 'Strömkabel HP EliteBook 8470p'
+            },{
+                name: 'Strömkabel HP EliteBook 820 G1',
+                value: 'Strömkabel HP EliteBook 820 G1'
+            },{
+                name: 'Strömkabel HP EliteBook 840 G1',
+                value: 'Strömkabel HP EliteBook 840 G1'
+            },{
+                name: 'DiplayPort-kabel till bildskärm',
+                value: 'DiplayPort-kabel till bildskärm'
+            },{
+                name: 'Adapter Ipad - Adapter för projektor och skärm (till iPad)',
+                value: 'Adapter Ipad - Adapter för projektor och skärm (till iPad)'
+            },{
+                name: 'Extern CD/DVD-spelare',
+                value: 'Extern CD/DVD-spelare'
+            },{
+                name: 'Strömkabel HP-dator 90W',
+                value: 'Strömkabel HP-dator 90W'
+            },{
+                name: 'Strömkabel HP-dator 65W',
+                value: 'Strömkabel HP-dator 65W'
+            },{
+                name: 'Strömkabel HP-dator 45W',
+                value: 'Strömkabel HP-dator 45W'
+            }];
+        }
+
+
+        function getIpadLeasingOptions() {
+            return [{
+                name: 'iPad 3 förberedd för 3G och 4G (beroende på abonnemang)',
+                value: 'iPad 3 förberedd för 3G och 4G (beroende på abonnemang)'
+            }];
+        }
+
+        function getComputerEquipmentLeasingOptions() {
+            return [{
+                name: 'Projektor - NEC M311W',
+                value: 'Projektor - NEC M311W'
+            }, {
+                name: 'Bildskärm 23" - HP EliteDisplay E231',
+                value: 'Bildskärm 23" - HP EliteDisplay E231'
+            }];
+        }
+
+        function getComputerLeasingOptions() {
+            return [{
+                name: 'Liten bärbar inkl. docka',
+                value: 'Liten bärbar inkl. docka'
+            }, {
+                name: 'Liten bärbar exkl. docka',
+                value: 'Liten bärbar exkl. docka'
+            }];
+        }
 
         function getRE(MO) {
             if (!MO) {
