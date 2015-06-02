@@ -15,9 +15,64 @@
             getComputerLeasingOptions: getComputerLeasingOptions,
             getComputerEquipmentLeasingOptions: getComputerEquipmentLeasingOptions,
             getComputerEquipmentOptions: getComputerEquipmentNoLeasingOptions,
-            getIpadLeasingOptions: getIpadLeasingOptions
+            getIpadLeasingOptions: getIpadLeasingOptions,
+
+            getPhoneOptions: getPhoneOptions,
+            getHeadsetOptions: getHeadsetOptions,
+            getConferencePhoneOptions: getConferencePhoneOptions,
+            getPhoneAccessoriesOptions: getPhoneAccessoriesOptions
         };
         return service;
+
+
+        function getPhoneAccessoriesOptions() {
+            return [{
+                name: 'Reseladdare',
+                value: 'Reseladdare'
+            }, {
+                name: 'Billaddare',
+                value: 'Billaddare'
+            }, {
+                name: 'Bluetooth',
+                value: 'Bluetooth'
+            }, {
+                name: 'Hörlurar',
+                value: 'Hörlurar'
+            }];
+        }
+
+        function getConferencePhoneOptions() {
+            return [{
+                name: 'Konferenstelefon',
+                value: 'Konferenstelefon'
+            }];
+        }
+
+        function getHeadsetOptions() {
+            return [{
+                name: 'Kontorsheadset  Mono',
+                value: 'Kontorsheadset  Mono'
+            }, {
+                name: 'Kontorsheadset  Stereo',
+                value: 'Kontorsheadset  Stereo'
+            }, {
+                name: 'Mellankabel till Kontorsheadset',
+                value: 'Mellankabel till Kontorsheadset'
+            }];
+        }
+
+        function getPhoneOptions() {
+            return [{
+                name: 'Samsung GT-B2710, enkel knapptelefon',
+                value: 'Samsung GT-B2710, enkel knapptelefon'
+            }, {
+                name:'iPhone 5C  16GB',
+                value: 'iPhone 5C  16GB'
+            },{
+                name:'Simkort passande till iPhone 5C',
+                value: 'Simkort passande till iPhone 5C'
+            }];
+        }
 
         function getComputerEquipmentNoLeasingOptions() {
             return [{

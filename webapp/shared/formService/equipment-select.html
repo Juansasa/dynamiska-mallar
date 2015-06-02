@@ -4,6 +4,9 @@
             <td>
                 <h4>{{value.beteckning}}</h4>
             </td>
+            <td ng-if="to.enableModelInput">
+                <formly-form model="value" fields="to.modelField"></formly-form>
+            </td>
             <td>
                 <formly-form model="value" fields="to.ammountField"></formly-form>
             </td>

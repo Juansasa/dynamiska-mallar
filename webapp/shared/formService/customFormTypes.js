@@ -335,6 +335,17 @@
                             min: 0
                         }
                     }];
+
+                    if ($scope.to.enableModelInput) {
+                        $scope.to.modelField = [{
+                            type: 'input',
+                            key: 'Telefonmodell',
+                            templateOptions: {
+                                label: 'Telefonmodell',
+                                min: 0
+                            }
+                        }];
+                    }
                 },
                 templateOptions: {
                     onChange: function(v, options, scope) {

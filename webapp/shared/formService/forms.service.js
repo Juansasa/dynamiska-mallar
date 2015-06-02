@@ -828,201 +828,47 @@
                 }]
             }, {
                 className: 'col-md-12',
-                type: 'equipmentTable',
+                type: 'equipment-select',
+                key: 'Telefoner – Produktbeskrivning finns i Previas Handbok',
                 templateOptions: {
-                    headers: ['Telefoner – Produktbeskrivning finns i Previas Handbok', '', 'Antal/st'],
-                    rowFields: [
-                        [{
-                            template: 'Samsung GT-B2710, enkel knapptelefon'
-                        }, {
-                            template: ''
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'iPhone 5C  16GB'
-                        }, {
-                            template: ''
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'Simkort passande till iPhone 5C'
-                        }, {
-                            template: ''
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }]
-                    ]
+                    label: 'Telefoner – Produktbeskrivning finns i Previas Handbok',
+                    options: autocomplete.getPhoneOptions()
                 }
             }, {
                 className: 'col-md-12',
                 type: 'equipmentTable',
                 templateOptions: {
-                    headers: ['Kontorsheadset', 'Modell', 'Antal/st'],
-                    rowFields: [
-                        [{
-                            template: 'Kontorsheadset  Mono'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'Kontorsheadset  Stereo'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'Mellankabel till Kontorsheadset'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }]
-                    ]
+
                 }
             }, {
                 className: 'col-md-12',
-                type: 'equipmentTable',
+                type: 'equipment-select',
+                key: 'Kontorsheadset',
                 templateOptions: {
-                    headers: ['Konferenstelefon', '', 'Antal/st'],
-                    rowFields: [
-                        [{
-                            template: 'Konferenstelefon'
-                        }, {
-                            template: ''
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }]
-                    ]
+                    label: 'Kontorsheadset',
+                    enableModelInput: true,
+                    options: autocomplete.getHeadsetOptions()
                 }
             }, {
                 className: 'col-md-12',
-                type: 'equipmentTable',
+                type: 'equipment-select',
+                key: 'Konferenstelefon',
                 templateOptions: {
-                    headers: ['Tillbehör', 'Modell', 'Antal/st'],
-                    rowFields: [
-                        [{
-                            template: 'Reseladdare'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'Billaddare'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'Bluetooth'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }],
-                        [{
-                            template: 'Hörlurar'
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                placeholder: 'Ange till vilken telefonmodell'
-                            }
-                        }, {
-                            className: 'plainInput',
-                            type: 'plainInput',
-                            templateOptions: {
-                                type: 'number',
-                                min: '0'
-                            }
-                        }]
-                    ]
+                    label: 'Konferenstelefon',
+                    options: autocomplete.getConferencePhoneOptions()
+                }
+            }, {
+                className: 'col-md-12',
+                type: 'equipment-select',
+                key: 'Tillbehör',
+                templateOptions: {
+                    label: 'Tillbehör',
+                    options: autocomplete.getPhoneAccessoriesOptions()
                 }
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-12',
-                    template: '<div><p><b>Godkänt för inköp</b></p></div>'
+                    template: '<hr><div><p><b>Godkänt för inköp</b></p></div>'
                 }, {
                     className: 'col-md-4',
                     type: 'input',
@@ -1052,7 +898,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Beställare</b></div>'
-                },{
+                }, {
                     className: 'col-md-4',
                     type: 'input',
                     templateOptions: {
@@ -1090,14 +936,14 @@
                         label: 'Leveransadress',
                         disabled: true,
                     }
-                },{
+                }, {
                     className: 'col-md-4',
                     type: 'input',
                     templateOptions: {
                         label: 'Postnummer',
                         disabled: true,
                     }
-                },{
+                }, {
                     className: 'col-md-4',
                     type: 'input',
                     templateOptions: {
