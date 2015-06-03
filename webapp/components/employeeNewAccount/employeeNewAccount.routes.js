@@ -13,7 +13,7 @@
                 views: {
                     'wizardContent@bestallning': {
                         url: '/new-caccount',
-                        templateUrl: 'components/employeeNewAccount/template.html',
+                        template: '<formly-form model="model.ny.anstalld.nyttKonto" fields="fields"></formly-form>',
                         title: gettext('New consultant account'),
                         controller: 'NewEmployeeAccountController'
                     }

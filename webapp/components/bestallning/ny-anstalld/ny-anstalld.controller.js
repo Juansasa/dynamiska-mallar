@@ -7,17 +7,21 @@
     function ctrl($scope, $state, forms) {
         init();
 
+        $scope.$parent.getSteps = function() {
+            return $scope.model.steps.newEmployee;
+        };
+
         $scope.$parent.next = function() {
             var index = findStateIndex($state.current);
-            if (index + 1 < $scope.model.steps.length) {
-                $state.go($scope.model.steps[index + 1].route);
+            if (index + 1 < $scope.model.steps.newEmployee.length) {
+                $state.go($scope.model.steps.newEmployee[index + 1].route);
             }
         };
 
         $scope.$parent.previous = function() {
             var index = findStateIndex($state.current);
             if (index > 0) {
-                $state.go($scope.model.steps[index - 1].route);
+                $state.go($scope.model.steps.newEmployee[index - 1].route);
             }
         };
 
@@ -26,12 +30,12 @@
         };
 
         $scope.$parent.checkGoForward = function() {
-            return findStateIndex($state.current) === $scope.model.steps.length - 1;
+            return findStateIndex($state.current) === $scope.model.steps.newEmployee.length - 1;
         };
 
         function init() {
             // initialize wizardsteps
-            $scope.model.steps = $scope.model.steps || [{
+            $scope.model.steps.newEmployee = $scope.model.steps.newEmployee || [{
                 name: 'Start',
                 route: $state.current.name
             }];
@@ -97,7 +101,7 @@
                 return;
             }
 
-            $scope.model.steps = wizardSteps
+            $scope.model.steps.newEmployee = wizardSteps
                 .concat(getCommonFormsteps())
                 .concat([{
                     name: 'Sammanfattning',
@@ -120,12 +124,12 @@
                 route: 'bestallning.ny.telefoniutrustning'
             }, {
                 name: 'Digital diktering',
-                route: '^'
+                route: 'bestallning.ny.digital-diktering'
             }];
         }
 
         function findStateIndex(state) {
-            return _.findIndex($scope.model.steps, function(step) {
+            return _.findIndex($scope.model.steps.newEmployee, function(step) {
                 return state.name === step.route;
             });
         }

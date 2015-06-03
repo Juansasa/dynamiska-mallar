@@ -12,7 +12,7 @@
                 url: '/abonnemang',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/subscription/template.html',
+                        template: '<formly-form model="model.ny.abonnemang" fields="fields"></form-form>',
                         title: gettext('Abonnemang'),
                         controller: 'SubscriptionController'
                     }

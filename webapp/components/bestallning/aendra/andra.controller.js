@@ -1,11 +1,15 @@
 (function() {
     'use strict';
     angular.module('bestallning')
-        .controller('NuvarandeAnstalldController', ctrl);
+        .controller('AendraController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state) {
+    function ctrl($scope, $state, autocomplete) {
+
         init();
+
+        // Ersätt med search call
+        $scope.employees = autocomplete.getAllEmployee();
 
         $scope.fields.formsSelection = [{
             className: 'row',
@@ -15,22 +19,22 @@
             }, {
                 className: 'col-md-12',
                 type: 'formSelection',
-                key: 'existingEmployee',
+                key: 'modifyExistingEmployee',
                 templateOptions: {
                     label: 'Välj beställningar som ska genomföras',
                     pre: {
                         name: 'Start',
-                        route: 'bestallning.nuvarande.personinfo'
+                        route: 'bestallning.andra.personinfo'
                     },
                     post: {
                         name: 'Sammanfattning',
-                        route: 'bestallning.nuvarande.sammanfattning'
+                        route: 'bestallning.andra.sammanfattning'
                     },
                     options: [{
                         name: 'Abonnemang',
                         value: {
                             name: 'Abonnemang',
-                            route: 'bestallning.nuvarande.abonnemang'
+                            route: 'bestallning.andra.abonnemang'
                         }
                     }, {
                         name: 'Mobilbredband',
@@ -62,25 +66,25 @@
         }];
 
 
-        $scope.$parent.getSteps = function() {
-            return $scope.model.steps.existingEmployee;
+        $scope.selected = function() {
+            $state.go('bestallning.andra.personinfo');
         };
 
-        $scope.sok = function() {
-            $state.go('bestallning.nuvarande.personinfo');
+        $scope.$parent.getSteps = function() {
+            return $scope.model.steps.modifyExistingEmployee;
         };
 
         $scope.$parent.next = function() {
             var index = findStateIndex($state.current);
-            if (index + 1 < $scope.model.steps.existingEmployee.length) {
-                $state.go($scope.model.steps.existingEmployee[index + 1].route);
+            if (index + 1 < $scope.model.steps.modifyExistingEmployee.length) {
+                $state.go($scope.model.steps.modifyExistingEmployee[index + 1].route);
             }
         };
 
         $scope.$parent.previous = function() {
             var index = findStateIndex($state.current);
             if (index > 0) {
-                $state.go($scope.model.steps.existingEmployee[index - 1].route);
+                $state.go($scope.model.steps.modifyExistingEmployee[index - 1].route);
             }
         };
 
@@ -89,21 +93,25 @@
         };
 
         $scope.$parent.checkGoForward = function() {
-            return findStateIndex($state.current) === $scope.model.steps.existingEmployee.length - 1;
+            return findStateIndex($state.current) === $scope.model.steps.modifyExistingEmployee.length - 1;
         };
 
         function init() {
-            $scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
+            $scope.model.steps.modifyExistingEmployee = $scope.model.steps.modifyExistingEmployee || [{
                 name: 'Start',
-                route: 'bestallning.nuvarande.personinfo'
+                route: 'bestallning.andra.personinfo'
             }, {
                 name: 'Sammanfattning',
-                route: 'bestallning.nuvarande.sammanfattning'
+                route: 'bestallning.andra.sammanfattning'
             }];
+
+            if($scope.model.person && $scope.model.person.anstallningstyp) {
+                $state.go('bestallning.andra.personinfo');
+            }
         }
 
         function findStateIndex(state) {
-            return _.findIndex($scope.model.steps.existingEmployee, function(step) {
+            return _.findIndex($scope.model.steps.modifyExistingEmployee, function(step) {
                 return state.name === step.route;
             });
         }

@@ -1,20 +1,20 @@
 (function() {
     'use strict';
 
-    angular.module('mobileBroadband')
+    angular.module('careTalk')
         .run(setUpRoutes);
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
         var state = [{
-            stateName: 'bestallning.ny.mobilbredband',
+            stateName: 'bestallning.ny.digital-diktering',
             stateConfig: {
-                url: '/mobilbredband',
+                url: '/digital-diktering',
                 views: {
                     'wizardContent@bestallning': {
-                        template: '<formly-form model="model.ny.mobilbredband" fields="fields"></formly-form>',
-                        title: gettext('New mobile broadband'),
-                        controller: 'MobileBroadbandController'
+                        template: '<formly-form model="model.ny.digitaldiktering" fields="fields"></formly-form>',
+                        title: gettext('Digital diktering'),
+                        controller: 'CareTalkController'
                     }
                 }
             }

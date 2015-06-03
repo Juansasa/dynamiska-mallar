@@ -5,7 +5,7 @@
         .run(setUpRoutes);
 
     /*@ngInject*/
-    function setUpRoutes(routeHelper, gettext) {
+    function setUpRoutes(routeHelper) {
         var states = [{
             stateName: 'bestallning.ny',
             stateConfig: {
@@ -14,16 +14,6 @@
                     'wizardContent@bestallning': {
                         templateUrl: 'components/bestallning/ny-anstalld/ny.html',
                         controller: 'NyAnstalldController'
-                    }
-                }
-            }
-        }, {
-            stateName: 'bestallning.ny.sammanfattning',
-            stateConfig: {
-                url: '/sammanfattning',
-                views: {
-                    'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html'
                     }
                 }
             }

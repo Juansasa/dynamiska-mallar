@@ -20,10 +20,77 @@
             getPhoneOptions: getPhoneOptions,
             getHeadsetOptions: getHeadsetOptions,
             getConferencePhoneOptions: getConferencePhoneOptions,
-            getPhoneAccessoriesOptions: getPhoneAccessoriesOptions
+            getPhoneAccessoriesOptions: getPhoneAccessoriesOptions,
+            getCaretalkHardwareOptions: getCaretalkHardwareOptions,
+            getCaretalkAccessoriesOptions: getCaretalkAccessoriesOptions,
+
+            getAllEmployee: getAllEmployee
         };
         return service;
 
+        function getAllEmployee() {
+            return [{
+                'anstallningstyp': 'previa anställd',
+                'namn': {
+                    'förnamn': 'Konsult',
+                    'mellannamn': 'von',
+                    'efternamn': 'Andersson'
+                },
+                'adress': {
+                    'gata': 'Konsultsgata',
+                    'postnummer': 31144,
+                    'ort': 'Stockholm'
+                },
+                'befattning': 'Affärscontroller',
+                'tjänsteställe': 'Tumba',
+                'Sekundär tjänsteställe': ['Kumla'],
+                'MO': 'MO 2',
+                'huvud-RE': 'MO 2-452252'
+            }];
+        }
+
+        function getCaretalkAccessoriesOptions() {
+            return [{
+                name: 'Fotkontroll 536',
+                value: 'Fotkontroll 536',
+                price: '1025',
+                description: 'Med snabbspolning fram'
+            }, {
+                name: 'Handkontroll',
+                description: 'Start/stopp, backspolning',
+                price: '1125',
+                value: 'Handkontroll'
+            }, {
+                name: 'Hörlur 565',
+                value: 'Hörlur 565',
+                price: '625',
+                description: 'Bygel ovanpå huvudet'
+            }, {
+                name: 'Hörlur 568',
+                value: 'Hörlur 568',
+                price: '625',
+                description: 'Bygel under hakan'
+            }];
+        }
+
+        function getCaretalkHardwareOptions() {
+            return [{
+                name: 'Digta 422',
+                value: 'Digta 422',
+                description: 'Diktering och docka (Bärbar diktafon)',
+                price: '6150'
+            }, {
+                name: 'USB-mikrofon, Sonic Mic II',
+                value: 'USB-mikrofon, Sonic Mic II',
+                description: 'Fast diktafon med sladd',
+                price: '3325'
+            }, {
+                name: 'USB-soundbox',
+                value: 'USB-soundbox',
+                description: 'Används av sekreterare',
+                price: '2684'
+            }];
+        }
 
         function getPhoneAccessoriesOptions() {
             return [{
@@ -66,10 +133,10 @@
                 name: 'Samsung GT-B2710, enkel knapptelefon',
                 value: 'Samsung GT-B2710, enkel knapptelefon'
             }, {
-                name:'iPhone 5C  16GB',
+                name: 'iPhone 5C  16GB',
                 value: 'iPhone 5C  16GB'
-            },{
-                name:'Simkort passande till iPhone 5C',
+            }, {
+                name: 'Simkort passande till iPhone 5C',
                 value: 'Simkort passande till iPhone 5C'
             }];
         }
@@ -81,52 +148,52 @@
             }, {
                 name: 'Väska - Targus Notepac Black',
                 value: 'Väska - Targus Notepac Black'
-            },{
+            }, {
                 name: 'Kabelansluten mus',
                 value: 'Kabelansluten mus'
-            },{
+            }, {
                 name: 'Tangentbord',
                 value: 'Tangentbord'
-            },{
+            }, {
                 name: 'USB-Hub 4 portar - Targus Travel USB 4-Port hub',
                 value: 'USB-Hub 4 portar - Targus Travel USB 4-Port hub'
-            },{
+            }, {
                 name: 'Webbkamera - Logitech HD Webcam C270',
                 value: 'Webbkamera - Logitech HD Webcam C270'
-            },{
+            }, {
                 name: 'Säkerhetslås till dator - Kensington Lås',
                 value: 'Säkerhetslås till dator - Kensington Lås'
-            },{
+            }, {
                 name: 'Lokal skrivare - HP LaserJet Pro P1606dn',
                 value: 'Lokal skrivare - HP LaserJet Pro P1606dn'
-            },{
+            }, {
                 name: 'Strömkabel HP EliteBook 2570p',
                 value: 'Strömkabel HP EliteBook 2570p'
-            },{
+            }, {
                 name: 'Strömkabel HP EliteBook 8470p',
                 value: 'Strömkabel HP EliteBook 8470p'
-            },{
+            }, {
                 name: 'Strömkabel HP EliteBook 820 G1',
                 value: 'Strömkabel HP EliteBook 820 G1'
-            },{
+            }, {
                 name: 'Strömkabel HP EliteBook 840 G1',
                 value: 'Strömkabel HP EliteBook 840 G1'
-            },{
+            }, {
                 name: 'DiplayPort-kabel till bildskärm',
                 value: 'DiplayPort-kabel till bildskärm'
-            },{
+            }, {
                 name: 'Adapter Ipad - Adapter för projektor och skärm (till iPad)',
                 value: 'Adapter Ipad - Adapter för projektor och skärm (till iPad)'
-            },{
+            }, {
                 name: 'Extern CD/DVD-spelare',
                 value: 'Extern CD/DVD-spelare'
-            },{
+            }, {
                 name: 'Strömkabel HP-dator 90W',
                 value: 'Strömkabel HP-dator 90W'
-            },{
+            }, {
                 name: 'Strömkabel HP-dator 65W',
                 value: 'Strömkabel HP-dator 65W'
-            },{
+            }, {
                 name: 'Strömkabel HP-dator 45W',
                 value: 'Strömkabel HP-dator 45W'
             }];

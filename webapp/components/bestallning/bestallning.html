@@ -2,11 +2,11 @@
 	<h2>Beställning</h2>
 	<form name="form" ng-submit="onSubmit()" novalidate>
 		<hr>
-		<div class="wizard" ng-if="model.steps && model.steps.length > 0">
+		<div class="wizard" ng-if="getSteps() && getSteps().length > 0">
 			<table>
 				<tbody>
 					<tr>
-						<td ng-repeat="step in model.steps">
+						<td ng-repeat="step in getSteps()">
 							<a type="submit"
 								ui-sref="{{step.route}}"
 								ui-sref-active-eq="current"><span class="badge">{{$index + 1}}</span> {{step.name}}</a>

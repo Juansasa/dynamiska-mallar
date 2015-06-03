@@ -23,7 +23,7 @@
                 url: '/telefoniutrustning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/phoneEquipment/template.html',
+                        template: '<formly-form model="model.ny.telefonutrustning" fields="fields"></form-form>',
                         title: gettext('Telefonutrustning'),
                         controller: 'PhoneEquipmentController'
                     }

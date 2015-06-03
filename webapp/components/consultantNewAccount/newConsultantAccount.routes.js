@@ -12,7 +12,7 @@
                 url: '/nytt-konto',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/consultantNewAccount/template.html',
+                        template: '<formly-form model="model.ny.konsult.nyttKonto" fields="fields"></formly-form>',
                         title: gettext('New consultant account'),
                         controller: 'NewConsultantAccountController'
                     }

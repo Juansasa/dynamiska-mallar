@@ -12,7 +12,7 @@
                 url: '/datorutrustning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/computerEquipments/template.html',
+                        template: '<formly-form model="model.ny.datorutrustning" fields="fields"></formly-form>',
                         title: gettext('Datorutrustning'),
                         controller: 'ComputerEquipmentsController'
                     }

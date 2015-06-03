@@ -22,7 +22,8 @@
             extendConsultantAccount: getOrderExtendConsultantAccountForm,
 
             terminateAccount: getOrderTerminateAccountForm,
-            subscription: getOrderSubscriptionForm,
+            newSubscription: getNewOrderSubscriptionForm,
+            modifySubscription: getModifySubscriptionForm,
             careTalk: getOrderCareTalkForm,
             computerAccessories: getOrderComputerAccessoriesForm,
             mobileBroadband: getOrderMobileBroadbandForm,
@@ -114,7 +115,7 @@
                         placeholder: 'Välj ett marknadsåmråde',
                         options: autocomplete.getAllMO(),
                         onChange: function(v, m, s) {
-                            s.model['Huvud-RE'] = null;
+                            s.model['huvud-RE'] = null;
                         }
                     }
                 }, {
@@ -512,7 +513,7 @@
         }
 
         // Nyt abonnemang
-        function getOrderSubscriptionForm() {
+        function getNewOrderSubscriptionForm() {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -586,7 +587,78 @@
                         label: 'Ny användare',
                         required: true
                     }
+                }]
+            }];
+
+            return getSubscriptionPersonInfo().concat(specific).concat(getOrderSignaturePart());
+        }
+
+        // Modifiera abonnemang
+        function getModifySubscriptionForm() {
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    type: 'select',
+                    key: 'Typ av ärende',
+                    templateOptions: {
+                        label: 'Typ av ärende',
+                        options: [{
+                            name: 'Flytt av abonnemang till annan användare',
+                            value: 'Flytt'
+                        }, {
+                            name: 'Uppsägning av abonnemang',
+                            value: 'Uppsägning'
+                        }]
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>'
                 }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för ändring',
+                    templateOptions: {
+                        label: 'Datum för ändring'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'select',
+                    key: 'Behövs nytt simkort',
+                    templateOptions: {
+                        label: 'Behövs nytt simkort',
+                        required: true,
+                        options: [{
+                            name: 'Ja',
+                            value: 'Ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'Nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Anknytning',
+                    templateOptions: {
+                        label: 'Anknytning',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Ny användare',
+                    templateOptions: {
+                        label: 'Ny användare',
+                        required: true
+                    }
+                }],
+                hideExpression: 'model["Typ av ärende"] !== "Flytt"'
+            }, {
+                className: 'row',
+                fieldGroup: [{
                     template: '<div><b>Uppsägning av abonnemang</b></div>'
                 }, {
                     className: 'col-md-6',
@@ -633,10 +705,9 @@
                         label: 'Mobilnummer',
                         type: 'tel',
                     }
-                }]
-            }];
-
-            return getSubscriptionPersonInfo().concat(specific).concat(getOrderSignaturePart());
+                }],
+                hideExpression: 'model["Typ av ärende"] !== "Uppsägning"'
+            }].concat(getOrderSignaturePart());
         }
 
         // Nytt mobilt bredband formulär
@@ -760,15 +831,15 @@
                     type: 'input',
                     templateOptions: {
                         label: 'Beställare',
-                        required: true
+                        disabled: true,
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'input',
                     templateOptions: {
-                        label: 'Tel',
+                        label: 'Beställarens telefon-nr',
                         type: 'tel',
-                        required: true
+                        disabled: true
                     }
                 }, {
                     template: '<div class="col-md-6"><label>Företag</label><p><b><i>AB Previa</i></b></p></div>'
@@ -777,6 +848,7 @@
                     type: 'input',
                     templateOptions: {
                         label: 'RE-nr',
+                        placeholder: 'Kostnadsbelastad resultatenhet',
                         required: true
                     }
                 }, {
@@ -784,28 +856,28 @@
                     type: 'input',
                     templateOptions: {
                         label: 'Mottagare/Användare (Om annan än beställaren)',
-                        required: true
+                        disabled: true
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'input',
                     templateOptions: {
                         label: 'Leveransadress',
-                        required: true
+                        disabled: true
                     }
                 }, {
                     className: 'col-md-3',
                     type: 'input',
                     templateOptions: {
                         label: 'Postnr',
-                        required: true
+                        disabled: true
                     }
                 }, {
                     className: 'col-md-3',
                     type: 'input',
                     templateOptions: {
                         label: 'Ort',
-                        required: true
+                        disabled: true
                     }
                 }, {
                     template: '<div class="col-md-12"><label>Fakturaadress</label><p><b><i>AB Previa</i></b></p></div>'
@@ -1033,6 +1105,193 @@
             return specific;
         }
 
+        // Digital diktering formulär
+        function getOrderCareTalkForm() {
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Beställare</b></div>'
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Namn',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Mailadress',
+                    templateOptions: {
+                        label: 'Mailadress',
+                        placeholder: 'Mailadress till mottagare av orderbekräftelse',
+                        disabled: true,
+                        type: 'mail'
+                    }
+                }, {
+                    template: '<div><b>Mottagare</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Leveransadress 1',
+                    templateOptions: {
+                        label: 'Leveransadress 1',
+                        disabled: true
+                    },
+                    controller: function($scope) {
+                        $scope.model['Leveransadress 1'] = 'AB Previa';
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Leveransmottagare'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Leveransadress 2',
+                    templateOptions: {
+                        label: 'Leveransadress 2',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel',
+                        required: true
+                    }
+                }, {
+                    template: '<div><b>Faktureringsuppgifter</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Fakturaadress',
+                    templateOptions: {
+                        label: 'Fakturaadress',
+                        disabled: true
+                    },
+                    controller: function($scope) {
+                        $scope.model.Fakturaadress = 'AB Previa';
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Re-nr',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Fakturareferens',
+                    templateOptions: {
+                        label: 'Fakturareferens',
+                        placeholder: 'Sign på den personen som har rollen som "Godkännare" i Pallette',
+                        required: true
+                    },
+                    controller: function($scope) {
+                        $scope.model.Fakturaadress = 'AB Previa';
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Box',
+                    templateOptions: {
+                        label: 'Box',
+                        disabled: true
+                    },
+                    controller: function($scope) {
+                        $scope.model.Box = 'PAA04220, FE 533';
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Postnr',
+                    templateOptions: {
+                        label: 'Postnr',
+                        disabled: true
+                    },
+                    controller: function($scope) {
+                        $scope.model.Postnr = '105 69';
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Ort',
+                    templateOptions: {
+                        label: 'Ort',
+                        disabled: true
+                    },
+                    controller: function($scope) {
+                        $scope.model.Ort = 'STOCKHOLM';
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    key: 'Maskinvara',
+                    type: 'equipment-select',
+                    templateOptions: {
+                        label: 'Maskinvara',
+                        options: autocomplete.getCaretalkHardwareOptions()
+                    }
+                }, {
+                    className: 'col-md-12',
+                    key: 'Tillbehör',
+                    type: 'equipment-select',
+                    templateOptions: {
+                        label: 'Tillbehör',
+                        options: autocomplete.getCaretalkAccessoriesOptions()
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<hr><div><b>Godkänt för inköp</b></div>'
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Behörig beställare',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Ort',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    templateOptions: {
+                        label: 'Datum',
+                        disabled: true
+                    }
+                }]
+            }];
+        }
+
         function getOrderModifyConsultantAccountForm() {
             return [];
         }
@@ -1041,9 +1300,7 @@
             return [];
         }
 
-        function getOrderCareTalkForm() {
-            return [];
-        }
+
 
         function getOrderModifyEmployeeAccountForm() {
             return [];

@@ -15,6 +15,7 @@
         'phoneEquipment',
         'subscription',
         'employeeNewAccount',
-        'computerEquipments'
+        'computerEquipments',
+        'careTalk'
     ]);
 })();

@@ -5,13 +5,19 @@
 
     /*@ngInject*/
     function ctrl($scope) {
-        $scope.currentStep = -1;
-        $scope.fields = {};
-        $scope.model = $scope.model || {
-            person: null, // Personinformation
-            chef: null, // Chef information
-            forms: null,
-            steps: null
-        };
+        modelReset();
+
+        function modelReset() {
+            $scope.currentStep = -1;
+            $scope.fields = {};
+            $scope.model = $scope.model || {
+                person: null, // Personinformation
+                chef: null, // Chef information
+                steps: {
+                    newEmployee: null,
+                    modifyExistingEmployee: null
+                }
+            };
+        }
     }
 })();

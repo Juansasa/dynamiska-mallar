@@ -7,47 +7,48 @@
     /*@ngInject*/
     function setUpRoutes(routeHelper) {
         var states = [{
-            stateName: 'bestallning.nuvarande',
+            stateName: 'bestallning.andra',
             stateConfig: {
-                url: '/nuvarande',
+                url: '/andra',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/nuvarande-anstalld/nuvarande.html',
-                        controller: 'NuvarandeAnstalldController'
+                        templateUrl: 'components/bestallning/aendra/andra.html',
+                        controller: 'AendraController'
                     },
-                    'person-info@bestallning.nuvarande': {
-                        templateUrl: 'components/bestallning/nuvarande-anstalld/person-info.html'
+                    'person-info@bestallning.andra': {
+                        templateUrl: 'components/bestallning/aendra/person-info.html'
                     }
                 }
             }
         }, {
-            stateName: 'bestallning.nuvarande.konsult',
+            stateName: 'bestallning.andra.konsult',
             stateConfig: {
                 url: '/konsult',
                 abstract: true,
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/nuvarande-anstalld/konsult.html'
+                        templateUrl: 'components/bestallning/aendra/konsult.html'
                     }
                 }
             }
         }, {
-            stateName: 'bestallning.nuvarande.anstalld',
+            stateName: 'bestallning.andra.anstalld',
             stateConfig: {
                 url: '/anstalld',
                 abstract: true,
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/nuvarande-anstalld/previa.html'
+                        templateUrl: 'components/bestallning/aendra/previa.html'
                     }
                 }
             }
         }, {
-            stateName: 'bestallning.nuvarande.personinfo',
+            stateName: 'bestallning.andra.personinfo',
             stateConfig: {
                 views: {
-                    'personinfo@bestallning.nuvarande': {
-                        templateUrl: 'components/bestallning/nuvarande-anstalld/person-info.html'
+                    'personinfo@bestallning.andra': {
+                        templateUrl: 'components/bestallning/aendra/person-info.html',
+                        controller: 'PersonInfoAndraController'
                     }
                 }
             }

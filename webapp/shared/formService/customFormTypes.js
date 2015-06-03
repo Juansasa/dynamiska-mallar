@@ -49,7 +49,7 @@
                         }, {
                             className: 'col-md-4',
                             type: 'input',
-                            key: 'Efternamn',
+                            key: 'efternamn',
                             templateOptions: {
                                 label: 'efternamn',
                                 required: true
@@ -194,7 +194,10 @@
                 if (angular.isArray(modelValue)) {
                     const valueProp = to.valueProp || 'value';
                     angular.forEach(to.options, function(v, index) {
-                        $scope.multiCheckbox.checked[index] = modelValue.indexOf(v[valueProp]) !== -1;
+                        var stepindex = _.findIndex(modelValue, function(step){
+                            return  step.route === v[valueProp].route;
+                        });
+                        $scope.multiCheckbox.checked[index] = stepindex > -1;
                     });
                 }
 
@@ -360,9 +363,15 @@
                             return;
                         }
 
-                        model[options.key].push({
+                        var modelVal = {
                             'beteckning': options.templateOptions.selectedValue.name
-                        });
+                        };
+
+                        if (options.templateOptions.selectedValue.price) {
+                            modelVal.price = options.templateOptions.selectedValue.price;
+                        }
+
+                        model[options.key].push(modelVal);
                     },
                 }
             }
