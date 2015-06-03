@@ -3,20 +3,24 @@
 
     angular
         .module('data')
-        .factory('person', exception);
+        .factory('personInfo', ps);
 
-        /*@ngInject*/
-        function exception() {
+    /*@ngInject*/
+    function ps() {
         var service = {
-            getPersonInfo: getPerson
+            person: null,
+            get: getPerson,
+            set: setPerson
         };
         return service;
 
+
+        function setPerson(person) {
+            service.person = person;
+        }
+
         function getPerson() {
-            return {
-                firstname: 'Bosse',
-                lastname: 'Bossesson'
-            };
+            return service.person;
         }
     }
 })();

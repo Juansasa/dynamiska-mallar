@@ -4,7 +4,7 @@
         .controller('AendraController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, autocomplete) {
+    function ctrl($scope, $state, autocomplete, personInfo) {
 
         init();
 
@@ -79,7 +79,8 @@
         }];
 
 
-        $scope.selected = function() {
+        $scope.selected = function(person) {
+            personInfo.set(person);
             $state.go('bestallning.andra.personinfo');
         };
 

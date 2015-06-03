@@ -1,4 +1,4 @@
-<ui-select ng-model="model[options.key]" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
+<ui-select ng-model="model[options.key]" theme="bootstrap" ng-disabled="to.disabled" reset-search-input="false">
     <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
     <ui-select-choices repeat="option.name as option in to.options | propsFilter: {name: $select.search}">
         <div ng-bind-html="option.name | highlight: $select.search"></div>

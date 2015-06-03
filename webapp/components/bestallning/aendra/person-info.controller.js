@@ -22,10 +22,6 @@
                 name: 'Sammanfattning',
                 route: 'bestallning.andra.sammanfattning'
             }];
-
-            if ($scope.model.person && $scope.model.person.anstallningstyp) {
-                $state.go('bestallning.andra.personinfo');
-            }
         }
     }
 })();

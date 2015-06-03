@@ -222,7 +222,7 @@
         }, {
             name: 'autoCompleteAdd',
             extends: 'tjanstestalleSelect',
-            templateUrl: 'shared/formService/secondary-tjanstestalle.html',
+            templateUrl: 'shared/formService/select-add.html',
             defaultOptions: {
                 templateOptions: {
                     onChange: function(v, options, scope) {

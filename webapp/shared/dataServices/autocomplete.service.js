@@ -10,8 +10,10 @@
         var service = {
             getTjanstestalleOptions: getToptions,
             getBefattningOptions: getBefattningOptions,
+
             getAllMO: getMO,
             getRE: getRE,
+
             getComputerLeasingOptions: getComputerLeasingOptions,
             getComputerEquipmentLeasingOptions: getComputerEquipmentLeasingOptions,
             getComputerEquipmentOptions: getComputerEquipmentNoLeasingOptions,

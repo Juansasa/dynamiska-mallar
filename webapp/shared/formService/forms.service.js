@@ -1389,7 +1389,7 @@
                     }
                 }, {
                     template: '<div><b>Ange ny tidsperiod</b></div>'
-                },{
+                }, {
                     className: 'col-md-6',
                     type: 'today-date',
                     key: 'Fr.o.m',
@@ -1397,7 +1397,7 @@
                         label: 'Fr.o.m',
                         required: true
                     }
-                },{
+                }, {
                     className: 'col-md-6',
                     type: 'today-date',
                     key: 'T.o.m',
@@ -1421,12 +1421,21 @@
                         }]
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'autocomplete-select',
                     key: 'Ersätt nuvarande MO till',
                     templateOptions: {
                         label: 'Ersätt nuvarande MO till',
-                        options: autocomplete.getAllMO()
+                        options: autocomplete.getAllMO(),
+                        onChange: 'model["Ersätt nuvarande Huvud-RE till"] = null'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Nuvarande Huvud-RE',
+                        disabled: true,
+                        placeholder: 'RE hämtas från serven'
                     }
                 }, {
                     className: 'col-md-6',
@@ -1436,7 +1445,61 @@
                         label: 'Ersätt nuvarande Huvud-RE till',
                     },
                     expressionProperties: {
-                        'templateOptions.disabled': '!model["Ersätt nuvarande MO till"] || model["Ersätt nuvarande MO till"].length < 1'
+                        'templateOptions.placeholder': '!model["Ersätt nuvarande MO till"] ? "Var vänlig och välj ett MO": "Välj ett RE"',
+                        'templateOptions.disabled': '!model["Ersätt nuvarande MO till"]',
+                        'templateOptions.options': function(v, o, s) {
+                            return autocomplete.getRE(s.model['Ersätt nuvarande MO till']);
+                        }
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autoCompleteAdd',
+                    templateOptions: {
+                        label: 'Lägg till ytterliggare RE',
+                        options: autocomplete.getRE('All-RE: ')
+                    },
+                    expressionProperties: {
+                        'templateOptions.placeholder': '!model["Ersätt nuvarande MO till"] ? "Var vänlig och välj ett MO": "Välj ett RE"',
+                        'templateOptions.disabled': '!model["Ersätt nuvarande MO till"]'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autoCompleteAdd',
+                    key: 'Borttag av RE',
+                    templateOptions: {
+                        label: 'Borttag av RE',
+                        onChange: function(v, options, scope) {
+                            var model = scope.model;
+                            model[options.key] = model[options.key] || [];
+
+                            var index = _.findIndex(scope.model[options.key], function(item) {
+                                return item === scope.to.selectedValue.name;
+                            });
+
+                            if (index > -1) {
+                                return;
+                            }
+
+                            model[options.key].push(options.templateOptions.selectedValue.value);
+                            options.templateOptions.selectedValue = null;
+                        },
+                    },
+                    controller: function($scope, personInfo) {
+                        if (personInfo.person) {
+                            var options = [];
+                            angular.forEach(personInfo.person['Sekundär tjänsteställe'], function(value) {
+                                options.push({
+                                    name: value,
+                                    value: value
+                                });
+                            });
+
+                            $scope.to.options = options;
+                            $scope.to.placeholder = 'Välj RE som ska tas bort';
+                        } else {
+                            $scope.to.disabled = true;
+                            $scope.to.placeholder = 'Ärende person saknar sekundära RE';
+                        }
                     }
                 }]
             }];
