@@ -24,23 +24,13 @@
             stateName: 'bestallning.andra.konsult',
             stateConfig: {
                 url: '/konsult',
-                abstract: true,
-                views: {
-                    'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/aendra/konsult.html'
-                    }
-                }
+                abstract: true
             }
         }, {
             stateName: 'bestallning.andra.anstalld',
             stateConfig: {
                 url: '/anstalld',
-                abstract: true,
-                views: {
-                    'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/aendra/previa.html'
-                    }
-                }
+                abstract: true
             }
         }, {
             stateName: 'bestallning.andra.personinfo',

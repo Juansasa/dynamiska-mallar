@@ -12,7 +12,12 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html'
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
+                        controller: function($scope, $state){
+                            if(!$scope.model.steps || !$scope.model.steps.newEmployee){
+                                $state.go('^');
+                            }
+                        }
                     }
                 }
             }
@@ -22,7 +27,12 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html'
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
+                        controller: function($scope, $state){
+                            if(!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee){
+                                $state.go('^');
+                            }
+                        }
                     }
                 }
             }
@@ -32,7 +42,13 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html'
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
+                        controller: function($scope, $state){
+                            console.log($scope.model.steps);
+                            if(!$scope.model.steps || !$scope.model.steps.existingEmployee){
+                                $state.go('^');
+                            }
+                        }
                     }
                 }
             }

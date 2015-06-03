@@ -14,7 +14,7 @@
                     'wizardContent@bestallning': {
                         template: '<formly-form model="model.ny.mobilbredband" fields="fields"></formly-form>',
                         title: gettext('New mobile broadband'),
-                        controller: 'MobileBroadbandController'
+                        controller: 'NewMobileBroadbandController'
                     }
                 }
             }

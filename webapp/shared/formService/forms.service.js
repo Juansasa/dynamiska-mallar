@@ -26,7 +26,9 @@
             modifySubscription: getModifySubscriptionForm,
             careTalk: getOrderCareTalkForm,
             computerAccessories: getOrderComputerAccessoriesForm,
-            mobileBroadband: getOrderMobileBroadbandForm,
+
+            modifyMobileBroadband: getModifyMobileBroadbandForm,
+
             phoneEquipment: getOrderPhoneEquipmentForm,
         };
 
@@ -598,7 +600,7 @@
             return [{
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-12',
+                    className: 'row',
                     type: 'select',
                     key: 'Typ av ärende',
                     templateOptions: {
@@ -611,6 +613,8 @@
                             value: 'Uppsägning'
                         }]
                     }
+                }, {
+                    template: '<hr>'
                 }]
             }, {
                 className: 'row',
@@ -708,6 +712,85 @@
                 }],
                 hideExpression: 'model["Typ av ärende"] !== "Uppsägning"'
             }].concat(getOrderSignaturePart());
+        }
+
+        // Modifiera existerande mobilt bredband
+        function getModifyMobileBroadbandForm() {
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    type: 'select',
+                    key: 'Mobilt bredband ärende',
+                    templateOptions: {
+                        label: 'Välj ett formulär',
+                        options: [{
+                            name: 'Flytt av Mobilt bredband till annan användare',
+                            value: 'Flytt'
+                        }, {
+                            name: 'Uppsägning av Mobilt bredband',
+                            value: 'Uppsägning'
+                        }]
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för flytt',
+                    templateOptions: {
+                        label: 'Datum för flytt'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Telefonnummer',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Ny abonnent – Namn',
+                    templateOptions: {
+                        label: 'Ny abonnent – Namn',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Alias',
+                    templateOptions: {
+                        label: 'Alias',
+                        disabled: true
+                    }
+                }],
+                hideExpression: 'model["Mobilt bredband ärende"] !== "Flytt"'
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Uppsägning av Mobilt bredband</b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för uppsägning',
+                    templateOptions: {
+                        label: 'Datum för uppsägning'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Telefonnummer',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel'
+                    }
+                }],
+                hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
+            }];
         }
 
         // Nytt mobilt bredband formulär
@@ -1293,7 +1376,70 @@
         }
 
         function getOrderModifyConsultantAccountForm() {
-            return [];
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Personuppgifter</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Användarnamn',
+                        required: true
+                    }
+                }, {
+                    template: '<div><b>Ange ny tidsperiod</b></div>'
+                },{
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Fr.o.m',
+                    templateOptions: {
+                        label: 'Fr.o.m',
+                        required: true
+                    }
+                },{
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'T.o.m',
+                    templateOptions: {
+                        label: 'T.o.m',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'select',
+                    key: 'Mailkonto',
+                    templateOptions: {
+                        label: 'Mailkonto',
+                        required: true,
+                        options: [{
+                            name: 'Ja',
+                            value: 'Ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'Nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'Ersätt nuvarande MO till',
+                    templateOptions: {
+                        label: 'Ersätt nuvarande MO till',
+                        options: autocomplete.getAllMO()
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'Ersätt nuvarande Huvud-RE till',
+                    templateOptions: {
+                        label: 'Ersätt nuvarande Huvud-RE till',
+                    },
+                    expressionProperties: {
+                        'templateOptions.disabled': '!model["Ersätt nuvarande MO till"] || model["Ersätt nuvarande MO till"].length < 1'
+                    }
+                }]
+            }];
         }
 
         function getOrderExtendConsultantAccountForm() {

@@ -30,7 +30,20 @@
                         name: 'Sammanfattning',
                         route: 'bestallning.andra.sammanfattning'
                     },
-                    options: [{
+                    options: [$scope.model.person && $scope.model.person.anstallningstyp === 'previa anställd' ?
+                    {
+                        name: 'Förändring Konto',
+                        value: {
+                            name: 'Förändring Konto',
+                            route: 'bestallning.andra.anstalld.forandring-konto'
+                        }
+                    } : {
+                        name: 'Förändring Konto',
+                        value: {
+                            name: 'Förändring Konto',
+                            route: 'bestallning.andra.konsult.forandring-konto'
+                        }
+                    },{
                         name: 'Abonnemang',
                         value: {
                             name: 'Abonnemang',
@@ -40,7 +53,7 @@
                         name: 'Mobilbredband',
                         value: {
                             name: 'Mobilbredband',
-                            route: 'bestallning.ny.mobilbredband'
+                            route: 'bestallning.andra.mobilbredband'
                         }
                     }, {
                         name: 'Datorutrustning',

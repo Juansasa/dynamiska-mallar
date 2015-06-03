@@ -1,12 +1,12 @@
 (function() {
     'use strict';
     angular.module('mobileBroadband')
-        .controller('MobileBroadbandController', mbCtrl);
+        .controller('ModifyMobileBroadbandController', mbCtrl);
 
     /*@ngInject*/
     function mbCtrl($scope, forms) {
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};
-        $scope.fields = forms.mobileBroadband();
+        $scope.fields = forms.modifyMobileBroadband();
     }
 })();
