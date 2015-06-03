@@ -28,6 +28,7 @@
             computerAccessories: getOrderComputerAccessoriesForm,
 
             modifyMobileBroadband: getModifyMobileBroadbandForm,
+            newMobileBroadband: getNewMobileBroadband,
 
             phoneEquipment: getOrderPhoneEquipmentForm,
         };
@@ -794,7 +795,7 @@
         }
 
         // Nytt mobilt bredband formulär
-        function getOrderMobileBroadbandForm() {
+        function getNewMobileBroadband() {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{

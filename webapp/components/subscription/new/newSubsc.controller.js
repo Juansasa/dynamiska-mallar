@@ -4,8 +4,8 @@
         .controller('SubscriptionController', subCtrl);
 
     /*@ngInject*/
-    function subCtrl($scope, $state, forms) {    	
-    	if(!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee){
+    function subCtrl($scope, $state, forms) {
+    	if(!$scope.model.steps || !$scope.model.steps.newEmployee){
         	$state.go('^');
         }
 
