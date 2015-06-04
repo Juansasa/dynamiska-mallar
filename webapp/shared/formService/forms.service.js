@@ -30,6 +30,8 @@
             modifyMobileBroadband: getModifyMobileBroadbandForm,
             newMobileBroadband: getNewMobileBroadband,
 
+            changeEmploymentStatus: changeEmploymentStatus,
+
             phoneEquipment: getOrderPhoneEquipmentForm,
         };
 
@@ -81,19 +83,56 @@
         // Personliga info som är specifik för ny previa anställd
         function getNewConsultantPersonalInfo() {
             var specific = [{
+                fieldGroup: [{
+                    type: 'personNo',
+                    key: 'personnummer'
+                }, {
+                    type: 'personName',
+                    key: 'namn'
+                }]
+            }, {
                 className: 'row',
                 fieldGroup: [{
+                    template: '<div><b>Tjänsteuppgifter<b></div>'
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'MO',
+                    templateOptions: {
+                        label: 'MO (Marknadsområde)',
+                        placeholder: 'Välj ett marknadsåmråde',
+                        options: autocomplete.getAllMO(),
+                        onChange: function(v, m, s) {
+                            s.model['huvud-RE'] = null;
+                        }
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'tjanstestalleSelect',
+                    key: 'Tjänsteställe',
+                    templateOptions: {
+                        label: gettext('Tjänsteställe'),
+                        placeholder: 'Välj ett tjänsteställe',
+                        options: autocomplete.getTjanstestalleOptions()
+                    }
+                }, {
                     className: 'col-md-12',
-                    type: 'select',
+                    type: 'autocomplete-select',
                     key: 'huvud-RE',
                     templateOptions: {
-                        label: 'Resultatenhet',
-                        options: autocomplete.getRE('All re')
+                        label: 'Huvud-RE',
+                        placeholder: 'Välj en RE',
+                        required: true
+                    },
+                    expressionProperties: {
+                        'templateOptions.options': function(v, m, s) {
+                            return autocomplete.getRE(s.model.MO);
+                        }
                     }
                 }]
             }];
 
-            return getGeneralPersonInfo().concat(specific);
+            return specific;
         }
 
         // Personliga info som är specifik för ny konsult
@@ -325,6 +364,24 @@
                         options: autocomplete.getRE('All')
                     }
                 }, {
+                    className: 'col-md-12',
+                    type: 'autocomplete-select',
+                    key: 'Rapporterar till (chef)',
+                    templateOptions: {
+                        label: 'Rapporterar till (chef)',
+                        required: true,
+                        options: [{
+                            name: 'Chef 1',
+                            value: 'Chef 1'
+                        }, {
+                            name: 'Chef 2',
+                            value: 'Chef 2'
+                        }, {
+                            name: 'Chef 3',
+                            value: 'Chef 3'
+                        }]
+                    }
+                }, {
                     template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
                 }, {
                     className: 'col-md-12',
@@ -365,8 +422,6 @@
                         label: 'Välj Befattning, roll och behörighet',
                         options: autocomplete.getBefattningOptions()
                     }
-                }, {
-                    type: 'signature'
                 }]
 
             }];
@@ -438,112 +493,31 @@
             return specific;
         }
 
-        // Person-info part of subscrition form
-        function getSubscriptionPersonInfo() {
-            return [{
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Personinformation</b></div>',
-                    templateOptions: {
-                        description: 'Om information om personen saknas var vänlig och fylla in i förregående steg. TODO bind data'
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namn',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Resultatenhet',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'RE-nr',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Previa enhet',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Postadress',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Postnummer',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ort',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Kontaktperson',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Telefonnr',
-                        type: 'tel',
-                        required: true
-                    }
-                }]
-            }];
-        }
-
         // Nyt abonnemang
         function getNewOrderSubscriptionForm() {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Nytt abonnemang</b></div>'
-                }, {
-                    className: 'col-md-4',
-                    type: 'today-date',
-                    key: 'Datum då abonnemanget ska börja gälla',
-                    templateOptions: {
-                        label: 'Datum då abonnemanget ska börja gälla'
-                    }
-                }, {
-                    className: 'col-md-4',
+                },{
+                    className: 'col-md-6',
                     type: 'select',
-                    key: 'Ny Anknytning med tillhörande mobilnr',
+                    key: 'Anknytningsval',
                     templateOptions: {
-                        label: 'Ny Anknytning med tillhörande mobilnr',
+                        label: 'Anknytningsval',
                         options: [{
+                            name: 'Ny Anknytning med tillhörande mobilnr',
+                            value: 'Ny Anknytning med tillhörande mobilnr'
+                        },{
                             name: 'Endast fast ankn',
                             value: 'Endast fast ankn'
-                        }, {
+                        },{
                             name: 'Endast mobilabonnemang',
                             value: 'Endast mobilabonnemang'
                         }]
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'today-date',
                     key: 'Beställningsdatum',
                     templateOptions: {
@@ -575,25 +549,16 @@
                         }]
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'input',
                     key: 'Anknytning',
                     templateOptions: {
                         label: 'Anknytning',
                         required: true
                     }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Ny användare',
-                    templateOptions: {
-                        label: 'Ny användare',
-                        required: true
-                    }
                 }]
             }];
-
-            return getSubscriptionPersonInfo().concat(specific).concat(getOrderSignaturePart());
+            return specific;
         }
 
         // Modifiera abonnemang
@@ -603,9 +568,9 @@
                 fieldGroup: [{
                     className: 'row',
                     type: 'select',
-                    key: 'Typ av ärende',
+                    key: 'Vald formulär',
                     templateOptions: {
-                        label: 'Typ av ärende',
+                        label: 'Välj ett formulär',
                         options: [{
                             name: 'Flytt av abonnemang till annan användare',
                             value: 'Flytt'
@@ -622,18 +587,33 @@
                 fieldGroup: [{
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>'
                 }, {
+                    className: 'col-md-12',
+                    type: 'checkbox',
+                    key: 'Anknytning med tillhörande mobilnr',
+                    templateOptions: {
+                        label: 'Anknytning med tillhörande mobilnr'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Ny användare',
+                    templateOptions: {
+                        label: 'Ny användare',
+                        required: true
+                    }
+                }, {
                     className: 'col-md-6',
                     type: 'today-date',
-                    key: 'Datum för ändring',
+                    key: 'Datum för flytt',
                     templateOptions: {
-                        label: 'Datum för ändring'
+                        label: 'Datum för flytt'
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'select',
-                    key: 'Behövs nytt simkort',
+                    key: 'Behövs nytt simkort ?',
                     templateOptions: {
-                        label: 'Behövs nytt simkort',
+                        label: 'Behövs nytt simkort ?',
                         required: true,
                         options: [{
                             name: 'Ja',
@@ -651,35 +631,22 @@
                         label: 'Anknytning',
                         required: true
                     }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Ny användare',
-                    templateOptions: {
-                        label: 'Ny användare',
-                        required: true
-                    }
                 }],
-                hideExpression: 'model["Typ av ärende"] !== "Flytt"'
+                hideExpression: 'model["Vald formulär"] !== "Flytt"'
             }, {
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Uppsägning av abonnemang</b></div>'
                 }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Datum för uppsägning',
-                    templateOptions: {
-                        label: 'Datum för uppsägning'
-                    }
-                }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'select',
-                    key: ' Anknytning med tillhörande mobilnr',
+                    key: 'Anknytningsval',
                     templateOptions: {
-                        label: ' Anknytning med tillhörande mobilnr',
-                        required: true,
+                        label: 'Anknytningsval',
                         options: [{
+                            name: 'Anknytning med tillhörande mobilnr',
+                            value: 'Anknytning med tillhörande mobilnr'
+                        }, {
                             name: 'Endast Fast Abonnemang',
                             value: 'Endast Fast Abonnemang'
                         }, {
@@ -710,9 +677,16 @@
                         label: 'Mobilnummer',
                         type: 'tel',
                     }
+                }, {
+                    className: 'col-md-12',
+                    type: 'today-date',
+                    key: 'Datum för uppsägning',
+                    templateOptions: {
+                        label: 'Datum för uppsägning'
+                    }
                 }],
-                hideExpression: 'model["Typ av ärende"] !== "Uppsägning"'
-            }].concat(getOrderSignaturePart());
+                hideExpression: 'model["Vald formulär"] !== "Uppsägning"'
+            }];
         }
 
         // Modifiera existerande mobilt bredband
@@ -755,18 +729,17 @@
                 }, {
                     className: 'col-md-6',
                     type: 'input',
-                    key: 'Ny abonnent – Namn',
                     templateOptions: {
-                        label: 'Ny abonnent – Namn',
-                        disabled: true
+                        label: 'Kontaktperson',
+                        required: true
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'input',
-                    key: 'Alias',
                     templateOptions: {
-                        label: 'Alias',
-                        disabled: true
+                        label: 'Telefonnr',
+                        type: 'tel',
+                        required: true
                     }
                 }],
                 hideExpression: 'model["Mobilt bredband ärende"] !== "Flytt"'
@@ -788,6 +761,42 @@
                     templateOptions: {
                         label: 'Telefonnummer',
                         type: 'tel'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Resultatenhet',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'RE-nr',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'RE-namn',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Kontaktperson',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Telefonnr',
+                        type: 'tel',
+                        required: true
                     }
                 }],
                 hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
@@ -823,7 +832,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'radio',
+                    type: 'select',
                     key: 'USB modem önskas',
                     templateOptions: {
                         label: 'USB modem önskas',
@@ -835,7 +844,9 @@
                             value: 'Nej'
                         }]
                     },
-                    hideExpression: 'model["Typ av mobilt bredband"] !== "Mobilt bredband 4G"'
+                    expressionProperties: {
+                        'templateOptions.disabled': '!model["Typ av mobilt bredband"]'
+                    } 
                 }]
             }, {
                 className: 'row',
@@ -867,35 +878,15 @@
                 }, {
                     className: 'col-md-6',
                     type: 'input',
-                    key: 'Alias',
+                    key: 'Användarnamn',
                     templateOptions: {
-                        label: 'Alias',
+                        label: 'Användarnamn',
                         disabled: true
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Uppsägning av Mobilt bredband</b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Datum för uppsägning',
-                    templateOptions: {
-                        label: 'Datum för uppsägning'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Telefonnummer',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        type: 'tel'
                     }
                 }]
             }];
 
-            return getSubscriptionPersonInfo().concat(specific).concat(getOrderSignaturePart());
+            return specific.concat(getOrderSignaturePart());
         }
 
         // Nytt telefonutrustning formulär
@@ -1021,30 +1012,6 @@
                     label: 'Tillbehör',
                     options: autocomplete.getPhoneAccessoriesOptions()
                 }
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<hr><div><p><b>Godkänt för inköp</b></p></div>'
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namnförtydligande'
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ort'
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'today-date',
-                    templateOptions: {
-                        label: 'Datum',
-                        disabled: true
-                    }
-                }]
             }];
         }
 
@@ -1157,33 +1124,6 @@
                         label: 'Övrig information'
                     }
                 }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Godkänt för inköp</b></div>'
-                }, {
-                    className: 'col-md-4',
-                    type: 'today-date',
-                    key: 'Datum',
-                    templateOptions: {
-                        label: 'Datum',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ort',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Behörig beställare',
-                        disabled: true
-                    }
-                }]
             }];
 
             return specific;
@@ -1216,7 +1156,7 @@
                     templateOptions: {
                         label: 'Mailadress',
                         placeholder: 'Mailadress till mottagare av orderbekräftelse',
-                        disabled: true,
+                        required: true,
                         type: 'mail'
                     }
                 }, {
@@ -1347,79 +1287,48 @@
                         options: autocomplete.getCaretalkAccessoriesOptions()
                     }
                 }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<hr><div><b>Godkänt för inköp</b></div>'
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Behörig beställare',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ort',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'today-date',
-                    templateOptions: {
-                        label: 'Datum',
-                        disabled: true
-                    }
-                }]
             }];
         }
 
         function getOrderModifyConsultantAccountForm() {
+            return [];
+        }
+
+        function getOrderModifyEmployeeAccountForm() {
             return [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Personuppgifter</b></div>'
+                    template: '<div><b>Tjänsteuppgifter</b></div>'
                 }, {
-                    className: 'col-md-12',
-                    type: 'input',
+                    className: 'col-md-4',
+                    type: 'select',
+                    key: 'Anställningsform',
                     templateOptions: {
-                        label: 'Användarnamn',
-                        required: true
+                        label: 'Anställningsform',
+                        options: [{
+                            name: 'Provanställning',
+                            value: 'Provanställning'
+                        }, {
+                            name: 'Tillsvidareanställning',
+                            value: 'Tillsvidareanställning'
+                        }, {
+                            name: ' Tidsbegränsad anställning',
+                            value: 'Tidsbegränsad anställning'
+                        }]
                     }
                 }, {
-                    template: '<div><b>Ange ny tidsperiod</b></div>'
-                }, {
-                    className: 'col-md-6',
+                    className: 'col-md-4',
                     type: 'today-date',
                     key: 'Fr.o.m',
                     templateOptions: {
-                        label: 'Fr.o.m',
-                        required: true
+                        label: 'Fr.o.m'
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-4',
                     type: 'today-date',
                     key: 'T.o.m',
                     templateOptions: {
-                        label: 'T.o.m',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'select',
-                    key: 'Mailkonto',
-                    templateOptions: {
-                        label: 'Mailkonto',
-                        required: true,
-                        options: [{
-                            name: 'Ja',
-                            value: 'Ja'
-                        }, {
-                            name: 'Nej',
-                            value: 'Nej'
-                        }]
+                        label: 'T.o.m'
                     }
                 }, {
                     className: 'col-md-12',
@@ -1436,7 +1345,12 @@
                     templateOptions: {
                         label: 'Nuvarande Huvud-RE',
                         disabled: true,
-                        placeholder: 'RE hämtas från serven'
+                        placeholder: 'Huvud-RE'
+                    },
+                    controller: function($scope, personInfo) {
+                        if (personInfo.get()) {
+                            $scope.model[$scope.options.key] = personInfo.get()['huvud-RE'];
+                        }
                     }
                 }, {
                     className: 'col-md-6',
@@ -1503,6 +1417,66 @@
                         }
                     }
                 }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Befattning / Roll / Behörighet / Licenser</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'select',
+                    key: 'Befattningen är en Tf roll',
+                    templateOptions: {
+                        label: 'Befattningen är en Tf roll',
+                        options: [{
+                            name: 'Ja',
+                            value: 'ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'infoList',
+                    templateOptions: {
+                        label: 'Standardbehörighet för samtliga roller och befattningar',
+                        options: [
+                            '3Q användarbehörighet( QV & Quando)',
+                            'Läsrättigheter till Internwebben',
+                            'E-post konto (konsult...)',
+                            'Hemkatalog H:',
+                            'Access till G:',
+                            'Improof',
+                            'Handboken',
+                            'Agda Entré',
+                            'Access till Kuben',
+                            'Lync'
+                        ]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'roleSelect',
+                    key: 'befattning',
+                    templateOptions: {
+                        label: 'Välj Befattning, roll och behörighet',
+                        options: autocomplete.getBefattningOptions(true)
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Rapportera till chef',
+                    templateOptions: {
+                        label: 'Rapportera till chef',
+                        required: true
+                    }
+                }]
             }];
         }
 
@@ -1510,14 +1484,59 @@
             return [];
         }
 
-
-
-        function getOrderModifyEmployeeAccountForm() {
-            return [];
-        }
-
         function getOrderExtendEmployeeAccountForm() {
-            return [];
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Tjänsteuppgifter</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Huvud-RE',
+                        disabled: true,
+                        placeholder: 'get from personuppgifter'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'select',
+                    key: 'Anställningsform',
+                    templateOptions: {
+                        label: 'Anställningsform',
+                        options: [{
+                            name: 'Provanställning',
+                            value: 'Provanställning'
+                        }, {
+                            name: 'Tillsvidareanställning',
+                            value: 'Tillsvidareanställning'
+                        }, {
+                            name: ' Tidsbegränsad anställning',
+                            value: 'Tidsbegränsad anställning'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    key: 'Fr.o.m',
+                    templateOptions: {
+                        label: 'Fr.o.m'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'today-date',
+                    key: 'T.o.m',
+                    templateOptions: {
+                        label: 'T.o.m'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information'
+                    }
+                }]
+            }];
         }
 
         function getOrderTerminateAccountForm() {
@@ -1569,6 +1588,63 @@
             }];
         }
 
+        function changeEmploymentStatus() {
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Namn',
+                        placeholder: 'get från personuppgifter',
+                        disabled: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Personnummer',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'tjanstestalleSelect',
+                    templateOptions: {
+                        label: 'Tjänsteställe',
+                        required: true,
+                        options: autocomplete.getTjanstestalleOptions()
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'tjanstestalleSelect',
+                    templateOptions: {
+                        label: 'Resultatenhet',
+                        required: true,
+                        options: autocomplete.getRE('All-RE')
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Vilken ändring som gäller (t ex ökad eller minskad tjänstgöringsgrad)',
+                    templateOptions: {
+                        label: 'Vilken ändring som gäller (t ex ökad eller minskad tjänstgöringsgrad)',
+                        required: true,
+                        type: 'number',
+                        placeholder: '%',
+                        min: 0
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'today-date',
+                    key: 'Datum som anger när ändringen skall gälla',
+                    templateOptions: {
+                        label: 'Datum som anger när ändringen skall gälla',
+                        required: true
+                    }
+                }]
+            }];
+        }
+
 
         // 
         // Form fragments
@@ -1584,26 +1660,6 @@
                     type: 'textarea',
                     templateOptions: {
                         label: 'Övriga upplysningar'
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'today-date',
-                    templateOptions: {
-                        label: 'Beställningsdatum',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Godkänt för beställning',
-                        type: 'date'
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namnförtydligande'
                     }
                 }]
             }];

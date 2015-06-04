@@ -80,14 +80,15 @@
 
             var wizardSteps = [];
             if ($scope.model.person.anstallningstyp === 'konsult') {
-                $scope.fields.personinfo = forms.newConsultantPersonalInfo();
+                $scope.fields.personinfo = forms.newConsultantPersonalInfo().concat(forms.newConsultantAccount());
                 wizardSteps = [{
-                    name: 'Person information',
-                    route: 'bestallning.ny'
-                }, {
-                    name: 'Nytt konto',
-                    route: 'bestallning.ny.konsult.nytt-konto'
-                }];
+                        name: 'Person information',
+                        route: 'bestallning.ny'
+                    }
+                    // , {
+                    //     name: 'Nytt konto',
+                    //     route: 'bestallning.ny.konsult.nytt-konto'
+                ];
             } else if ($scope.model.person.anstallningstyp === 'previa anställd') {
                 $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{

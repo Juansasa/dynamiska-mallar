@@ -18,18 +18,6 @@
                     }
                 }
             }
-        }, {
-            stateName: 'bestallning.andra.anstalld.forandring-konto',
-            stateConfig: {
-                url: '/forandring-konto',
-                views: {
-                    'wizardContent@bestallning': {
-                        template: '<formly-form model="model.andra.konto[\'anställd\']" fields="fields"></form-form>',
-                        title: gettext('Förändring konto'),
-                        controller: 'ModifyConsultantAccountController'
-                    }
-                }
-            }
         }];
 
         routeHelper.registerStates(state);

@@ -286,27 +286,21 @@
                             }
                         }, {
                             className: 'col-md-6',
-                            type: 'input',
+                            type: 'autocomplete-select',
                             key: 'Rapporterar till (chef)',
                             templateOptions: {
                                 label: 'Rapporterar till (chef)',
-                                required: true
-                            }
-                        }, {
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'Namn på behörig beställare',
-                            templateOptions: {
-                                label: 'Namn på behörig beställare',
-                                required: true
-                            }
-                        }, {
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'E-postadress på behörig beställare',
-                            templateOptions: {
-                                label: 'E-postadress på behörig beställare',
-                                required: true
+                                required: true,
+                                options: [{
+                                    name: 'Chef 1',
+                                    value: 'Chef 1'
+                                }, {
+                                    name: 'Chef 2',
+                                    value: 'Chef 2'
+                                }, {
+                                    name: 'Chef 3',
+                                    value: 'Chef 3'
+                                }]
                             }
                         }]
                     }]

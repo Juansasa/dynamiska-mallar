@@ -34,7 +34,7 @@
             return [{
                 'anstallningstyp': 'previa anställd',
                 'namn': {
-                    'förnamn': 'Konsult',
+                    'förnamn': 'Previa',
                     'mellannamn': 'von',
                     'efternamn': 'Andersson'
                 },

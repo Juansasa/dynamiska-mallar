@@ -41,7 +41,7 @@
                         name: 'Förändring Konto',
                         value: {
                             name: 'Förändring Konto',
-                            route: 'bestallning.andra.konsult.forandring-konto'
+                            route: 'bestallning.andra.anstalld.forandring-konto'
                         }
                     },{
                         name: 'Abonnemang',
@@ -56,22 +56,10 @@
                             route: 'bestallning.andra.mobilbredband'
                         }
                     }, {
-                        name: 'Datorutrustning',
+                        name: 'Ändring av anställningsförhållande',
                         value: {
-                            name: 'Datorutrustning',
-                            route: 'bestallning.ny.datorutrustning'
-                        }
-                    }, {
-                        name: 'Telefonutrustning',
-                        value: {
-                            name: 'Telefonutrustning',
-                            route: 'bestallning.ny.telefoniutrustning'
-                        }
-                    }, {
-                        name: 'Digital diktering',
-                        value: {
-                            name: 'Digital diktering',
-                            route: 'bestallning.ny.digital-diktering'
+                            name: 'Ändring av anställningsförhållande',
+                            route: 'bestallning.andra.anstallningsforhallande'
                         }
                     }]
                 }

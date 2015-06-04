@@ -17,6 +17,7 @@
         'employeeNewAccount',
         'computerEquipments',
         'careTalk',
-        'modifyAccount'
+        'modifyAccount',
+        'changeEmploymentStatus'
     ]);
 })();
