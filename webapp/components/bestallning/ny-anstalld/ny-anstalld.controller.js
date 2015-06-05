@@ -12,10 +12,36 @@
         };
 
         $scope.$parent.next = function() {
+            if ($scope.form.$invalid) {
+                return;
+            }
+
             var index = findStateIndex($state.current);
             if (index + 1 < $scope.model.steps.newEmployee.length) {
                 $state.go($scope.model.steps.newEmployee[index + 1].route);
             }
+        };
+
+        $scope.$parent.skip = function() {
+            // Clear model-data and mark model as disabled
+            var path = $state.current.modelKey;
+            var model = $scope.model;
+
+            if (!path || !model) {
+                return;
+            }
+
+            var stack = path.split('.');
+
+            while (stack.length > 1) {
+                model = model[stack.shift()];
+            }
+
+            model[stack.shift()] = {
+                disabled: true
+            };
+
+            $scope.next();
         };
 
         $scope.$parent.previous = function() {
@@ -82,13 +108,9 @@
             if ($scope.model.person.anstallningstyp === 'konsult') {
                 $scope.fields.personinfo = forms.newConsultantPersonalInfo().concat(forms.newConsultantAccount());
                 wizardSteps = [{
-                        name: 'Person information',
-                        route: 'bestallning.ny'
-                    }
-                    // , {
-                    //     name: 'Nytt konto',
-                    //     route: 'bestallning.ny.konsult.nytt-konto'
-                ];
+                    name: 'Nytt konto',
+                    route: 'bestallning.ny'
+                }];
             } else if ($scope.model.person.anstallningstyp === 'previa anställd') {
                 $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{
@@ -112,14 +134,14 @@
 
         function getCommonFormsteps() {
             return [{
-                name: 'Abonnemang',
-                route: 'bestallning.ny.abonnemang'
+                name: 'Datorutrustning',
+                route: 'bestallning.ny.datorutrustning'
             }, {
                 name: 'Mobilbredband',
                 route: 'bestallning.ny.mobilbredband'
             }, {
-                name: 'Datorutrustning',
-                route: 'bestallning.ny.datorutrustning'
+                name: 'Telefoni',
+                route: 'bestallning.ny.abonnemang'
             }, {
                 name: 'Telefonutrustning',
                 route: 'bestallning.ny.telefoniutrustning'

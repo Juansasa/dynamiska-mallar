@@ -41,8 +41,8 @@ p {
     }
 }
 
-.btn-next {
-    float: right;
+.btn-skip {
+    margin-right: 1em;
 }
 
 .radio-group {
@@ -81,6 +81,11 @@ p {
 
 input::-webkit-input-placeholder {
     font-style: italic;
+}
+
+.checkbox {
+    display: inline-block;
+    margin-right: 1em;
 }
 
 .wizard-footer {

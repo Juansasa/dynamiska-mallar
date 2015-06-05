@@ -19,42 +19,42 @@
                 templateOptions: {
                     label: 'Välj beställningar som ska genomföras',
                     pre: {
-                        name: 'Start',
-                        route: 'bestallning.nuvarande.personinfo'
+                        name: 'Sök',
+                        route: 'bestallning.nuvarande'
                     },
                     post: {
                         name: 'Sammanfattning',
                         route: 'bestallning.nuvarande.sammanfattning'
                     },
                     options: [{
-                        name: 'Abonnemang',
+                        name: 'Telefoni',
                         value: {
-                            name: 'Abonnemang',
+                            name: 'Telefoni',
                             route: 'bestallning.nuvarande.abonnemang'
                         }
                     }, {
                         name: 'Mobilbredband',
                         value: {
                             name: 'Mobilbredband',
-                            route: 'bestallning.ny.mobilbredband'
+                            route: 'bestallning.nuvarande.mobilbredband'
                         }
                     }, {
                         name: 'Datorutrustning',
                         value: {
                             name: 'Datorutrustning',
-                            route: 'bestallning.ny.datorutrustning'
+                            route: 'bestallning.nuvarande.datorutrustning'
                         }
                     }, {
                         name: 'Telefonutrustning',
                         value: {
                             name: 'Telefonutrustning',
-                            route: 'bestallning.ny.telefoniutrustning'
+                            route: 'bestallning.nuvarande.telefoniutrustning'
                         }
                     }, {
                         name: 'Digital diktering',
                         value: {
                             name: 'Digital diktering',
-                            route: 'bestallning.ny.digital-diktering'
+                            route: 'bestallning.nuvarande.digital-diktering'
                         }
                     }]
                 }
@@ -63,15 +63,14 @@
 
 
         $scope.$parent.getSteps = function() {
+            if($scope.model.steps.existingEmployee.length === 2) {
+                return $scope.model.steps.existingEmployee.splice(1, 1);
+            }
             return $scope.model.steps.existingEmployee;
         };
 
-        $scope.sok = function() {
-            $state.go('bestallning.nuvarande.personinfo');
-        };
-
         $scope.$parent.next = function() {
-            var index = findStateIndex($state.current);
+            var index = findStateIndex($state.current);            
             if (index + 1 < $scope.model.steps.existingEmployee.length) {
                 $state.go($scope.model.steps.existingEmployee[index + 1].route);
             }
@@ -92,10 +91,9 @@
             return findStateIndex($state.current) === $scope.model.steps.existingEmployee.length - 1;
         };
 
-        function init() {
-            $scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
-                name: 'Start',
-                route: 'bestallning.nuvarande.personinfo'
+        function init() {$scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
+                name: 'Sök',
+                route: 'bestallning.nuvarande'
             }, {
                 name: 'Sammanfattning',
                 route: 'bestallning.nuvarande.sammanfattning'

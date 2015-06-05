@@ -1,20 +1,20 @@
 (function() {
     'use strict';
 
-    angular.module('subscription')
+    angular.module('removeAccount')
         .run(setUpRoutes);
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
         var state = [{
-            stateName: 'bestallning.andra.abonnemang',
+            stateName: 'bestallning.andra.avsluta',
             stateConfig: {
-                url: '/abonnemang',
+                url: '/avsluta-konto',
                 views: {
                     'wizardContent@bestallning': {
-                        template: '<formly-form model="model.andra.abonnemang" fields="fields"></form-form>',
-                        title: gettext('Abonnemang'),
-                        controller: 'SubscriptionChangeController'
+                        templateUrl: 'components/removeAccount/template.html',
+                        title: gettext('Avsluta konto'),
+                        controller: 'RemoveAccountController'
                     }
                 }
             }

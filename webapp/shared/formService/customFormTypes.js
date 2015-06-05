@@ -264,28 +264,6 @@
                         className: 'row',
                         fieldGroup: [{
                             className: 'col-md-12',
-                            type: 'textarea',
-                            key: 'Övrig information',
-                            templateOptions: {
-                                label: 'Övrig information',
-                                placeholder: 'Övriga information'
-                            }
-                        }, {
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'Dagens datum',
-                            templateOptions: {
-                                label: 'Dagens datum',
-                                type: 'date',
-                                disabled: true
-                            },
-                            expressionProperties: {
-                                'init': function(v, m, scope) {
-                                    scope.model['Dagens datum'] = new Date();
-                                }
-                            }
-                        }, {
-                            className: 'col-md-6',
                             type: 'autocomplete-select',
                             key: 'Rapporterar till (chef)',
                             templateOptions: {
@@ -302,7 +280,31 @@
                                     value: 'Chef 3'
                                 }]
                             }
-                        }]
+                        }, {
+                            className: 'col-md-12',
+                            type: 'textarea',
+                            key: 'Övrig information',
+                            templateOptions: {
+                                label: 'Övrig information',
+                                placeholder: 'Övriga information'
+                            }
+                        }, 
+                        // {
+                        //     className: 'col-md-6',
+                        //     type: 'input',
+                        //     key: 'Dagens datum',
+                        //     templateOptions: {
+                        //         label: 'Dagens datum',
+                        //         type: 'date',
+                        //         disabled: true
+                        //     },
+                        //     expressionProperties: {
+                        //         'init': function(v, m, scope) {
+                        //             scope.model['Dagens datum'] = new Date();
+                        //         }
+                        //     }
+                        // }, 
+                        ]
                     }]
                 }
             }
@@ -329,7 +331,8 @@
                         templateOptions: {
                             label: 'Antal',
                             type: 'number',
-                            min: 0
+                            required: true,
+                            min: 1
                         }
                     }];
 
@@ -339,7 +342,8 @@
                             key: 'Telefonmodell',
                             templateOptions: {
                                 label: 'Telefonmodell',
-                                min: 0
+                                required: true,
+                                min: 1
                             }
                         }];
                     }

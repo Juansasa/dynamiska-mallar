@@ -12,7 +12,10 @@
             $scope.fields = {};
             $scope.model = $scope.model || {
                 person: null, // Personinformation
-                chef: null, // Chef information
+                orderPerson: {
+                    namn: 'Bosse King',
+                    email: 'Bosee.king@fortet.se'
+                }, // Chef information
                 steps: {
                     newEmployee: null,
                     modifyExistingEmployee: null

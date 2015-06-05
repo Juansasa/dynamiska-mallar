@@ -61,6 +61,12 @@
                             name: 'Ändring av anställningsförhållande',
                             route: 'bestallning.andra.anstallningsforhallande'
                         }
+                    }, {
+                        name: 'Avsluta konto',
+                        value: {
+                            name: 'Avsluta konto',
+                            route: 'bestallning.andra.avsluta'
+                        }
                     }]
                 }
             }]

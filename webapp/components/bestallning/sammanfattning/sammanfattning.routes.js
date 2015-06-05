@@ -17,6 +17,12 @@
                             if(!$scope.model.steps || !$scope.model.steps.newEmployee){
                                 $state.go('^');
                             }
+
+                            $scope.summary = {
+                                person : $scope.model.person,
+                                'beställare': $scope.model.orderPerson,
+                                'beställningar': $scope.model.ny
+                            };
                         }
                     }
                 }
@@ -32,6 +38,10 @@
                             if(!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee){
                                 $state.go('^');
                             }
+
+                            $scope.summary = {
+                                person : $scope.model.person
+                            };
                         }
                     }
                 }
@@ -44,10 +54,13 @@
                     'wizardContent@bestallning': {
                         templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
                         controller: function($scope, $state){
-                            console.log($scope.model.steps);
                             if(!$scope.model.steps || !$scope.model.steps.existingEmployee){
                                 $state.go('^');
                             }
+
+                            $scope.summary = {
+                                person : $scope.model.person
+                            };
                         }
                     }
                 }

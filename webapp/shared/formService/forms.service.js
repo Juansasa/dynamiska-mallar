@@ -21,7 +21,7 @@
             modifyConsultantAccount: getOrderModifyConsultantAccountForm,
             extendConsultantAccount: getOrderExtendConsultantAccountForm,
 
-            terminateAccount: getOrderTerminateAccountForm,
+            removeAccount: getOrderRemoveAccountForm,
             newSubscription: getNewOrderSubscriptionForm,
             modifySubscription: getModifySubscriptionForm,
             careTalk: getOrderCareTalkForm,
@@ -202,16 +202,15 @@
                     }
                 }, {
                     className: 'col-md-3',
-                    type: 'input',
+                    type: 'today-date',
                     key: 'fr o m',
                     templateOptions: {
                         label: 'fr o m',
-                        type: 'date',
                         required: true
                     }
                 }, {
                     className: 'col-md-3',
-                    type: 'input',
+                    type: 'today-date',
                     key: 't o m',
                     expressionProperties: {
                         'templateOptions.disabled': function(vv, mv, scope) {
@@ -220,7 +219,6 @@
                     },
                     templateOptions: {
                         label: 't o m',
-                        type: 'date',
                         required: true
                     }
                 }, {
@@ -434,6 +432,8 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
+                    template: '<div><b>Tjänsteuppgifter</b></div>'
+                }, {
                     className: 'col-md-12',
                     type: 'autoCompleteAdd',
                     key: 'Sekundär tjänsteställe',
@@ -500,8 +500,8 @@
                 fieldGroup: [{
                     template: '<div><b>Nytt abonnemang</b></div>'
                 },{
-                    className: 'col-md-6',
-                    type: 'select',
+                    className: 'col-md-12',
+                    type: 'radio',
                     key: 'Anknytningsval',
                     templateOptions: {
                         label: 'Anknytningsval',
@@ -517,44 +517,13 @@
                         }]
                     }
                 }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Beställningsdatum',
-                    templateOptions: {
-                        label: 'Beställningsdatum',
-                        required: true
-                    }
-                }, {
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>'
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'today-date',
                     key: 'Datum för ändring',
                     templateOptions: {
                         label: 'Datum för ändring'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'select',
-                    key: 'Behövs nytt simkort',
-                    templateOptions: {
-                        label: 'Behövs nytt simkort',
-                        required: true,
-                        options: [{
-                            name: 'Ja',
-                            value: 'Ja'
-                        }, {
-                            name: 'Nej',
-                            value: 'Nej'
-                        }]
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'Anknytning',
-                    templateOptions: {
-                        label: 'Anknytning',
-                        required: true
                     }
                 }]
             }];
@@ -639,7 +608,7 @@
                     template: '<div><b>Uppsägning av abonnemang</b></div>'
                 }, {
                     className: 'col-md-12',
-                    type: 'select',
+                    type: 'radio',
                     key: 'Anknytningsval',
                     templateOptions: {
                         label: 'Anknytningsval',
@@ -810,32 +779,12 @@
                 fieldGroup: [{
                     template: '<div><b>Nytt Mobilt bredband</b></div>'
                 }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Datum då abonnemanget ska börja gälla',
-                    templateOptions: {
-                        label: 'Datum då abonnemanget ska börja gälla'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'select',
-                    key: 'Typ av mobilt bredband',
-                    templateOptions: {
-                        label: 'Typ av mobilt bredband',
-                        options: [{
-                            name: 'Mobilt bredband 3G',
-                            value: 'Mobilt bredband 3G'
-                        }, {
-                            name: 'Mobilt bredband 4G',
-                            value: 'Mobilt bredband 4G'
-                        }]
-                    }
-                }, {
                     className: 'col-md-12',
-                    type: 'select',
-                    key: 'USB modem önskas',
+                    type: 'radio',
+                    key: 'Mobilt bredband för en existerande dator',
                     templateOptions: {
-                        label: 'USB modem önskas',
+                        label: 'Mobilt bredband för en existerande dator',
+                        defaultOptions: 'Nej',
                         options: [{
                             name: 'Ja',
                             value: 'Ja'
@@ -843,10 +792,22 @@
                             name: 'Nej',
                             value: 'Nej'
                         }]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Datorns serienummer',
+                    templateOptions: {
+                        label: 'Ange serienummer för datorn ifrågan'
                     },
-                    expressionProperties: {
-                        'templateOptions.disabled': '!model["Typ av mobilt bredband"]'
-                    } 
+                    hideExpression: 'model["Mobilt bredband för en existerande dator"] !== "Ja"'
+                }, {
+                    className: 'col-md-12',
+                    type: 'today-date',
+                    key: 'Datum då abonnemanget ska börja gälla',
+                    templateOptions: {
+                        label: 'Datum då abonnemanget ska börja gälla'
+                    }
                 }]
             }, {
                 className: 'row',
@@ -1539,8 +1500,65 @@
             }];
         }
 
-        function getOrderTerminateAccountForm() {
-            return [];
+        function getOrderRemoveAccountForm() {
+            return [{
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Användarnamn',
+                        disabled: 'true'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Förnamn',
+                        disabled: 'true'
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Efternamn',
+                        disabled: 'true'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    templateOptions: {
+                        label: 'Huvud-RE',
+                        disabled: 'true'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'today-date',
+                    key: 'Kontot avslutas fr.o.m',
+                    templateOptions: {
+                        label: 'Kontot avslutas fr.o.m',
+                        required: 'true'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Mailbox och H: kopieras till följande person',
+                    templateOptions: {
+                        label: 'Mailbox och H: kopieras till följande person',
+                        description: 'Mailbox behålls i 90 dagar, sedan raderas den automatiskt',
+                        required: 'true'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information',
+                        required: 'true',
+                        description: '* En konto-avslut tar cirka 5 arbetsdagar samt kostar cirka 200kr'
+                    }
+                }]
+            }];
         }
 
         function getOrderManagerForm() {
@@ -1597,7 +1615,7 @@
                     templateOptions: {
                         label: 'Namn',
                         placeholder: 'get från personuppgifter',
-                        disabled: true
+                        required: true
                     }
                 }, {
                     className: 'col-md-6',

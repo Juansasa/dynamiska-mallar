@@ -10,6 +10,7 @@
             stateName: 'bestallning.andra.anstallningsforhallande',
             stateConfig: {
                 url: '/anstallningsforhallande',
+                modelKey: 'andra.anstallningsfarhallande.anstalld',
                 views: {
                     'wizardContent@bestallning': {
                         template: '<formly-form model="model.andra.anstallningsfarhallande.anstalld" fields="fields"></formly-form>',

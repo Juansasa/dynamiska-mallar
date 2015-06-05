@@ -18,6 +18,7 @@
         'computerEquipments',
         'careTalk',
         'modifyAccount',
-        'changeEmploymentStatus'
+        'changeEmploymentStatus',
+        'removeAccount'
     ]);
 })();

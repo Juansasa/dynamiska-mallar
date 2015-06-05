@@ -369,7 +369,7 @@
                         'Quid Agis'
                     ],
                     subOptions: [{
-                        key: 'Beteendevetare-option',
+                        key: 'Beteendevetare-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
@@ -427,7 +427,7 @@
                         'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
                     ],
                     subOptions: [{
-                        key: 'Fysioterapeut-option',
+                        key: 'Fysioterapeut-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
@@ -456,7 +456,7 @@
                         'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
                     ],
                     subOptions: [{
-                        key: 'Företagssköterska-option',
+                        key: 'Företagssköterska-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
@@ -566,7 +566,7 @@
                         'Quid Agis'
                     ],
                     subOptions: [{
-                        key: 'Leg psykolog-option',
+                        key: 'Leg psykolog-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
@@ -603,7 +603,7 @@
                         'Quid Agis'
                     ],
                     subOptions: [{
-                        key: 'Organisationskonsult-option',
+                        key: 'Organisationskonsult-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
@@ -625,7 +625,7 @@
                         'Quid Agis'
                     ],
                     subOptions: [{
-                        key: 'PTP-psykolog-option',
+                        key: 'PTP-psykolog-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'
@@ -677,7 +677,7 @@
                         'Cardio Controll - EKG/Spiro'
                     ],
                     subOptions: [{
-                        key: 'Undersköterska-option',
+                        key: 'Undersköterska-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: 'CareTalk - Digital diktering  (OBS! Se handboken för installationsinstruktion)'

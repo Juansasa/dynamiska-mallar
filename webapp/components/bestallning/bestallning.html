@@ -1,7 +1,6 @@
 <div class="container">
-	<h2>Beställning</h2>
-	<form name="form" ng-submit="onSubmit()" novalidate>
-		<hr>
+	<form name="form">
+		<br>
 		<div class="wizard" ng-if="getSteps() && getSteps().length > 0">
 			<table>
 				<tbody>
@@ -20,8 +19,11 @@
 		<div ui-view="wizardContent"></div>
 		<hr>
 		<div class="wizard-footer col-md-12">
-			<button type="submit" ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success" translate>Previous</button>
-			<button type="submit" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success" translate>Next</button>
+			<button type="submit" ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success pull-left" translate>Förregående</button>
+
+			<button type="submit" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success pull-right" translate>Nästa</button>
+
+			<button ng-disabled="checkGoForward()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
 		</div>
     </form>
 </div>

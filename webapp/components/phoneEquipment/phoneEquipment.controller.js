@@ -4,8 +4,12 @@
         .controller('PhoneEquipmentController', mbCtrl);
 
     /*@ngInject*/
-    function mbCtrl($scope, forms) {
+    function mbCtrl($scope, $state, forms) {
         // Make sure to only use one model for all states
+        if (!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee && !$scope.model.steps.existingEmployee && !$scope.model.steps.newEmployee) {
+            $state.go('^');
+        }
+
         $scope.model = $scope.model || {};
         $scope.fields = forms.phoneEquipment();
     }

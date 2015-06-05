@@ -10,6 +10,7 @@
             stateName: 'bestallning.ny.anstalld.nytt-konto',
             stateConfig: {
                 url: '/nytt-konto',
+                modelKey: 'ny.anstalld.nyttKonto',
                 views: {
                     'wizardContent@bestallning': {
                         url: '/new-caccount',
