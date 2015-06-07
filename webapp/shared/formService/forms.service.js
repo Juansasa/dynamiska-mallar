@@ -96,6 +96,8 @@
                 }]
             }];
 
+            showErrors(specific);
+
             return specific;
         }
 
@@ -198,7 +200,7 @@
                     type: 'today-date',
                     key: 't o m',
                     hideExpression: function(vv, mv, scope) {
-                            return scope.model['anställningsform'] === 'tillsvidareanställning';
+                        return scope.model['anställningsform'] === 'tillsvidareanställning';
                     },
                     templateOptions: {
                         label: 't o m',
@@ -209,7 +211,7 @@
                     type: 'input',
                     key: 'vikariat för',
                     hideExpression: function(vv, mv, scope) {
-                            return scope.model['anställningsform'] !== 'vikariat';
+                        return scope.model['anställningsform'] !== 'vikariat';
                     },
                     templateOptions: {
                         label: 'vikariat för',
@@ -219,8 +221,8 @@
                     className: 'col-md-3',
                     type: 'input',
                     key: 'pga',
-                    hideExpression:  function(vv, mv, scope) {
-                            return scope.model['anställningsform'] !== 'vikariat';
+                    hideExpression: function(vv, mv, scope) {
+                        return scope.model['anställningsform'] !== 'vikariat';
                     },
                     templateOptions: {
                         label: 'pga',
@@ -248,7 +250,7 @@
                         required: true
                     },
                     hideExpression: function(vv, mv, scope) {
-                            return scope.model['anställningsform'] !== 'anställd med timlön';
+                        return scope.model['anställningsform'] !== 'anställd med timlön';
                     }
                 }, {
                     className: 'col-md-6',
@@ -322,6 +324,7 @@
                 }]
             }];
 
+            showErrors(specific);
             return specific;
         }
 
@@ -401,6 +404,7 @@
 
             }];
 
+            showErrors(specific);
             return specific;
         }
 
@@ -467,6 +471,7 @@
 
             }];
 
+            showErrors(specific);
             return specific;
         }
 
@@ -477,7 +482,7 @@
                 fieldGroup: [{
                     template: '<div><b>Nytt abonnemang</b></div>',
                     key: 'Vald formulär',
-                    controller: function($scope){
+                    controller: function($scope) {
                         $scope.model[$scope.options.key] = 'Nytt abonnemang';
                     }
                 }, {
@@ -508,12 +513,13 @@
                     }
                 }]
             }];
+            showErrors(specific);
             return specific;
         }
 
         // Modifiera abonnemang
         function getModifySubscriptionForm() {
-            return [{
+            var specific =  [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'row',
@@ -637,11 +643,14 @@
                 }],
                 hideExpression: 'model["Vald formulär"] !== "Uppsägning"'
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         // Modifiera existerande mobilt bredband
         function getModifyMobileBroadbandForm() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     type: 'select',
@@ -751,6 +760,8 @@
                 }],
                 hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
             }];
+            showErrors(specific);
+            return specific;
         }
 
         // Nytt mobilt bredband formulär
@@ -828,12 +839,13 @@
                 }]
             }];
 
+            showErrors(specific);
             return specific.concat(getOrderSignaturePart());
         }
 
         // Nytt telefonutrustning formulär
         function getOrderPhoneEquipmentForm() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'col-md-12',
@@ -955,6 +967,9 @@
                     options: autocomplete.getPhoneAccessoriesOptions()
                 }
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         // Datorutrustning formulär
@@ -1067,13 +1082,13 @@
                     }
                 }]
             }];
-
+            showErrors(specific);
             return specific;
         }
 
         // Digital diktering formulär
         function getOrderCareTalkForm() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Beställare</b></div>'
@@ -1230,6 +1245,9 @@
                     }
                 }]
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         function getOrderModifyConsultantAccountForm() {
@@ -1237,7 +1255,7 @@
         }
 
         function getOrderModifyEmployeeAccountForm() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter</b></div>'
@@ -1420,6 +1438,9 @@
                     }
                 }]
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         function getOrderExtendConsultantAccountForm() {
@@ -1427,7 +1448,7 @@
         }
 
         function getOrderExtendEmployeeAccountForm() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter</b></div>'
@@ -1479,10 +1500,13 @@
                     }
                 }]
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         function getOrderRemoveAccountForm() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'col-md-4',
@@ -1540,10 +1564,13 @@
                     }
                 }]
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         function getOrderManagerForm() {
-            return [{
+            var specific = [{
                 type: 'input',
                 key: 'firstname',
                 templateOptions: {
@@ -1585,10 +1612,13 @@
                     }]
                 }
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
         function changeEmploymentStatus() {
-            return [{
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'col-md-6',
@@ -1642,12 +1672,34 @@
                     }
                 }]
             }];
+
+            showErrors(specific);
+            return specific;
         }
 
 
         // 
         // Form fragments
         // 
+
+        function showErrors(fields) {
+            angular.forEach(fields, function(field, index) {
+                addShowError(fields[index]);
+                if (field.fieldGroup && field.fieldGroup.length > 0) {
+                    angular.forEach(field.fieldGroup, function(subField, subIndex) {
+                        addShowError(fields[index].fieldGroup[subIndex]);
+                    });
+                }
+            });
+        }
+
+        function addShowError(field) {
+            if (field && field.templateOptions && field.templateOptions.required) {
+                field.validation = {
+                    show: true
+                };
+            }
+        }
 
         function getOrderSignaturePart() {
             return [{

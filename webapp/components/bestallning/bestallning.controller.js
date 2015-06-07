@@ -7,9 +7,7 @@
     function ctrl($scope, $state) {
         modelReset();
 
-        $scope.goToState = function(nextState) {
-            console.log($scope.form.$valid);
-
+        $scope.goToState = function(nextState) {            
             if($scope.form.$valid) {
                 $state.go(nextState.route);
             }

@@ -1,14 +1,16 @@
 <div class="container">
 	<form name="form">
 		<br>
-		<div class="wizard" >
+		<div class="wizard">
 			<table>
 				<tbody>
 					<tr>
 						<td ng-repeat="step in getSteps()">
-							<button type="submit"
+							<button
+								type="submit"
 								ng-click="goToState(step)"
-								ng-class="{current: isCurrent(step)}"><span class="badge">{{$index + 1}}</span> {{step.name}}</button>
+								ng-class="{current: isCurrent(step)}"
+								><span class="badge">{{$index + 1}}</span> {{step.name}}</button>
 						</td>
 					</tr>
 				</tbody>
@@ -22,7 +24,7 @@
 
 			<button type="submit" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success pull-right" translate>Nästa</button>
 
-			<button ng-disabled="checkGoForward()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
+			<button type="button" ng-if="!checkGoForward()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
 		</div>
     </form>
 </div>

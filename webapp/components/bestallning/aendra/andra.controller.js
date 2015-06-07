@@ -108,9 +108,6 @@
             $scope.model.steps.modifyExistingEmployee = $scope.model.steps.modifyExistingEmployee || [{
                 name: 'Start',
                 route: 'bestallning.andra.personinfo'
-            }, {
-                name: 'Sammanfattning',
-                route: 'bestallning.andra.sammanfattning'
             }];
 
             if($scope.model.person && $scope.model.person.anstallningstyp) {

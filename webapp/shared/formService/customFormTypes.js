@@ -22,6 +22,9 @@
                     required: true,
                     placeholder: 'ååmmdd-xxxx',
                     pattern: '[0-9]{6}-[0-9]{4}'
+                },
+                validation: {
+                    show: true
                 }
             }
         }, {
@@ -38,7 +41,10 @@
                             templateOptions: {
                                 label: 'Förnamn',
                                 required: true
-                            }
+                            },
+                validation: {
+                    show: true
+                }
                         }, {
                             className: 'col-md-4',
                             type: 'input',
@@ -53,7 +59,10 @@
                             templateOptions: {
                                 label: 'efternamn',
                                 required: true
-                            }
+                            },
+                validation: {
+                    show: true
+                }
                         }]
                     }]
                 }
@@ -72,7 +81,10 @@
                             templateOptions: {
                                 label: 'Gata',
                                 required: true
-                            }
+                            },
+                validation: {
+                    show: true
+                }
                         }, {
                             className: 'col-md-3',
                             type: 'input',
@@ -92,7 +104,10 @@
                             templateOptions: {
                                 label: 'Ort',
                                 required: true
-                            }
+                            },
+                validation: {
+                    show: true
+                }
                         }]
                     }, {
                         className: 'col-md-12',
@@ -101,7 +116,10 @@
                         templateOptions: {
                             label: 'Ev c/o adress',
                             required: true
-                        }
+                        },
+                validation: {
+                    show: true
+                }
                     }]
                 }
             }
@@ -270,7 +288,7 @@
                                 key: 'Rapporterar till (chef)',
                                 templateOptions: {
                                     label: 'Rapporterar till (chef)',
-                                    required: true,
+                                required: true,
                                     options: [{
                                         name: 'Chef 1',
                                         value: 'Chef 1'
@@ -281,7 +299,10 @@
                                         name: 'Chef 3',
                                         value: 'Chef 3'
                                     }]
-                                }
+                                },
+                validation: {
+                    show: true
+                }
                             }, {
                                 className: 'col-md-12',
                                 type: 'textarea',
@@ -335,7 +356,10 @@
                             type: 'number',
                             required: true,
                             min: 1
-                        }
+                        },
+                validation: {
+                    show: true
+                }
                     }];
 
                     if ($scope.to.enableModelInput) {
@@ -346,7 +370,10 @@
                                 label: 'Telefonmodell',
                                 required: true,
                                 min: 1
-                            }
+                            },
+                validation: {
+                    show: true
+                }
                         }];
                     }
                 },

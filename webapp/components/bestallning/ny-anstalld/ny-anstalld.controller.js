@@ -12,35 +12,30 @@
         };
 
         $scope.$parent.next = function() {
-            if ($scope.form.$invalid) {
-                return;
-            }
-
             var index = findStateIndex($state.current);
-            if (index + 1 < $scope.model.steps.newEmployee.length) {
+            if (index + 1 < $scope.model.steps.newEmployee.length && $scope.form.$valid) {
                 $state.go($scope.model.steps.newEmployee[index + 1].route);
             }
         };
 
         $scope.$parent.skip = function() {
+
             // Clear model-data and mark model as disabled
             var path = $state.current.modelKey;
             var model = $scope.model;
-
-            if (!path || !model) {
-                return;
-            }
-
-            var stack = path.split('.');
-
-            while (stack.length > 1) {
-                model = model[stack.shift()];
-            }
-
-            model[stack.shift()] = null;
-
             var index = findStateIndex($state.current);
-            if (index + 1 < $scope.model.steps.newEmployee.length) {
+
+            if (path && model) {
+                var stack = path.split('.');
+                while (stack.length > 1) {
+                    model = model[stack.shift()];
+                }
+
+                model[stack.shift()] = null;
+
+            }
+
+            if (index + 1 < $scope.model.steps.newEmployee.length && index !== 0) {
                 $state.go($scope.model.steps.newEmployee[index + 1].route);
             }
         };
