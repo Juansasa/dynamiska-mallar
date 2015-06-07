@@ -5,6 +5,6 @@
     </ui-select-choices>
 </ui-select>
 
-<div class="row" ng-if="model[options.key]">
+<div class="row" ng-if="model[options.key] && to.subControls">
 	<formly-form model="model" fields="to.subControls"></formly-form>
 </div>

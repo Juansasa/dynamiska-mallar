@@ -111,7 +111,9 @@ input::-webkit-input-placeholder {
         tbody {
             tr {
                 td {
-                    a {
+                    button {
+                        border: none;
+                        outline: none;
                         padding: 12px 12px 10px 25px;
                         margin-right: 5px;
                         background: $step-color;
@@ -119,6 +121,7 @@ input::-webkit-input-placeholder {
                         display: inline-block;
                         text-decoration: none;
                         cursor: pointer;
+
                         &:before {
                             width: 0px;
                             height: 0px;
@@ -151,7 +154,7 @@ input::-webkit-input-placeholder {
                         }
                     }
                     &:first-child {
-                        a:before {
+                        button:before {
                             display: none;
                         }
                     }

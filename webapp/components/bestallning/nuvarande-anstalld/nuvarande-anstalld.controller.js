@@ -4,7 +4,7 @@
         .controller('NuvarandeAnstalldController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state) {
+    function ctrl($scope, $state, autocomplete, personInfo) {
         init();
 
         $scope.fields.formsSelection = [{
@@ -61,6 +61,10 @@
             }]
         }];
 
+        $scope.selected = function(person) {
+            personInfo.set(person);
+        };
+
 
         $scope.$parent.getSteps = function() {
             if($scope.model.steps.existingEmployee.length === 2) {
@@ -91,7 +95,10 @@
             return findStateIndex($state.current) === $scope.model.steps.existingEmployee.length - 1;
         };
 
-        function init() {$scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
+        function init() {
+            $scope.employees = autocomplete.getAllEmployee();
+
+            $scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
                 name: 'Sök',
                 route: 'bestallning.nuvarande'
             }, {

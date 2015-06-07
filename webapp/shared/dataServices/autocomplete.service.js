@@ -45,9 +45,17 @@
                 },
                 'befattning': 'Affärscontroller',
                 'tjänsteställe': 'Tumba',
-                'Sekundär tjänsteställe': ['Kumla'],
+                'Sekundär tjänsteställe': [
+                    'Kumla'
+                ],
                 'MO': 'MO 2',
-                'huvud-RE': 'MO 2-452252'
+                'huvud-RE': 'MO 2-452252',
+                'telefoner': {
+                    'hem': '0370-55565',
+                    'mobil': '073-323252'
+                },
+                'anställningsform': 'tillsvidareanställning',
+                'fr o m': new Date()
             }];
         }
 

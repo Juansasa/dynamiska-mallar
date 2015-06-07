@@ -37,11 +37,12 @@
                 model = model[stack.shift()];
             }
 
-            model[stack.shift()] = {
-                disabled: true
-            };
+            model[stack.shift()] = null;
 
-            $scope.next();
+            var index = findStateIndex($state.current);
+            if (index + 1 < $scope.model.steps.newEmployee.length) {
+                $state.go($scope.model.steps.newEmployee[index + 1].route);
+            }
         };
 
         $scope.$parent.previous = function() {

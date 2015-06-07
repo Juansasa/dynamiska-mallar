@@ -40,7 +40,9 @@
                             }
 
                             $scope.summary = {
-                                person : $scope.model.person
+                                person : $scope.model.person,
+                                'beställare': $scope.model.orderPerson,
+                                'beställningar': $scope.model.andra
                             };
                         }
                     }
@@ -59,7 +61,9 @@
                             }
 
                             $scope.summary = {
-                                person : $scope.model.person
+                                person : $scope.model.person,
+                                'beställare': $scope.model.orderPerson,
+                                'beställningar': $scope.model.nuvarande
                             };
                         }
                     }

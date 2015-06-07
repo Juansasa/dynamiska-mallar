@@ -22,9 +22,12 @@
             extendConsultantAccount: getOrderExtendConsultantAccountForm,
 
             removeAccount: getOrderRemoveAccountForm,
+
             newSubscription: getNewOrderSubscriptionForm,
             modifySubscription: getModifySubscriptionForm,
+
             careTalk: getOrderCareTalkForm,
+
             computerAccessories: getOrderComputerAccessoriesForm,
 
             modifyMobileBroadband: getModifyMobileBroadbandForm,
@@ -37,48 +40,7 @@
 
         return service;
 
-        // Personliga info som är samma för både ny konsult och previa anställd
-        function getGeneralPersonInfo() {
-            return [{
-                fieldGroup: [{
-                    type: 'personNo',
-                    key: 'personnummer'
-                }, {
-                    type: 'personName',
-                    key: 'namn'
-                }, {
-                    type: 'adress',
-                    key: 'adress'
-                }, {
-                    type: 'telefon',
-                    key: 'telefoner'
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Tjänsteuppgifter<b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'roleSelect',
-                    key: 'befattning',
-                    templateOptions: {
-                        label: gettext('Befattning'),
-                        options: autocomplete.getBefattningOptions(false),
-                        placeholder: 'Välj befattning/roll/titel',
-                        showPrevileges: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'tjanstestalleSelect',
-                    key: 'tjänsteställe',
-                    templateOptions: {
-                        label: gettext('Tjänsteställe'),
-                        placeholder: 'Välj ett tjänsteställe',
-                        options: autocomplete.getTjanstestalleOptions()
-                    }
-                }]
-            }];
-        }
+
 
         // Personliga info som är specifik för ny previa anställd
         function getNewConsultantPersonalInfo() {
@@ -104,7 +66,8 @@
                         options: autocomplete.getAllMO(),
                         onChange: function(v, m, s) {
                             s.model['huvud-RE'] = null;
-                        }
+                        },
+                        required: true
                     }
                 }, {
                     className: 'col-md-6',
@@ -113,7 +76,8 @@
                     templateOptions: {
                         label: gettext('Tjänsteställe'),
                         placeholder: 'Välj ett tjänsteställe',
-                        options: autocomplete.getTjanstestalleOptions()
+                        options: autocomplete.getTjanstestalleOptions(),
+                        required: true
                     }
                 }, {
                     className: 'col-md-12',
@@ -138,16 +102,23 @@
         // Personliga info som är specifik för ny konsult
         function getNewPreviaEmployeePersonalInfo() {
             var specific = [{
+                fieldGroup: [{
+                    type: 'personNo',
+                    key: 'personnummer'
+                }, {
+                    type: 'personName',
+                    key: 'namn'
+                }, {
+                    type: 'adress',
+                    key: 'adress'
+                }, {
+                    type: 'telefon',
+                    key: 'telefoner'
+                }]
+            }, {
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'autoCompleteAdd',
-                    key: 'Sekundär tjänsteställe',
-                    templateOptions: {
-                        label: gettext('Tjänsteställe (Sekundärt)'),
-                        placeholder: 'Lägga till ett eller fler sekundär tjänsteställe',
-                        options: autocomplete.getTjanstestalleOptions()
-                    }
+                    template: '<div><b>Tjänsteuppgifter<b></div>'
                 }, {
                     className: 'col-md-6',
                     type: 'autocomplete-select',
@@ -158,7 +129,8 @@
                         options: autocomplete.getAllMO(),
                         onChange: function(v, m, s) {
                             s.model['huvud-RE'] = null;
-                        }
+                        },
+                        required: true
                     }
                 }, {
                     className: 'col-md-6',
@@ -173,6 +145,18 @@
                         'templateOptions.options': function(v, m, s) {
                             return autocomplete.getRE(s.model.MO);
                         }
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    type: 'autoCompleteAdd',
+                    key: 'Sekundär tjänsteställe',
+                    templateOptions: {
+                        label: gettext('Tjänsteställe (Sekundärt)'),
+                        placeholder: 'Lägga till ett eller fler sekundär tjänsteställe',
+                        options: autocomplete.getTjanstestalleOptions()
                     }
                 }]
             }, {
@@ -198,7 +182,8 @@
                         }, {
                             name: 'Anställd med timlön',
                             value: 'anställd med timlön'
-                        }]
+                        }],
+                        required: true
                     }
                 }, {
                     className: 'col-md-3',
@@ -212,10 +197,8 @@
                     className: 'col-md-3',
                     type: 'today-date',
                     key: 't o m',
-                    expressionProperties: {
-                        'templateOptions.disabled': function(vv, mv, scope) {
+                    hideExpression: function(vv, mv, scope) {
                             return scope.model['anställningsform'] === 'tillsvidareanställning';
-                        }
                     },
                     templateOptions: {
                         label: 't o m',
@@ -225,10 +208,8 @@
                     className: 'col-md-3',
                     type: 'input',
                     key: 'vikariat för',
-                    expressionProperties: {
-                        'templateOptions.disabled': function(vv, mv, scope) {
+                    hideExpression: function(vv, mv, scope) {
                             return scope.model['anställningsform'] !== 'vikariat';
-                        }
                     },
                     templateOptions: {
                         label: 'vikariat för',
@@ -238,10 +219,8 @@
                     className: 'col-md-3',
                     type: 'input',
                     key: 'pga',
-                    expressionProperties: {
-                        'templateOptions.disabled': function(vv, mv, scope) {
+                    hideExpression:  function(vv, mv, scope) {
                             return scope.model['anställningsform'] !== 'vikariat';
-                        }
                     },
                     templateOptions: {
                         label: 'pga',
@@ -268,10 +247,8 @@
                         label: 'Timlön, exkl semesterlön',
                         required: true
                     },
-                    expressionProperties: {
-                        'templateOptions.disabled': function(vv, mv, scope) {
+                    hideExpression: function(vv, mv, scope) {
                             return scope.model['anställningsform'] !== 'anställd med timlön';
-                        }
                     }
                 }, {
                     className: 'col-md-6',
@@ -345,7 +322,7 @@
                 }]
             }];
 
-            return getGeneralPersonInfo().concat(specific);
+            return specific;
         }
 
         // Nytt konto för ny konsult
@@ -498,8 +475,12 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Nytt abonnemang</b></div>'
-                },{
+                    template: '<div><b>Nytt abonnemang</b></div>',
+                    key: 'Vald formulär',
+                    controller: function($scope){
+                        $scope.model[$scope.options.key] = 'Nytt abonnemang';
+                    }
+                }, {
                     className: 'col-md-12',
                     type: 'radio',
                     key: 'Anknytningsval',
@@ -508,10 +489,10 @@
                         options: [{
                             name: 'Ny Anknytning med tillhörande mobilnr',
                             value: 'Ny Anknytning med tillhörande mobilnr'
-                        },{
+                        }, {
                             name: 'Endast fast ankn',
                             value: 'Endast fast ankn'
-                        },{
+                        }, {
                             name: 'Endast mobilabonnemang',
                             value: 'Endast mobilabonnemang'
                         }]

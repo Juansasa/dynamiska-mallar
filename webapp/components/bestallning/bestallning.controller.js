@@ -4,8 +4,20 @@
         .controller('BestallningController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope) {
+    function ctrl($scope, $state) {
         modelReset();
+
+        $scope.goToState = function(nextState) {
+            console.log($scope.form.$valid);
+
+            if($scope.form.$valid) {
+                $state.go(nextState.route);
+            }
+        };
+
+        $scope.isCurrent = function(state) {
+            return state && $state.current.name === state.route;
+        };
 
         function modelReset() {
             $scope.currentStep = -1;

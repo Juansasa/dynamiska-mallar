@@ -139,7 +139,7 @@
         }, {
             name: 'tjanstestalleSelect',
             templateUrl: 'shared/formService/tjanstestalle.html',
-            wrapper: ['bootstrapLabel'],
+            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
             defaultOptions: {
                 templateOptions: {
                     onChange: function(v, m, scope) {
@@ -152,8 +152,9 @@
         }, {
             name: 'roleSelect',
             templateUrl: 'shared/formService/roleSelect.html',
-            wrapper: ['bootstrapLabel'],
+            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
             defaultOptions: {
+
                 key: 'befattning',
                 templateOptions: {
                     showPrevileges: true
@@ -194,8 +195,8 @@
                 if (angular.isArray(modelValue)) {
                     const valueProp = to.valueProp || 'value';
                     angular.forEach(to.options, function(v, index) {
-                        var stepindex = _.findIndex(modelValue, function(step){
-                            return  step.route === v[valueProp].route;
+                        var stepindex = _.findIndex(modelValue, function(step) {
+                            return step.route === v[valueProp].route;
                         });
                         $scope.multiCheckbox.checked[index] = stepindex > -1;
                     });
@@ -223,6 +224,7 @@
             name: 'autoCompleteAdd',
             extends: 'tjanstestalleSelect',
             templateUrl: 'shared/formService/select-add.html',
+            wrapper: ['bootstrapLabel','bootstrapHasError'],
             defaultOptions: {
                 templateOptions: {
                     onChange: function(v, options, scope) {
@@ -263,47 +265,47 @@
                     formfields: [{
                         className: 'row',
                         fieldGroup: [{
-                            className: 'col-md-12',
-                            type: 'autocomplete-select',
-                            key: 'Rapporterar till (chef)',
-                            templateOptions: {
-                                label: 'Rapporterar till (chef)',
-                                required: true,
-                                options: [{
-                                    name: 'Chef 1',
-                                    value: 'Chef 1'
-                                }, {
-                                    name: 'Chef 2',
-                                    value: 'Chef 2'
-                                }, {
-                                    name: 'Chef 3',
-                                    value: 'Chef 3'
-                                }]
-                            }
-                        }, {
-                            className: 'col-md-12',
-                            type: 'textarea',
-                            key: 'Övrig information',
-                            templateOptions: {
-                                label: 'Övrig information',
-                                placeholder: 'Övriga information'
-                            }
-                        }, 
-                        // {
-                        //     className: 'col-md-6',
-                        //     type: 'input',
-                        //     key: 'Dagens datum',
-                        //     templateOptions: {
-                        //         label: 'Dagens datum',
-                        //         type: 'date',
-                        //         disabled: true
-                        //     },
-                        //     expressionProperties: {
-                        //         'init': function(v, m, scope) {
-                        //             scope.model['Dagens datum'] = new Date();
-                        //         }
-                        //     }
-                        // }, 
+                                className: 'col-md-12',
+                                type: 'autocomplete-select',
+                                key: 'Rapporterar till (chef)',
+                                templateOptions: {
+                                    label: 'Rapporterar till (chef)',
+                                    required: true,
+                                    options: [{
+                                        name: 'Chef 1',
+                                        value: 'Chef 1'
+                                    }, {
+                                        name: 'Chef 2',
+                                        value: 'Chef 2'
+                                    }, {
+                                        name: 'Chef 3',
+                                        value: 'Chef 3'
+                                    }]
+                                }
+                            }, {
+                                className: 'col-md-12',
+                                type: 'textarea',
+                                key: 'Övrig information',
+                                templateOptions: {
+                                    label: 'Övrig information',
+                                    placeholder: 'Övriga information'
+                                }
+                            },
+                            // {
+                            //     className: 'col-md-6',
+                            //     type: 'input',
+                            //     key: 'Dagens datum',
+                            //     templateOptions: {
+                            //         label: 'Dagens datum',
+                            //         type: 'date',
+                            //         disabled: true
+                            //     },
+                            //     expressionProperties: {
+                            //         'init': function(v, m, scope) {
+                            //             scope.model['Dagens datum'] = new Date();
+                            //         }
+                            //     }
+                            // }, 
                         ]
                     }]
                 }
@@ -315,9 +317,9 @@
                 templateOptions: {
                     type: 'date',
                 },
-                controller: function($scope) {
-                    $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || new Date();
-                }
+                // controller: function($scope) {
+                //     $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || new Date();
+                // }
             }
         }, {
             name: 'equipment-select',
