@@ -8,7 +8,12 @@
     /*@ngInject*/
     function exception() {
         var service = {
+
             getTjanstestalleOptions: getToptions,
+            getTjanstestalleBesokAdress: getTBadress,
+            getTjanstestallePostAdress: getTPadress,
+            getTjanstestalleNamn: getTjanstestalleNamn,
+
             getBefattningOptions: getBefattningOptions,
 
             getAllMO: getMO,
@@ -29,6 +34,28 @@
             getAllEmployee: getAllEmployee
         };
         return service;
+
+
+        function getTjanstestalleNamn(id) {
+            return 'Namn(' + id + ')';
+        }
+
+        function getTPadress(id) {
+            return {
+                'Gata/Box': id + ':: sdfsdfdsf',
+                Postnummer: '33333',
+                Ort: 'Stockholm'
+            };
+        }
+
+
+        function getTBadress(id) {
+            return {
+                Gata: id + ':: St eriks-gata 12',
+                Postnummer: '33333',
+                Ort: 'Stockholm'
+            };
+        }
 
         function getAllEmployee() {
             return [{

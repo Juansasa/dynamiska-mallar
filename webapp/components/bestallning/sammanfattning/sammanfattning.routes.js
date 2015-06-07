@@ -20,7 +20,6 @@
 
                             $scope.summary = {
                                 person : $scope.model.person,
-                                'beställare': $scope.model.orderPerson,
                                 'beställningar': $scope.model.ny
                             };
                         }

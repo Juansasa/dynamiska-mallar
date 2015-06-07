@@ -395,7 +395,7 @@
                 }, {
                     className: 'col-md-12',
                     type: 'roleSelect',
-                    key: 'befattning',
+                    key: 'Befattning',
                     templateOptions: {
                         label: 'Välj Befattning, roll och behörighet',
                         options: autocomplete.getBefattningOptions()
@@ -409,10 +409,46 @@
         }
 
         // Nytt konto för ny anställd
-        function getOrderEmployeeAccountForm() {
+        function getOrderEmployeeAccountForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
+                    template: '<div><b>Personuppgifter</b></div>',
+                    key: 'personuppgifter',
+                    controller: function($scope, $filter) {
+                        $scope.model[$scope.options.key] = {
+                            'Personnummer': model.person.personnummer,
+                            'Namn': model.person.namn,
+                            'Tjänsteställets besöksadress': autocomplete.getTjanstestalleBesokAdress(model.person['huvud-RE']),
+                            'Tjänsteställets postadress': autocomplete.getTjanstestallePostAdress(model.person['huvud-RE']),
+                            'Anställningsinformation': getAnstallning(model.person['anställningsform']),
+                            'MO (Marknadsområde)': model.person.MO,
+                            'Huvud-RE': model.person['huvud-RE'],
+                            'Tillhör även RE': model.person['Sekundär tjänsteställe'],
+                            'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person['huvud-RE']),
+                            'Dagens datum': $filter('date')(new Date(), 'dd-MM-yyyy'),
+                            'Beställare': model.orderPerson
+                        };
+
+
+                        function getAnstallning(type) {
+                            var retval = {
+                                'Anställningsform': type
+                            };
+                            switch (type) {
+                                case 'tillsvidareanställning':
+                                    retval['Fr.o.m'] = $filter('date')(model.person['fr o m'], 'dd-MM-yyyy');
+                                    break;
+                                default:
+                                    retval['Fr.o.m'] = $filter('date')(model.person['fr o m'], 'dd-MM-yyyy');
+                                    retval['T.o.m'] = $filter('date')(model.person['t o m'], 'dd-MM-yyyy');
+                                    break;
+                            }
+
+                            return retval;
+                        }
+                    }
+                }, {
                     template: '<div><b>Tjänsteuppgifter</b></div>'
                 }, {
                     className: 'col-md-12',
@@ -460,7 +496,7 @@
                 }, {
                     className: 'col-md-12',
                     type: 'roleSelect',
-                    key: 'befattning',
+                    key: 'Befattning',
                     templateOptions: {
                         label: 'Välj Befattning, roll och behörighet',
                         options: autocomplete.getBefattningOptions(true)
@@ -476,7 +512,7 @@
         }
 
         // Nyt abonnemang
-        function getNewOrderSubscriptionForm() {
+        function getNewOrderSubscriptionForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -518,8 +554,8 @@
         }
 
         // Modifiera abonnemang
-        function getModifySubscriptionForm() {
-            var specific =  [{
+        function getModifySubscriptionForm(model) {
+            var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'row',
@@ -649,7 +685,7 @@
         }
 
         // Modifiera existerande mobilt bredband
-        function getModifyMobileBroadbandForm() {
+        function getModifyMobileBroadbandForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -765,7 +801,7 @@
         }
 
         // Nytt mobilt bredband formulär
-        function getNewMobileBroadband() {
+        function getNewMobileBroadband(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -844,7 +880,7 @@
         }
 
         // Nytt telefonutrustning formulär
-        function getOrderPhoneEquipmentForm() {
+        function getOrderPhoneEquipmentForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -973,7 +1009,7 @@
         }
 
         // Datorutrustning formulär
-        function getOrderComputerAccessoriesForm() {
+        function getOrderComputerAccessoriesForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -1087,7 +1123,7 @@
         }
 
         // Digital diktering formulär
-        function getOrderCareTalkForm() {
+        function getOrderCareTalkForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -1250,11 +1286,11 @@
             return specific;
         }
 
-        function getOrderModifyConsultantAccountForm() {
+        function getOrderModifyConsultantAccountForm(model) {
             return [];
         }
 
-        function getOrderModifyEmployeeAccountForm() {
+        function getOrderModifyEmployeeAccountForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -1416,7 +1452,7 @@
                 }, {
                     className: 'col-md-12',
                     type: 'roleSelect',
-                    key: 'befattning',
+                    key: 'Befattning',
                     templateOptions: {
                         label: 'Välj Befattning, roll och behörighet',
                         options: autocomplete.getBefattningOptions(true)
@@ -1443,11 +1479,11 @@
             return specific;
         }
 
-        function getOrderExtendConsultantAccountForm() {
+        function getOrderExtendConsultantAccountForm(model) {
             return [];
         }
 
-        function getOrderExtendEmployeeAccountForm() {
+        function getOrderExtendEmployeeAccountForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -1505,7 +1541,7 @@
             return specific;
         }
 
-        function getOrderRemoveAccountForm() {
+        function getOrderRemoveAccountForm(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -1569,7 +1605,7 @@
             return specific;
         }
 
-        function getOrderManagerForm() {
+        function getOrderManagerForm(model) {
             var specific = [{
                 type: 'input',
                 key: 'firstname',
@@ -1617,7 +1653,7 @@
             return specific;
         }
 
-        function changeEmploymentStatus() {
+        function changeEmploymentStatus(model) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{

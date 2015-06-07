@@ -20,7 +20,7 @@
 
         $scope.$parent.canSkip = function() {
             var index = findStateIndex($state.current);
-            return $scope.model.steps.newEmployee[index].canSkip;
+            return $scope.model.steps.newEmployee[index] && $scope.model.steps.newEmployee[index].canSkip;
         };
 
         $scope.$parent.skip = function() {
