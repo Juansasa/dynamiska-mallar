@@ -430,7 +430,6 @@
                             'Beställare': model.orderPerson
                         };
 
-
                         function getAnstallning(type) {
                             var retval = {
                                 'Anställningsform': type
