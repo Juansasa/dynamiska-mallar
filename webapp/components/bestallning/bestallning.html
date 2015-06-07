@@ -5,7 +5,7 @@
 			<table>
 				<tbody>
 					<tr>
-						<td ng-repeat="step in model.steps.newEmployee">
+						<td ng-repeat="step in getSteps()">
 							<button type="submit"
 								ng-click="goToState(step)"
 								ng-class="{current: isCurrent(step)}"><span class="badge">{{$index + 1}}</span> {{step.name}}</button>
