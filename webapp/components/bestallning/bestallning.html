@@ -24,7 +24,7 @@
 
 			<button type="submit" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success pull-right" translate>Nästa</button>
 
-			<button type="button" ng-if="!checkGoForward()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
+			<button type="button" ng-if="canSkip()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
 		</div>
     </form>
 </div>

@@ -18,6 +18,11 @@
             }
         };
 
+        $scope.$parent.canSkip = function() {
+            var index = findStateIndex($state.current);
+            return $scope.model.steps.newEmployee[index].canSkip;
+        };
+
         $scope.$parent.skip = function() {
 
             // Clear model-data and mark model as disabled
@@ -35,7 +40,7 @@
 
             }
 
-            if (index + 1 < $scope.model.steps.newEmployee.length && index !== 0) {
+            if (index + 1 < $scope.model.steps.newEmployee.length) {
                 $state.go($scope.model.steps.newEmployee[index + 1].route);
             }
         };
@@ -114,7 +119,8 @@
                     route: 'bestallning.ny'
                 }, {
                     name: 'Nytt konto',
-                    route: 'bestallning.ny.anstalld.nytt-konto'
+                    route: 'bestallning.ny.anstalld.nytt-konto',
+                    canSkip: true
                 }];
             } else {
                 return;
@@ -131,19 +137,24 @@
         function getCommonFormsteps() {
             return [{
                 name: 'Datorutrustning',
-                route: 'bestallning.ny.datorutrustning'
+                route: 'bestallning.ny.datorutrustning',
+                canSkip: true
             }, {
                 name: 'Mobilbredband',
-                route: 'bestallning.ny.mobilbredband'
+                route: 'bestallning.ny.mobilbredband',
+                canSkip: true
             }, {
                 name: 'Telefoni',
-                route: 'bestallning.ny.abonnemang'
+                route: 'bestallning.ny.abonnemang',
+                canSkip: true
             }, {
                 name: 'Telefonutrustning',
-                route: 'bestallning.ny.telefoniutrustning'
+                route: 'bestallning.ny.telefoniutrustning',
+                canSkip: true
             }, {
                 name: 'Digital diktering',
-                route: 'bestallning.ny.digital-diktering'
+                route: 'bestallning.ny.digital-diktering',
+                canSkip: true
             }];
         }
 

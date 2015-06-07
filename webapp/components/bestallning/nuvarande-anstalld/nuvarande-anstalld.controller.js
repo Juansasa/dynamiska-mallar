@@ -75,7 +75,7 @@
 
         $scope.$parent.next = function() {
             var index = findStateIndex($state.current);            
-            if (index + 1 < $scope.model.steps.existingEmployee.length) {
+            if (index + 1 < $scope.model.steps.existingEmployee.length && $scope.form.$valid) {
                 $state.go($scope.model.steps.existingEmployee[index + 1].route);
             }
         };

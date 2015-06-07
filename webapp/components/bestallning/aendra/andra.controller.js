@@ -84,7 +84,7 @@
 
         $scope.$parent.next = function() {
             var index = findStateIndex($state.current);
-            if (index + 1 < $scope.model.steps.modifyExistingEmployee.length) {
+            if (index + 1 < $scope.model.steps.modifyExistingEmployee.length && $scope.form.$valid) {
                 $state.go($scope.model.steps.modifyExistingEmployee[index + 1].route);
             }
         };
