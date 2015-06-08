@@ -5,7 +5,7 @@
 
     /*@ngInject*/
     function ctrl($scope, $state, autocomplete) {
-        if(!$scope.model.person || !$scope.model.person.anstallningstyp){
+        if(!$scope.model.person || !$scope.model.person['Anställningstyp']){
             $state.go('^');
         }
 

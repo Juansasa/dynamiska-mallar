@@ -14,6 +14,8 @@
 
 
         $scope.selected = function(person) {
+                        console.log($scope.model.person);
+
             personInfo.set(person);
             resetSteps();
             $state.go('bestallning.andra.personinfo');
@@ -51,7 +53,7 @@
                 route: 'bestallning.andra.personinfo'
             }];
 
-            if ($scope.model.person && $scope.model.person.anstallningstyp) {
+            if ($scope.model.person && $scope.model.person['Anställningstyp']) {
                 $state.go('bestallning.andra.personinfo');
             }
         }
@@ -90,7 +92,7 @@
                             name: 'Sammanfattning',
                             route: 'bestallning.andra.sammanfattning'
                         },
-                        options: [$scope.model.person && $scope.model.person.anstallningstyp === 'previa anställd' ? {
+                        options: [$scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
                             name: 'Förändring Konto',
                             value: {
                                 name: 'Förändring Konto',
