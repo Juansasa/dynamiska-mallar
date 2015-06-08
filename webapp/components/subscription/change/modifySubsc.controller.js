@@ -11,6 +11,6 @@
         }
 
         $scope.model = $scope.model || {};
-        $scope.fields = forms.modifySubscription();
+        $scope.fields = forms.modifySubscription($scope.model);
     }
 })();

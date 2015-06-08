@@ -1639,11 +1639,17 @@
             return specific;
         }
 
-        function getOrderExtendEmployeeAccountForm(model) {
+        function getOrderExtendEmployeeAccountForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Tjänsteuppgifter</b></div>'
+                    template: '<div><b>Tjänsteuppgifter</b></div>',
+                    controller: function($scope) {
+                        setPersonInfo($scope.model, parentModel);
+                        $scope.model['Huvud-RE'] = parentModel.person['huvud-RE'];
+                        $scope.model['Dagens datum'] = new Date();
+                        $scope.model['Beställare'] = parentModel.orderPerson;
+                    }
                 }, {
                     className: 'col-md-12',
                     type: 'input',
@@ -1688,7 +1694,8 @@
                     type: 'textarea',
                     key: 'Övrig information',
                     templateOptions: {
-                        label: 'Övrig information'
+                        label: 'Övrig information',
+                        description: 'En kontobeställning-/ändring/-avslut tar cirka 5 arbetsdagar samt kostar cirka 200 kronor'
                     }
                 }]
             }];

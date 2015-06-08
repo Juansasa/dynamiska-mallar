@@ -11,6 +11,6 @@
 
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};
-        $scope.fields = forms.newSubscription();
+        $scope.fields = forms.newSubscription($scope.model);
     }
 })();
