@@ -83,11 +83,11 @@
                     templateOptions: {
                         label: 'Anställningstyp',
                         options: [{
-                            name: 'Konsult',
-                            value: 'konsult'
-                        }, {
                             name: 'Previa anställd',
                             value: 'previa anställd'
+                        }, {
+                            name: 'Konsult',
+                            value: 'konsult'
                         }],
                         required: true,
                         onChange: function() {

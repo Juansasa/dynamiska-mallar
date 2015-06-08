@@ -12,7 +12,7 @@
                 url: '/forandring-konto',
                 views: {
                     'wizardContent@bestallning': {
-                        template: '<formly-form model="model.andra.konto.konsult" fields="fields"></form-form>',
+                        templateUrl: 'components/modifyAccount/consultant/template.html',
                         title: gettext('Förändring konto'),
                         controller: 'ModifyConsultantAccountController'
                     }

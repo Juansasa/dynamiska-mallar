@@ -9,19 +9,7 @@
             $state.go('^');
         }
 
-        init();
-
         // Ersätt med search call
         $scope.employees = autocomplete.getAllEmployee();
-
-        function init() {
-            $scope.model.steps = $scope.model.steps || [{
-                name: 'Start',
-                route: 'bestallning.andra.personinfo'
-            }, {
-                name: 'Sammanfattning',
-                route: 'bestallning.andra.sammanfattning'
-            }];
-        }
     }
 })();

@@ -39,20 +39,25 @@
                     var value = $scope.model[$scope.options.key];
                     if (value) {
                         if (value === 'Förändring Konto') {
-                            $scope.to.data.setField(value, forms.modifyEmployeeAccount());
+                            $scope.to.data.setField(value, forms.modifyEmployeeAccount(getModel()));
                         } else {
-                            $scope.to.data.setField(value, forms.extendEmployeeAccount());
+                            $scope.to.data.setField(value, forms.extendEmployeeAccount(getModel()));
                         }
                     }
                 }
             }
         }];
 
+        function getModel() {
+            return $scope.model;
+        }
+
         function setFormFields(option, fields) {
             $scope.formFields = fields;
-            $scope.model.andra.konto['anställd'] = {
-                'Vald formulär': option
-            };
+            $scope.model.andra.konto['anställd'] = $scope.model.andra.konto['anställd'] || {};
+            if($scope.model.andra.konto['anställd']) {
+                $scope.model.andra.konto['anställd']['Vald formulär'] = option;
+            }
         }
     }
 })();

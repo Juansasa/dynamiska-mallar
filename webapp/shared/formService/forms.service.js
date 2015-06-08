@@ -415,7 +415,7 @@
                 fieldGroup: [{
                     template: '<div><b>Personuppgifter</b></div>',
                     key: 'personuppgifter',
-                    controller: function($scope, $filter) {
+                    controller: function($scope) {
                         $scope.model[$scope.options.key] = {
                             'Personnummer': model.person.personnummer,
                             'Namn': model.person.namn,
@@ -426,7 +426,7 @@
                             'Huvud-RE': model.person['huvud-RE'],
                             'Tillhör även RE': model.person['Sekundär tjänsteställe'],
                             'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person['huvud-RE']),
-                            'Dagens datum': $filter('date')(new Date(), 'dd-MM-yyyy'),
+                            'Dagens datum': new Date(),
                             'Beställare': model.orderPerson
                         };
 
@@ -436,11 +436,11 @@
                             };
                             switch (type) {
                                 case 'tillsvidareanställning':
-                                    retval['Fr.o.m'] = $filter('date')(model.person['fr o m'], 'dd-MM-yyyy');
+                                    retval['Fr.o.m'] = model.person['fr o m'];
                                     break;
                                 default:
-                                    retval['Fr.o.m'] = $filter('date')(model.person['fr o m'], 'dd-MM-yyyy');
-                                    retval['T.o.m'] = $filter('date')(model.person['t o m'], 'dd-MM-yyyy');
+                                    retval['Fr.o.m'] = model.person['fr o m'];
+                                    retval['T.o.m'] = model.person['t o m'];
                                     break;
                             }
 
@@ -1285,15 +1285,220 @@
             return specific;
         }
 
-        function getOrderModifyConsultantAccountForm(model) {
-            return [];
+
+        function setTVisitAdress(targetModel, parentModel) {
+            targetModel['Tjänsteställets besöksadress'] = autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE']);
         }
 
-        function getOrderModifyEmployeeAccountForm(model) {
+        function setTPostalAdress(targetModel, parentModel) {
+            targetModel['Tjänsteställets postadress'] = autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE']);
+
+        }
+
+        function getOrderModifyConsultantAccountForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Tjänsteuppgifter</b></div>'
+                    template: '<div><b>Ange ny tidsperiod</b></div>',
+                    controller: function($scope) {
+                        setPersonInfo($scope.model, parentModel);
+                        setTVisitAdress($scope.model, parentModel);
+                        setTPostalAdress($scope.model, parentModel);
+                        setOrderPersonInfo($scope.model, parentModel);
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Fr.o.m',
+                    templateOptions: {
+                        label: 'Fr.o.m'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'T.o.m',
+                    templateOptions: {
+                        label: 'T.o.m'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'radio',
+                    key: 'Mailkonto',
+                    templateOptions: {
+                        label: 'Mailkonto',
+                        options: [{
+                            name: 'Ja',
+                            value: 'Ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'Nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'autocomplete-select',
+                    key: 'Ersätt nuvarande MO till',
+                    templateOptions: {
+                        label: 'Ersätt nuvarande MO till',
+                        options: autocomplete.getAllMO(),
+                        onChange: 'model["Ersätt nuvarande Huvud-RE till"] = null'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Nuvarande Huvud-RE',
+                    templateOptions: {
+                        label: 'Nuvarande Huvud-RE',
+                        disabled: true,
+                        placeholder: 'Huvud-RE'
+                    },
+                    controller: function($scope, personInfo) {
+                        if (personInfo.get()) {
+                            $scope.model[$scope.options.key] = personInfo.get()['huvud-RE'];
+                        }
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'Ersätt nuvarande Huvud-RE till',
+                    templateOptions: {
+                        label: 'Ersätt nuvarande Huvud-RE till',
+                    },
+                    expressionProperties: {
+                        'templateOptions.placeholder': '!model["Ersätt nuvarande MO till"] ? "Var vänlig och välj ett MO": "Välj ett RE"',
+                        'templateOptions.disabled': '!model["Ersätt nuvarande MO till"]',
+                        'templateOptions.options': function(v, o, s) {
+                            return autocomplete.getRE(s.model['Ersätt nuvarande MO till']);
+                        }
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autoCompleteAdd',
+                    key: 'Lägg till ytterliggare RE',
+                    templateOptions: {
+                        label: 'Lägg till ytterliggare RE',
+                        options: autocomplete.getRE('All-RE: ')
+                    },
+                    expressionProperties: {
+                        'templateOptions.placeholder': '!model["Ersätt nuvarande MO till"] ? "Var vänlig och välj ett MO": "Välj ett RE"',
+                        'templateOptions.disabled': '!model["Ersätt nuvarande MO till"]'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'autoCompleteAdd',
+                    key: 'Borttag av RE',
+                    templateOptions: {
+                        label: 'Borttag av RE',
+                        onChange: function(v, options, scope) {
+                            var model = scope.model;
+                            model[options.key] = model[options.key] || [];
+
+                            var index = _.findIndex(scope.model[options.key], function(item) {
+                                return item === scope.to.selectedValue.name;
+                            });
+
+                            if (index > -1) {
+                                return;
+                            }
+
+                            model[options.key].push(options.templateOptions.selectedValue.value);
+                            options.templateOptions.selectedValue = null;
+                        },
+                    },
+                    controller: function($scope, personInfo) {
+                        if (personInfo.person) {
+                            var options = [];
+                            angular.forEach(personInfo.person['Sekundär tjänsteställe'], function(value) {
+                                options.push({
+                                    name: value,
+                                    value: value
+                                });
+                            });
+
+                            $scope.to.options = options;
+                            $scope.to.placeholder = 'Välj RE som ska tas bort';
+                        } else {
+                            $scope.to.disabled = true;
+                            $scope.to.placeholder = 'Ärende person saknar sekundära RE';
+                        }
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Befattning / Roll / Behörighet / Licenser</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'select',
+                    key: 'Befattningen är en Tf roll',
+                    templateOptions: {
+                        label: 'Befattningen är en Tf roll',
+                        options: [{
+                            name: 'Ja',
+                            value: 'ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'infoList',
+                    templateOptions: {
+                        label: 'Standardbehörighet för samtliga roller och befattningar',
+                        options: [
+                            '3Q användarbehörighet( QV & Quando)',
+                            'Läsrättigheter till Internwebben',
+                            'E-post konto (konsult...)',
+                            'Hemkatalog H:',
+                            'Improof',
+                            'Handboken',
+                            'Agda Entré',
+                            'Access till Kuben',
+                            'Lync'
+                        ]
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'roleSelect',
+                    key: 'Befattning',
+                    templateOptions: {
+                        label: 'Välj Befattning, roll och behörighet',
+                        options: autocomplete.getBefattningOptions(false)
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Rapportera till chef',
+                    templateOptions: {
+                        label: 'Rapportera till chef',
+                        required: true
+                    }
+                }]
+            }];
+
+            showErrors(specific);
+            return specific;
+        }
+
+        function getOrderModifyEmployeeAccountForm(parentModel) {
+            var specific = [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Tjänsteuppgifter</b></div>',
+                    controller: function($scope) {
+                        setPersonInfo($scope.model, parentModel);
+                        setTVisitAdress($scope.model, parentModel);
+                        setTPostalAdress($scope.model, parentModel);
+                        setOrderPersonInfo($scope.model, parentModel);
+                    }
                 }, {
                     className: 'col-md-4',
                     type: 'select',
@@ -1337,6 +1542,7 @@
                 }, {
                     className: 'col-md-6',
                     type: 'input',
+                    key: 'Nuvarande Huvud-RE',
                     templateOptions: {
                         label: 'Nuvarande Huvud-RE',
                         disabled: true,
@@ -1364,6 +1570,7 @@
                 }, {
                     className: 'col-md-6',
                     type: 'autoCompleteAdd',
+                    key: 'Lägg till ytterliggare RE',
                     templateOptions: {
                         label: 'Lägg till ytterliggare RE',
                         options: autocomplete.getRE('All-RE: ')
@@ -1479,7 +1686,42 @@
         }
 
         function getOrderExtendConsultantAccountForm(model) {
-            return [];
+            var specific = [{
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Förläng konto</b></div>',
+                    controller: function($scope) {
+                        $scope.model['Användarnamn'] = model.person['Användarnamn'];
+                        $scope.model.Namn = model.person.namn;
+                        $scope.model['Huvud-RE'] = model.person['huvud-RE'];
+                        $scope.model['Dagens datum'] = new Date();
+                        $scope.model['Behörig beställare'] = model.orderPerson;
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Fr.o.m',
+                    templateOptions: {
+                        label: 'Fr.o.m'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'T.o.m',
+                    templateOptions: {
+                        label: 'T.o.m'
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information'
+                    }
+                }]
+            }];
+
+            return specific;
         }
 
         function getOrderExtendEmployeeAccountForm(model) {
@@ -1751,5 +1993,20 @@
             }];
         }
 
+
+        //
+        // Model setters
+        // 
+        
+        function setPersonInfo(targetModel, parentModel) {
+            targetModel['Användarnamn'] = parentModel.person['Användarnamn'];
+            targetModel.Namn = parentModel.person.namn;
+        }
+
+        function setOrderPersonInfo(targetModel, parentModel) {
+            targetModel['Huvud-RE'] = parentModel.person['huvud-RE'];
+            targetModel['Dagens datum'] = new Date();
+            targetModel['Behörig beställare'] = parentModel.orderPerson;
+        }
     }
 })();

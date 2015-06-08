@@ -5,7 +5,7 @@
         .run(register);
 
     /*@ngInject*/
-    function register(formlyConfig, gettext) {
+    function register(formlyConfig, $filter, gettext) {
         formlyConfig.setType([{
             name: 'infoList',
             wrapper: ['bootstrapLabel'],
@@ -42,9 +42,9 @@
                                 label: 'Förnamn',
                                 required: true
                             },
-                validation: {
-                    show: true
-                }
+                            validation: {
+                                show: true
+                            }
                         }, {
                             className: 'col-md-4',
                             type: 'input',
@@ -60,9 +60,9 @@
                                 label: 'efternamn',
                                 required: true
                             },
-                validation: {
-                    show: true
-                }
+                            validation: {
+                                show: true
+                            }
                         }]
                     }]
                 }
@@ -82,9 +82,9 @@
                                 label: 'Gata',
                                 required: true
                             },
-                validation: {
-                    show: true
-                }
+                            validation: {
+                                show: true
+                            }
                         }, {
                             className: 'col-md-3',
                             type: 'input',
@@ -105,9 +105,9 @@
                                 label: 'Ort',
                                 required: true
                             },
-                validation: {
-                    show: true
-                }
+                            validation: {
+                                show: true
+                            }
                         }]
                     }, {
                         className: 'col-md-12',
@@ -117,9 +117,9 @@
                             label: 'Ev c/o adress',
                             required: true
                         },
-                validation: {
-                    show: true
-                }
+                        validation: {
+                            show: true
+                        }
                     }]
                 }
             }
@@ -242,7 +242,7 @@
             name: 'autoCompleteAdd',
             extends: 'tjanstestalleSelect',
             templateUrl: 'shared/formService/select-add.html',
-            wrapper: ['bootstrapLabel','bootstrapHasError'],
+            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
             defaultOptions: {
                 templateOptions: {
                     onChange: function(v, options, scope) {
@@ -288,7 +288,7 @@
                                 key: 'Rapporterar till (chef)',
                                 templateOptions: {
                                     label: 'Rapporterar till (chef)',
-                                required: true,
+                                    required: true,
                                     options: [{
                                         name: 'Chef 1',
                                         value: 'Chef 1'
@@ -300,9 +300,9 @@
                                         value: 'Chef 3'
                                     }]
                                 },
-                validation: {
-                    show: true
-                }
+                                validation: {
+                                    show: true
+                                }
                             }, {
                                 className: 'col-md-12',
                                 type: 'textarea',
@@ -336,11 +336,8 @@
             extends: 'input',
             defaultOptions: {
                 templateOptions: {
-                    type: 'date',
-                },
-                // controller: function($scope) {
-                //     $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || new Date();
-                // }
+                    type: 'date'
+                }
             }
         }, {
             name: 'equipment-select',
@@ -357,9 +354,9 @@
                             required: true,
                             min: 1
                         },
-                validation: {
-                    show: true
-                }
+                        validation: {
+                            show: true
+                        }
                     }];
 
                     if ($scope.to.enableModelInput) {
@@ -371,9 +368,9 @@
                                 required: true,
                                 min: 1
                             },
-                validation: {
-                    show: true
-                }
+                            validation: {
+                                show: true
+                            }
                         }];
                     }
                 },

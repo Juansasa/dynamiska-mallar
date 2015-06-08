@@ -18,11 +18,19 @@
                                 $state.go('^');
                             }
 
-                            $scope.summary = {
-                                person: $scope.model.person,
-                                'beställningar': $scope.model.ny
-                            };
-
+                            switch ($scope.model.person.anstallningstyp) {
+                                case 'konsult':
+                                    $scope.summary = {
+                                        'Personuppgift och konto beställning': $scope.model.person
+                                    };
+                                    break;
+                                case 'previa anställd':
+                                    $scope.summary = {
+                                        'Anställningsavtal': $scope.model.person
+                                    };
+                            }
+                            
+                            $scope.summary['Beställningar'] =  $scope.model.ny;
                             $scope.mailBody = convertJsonToMailString($scope.summary);
                         }
                     }
@@ -42,8 +50,8 @@
 
                             $scope.summary = {
                                 person: $scope.model.person,
-                                'beställare': $scope.model.orderPerson,
-                                'beställningar': $scope.model.andra
+                                'Beställare': $scope.model.orderPerson,
+                                'Beställningar': $scope.model.andra
                             };
 
                             $scope.mailBody = convertJsonToMailString($scope.summary);
@@ -65,8 +73,8 @@
 
                             $scope.summary = {
                                 person: $scope.model.person,
-                                'beställare': $scope.model.orderPerson,
-                                'beställningar': $scope.model.nuvarande
+                                'Beställare': $scope.model.orderPerson,
+                                'Beställningar': $scope.model.nuvarande
                             };
 
                             $scope.mailBody = convertJsonToMailString($scope.summary);
@@ -79,7 +87,7 @@
         routeHelper.registerStates(states);
 
         function convertJsonToMailString(jsonObj) {
-                return '%0D --------------------------------------------- %0D --------------------------------------------- %0D' + encodeURIComponent($filter('json')(jsonObj));
+            return '%0D --------------------------------------------- %0D --------------------------------------------- %0D' + encodeURIComponent($filter('json')(jsonObj));
         }
     }
 })();

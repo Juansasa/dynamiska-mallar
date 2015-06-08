@@ -83,6 +83,36 @@
                 },
                 'anställningsform': 'tillsvidareanställning',
                 'fr o m': new Date()
+            }, {
+                'anstallningstyp': 'konsult',
+                'namn': {
+                    'förnamn': 'Konsult',
+                    'mellannamn': 'e',
+                    'efternamn': 'Kling'
+                },
+                'adress': {
+                    'gata': 'Konsultsgata',
+                    'postnummer': 31144,
+                    'ort': 'Stockholm'
+                },
+                'befattning': 'Affärscontroller',
+                'tjänsteställe': 'Tumba',
+                'Sekundär tjänsteställe': [
+                    'Kumla',
+                    'All-452252',
+                    'All-141432535'
+                ],
+                'MO': 'MO 2',
+                'huvud-RE': 'MO 2-452252',
+                'telefoner': {
+                    'hem': '0370-55565',
+                    'mobil': '073-323252'
+                },
+                'anställningsform': 'tillsvidareanställning',
+                'fr o m': new Date(),
+                'Rapporterar till (chef)': 'Chef 3',
+                'Befattningen är en Tf roll': 'ja',
+                'Befattning': 'CFO'
             }];
         }
 
