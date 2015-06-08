@@ -509,14 +509,39 @@
         }
 
         // Nyt abonnemang
-        function getNewOrderSubscriptionForm(model) {
+        function getNewOrderSubscriptionForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Nytt abonnemang</b></div>',
+                    className: 'col-md-12',
+                    type: 'radio',
                     key: 'Vald formulär',
+                    templateOptions: {
+                        label: 'Välj ett formulär',
+                        options: [{
+                            name: 'Nytt abonnemang',
+                            value: 'Nytt'
+                        }, {
+                            name: 'Flytt av abonnemang till annan användare',
+                            value: 'Flytt'
+                        }]
+                    }
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Nytt abonnemang</b></div>',
                     controller: function($scope) {
-                        $scope.model[$scope.options.key] = 'Nytt abonnemang';
+                        $scope.model['Beställnings datum'] = new Date();
+                        $scope.model.Abonent = {
+                            Namn: parentModel.person.namn,
+                            Resultatenhet: parentModel.person['huvud-RE'],
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                        };
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.namn,
+                            Telefonnummer: parentModel.orderPerson.tel
+                        };
                     }
                 }, {
                     className: 'col-md-12',
@@ -535,23 +560,78 @@
                             value: 'Endast mobilabonnemang'
                         }]
                     }
-                }, {
-                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>'
+                }],
+                hideExpression: 'model["Vald formulär"] !== "Nytt"'
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
+                    controller: function($scope) {
+                        $scope.model['Beställnings datum'] = new Date();
+                        $scope.model.Abonent = {
+                            Namn: parentModel.person.namn,
+                            Resultatenhet: parentModel.person['huvud-RE'],
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                        };
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.namn,
+                            Telefonnummer: parentModel.orderPerson.tel
+                        };
+                    }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
-                    key: 'Datum för ändring',
+                    type: 'checkbox',
+                    key: 'Anknytning med tillhörande mobilnr',
                     templateOptions: {
-                        label: 'Datum för ändring'
+                        label: 'Anknytning med tillhörande mobilnr'
                     }
-                }]
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Ny användare',
+                    templateOptions: {
+                        label: 'Ny användare',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för flytt',
+                    templateOptions: {
+                        label: 'Datum för flytt'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'select',
+                    key: 'Behövs nytt simkort ?',
+                    templateOptions: {
+                        label: 'Behövs nytt simkort ?',
+                        required: true,
+                        options: [{
+                            name: 'Ja',
+                            value: 'Ja'
+                        }, {
+                            name: 'Nej',
+                            value: 'Nej'
+                        }]
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Anknytning',
+                    templateOptions: {
+                        label: 'Anknytning',
+                        required: true
+                    }
+                }],
+                hideExpression: 'model["Vald formulär"] !== "Flytt"'
             }];
             showErrors(specific);
             return specific;
         }
 
         // Modifiera abonnemang
-        function getModifySubscriptionForm(model) {
+        function getModifySubscriptionForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -568,13 +648,23 @@
                             value: 'Uppsägning'
                         }]
                     }
-                }, {
-                    template: '<hr>'
                 }]
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>'
+                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
+                    controller: function($scope) {
+                        $scope.model['Beställnings datum'] = new Date();
+                        $scope.model.Abonent = {
+                            Namn: parentModel.person.namn,
+                            Resultatenhet: parentModel.person['huvud-RE'],
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                        };
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.namn,
+                            Telefonnummer: parentModel.orderPerson.tel
+                        };
+                    }
                 }, {
                     className: 'col-md-12',
                     type: 'checkbox',
@@ -625,7 +715,17 @@
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Uppsägning av abonnemang</b></div>'
+                    template: '<div><b>Uppsägning av abonnemang</b></div>',
+                    controller: function($scope) {
+                        $scope.model['Beställnings datum'] = new Date();
+                        $scope.model.Abonent = {
+                            Resultatenhet: parentModel.person['huvud-RE']
+                        };
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.namn,
+                            Telefonnummer: parentModel.orderPerson.tel
+                        };
+                    }
                 }, {
                     className: 'col-md-12',
                     type: 'radio',
