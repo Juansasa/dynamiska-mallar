@@ -14,8 +14,6 @@
 
 
         $scope.selected = function(person) {
-                        console.log($scope.model.person);
-
             personInfo.set(person);
             resetSteps();
             $state.go('bestallning.andra.personinfo');

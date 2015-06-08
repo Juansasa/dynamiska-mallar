@@ -635,7 +635,6 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    className: 'row',
                     type: 'select',
                     key: 'Vald formulär',
                     templateOptions: {

@@ -47,7 +47,7 @@
                 case 'previa anställd':
                     return {
                         'Anställningsavtal': model.person,
-                        'Konto beställning': model.ny ? model.ny.anstalld.nyttKonto : null,
+                        'Konto beställning': model.ny && model.ny.anstalld ? model.ny.anstalld.nyttKonto : null,
                         'Datorutrustning': model.ny ? model.ny.datorutrustning : null,
                         'Mobilt bredband': model.ny ? model.ny.mobilbredband : null,
                         'Telefonutrustning': model.ny ? model.ny.telefonutrustning : null,
