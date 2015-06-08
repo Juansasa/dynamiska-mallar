@@ -67,7 +67,7 @@
                 route: $state.current.name
             }];
 
-            if ($scope.model.person && $scope.model.person.anstallningstyp) {
+            if ($scope.model.person && $scope.model.person['Anställningstyp']) {
                 getPageDataByEmploymentType();
             }
 
@@ -79,7 +79,7 @@
                 }, {
                     className: 'col-md-12',
                     type: 'radio',
-                    key: 'anstallningstyp',
+                    key: 'Anställningstyp',
                     templateOptions: {
                         label: 'Anställningstyp',
                         options: [{
@@ -91,7 +91,7 @@
                         }],
                         required: true,
                         onChange: function() {
-                            if ($scope.model.person.anstallningstyp) {
+                            if ($scope.model.person['Anställningstyp']) {
                                 getPageDataByEmploymentType();
                             }
                         }
@@ -106,13 +106,13 @@
             }
 
             var wizardSteps = [];
-            if ($scope.model.person.anstallningstyp === 'konsult') {
+            if ($scope.model.person['Anställningstyp'] === 'konsult') {
                 $scope.fields.personinfo = forms.newConsultantPersonalInfo().concat(forms.newConsultantAccount());
                 wizardSteps = [{
                     name: 'Nytt konto',
                     route: 'bestallning.ny'
                 }];
-            } else if ($scope.model.person.anstallningstyp === 'previa anställd') {
+            } else if ($scope.model.person['Anställningstyp'] === 'previa anställd') {
                 $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{
                     name: 'Anställningsavtal - HR',

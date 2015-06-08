@@ -103,9 +103,9 @@
                                 route: 'bestallning.andra.konsult.forandring-konto'
                             }
                         }, {
-                            name: 'Abonnemang',
+                            name: 'Telefoni',
                             value: {
-                                name: 'Abonnemang',
+                                name: 'Telefoni',
                                 route: 'bestallning.andra.abonnemang'
                             }
                         }, {

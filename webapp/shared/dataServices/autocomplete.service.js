@@ -59,7 +59,7 @@
 
         function getAllEmployee() {
             return [{
-                'anstallningstyp': 'previa anställd',
+                'Anställningstyp': 'previa anställd',
                 'användarnamn': 'Zqudjad',
                 'namn': {
                     'förnamn': 'Previa',
@@ -85,7 +85,7 @@
                 'anställningsform': 'tillsvidareanställning',
                 'fr o m': new Date()
             }, {
-                'anstallningstyp': 'konsult',
+                'Anställningstyp': 'konsult',
                 'användarnamn': 'Zhahju',
                 'namn': {
                     'förnamn': 'Konsult',

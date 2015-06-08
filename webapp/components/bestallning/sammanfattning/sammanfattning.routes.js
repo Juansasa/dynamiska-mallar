@@ -12,29 +12,8 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
-                        controller: function($scope, $state) {
-                            if (!$scope.model.steps || !$scope.model.steps.newEmployee) {
-                                $state.go('^');
-                            }
-                            
-                            if ($scope.model.person) {
-                                switch ($scope.model.person.anstallningstyp) {
-                                    case 'konsult':
-                                        $scope.summary = {
-                                            'Personuppgift och konto beställning': $scope.model.person
-                                        };
-                                        break;
-                                    case 'previa anställd':
-                                        $scope.summary = {
-                                            'Anställningsavtal': $scope.model.person
-                                        };
-                                }
-
-                                $scope.summary['Beställningar'] = $scope.model.ny;
-                                $scope.mailBody = convertJsonToMailString($scope.summary);
-                            }
-                        }
+                        templateUrl: 'components/bestallning/sammanfattning/ny-sammanfattning.html',
+                        controller: 'SummaryNewEmployeeController'
                     }
                 }
             }

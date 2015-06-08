@@ -1,0 +1,15 @@
+<h1>Beställningar</h1>
+<div class="row" ng-repeat="(key, order) in getOrders(model)" ng-if="order">
+    <h3>{{key}}</h3>
+    <div class="col-md-12" ng-repeat="(key, value) in order">
+        <span><b class="text-capitalize">{{key}}: </b> <i ng-repeat="entry in getValue(value)"> {{entry}}</i></span>
+        
+        <div class="col-md-12" ng-repeat="(key, nval) in getValue(entry)">
+            <span><b class="text-capitalize">{{key}}: </b> <i ng-repeat="entry in getValue(nval)"> {{entry}}</i></span>
+        </div>
+    </div>
+    <pre>
+		{{order | json}}
+	</pre>
+    <a class="pull-right" href="mailto:you@yourdomain.com?subject=Data&body={{mailBody}}">Skicka</a>
+</div>

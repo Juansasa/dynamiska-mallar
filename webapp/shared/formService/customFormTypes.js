@@ -250,7 +250,7 @@
                         model[options.key] = model[options.key] || [];
 
                         var index = _.findIndex(scope.model[options.key], function(item) {
-                            return item.beteckning === scope.to.selectedValue.name;
+                            return item === scope.to.selectedValue.name;
                         });
 
                         if (index > -1) {
