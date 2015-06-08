@@ -11,6 +11,6 @@
         }
 
         $scope.model = $scope.model || {};
-        $scope.fields = forms.phoneEquipment();
+        $scope.fields = forms.phoneEquipment($scope.model);
     }
 })();

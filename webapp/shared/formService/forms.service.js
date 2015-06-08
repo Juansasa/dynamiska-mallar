@@ -879,89 +879,50 @@
         }
 
         // Nytt telefonutrustning formulär
-        function getOrderPhoneEquipmentForm(model) {
+        function getOrderPhoneEquipmentForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    className: 'col-md-12',
-                    type: 'today-date',
-                    key: 'Beställningsdatum',
-                    templateOptions: {
-                        label: 'Beställningsdatum',
-                        disabled: true,
-                    }
+                    template: '<div><b>Faktureringsuppgifter</b></div>'
                 }, {
                     className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Beställare',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Beställarens telefon-nr',
-                        type: 'tel',
-                        disabled: true
-                    }
-                }, {
-                    template: '<div class="col-md-6"><label>Företag</label><p><b><i>AB Previa</i></b></p></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
+                    type: 'autocomplete-select',
+                    key: 'Kostnadsbelastad resultatenhet',
                     templateOptions: {
                         label: 'RE-nr',
                         placeholder: 'Kostnadsbelastad resultatenhet',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Mottagare/Användare (Om annan än beställaren)',
-                        disabled: true
+                        required: true,
+                        options: autocomplete.getRE('All-re')
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'input',
-                    templateOptions: {
-                        label: 'Leveransadress',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-3',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Postnr',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-3',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ort',
-                        disabled: true
-                    }
-                }, {
-                    template: '<div class="col-md-12"><label>Fakturaadress</label><p><b><i>AB Previa</i></b></p></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
+                    key: 'Fakturaref',
                     templateOptions: {
                         label: 'Fakturaref',
                         placeholder: 'Sign på den personen som har rollen som godkännare i Batlzar',
                         required: true
                     }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Fakturaadress',
-                        placeholder: 'PAA 04220  FE 533,  105 69 STOCKHOLM',
-                        disabled: true
-                    }
                 }]
+            }, {
+                template: '<div><b>Utrustning</b></div>',
+                controller: function($scope) {
+                    $scope.model['Beställare'] = {
+                        'Namn': parentModel.orderPerson.namn,
+                        'Tel': parentModel.orderPerson.tel,
+                        'Företag': 'AB Previa',
+                        'RE-nr': parentModel.orderPerson['resulat-enhet']
+                    };
+
+                    $scope.model['Mottagare/Användare'] = {
+                        'Namn': parentModel.person.namn,
+                        'Tel': parentModel.person.telefoner,
+                        'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE']),
+                        'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
+                    };
+
+                    $scope.model['Dagens datum'] = new Date();
+                }
             }, {
                 className: 'col-md-12',
                 type: 'equipment-select',
@@ -1012,7 +973,7 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Faktureringuppgifter</b></div>'
+                    template: '<div><b>Faktureringsuppgifter</b></div>'
                 }, {
                     className: 'col-md-12',
                     type: 'input',
