@@ -17,21 +17,23 @@
                             if (!$scope.model.steps || !$scope.model.steps.newEmployee) {
                                 $state.go('^');
                             }
-
-                            switch ($scope.model.person.anstallningstyp) {
-                                case 'konsult':
-                                    $scope.summary = {
-                                        'Personuppgift och konto beställning': $scope.model.person
-                                    };
-                                    break;
-                                case 'previa anställd':
-                                    $scope.summary = {
-                                        'Anställningsavtal': $scope.model.person
-                                    };
-                            }
                             
-                            $scope.summary['Beställningar'] =  $scope.model.ny;
-                            $scope.mailBody = convertJsonToMailString($scope.summary);
+                            if ($scope.model.person) {
+                                switch ($scope.model.person.anstallningstyp) {
+                                    case 'konsult':
+                                        $scope.summary = {
+                                            'Personuppgift och konto beställning': $scope.model.person
+                                        };
+                                        break;
+                                    case 'previa anställd':
+                                        $scope.summary = {
+                                            'Anställningsavtal': $scope.model.person
+                                        };
+                                }
+
+                                $scope.summary['Beställningar'] = $scope.model.ny;
+                                $scope.mailBody = convertJsonToMailString($scope.summary);
+                            }
                         }
                     }
                 }

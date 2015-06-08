@@ -348,6 +348,7 @@
                     $scope.to.ammountField = [{
                         type: 'input',
                         key: 'Antal',
+                        defaultValue: 1,
                         templateOptions: {
                             label: 'Antal',
                             type: 'number',
@@ -363,6 +364,7 @@
                         $scope.to.modelField = [{
                             type: 'input',
                             key: 'Telefonmodell',
+                            defaultValue: 1,
                             templateOptions: {
                                 label: 'Telefonmodell',
                                 required: true,

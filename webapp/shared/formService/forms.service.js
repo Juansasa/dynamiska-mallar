@@ -1008,66 +1008,15 @@
         }
 
         // Datorutrustning formulär
-        function getOrderComputerAccessoriesForm(model) {
+        function getOrderComputerAccessoriesForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Beställare</b></div>'
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namn',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Resultatenhet',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Mailadress',
-                        type: 'mail',
-                        placeholder: 'Mottagare av orderbekräftelse'
-                    }
-                }, {
-                    template: '<div><b>Mottagare</b></div>'
+                    template: '<div><b>Faktureringuppgifter</b></div>'
                 }, {
                     className: 'col-md-12',
                     type: 'input',
-                    templateOptions: {
-                        label: 'Namn',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Leveransadress',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Postnummer',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Ort',
-                        disabled: true,
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
+                    key: 'Fakturareferens',
                     templateOptions: {
                         label: 'Fakturareferens',
                         placeholder: '(Sign på den personen som har rollen som ”Godkännare” i Palette)'
@@ -1076,7 +1025,14 @@
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Utrustning</b></div>'
+                    template: '<div><b>Utrustning</b></div>',
+                    controller: function($scope) {
+                        $scope.model['Beställare'] = parentModel.orderPerson;
+                        $scope.model.Mottagare = {
+                            Leveransmottagare: parentModel.person.namn,
+                            Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE'])
+                        };
+                    }
                 }, {
                     className: 'col-md-12',
                     type: 'equipment-select',
@@ -1112,6 +1068,7 @@
                 }, {
                     className: 'col-md-12',
                     type: 'textarea',
+                    key: 'Övrig information',
                     templateOptions: {
                         label: 'Övrig information'
                     }

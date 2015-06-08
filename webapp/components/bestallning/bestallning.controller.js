@@ -4,7 +4,7 @@
         .controller('BestallningController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state) {
+    function ctrl($scope, $state, manager) {
         modelReset();
 
         $scope.goToState = function(nextState) {            
@@ -22,10 +22,7 @@
             $scope.fields = {};
             $scope.model = $scope.model || {
                 person: null, // Personinformation
-                orderPerson: {
-                    namn: 'Bosse King',
-                    email: 'Bosee.king@fortet.se'
-                }, // Chef information
+                orderPerson: manager.get(), // Chef information
                 steps: {
                     newEmployee: null,
                     modifyExistingEmployee: null

@@ -8,15 +8,16 @@
         /*@ngInject*/
         function exception() {
         var service = {
-            getManagerInfo: getManager
+            get: getManager
         };
         return service;
 
         function getManager() {
             return {
-                firstname: 'Per',
-                lastname: 'Persson'
-            };
+                    namn: 'Bosse King',
+                    email: 'Bosee.king@fortet.se',
+                    'resulat-enhet': 'Chef RE'
+                };
         }
     }
 })();
