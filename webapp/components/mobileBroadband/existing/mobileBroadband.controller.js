@@ -11,6 +11,6 @@
         }
 
         $scope.model = $scope.model || {};
-        $scope.fields = forms.modifyMobileBroadband();
+        $scope.fields = forms.modifyMobileBroadband($scope.model);
     }
 })();

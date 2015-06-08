@@ -60,6 +60,7 @@
         function getAllEmployee() {
             return [{
                 'anstallningstyp': 'previa anställd',
+                'användarnamn': 'Zqudjad',
                 'namn': {
                     'förnamn': 'Previa',
                     'mellannamn': 'von',
@@ -85,6 +86,7 @@
                 'fr o m': new Date()
             }, {
                 'anstallningstyp': 'konsult',
+                'användarnamn': 'Zhahju',
                 'namn': {
                     'förnamn': 'Konsult',
                     'mellannamn': 'e',
