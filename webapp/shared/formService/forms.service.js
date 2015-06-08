@@ -1032,6 +1032,8 @@
                             Leveransmottagare: parentModel.person.namn,
                             Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE'])
                         };
+
+                        $scope.model.Datum = new Date();
                     }
                 }, {
                     className: 'col-md-12',
