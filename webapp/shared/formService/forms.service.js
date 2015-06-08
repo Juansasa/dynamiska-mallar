@@ -8,8 +8,6 @@
     /*@ngInject*/
     function exception(FORMKEYS, gettext, autocomplete) {
         var service = {
-            manager: getOrderManagerForm,
-
             newConsultantPersonalInfo: getNewConsultantPersonalInfo,
             newEmployeePersonalInfo: getNewPreviaEmployeePersonalInfo,
 
@@ -1037,142 +1035,46 @@
         }
 
         // Digital diktering formulär
-        function getOrderCareTalkForm(model) {
+        function getOrderCareTalkForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Beställare</b></div>'
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Namn',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        disabled: true
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    key: 'Mailadress',
-                    templateOptions: {
-                        label: 'Mailadress',
-                        placeholder: 'Mailadress till mottagare av orderbekräftelse',
-                        required: true,
-                        type: 'mail'
-                    }
-                }, {
-                    template: '<div><b>Mottagare</b></div>'
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'Leveransadress 1',
-                    templateOptions: {
-                        label: 'Leveransadress 1',
-                        disabled: true
-                    },
+                    template: '<div><b>Faktureringsuppgifter</b></div>',
                     controller: function($scope) {
-                        $scope.model['Leveransadress 1'] = 'AB Previa';
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Leveransmottagare'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        type: 'tel',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Leveransadress 2',
-                    templateOptions: {
-                        label: 'Leveransadress 2',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        type: 'tel',
-                        required: true
-                    }
-                }, {
-                    template: '<div><b>Faktureringsuppgifter</b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Fakturaadress',
-                    templateOptions: {
-                        label: 'Fakturaadress',
-                        disabled: true
-                    },
-                    controller: function($scope) {
+                        $scope.model['Beställare'] = {
+                            Namn: parentModel.orderPerson.namn,
+                            Tel: parentModel.orderPerson.tel,
+                            Mailadress: parentModel.orderPerson.email
+                        };
+
+                        $scope.model.Leveransuppgifter = {
+                            'Leveransadress 1': 'AB Previa',
+                            Leveransmottagare: {
+                                Namn: parentModel.person.namn,
+                                'Leveransadress 2': autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE'])
+                            }
+                        };
+
                         $scope.model.Fakturaadress = 'AB Previa';
+                        $scope.model['Box/Postnr/Ort'] = 'PAA04220, FE 533 105 69, STOCKHOLM';
+                        $scope.model['Dagens datum'] = new Date();
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'input',
                     templateOptions: {
                         label: 'Re-nr',
+                        placeholder: 'Kostnadsbelastad resultatenhet',
                         required: true
                     }
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-6',
                     type: 'input',
                     key: 'Fakturareferens',
                     templateOptions: {
                         label: 'Fakturareferens',
                         placeholder: 'Sign på den personen som har rollen som "Godkännare" i Pallette',
                         required: true
-                    },
-                    controller: function($scope) {
-                        $scope.model.Fakturaadress = 'AB Previa';
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    key: 'Box',
-                    templateOptions: {
-                        label: 'Box',
-                        disabled: true
-                    },
-                    controller: function($scope) {
-                        $scope.model.Box = 'PAA04220, FE 533';
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    key: 'Postnr',
-                    templateOptions: {
-                        label: 'Postnr',
-                        disabled: true
-                    },
-                    controller: function($scope) {
-                        $scope.model.Postnr = '105 69';
-                    }
-                }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    key: 'Ort',
-                    templateOptions: {
-                        label: 'Ort',
-                        disabled: true
-                    },
-                    controller: function($scope) {
-                        $scope.model.Ort = 'STOCKHOLM';
                     }
                 }]
             }, {
@@ -1741,54 +1643,6 @@
                         description: '* En konto-avslut tar cirka 5 arbetsdagar samt kostar cirka 200kr'
                     }
                 }]
-            }];
-
-            showErrors(specific);
-            return specific;
-        }
-
-        function getOrderManagerForm(model) {
-            var specific = [{
-                type: 'input',
-                key: 'firstname',
-                templateOptions: {
-                    label: 'First name'
-                }
-            }, {
-                type: 'select',
-                key: 'options',
-                templateOptions: {
-                    label: 'Select something',
-                    valueProp: 'name',
-                    options: [{
-                        name: 'Car'
-                    }, {
-                        name: 'Helicopter'
-                    }, {
-                        name: 'Sport Utility Vehicle'
-                    }, {
-                        name: 'Bicycle',
-                        group: 'low emissions'
-                    }, {
-                        name: 'Skateboard',
-                        group: 'low emissions'
-                    }, {
-                        name: 'Walk',
-                        group: 'low emissions'
-                    }, {
-                        name: 'Bus',
-                        group: 'low emissions'
-                    }, {
-                        name: 'Scooter',
-                        group: 'low emissions'
-                    }, {
-                        name: 'Train',
-                        group: 'low emissions'
-                    }, {
-                        name: 'Hot Air Baloon',
-                        group: 'low emissions'
-                    }]
-                }
             }];
 
             showErrors(specific);
