@@ -12,7 +12,7 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/ny-sammanfattning.html',
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
                         controller: 'SummaryNewEmployeeController'
                     }
                 }
@@ -23,7 +23,7 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/ny-sammanfattning.html',
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
                         controller: 'SummaryExistingEmployeeController'
                     }
                 }
@@ -34,7 +34,7 @@
                 url: '/sammanfattning',
                 views: {
                     'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/ny-sammanfattning.html',
+                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
                         controller: 'SummaryAndraEmployeeController'
                     }
                 }

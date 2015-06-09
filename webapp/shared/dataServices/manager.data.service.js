@@ -14,8 +14,8 @@
 
         function getManager() {
             return {
-                    namn: 'Bosse King',
-                    email: 'Bosee.king@fortet.se',
+                    namn: 'Bosse Blom',
+                    email: 'Bosee.Blom@fortet.se',
                     'resulat-enhet': 'Chef RE',
                     tel: '0370-44433'
                 };

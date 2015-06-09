@@ -545,6 +545,13 @@
                     }
                 }, {
                     className: 'col-md-12',
+                    type: 'today-date',
+                    key: 'Datum abonnemanget ska börja gälla',
+                    templateOptions: {
+                        label: 'Datum abonnemanget ska börja gälla'
+                    }
+                }, {
+                    className: 'col-md-12',
                     type: 'radio',
                     key: 'Anknytningsval',
                     templateOptions: {
@@ -1674,7 +1681,7 @@
                         }, {
                             name: ' Tidsbegränsad anställning',
                             value: 'Tidsbegränsad anställning'
-                        }]
+                        }],
                     }
                 }, {
                     className: 'col-md-4',
@@ -1752,6 +1759,8 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
+                    template: '<h1>Work in progress ...</h1>'
+                }, {
                     className: 'col-md-6',
                     type: 'input',
                     templateOptions: {

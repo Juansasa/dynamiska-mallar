@@ -62,7 +62,7 @@
                 'användarnamn': 'Zqudjad',
                 'namn': {
                     'förnamn': 'Previa',
-                    'mellannamn': 'von',
+                    'mellannamn': '',
                     'efternamn': 'Andersson'
                 },
                 'adress': {

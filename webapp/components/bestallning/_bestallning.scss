@@ -1,0 +1,8 @@
+.panel-body {
+	span {
+		margin-right: 3em;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

@@ -1,30 +1,35 @@
 <div class="container">
-	<form name="form">
-		<br>
-		<div class="wizard">
-			<table>
-				<tbody>
-					<tr>
-						<td ng-repeat="step in getSteps()">
-							<button
-								type="submit"
-								ng-click="goToState(step)"
-								ng-class="{current: isCurrent(step)}"
-								><span class="badge">{{$index + 1}}</span> {{step.name}}</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<hr>
-		<div ui-view="wizardContent"></div>
-		<hr>
-		<div class="wizard-footer col-md-12">
-			<button type="submit" ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success pull-left" translate>Förregående</button>
+    <form name="form">
+        <br>
+        <div class="wizard">
+            <table>
+                <tbody>
+                    <tr>
+                        <td ng-repeat="step in getSteps()">
+                            <button type="submit" ng-click="goToState(step)" ng-class="{current: isCurrent(step)}"><span class="badge">{{$index + 1}}</span> {{step.name}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div ng-if="model.person" class="panel panel-default panel-info">
+            <div class="panel-heading"><b>Personen ärende gäller</b></div>
+            <div class="panel-body">
+                <span><b>Namn:</b> {{model.person.namn['förnamn'] + ' ' + model.person.namn['efternamn']}}</span>
+                <span><b>Huvud-RE:</b> {{model.person['huvud-RE']}}</span>
+                <span><b>Tjänsteställe:</b> {{model.person['tjänsteställe']}}</span>
+            </div>
+        </div>
 
-			<button type="submit" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success pull-right" translate>Nästa</button>
-
-			<button type="button" ng-if="canSkip()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
-		</div>
+        
+        <div ui-view="wizardContent"></div>
+        
+        <hr>
+        <div class="wizard-footer col-md-12">
+            <button type="submit" ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success pull-left" translate>Förregående</button>
+            <button type="submit" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success pull-right" translate>Nästa</button>
+            <button type="button" ng-if="canSkip()" ng-click="skip()" class="btn btn-success pull-right btn-skip" translate>Hoppa över</button>
+        </div>
     </form>
 </div>

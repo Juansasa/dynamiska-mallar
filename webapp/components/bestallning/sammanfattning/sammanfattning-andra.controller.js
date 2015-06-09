@@ -23,13 +23,14 @@
                         'Konto ändring': model.andra.konto && model.andra.konto.konsult,
                         'Mobilt bredband': model.andra ? model.andra.mobilbredband : null,
                         'Telefoni': model.andra ? model.andra.abonnemang : null,
+                        //'Ändra anställningsförhållande': model.andra ? model.andra.anstallningsforhallande.konsult : null
                     };
                 case 'previa anställd':
                     return {
-                        'Anställningsavtal': model.person,
-                        'Konto ändring': model.andra && model.andra.anstalld ? model.andra.anstalld.nyttKonto : null,
+                        'Konto ändring': model.andra.konto && model.andra.konto['anställd'],
                         'Mobilt bredband': model.andra ? model.andra.mobilbredband : null,
                         'Telefoni': model.andra ? model.andra.abonnemang : null,
+                        //'Ändra anställningsförhållande': model.andra ? model.andra.anstallningsforhallande.anstalld : null
                     };
                 default:
                     break;
@@ -57,7 +58,7 @@
                 return obj;
             }
         }
-        
+
         function isPrimitive(obj) {
             return !obj || _.isEmpty(obj) || (_.isString(obj) || _.isNumber(obj) || _.isBoolean(obj) || isDate(obj));
         }

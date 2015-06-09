@@ -245,6 +245,7 @@
             wrapper: ['bootstrapLabel', 'bootstrapHasError'],
             defaultOptions: {
                 templateOptions: {
+                    placeholder: 'Välj i listan',
                     onChange: function(v, options, scope) {
                         var model = scope.model;
                         model[options.key] = model[options.key] || [];
@@ -364,11 +365,9 @@
                         $scope.to.modelField = [{
                             type: 'input',
                             key: 'Telefonmodell',
-                            defaultValue: 1,
                             templateOptions: {
                                 label: 'Telefonmodell',
-                                required: true,
-                                min: 1
+                                required: true
                             },
                             validation: {
                                 show: true

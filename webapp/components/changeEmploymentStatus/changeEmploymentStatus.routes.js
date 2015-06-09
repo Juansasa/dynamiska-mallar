@@ -10,10 +10,10 @@
             stateName: 'bestallning.andra.anstallningsforhallande',
             stateConfig: {
                 url: '/anstallningsforhallande',
-                modelKey: 'andra.anstallningsfarhallande.anstalld',
+                modelKey: 'andra.anstallningsforhallande.anstalld',
                 views: {
                     'wizardContent@bestallning': {
-                        template: '<formly-form model="model.andra.anstallningsfarhallande.anstalld" fields="fields"></formly-form>',
+                        template: '<formly-form model="model.andra.anstallningsforhallande.anstalld" fields="fields"></formly-form>',
                         title: gettext('Ändra anställningsförhållande'),
                         controller: 'ChangeEmploymentStatusController'
                     }
