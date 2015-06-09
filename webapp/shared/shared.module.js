@@ -16,6 +16,7 @@
         'formly',
         'formlyBootstrap',
         'ui.select',
+        'uz.mailto',
 
         'exception',
         'router',

@@ -1,15 +1,22 @@
 <h1>Beställningar</h1>
-<div class="row" ng-repeat="(key, order) in getOrders(model)" ng-if="order">
+<div class="row well" ng-repeat="(key, order) in getOrders(model)" ng-if="isOrderDefined(order)">
     <h3>{{key}}</h3>
     <div class="col-md-12" ng-repeat="(key, value) in order">
-        <span><b class="text-capitalize">{{key}}: </b> <i ng-repeat="entry in getValue(value)"> {{entry}}</i></span>
-        
-        <div class="col-md-12" ng-repeat="(key, nval) in getValue(entry)">
-            <span><b class="text-capitalize">{{key}}: </b> <i ng-repeat="entry in getValue(nval)"> {{entry}}</i></span>
+        <div class="col-md-12">
+            <span><b class="text-capitalize">{{key}}</b><i ng-if="isPrimitive(value)">: {{extractValue(value)}}</i></span>
+            
+            <div class="col-md-12" ng-if="!isPrimitive(value)">
+                <div ng-repeat="(nk, nval) in value">
+                    <span><b class="text-capitalize">{{nk}}</b><i ng-if="isPrimitive(nval)">: {{extractValue(nval)}}</i></span>
+                    
+                    <div class="col-md-12" ng-if="!isPrimitive(nval)">
+                        <div ng-repeat="(nnk, nnval) in nval">
+                            <span><b class="text-capitalize">{{nnk}}</b><i ng-if="isPrimitive(nnval)">: {{extractValue(nnval)}}</i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <pre>
-		{{order | json}}
-	</pre>
-    <a class="pull-right" href="mailto:you@yourdomain.com?subject=Data&body={{mailBody}}">Skicka</a>
+    <a href="{{getMailURL(order, key)}}" class="btn btn-success fa fa-envelope pull-right"> Skicka</a>
 </div>

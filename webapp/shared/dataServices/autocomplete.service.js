@@ -35,7 +35,6 @@
         };
         return service;
 
-
         function getTjanstestalleNamn(id) {
             return 'Namn(' + id + ')';
         }
