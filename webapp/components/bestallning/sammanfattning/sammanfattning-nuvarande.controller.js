@@ -32,7 +32,7 @@
         }
 
         function extractValue(obj) {
-            if (!obj || _.isEmpty(obj)) {
+            if (_.isNull(obj) || _.isUndefined(obj) || _.isObject(obj) && _.isEmpty(obj)) {
                 return 'Uppgift saknas';
             }
 
