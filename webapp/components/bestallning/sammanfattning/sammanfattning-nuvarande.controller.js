@@ -1,11 +1,11 @@
 (function() {
     'use strict';
     angular.module('bestallning')
-        .controller('SummaryNewEmployeeController', ctrl);
+        .controller('SummaryExistingEmployeeController', ctrl);
 
     /*@ngInject*/
     function ctrl($scope, $state, $filter, Mailto) {
-        if (!$scope.model.steps || !$scope.model.steps.newEmployee) {
+        if (!$scope.model.steps || !$scope.model.steps.existingEmployee) {
             $state.go('^');
         }
 
@@ -16,34 +16,16 @@
         $scope.getMailURL = getMailURL;
         $scope.getOrders = getOrders;
 
+
         function getOrders(model) {
-            switch (model.person['Anställningstyp']) {
-                case 'konsult':
-                    return {
-                        'Konto beställning': model.person,
-                        'Datorutrustning': model.ny ? model.ny.datorutrustning : null,
-                        'Mobilt bredband': model.ny ? model.ny.mobilbredband : null,
-                        'Telefonutrustning': model.ny ? model.ny.telefonutrustning : null,
-                        'Telefoni': model.ny ? model.ny.abonnemang : null,
-                        'Digital diktering': model.ny ? model.ny.digitaldiktering : null,
-                    };
-                case 'previa anställd':
-                    return {
-                        'Anställningsavtal': model.person,
-                        'Konto beställning': model.ny && model.ny.anstalld ? model.ny.anstalld.nyttKonto : null,
-                        'Datorutrustning': model.ny ? model.ny.datorutrustning : null,
-                        'Mobilt bredband': model.ny ? model.ny.mobilbredband : null,
-                        'Telefonutrustning': model.ny ? model.ny.telefonutrustning : null,
-                        'Telefoni': model.ny ? model.ny.abonnemang : null,
-                        'Digital diktering': model.ny ? model.ny.digitaldiktering : null,
-                    };
-                default:
-                    break;
-            }
-
-            return [];
+            return {
+                'Datorutrustning': model.nuvarande ? model.nuvarande.datorutrustning : null,
+                'Mobilt bredband': model.nuvarande ? model.nuvarande.mobilbredband : null,
+                'Telefonutrustning': model.nuvarande ? model.nuvarande.telefonutrustning : null,
+                'Telefoni': model.nuvarande ? model.nuvarande.abonnemang : null,
+                'Digital diktering': model.nuvarande ? model.nuvarande.digitaldiktering : null,
+            };
         }
-
 
         function isOrderDefined(order) {
             return order && !_.isEmpty(order);

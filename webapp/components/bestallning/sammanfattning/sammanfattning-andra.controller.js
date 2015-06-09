@@ -1,11 +1,11 @@
 (function() {
     'use strict';
     angular.module('bestallning')
-        .controller('SummaryNewEmployeeController', ctrl);
+        .controller('SummaryAndraEmployeeController', ctrl);
 
     /*@ngInject*/
     function ctrl($scope, $state, $filter, Mailto) {
-        if (!$scope.model.steps || !$scope.model.steps.newEmployee) {
+        if (!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee) {
             $state.go('^');
         }
 
@@ -20,22 +20,16 @@
             switch (model.person['Anställningstyp']) {
                 case 'konsult':
                     return {
-                        'Konto beställning': model.person,
-                        'Datorutrustning': model.ny ? model.ny.datorutrustning : null,
-                        'Mobilt bredband': model.ny ? model.ny.mobilbredband : null,
-                        'Telefonutrustning': model.ny ? model.ny.telefonutrustning : null,
-                        'Telefoni': model.ny ? model.ny.abonnemang : null,
-                        'Digital diktering': model.ny ? model.ny.digitaldiktering : null,
+                        'Konto ändring': model.andra.konto && model.andra.konto.konsult,
+                        'Mobilt bredband': model.andra ? model.andra.mobilbredband : null,
+                        'Telefoni': model.andra ? model.andra.abonnemang : null,
                     };
                 case 'previa anställd':
                     return {
                         'Anställningsavtal': model.person,
-                        'Konto beställning': model.ny && model.ny.anstalld ? model.ny.anstalld.nyttKonto : null,
-                        'Datorutrustning': model.ny ? model.ny.datorutrustning : null,
-                        'Mobilt bredband': model.ny ? model.ny.mobilbredband : null,
-                        'Telefonutrustning': model.ny ? model.ny.telefonutrustning : null,
-                        'Telefoni': model.ny ? model.ny.abonnemang : null,
-                        'Digital diktering': model.ny ? model.ny.digitaldiktering : null,
+                        'Konto ändring': model.andra && model.andra.anstalld ? model.andra.anstalld.nyttKonto : null,
+                        'Mobilt bredband': model.andra ? model.andra.mobilbredband : null,
+                        'Telefoni': model.andra ? model.andra.abonnemang : null,
                     };
                 default:
                     break;

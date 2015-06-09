@@ -91,15 +91,15 @@
                             route: 'bestallning.andra.sammanfattning'
                         },
                         options: [$scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
-                            name: 'Förändring Konto',
+                            name: 'Ändra Konto',
                             value: {
-                                name: 'Förändring Konto',
+                                name: 'Ändra Konto',
                                 route: 'bestallning.andra.anstalld.forandring-konto'
                             }
                         } : {
-                            name: 'Förändring Konto',
+                            name: 'Ändra Konto',
                             value: {
-                                name: 'Förändring Konto',
+                                name: 'Ändra Konto',
                                 route: 'bestallning.andra.konsult.forandring-konto'
                             }
                         }, {
@@ -115,9 +115,9 @@
                                 route: 'bestallning.andra.mobilbredband'
                             }
                         }, {
-                            name: 'Ändring av anställningsförhållande',
+                            name: 'Ändra anställningsförhållande',
                             value: {
-                                name: 'Ändring av anställningsförhållande',
+                                name: 'Ändra anställningsförhållande',
                                 route: 'bestallning.andra.anstallningsforhallande'
                             }
                         }, {
