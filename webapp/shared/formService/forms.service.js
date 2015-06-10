@@ -444,8 +444,8 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Personuppgifter</b></div>',
-                    key: 'personuppgifter',
+                    template: '<div><b>Tjänsteuppgifter</b></div>',
+                    key: 'Ärende person',
                     controller: function($scope) {
                         $scope.model[$scope.options.key] = {
                             'Personnummer': model.person ? model.person.personnummer : null,
@@ -457,9 +457,9 @@
                             'Huvud-RE': model.person['huvud-RE'],
                             'Tillhör även RE': model.person['Sekundär tjänsteställe'],
                             'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person['huvud-RE']),
-                            'Dagens datum': new Date(),
-                            'Beställare': model.orderPerson
                         };
+                        $scope.model['Beställare'] = model.orderPerson;
+                        $scope.model['Dagens datum'] = new Date();
 
                         function getAnstallning(type) {
                             var retval = {
@@ -478,8 +478,6 @@
                             return retval;
                         }
                     }
-                }, {
-                    template: '<div><b>Tjänsteuppgifter</b></div>'
                 }, {
                     className: 'col-md-12',
                     type: 'autoCompleteAdd',

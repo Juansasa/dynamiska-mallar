@@ -81,7 +81,7 @@
                     'Kumla'
                 ],
                 'anställningsform': 'tillsvidareanställning',
-                'fr o m': '2015-06-18T22:00:00.000Z',
+                'fr o m': new Date(),
                 'Månadslön, heltid': '45000',
                 'om begynnelselönen gäller oberoende av årets lönerevision': 'nej',
                 'semesterrätt': 25,
@@ -94,8 +94,8 @@
                     'mellannamn': 'c',
                     'efternamn': 'Martin'
                 },
-                'Anställd Fr o m': '2015-06-11T22:00:00.000Z',
-                'Anställd T o m': '2015-06-18T22:00:00.000Z',
+                'Anställd Fr o m': new Date(),
+                'Anställd T o m': new Date(),
                 'Mailkonto för konsult': 'Ja',
                 'MO': 'MO 3',
                 'huvud-RE': 'MO 3-141432535',
