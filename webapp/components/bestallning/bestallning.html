@@ -12,12 +12,12 @@
     </div>
 
     <div class="container">
-        <div class="panel panel-default">
+        <div class="panel panel-success">
             <div class="panel-heading" ng-if="model.person.namn">
                 <h4><b>Ärende person</b></h4>
-                <span><b>Namn:</b> {{model.person.namn['förnamn'] + ' ' + model.person.namn['efternamn']}}</span>
-                <span><b>Huvud-RE:</b> {{model.person['huvud-RE']}}</span>
-                <span><b>Tjänsteställe:</b> {{model.person['Tjänsteställe (Primärt)']}}</span>
+                <span><b>Namn:</b> <i>{{model.person.namn['förnamn'] + ' ' + model.person.namn['efternamn']}}</i></span>
+                <span><b>Huvud-RE:</b> <i>{{model.person['huvud-RE']}}</i></span>
+                <span><b>Tjänsteställe:</b> <i>{{model.person['Tjänsteställe (Primärt)']}}</i></span>
             </div>
             <div class="panel-body">
                 <div ui-view="wizardContent"></div>
