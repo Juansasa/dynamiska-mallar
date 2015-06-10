@@ -932,11 +932,12 @@
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.namn,
                             Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE']),
-                            Kontaktperson: {
-                                Namn: parentModel.orderPerson.namn,
-                                Telefonnummer: parentModel.orderPerson.tel
-                            }
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                        };
+
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.namn,
+                            Telefonnummer: parentModel.orderPerson.tel
                         };
                     },
                     templateOptions: {
@@ -976,11 +977,11 @@
                             Namn: parentModel.person.namn,
                             'Användarnamn': parentModel.person['användarnamn'],
                             Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE']),
-                            Kontaktperson: {
-                                Namn: parentModel.orderPerson.namn,
-                                Telefonnummer: parentModel.orderPerson.tel
-                            }
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                        };
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.namn,
+                            Telefonnummer: parentModel.orderPerson.tel
                         };
                     }
                 }, {
