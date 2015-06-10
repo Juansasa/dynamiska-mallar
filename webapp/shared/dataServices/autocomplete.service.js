@@ -59,61 +59,55 @@
         function getAllEmployee() {
             return [{
                 'Anställningstyp': 'previa anställd',
-                'användarnamn': 'Zqudjad',
                 'namn': {
-                    'förnamn': 'Previa',
-                    'mellannamn': '',
-                    'efternamn': 'Andersson'
+                    'förnamn': 'Juan',
+                    'mellannamn': 'Von',
+                    'efternamn': 'Kiel'
                 },
                 'adress': {
-                    'gata': 'Konsultsgata',
-                    'postnummer': 31144,
-                    'ort': 'Stockholm'
+                    'gata': 'Hemmagatan',
+                    'postnummer': 33333,
+                    'ort': 'Linköping'
                 },
-                'befattning': 'Affärscontroller',
-                'tjänsteställe': 'Tumba',
+                'telefoner': {
+                    'hem': '333-333333',
+                    'mobil': '4444-444444'
+                },
+                'MO': 'MO 2',
+                'huvud-RE': 'MO 2-452252',
+                'Tjänsteställe (Primärt)': 'Kumla',
                 'Sekundär tjänsteställe': [
+                    'Tumba',
                     'Kumla'
                 ],
-                'MO': 'MO 2',
-                'huvud-RE': 'MO 2-452252',
-                'telefoner': {
-                    'hem': '0370-55565',
-                    'mobil': '073-323252'
-                },
                 'anställningsform': 'tillsvidareanställning',
-                'fr o m': new Date()
+                'fr o m': '2015-06-18T22:00:00.000Z',
+                'Månadslön, heltid': '45000',
+                'om begynnelselönen gäller oberoende av årets lönerevision': 'nej',
+                'semesterrätt': 25,
+                'Rätt till övertids-, restidsersättning': 'ja',
+                'egen bil i tjänsten': 'ja'
             }, {
                 'Anställningstyp': 'konsult',
-                'användarnamn': 'Zhahju',
                 'namn': {
                     'förnamn': 'Konsult',
-                    'mellannamn': 'e',
-                    'efternamn': 'Kling'
+                    'mellannamn': 'c',
+                    'efternamn': 'Martin'
                 },
-                'adress': {
-                    'gata': 'Konsultsgata',
-                    'postnummer': 31144,
-                    'ort': 'Stockholm'
-                },
-                'befattning': 'Affärscontroller',
-                'tjänsteställe': 'Tumba',
+                'Anställd Fr o m': '2015-06-11T22:00:00.000Z',
+                'Anställd T o m': '2015-06-18T22:00:00.000Z',
+                'Mailkonto för konsult': 'Ja',
+                'MO': 'MO 3',
+                'huvud-RE': 'MO 3-141432535',
+                'Tjänsteställe (Primärt)': 'Tumba',
                 'Sekundär tjänsteställe': [
-                    'Kumla',
                     'All-452252',
-                    'All-141432535'
+                    'All-124124214'
                 ],
-                'MO': 'MO 2',
-                'huvud-RE': 'MO 2-452252',
-                'telefoner': {
-                    'hem': '0370-55565',
-                    'mobil': '073-323252'
-                },
-                'anställningsform': 'tillsvidareanställning',
-                'fr o m': new Date(),
-                'Rapporterar till (chef)': 'Chef 3',
+                'Rapporterar till (chef)': 'John karlsson',
                 'Befattningen är en Tf roll': 'ja',
-                'Befattning': 'CFO'
+                'Befattning': 'Affärsområdeschef',
+                'Fakturareferens': 'Fakturareferens-dddd'
             }];
         }
 

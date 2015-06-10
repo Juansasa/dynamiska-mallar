@@ -12,17 +12,17 @@
 
         $scope.model = $scope.model || {};
         $scope.formSelectfields = [{
-            className: 'row',
-            type: 'select',
+            className: 'col-md-12',
+            type: 'radio',
             key: 'Vald formulär',
             templateOptions: {
                 label: 'Välj en formulär',
                 options: [{
-                    name: 'Förändring Konto',
-                    value: 'Förändring Konto'
+                    name: 'Ändra Konto',
+                    value: 'Ändra Konto'
                 }, {
-                    name: 'Förlängning Konto',
-                    value: 'Förlängning Konto'
+                    name: 'Förläng Konto',
+                    value: 'Förläng Konto'
                 }],
                 data: {
                     setField: setFormFields

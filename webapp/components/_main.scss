@@ -101,17 +101,22 @@ input::-webkit-input-placeholder {
 }
 
 .wizard {
-    $step-color: #efefef;
+    $step-color:  lighten(#F7931D, 20%);
     $hover-color: darken($previa-red, 5);
     $active-color: $previa-red;
     white-space: nowrap;
     overflow-x: scroll;
-
+    text-align: center;
+    margin: 1em auto 1em auto;
+    background-color: lighten(grey, 45%);
+    padding: 1em;
     table {
+        display: inline-block;
         tbody {
             tr {
                 td {
                     button {
+                        color: black;
                         border: none;
                         outline: none;
                         padding: 12px 12px 10px 25px;
@@ -147,7 +152,7 @@ input::-webkit-input-placeholder {
                         }
                         &:hover {
                             background-color: $hover-color;
-                            color: text-constrast($hover-color, white, 7);
+                            color: white;
                             &:after {
                                 border-left-color: $hover-color;
                             }

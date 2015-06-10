@@ -10,9 +10,9 @@
             <td>
                 <formly-form model="value" fields="to.ammountField"></formly-form>
             </td>
-            <td ng-if="value.Antal && value.price">
+            <td ng-if="value.Antal && value.pris">
                 <label class="control-label">Totalpris </label>
-                <span class="form-control"><b>{{value.price * value.Antal}} kr</b></span>
+                <span class="form-control"><b>{{value.pris * value.Antal}} kr</b></span>
             </td>
             <td>
                 <button ng-click="to.removeCallback(value, options.key, model)" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>

@@ -5,7 +5,7 @@
         .run(register);
 
     /*@ngInject*/
-    function register(formlyConfig, $filter, gettext) {
+    function register(formlyConfig, $filter, gettext, dataSharing) {
         formlyConfig.setType([{
             name: 'infoList',
             wrapper: ['bootstrapLabel'],
@@ -79,7 +79,7 @@
                             type: 'input',
                             key: 'gata',
                             templateOptions: {
-                                label: 'Gata',
+                                label: 'Hemadress',
                                 required: true
                             },
                             validation: {
@@ -93,9 +93,10 @@
                                 type: 'number',
                                 required: true,
                                 label: 'Postnummer',
-                                max: 99999,
-                                min: 0,
                                 pattern: '\\d{5}'
+                            },
+                            validation: {
+                                show: true
                             }
                         }, {
                             className: 'col-md-3',
@@ -114,8 +115,7 @@
                         type: 'input',
                         key: 'c/o',
                         templateOptions: {
-                            label: 'Ev c/o adress',
-                            required: true
+                            label: 'Ev c/o adress'
                         },
                         validation: {
                             show: true
@@ -284,51 +284,41 @@
                     formfields: [{
                         className: 'row',
                         fieldGroup: [{
-                                className: 'col-md-12',
-                                type: 'autocomplete-select',
-                                key: 'Rapporterar till (chef)',
-                                templateOptions: {
-                                    label: 'Rapporterar till (chef)',
-                                    required: true,
-                                    options: [{
-                                        name: 'Chef 1',
-                                        value: 'Chef 1'
-                                    }, {
-                                        name: 'Chef 2',
-                                        value: 'Chef 2'
-                                    }, {
-                                        name: 'Chef 3',
-                                        value: 'Chef 3'
-                                    }]
-                                },
-                                validation: {
-                                    show: true
-                                }
-                            }, {
-                                className: 'col-md-12',
-                                type: 'textarea',
-                                key: 'Övrig information',
-                                templateOptions: {
-                                    label: 'Övrig information',
-                                    placeholder: 'Övriga information'
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'Rapporterar till (chef)',
+                            templateOptions: {
+                                label: 'Rapporterar till (chef)',
+                                required: true
+                            },
+                            validation: {
+                                show: true
+                            }
+                        }, {
+                            className: 'col-md-6',
+                            type: 'input',
+                            key: 'Fakturareferens',
+                            templateOptions: {
+                                label: 'Fakturareferens',
+                                required: true,
+                                onBlur: function(v) {
+                                    if(v) {
+                                        dataSharing.set('Fakturareferens', v);
+                                    }
                                 }
                             },
-                            // {
-                            //     className: 'col-md-6',
-                            //     type: 'input',
-                            //     key: 'Dagens datum',
-                            //     templateOptions: {
-                            //         label: 'Dagens datum',
-                            //         type: 'date',
-                            //         disabled: true
-                            //     },
-                            //     expressionProperties: {
-                            //         'init': function(v, m, scope) {
-                            //             scope.model['Dagens datum'] = new Date();
-                            //         }
-                            //     }
-                            // }, 
-                        ]
+                            validation: {
+                                show: true
+                            }
+                        }, {
+                            className: 'col-md-12',
+                            type: 'textarea',
+                            key: 'Övrig information',
+                            templateOptions: {
+                                label: 'Övrig information',
+                                placeholder: 'Övriga information'
+                            }
+                        }]
                     }]
                 }
             }
@@ -377,11 +367,18 @@
                 },
                 templateOptions: {
                     onChange: function(v, options, scope) {
+                        var selected = scope.$select.selected;
+                        scope.$select.selected = null;
+
+                        if(!selected) {
+                            return;
+                        }
+
                         var model = scope.model;
                         model[options.key] = model[options.key] || [];
 
                         var index = _.findIndex(scope.model[options.key], function(item) {
-                            return item.beteckning === scope.to.selectedValue.name;
+                            return item.beteckning === selected.name;
                         });
 
                         if (index > -1) {
@@ -389,14 +386,21 @@
                         }
 
                         var modelVal = {
-                            'beteckning': options.templateOptions.selectedValue.name
+                            'beteckning': selected.name
                         };
 
-                        if (options.templateOptions.selectedValue.price) {
-                            modelVal.price = options.templateOptions.selectedValue.price;
+                        if (selected.price) {
+                            modelVal.pris = selected.price;
                         }
 
                         model[options.key].push(modelVal);
+
+                        
+                        if(model[options.key] && model[options.key].length) {
+                            scope.to.placeholder = 'välj och lägga till fler';
+                        } else {
+                            scope.to.placeholder = 'välj i listan';
+                        }
                     },
                 }
             }

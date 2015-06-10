@@ -6,7 +6,7 @@
         .factory('forms', exception);
 
     /*@ngInject*/
-    function exception(FORMKEYS, gettext, autocomplete) {
+    function exception(FORMKEYS, gettext, autocomplete, dataSharing) {
         var service = {
             newConsultantPersonalInfo: getNewConsultantPersonalInfo,
             newEmployeePersonalInfo: getNewPreviaEmployeePersonalInfo,
@@ -53,9 +53,40 @@
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Tjänsteuppgifter<b></div>'
+                    template: '<div><b>Anställningsperiod</b></div>'
                 }, {
                     className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Anställd Fr o m',
+                    templateOptions: {
+                        label: 'Fr o m',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Anställd T o m',
+                    templateOptions: {
+                        label: 'T o m',
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'radio',
+                    key: 'Mailkonto för konsult',
+                    templateOptions: {
+                        label: 'Mailkonto för konsult',
+                        options: [{
+                            value: 'Ja',
+                            name: 'Ja'
+                        }, {
+                            value: 'Nej',
+                            name: 'Nej'
+                        }],
+                        required: true
+                    }
+                }, {
+                    className: 'col-md-4',
                     type: 'autocomplete-select',
                     key: 'MO',
                     templateOptions: {
@@ -68,9 +99,9 @@
                         required: true
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-4',
                     type: 'tjanstestalleSelect',
-                    key: 'Tjänsteställe',
+                    key: 'Tjänsteställe (Primärt)',
                     templateOptions: {
                         label: gettext('Tjänsteställe'),
                         placeholder: 'Välj ett tjänsteställe',
@@ -78,7 +109,7 @@
                         required: true
                     }
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-4',
                     type: 'autocomplete-select',
                     key: 'huvud-RE',
                     templateOptions: {
@@ -146,11 +177,18 @@
                             return autocomplete.getRE(s.model.MO);
                         }
                     }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
+                }, {
+                    className: 'col-md-6',
+                    type: 'autocomplete-select',
+                    key: 'Tjänsteställe (Primärt)',
+                    templateOptions: {
+                        label: 'Tjänsteställe (Primärt)',
+                        placeholder: 'Välj från listan',
+                        required: true,
+                        options: autocomplete.getTjanstestalleOptions()
+                    }
+                }, {
+                    className: 'col-md-6',
                     type: 'autoCompleteAdd',
                     key: 'Sekundär tjänsteställe',
                     templateOptions: {
@@ -218,12 +256,12 @@
                 }, {
                     className: 'col-md-3',
                     type: 'input',
-                    key: 'pga',
+                    key: 'orsak',
                     hideExpression: function(vv, mv, scope) {
                         return scope.model['anställningsform'] !== 'vikariat';
                     },
                     templateOptions: {
-                        label: 'pga',
+                        label: 'orsak',
                         required: true
                     }
                 }]
@@ -232,15 +270,18 @@
                 fieldGroup: [{
                     template: '<div><b>Lön<b></div>'
                 }, {
-                    className: 'col-md-3',
+                    className: 'col-md-6',
                     type: 'input',
                     key: 'Månadslön, heltid',
                     templateOptions: {
                         label: 'Månadslön, heltid',
                         required: true
+                    },
+                    hideExpression: function(vv, mv, scope) {
+                        return scope.model['anställningsform'] === 'anställd med timlön';
                     }
                 }, {
-                    className: 'col-md-3',
+                    className: 'col-md-6',
                     type: 'input',
                     key: 'Timlön, exkl semesterlön',
                     templateOptions: {
@@ -270,8 +311,8 @@
                 fieldGroup: [{
                     template: '<div><b>Allmänna anställningsvillkor<b></div>'
                 }, {
-                    className: 'col-md-4',
-                    type: 'select',
+                    className: 'col-md-12',
+                    type: 'radio',
                     key: 'semesterrätt',
                     templateOptions: {
                         label: 'Semesterrätt',
@@ -285,10 +326,13 @@
                             name: '30',
                             value: 30
                         }]
+                    },
+                    hideExpression: function(vv, mv, scope) {
+                        return scope.model['anställningsform'] === 'anställd med timlön';
                     }
                 }, {
-                    className: 'col-md-4',
-                    type: 'select',
+                    className: 'col-md-6',
+                    type: 'radio',
                     key: 'Rätt till övertids-, restidsersättning',
                     templateOptions: {
                         label: 'Rätt till övertids-, restidsersättning',
@@ -300,15 +344,13 @@
                             value: 'nej'
                         }]
                     },
-                    expressionProperties: {
-                        'templateOptions.disabled': function(vv, mv, scope) {
-                            return scope.model['semesterrätt'] !== 25;
-                        }
+                    hideExpression: function(vv, mv, scope) {
+                        return scope.model['semesterrätt'] !== 25;
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     key: 'egen bil i tjänsten',
-                    type: 'select',
+                    type: 'radio',
                     templateOptions: {
                         label: 'Egen bil i tjänsten',
                         options: [{
@@ -341,27 +383,17 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'autocomplete-select',
+                    type: 'input',
                     key: 'Rapporterar till (chef)',
                     templateOptions: {
                         label: 'Rapporterar till (chef)',
-                        required: true,
-                        options: [{
-                            name: 'Chef 1',
-                            value: 'Chef 1'
-                        }, {
-                            name: 'Chef 2',
-                            value: 'Chef 2'
-                        }, {
-                            name: 'Chef 3',
-                            value: 'Chef 3'
-                        }]
+                        required: true
                     }
                 }, {
                     template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
                 }, {
                     className: 'col-md-12',
-                    type: 'select',
+                    type: 'radio',
                     key: 'Befattningen är en Tf roll',
                     templateOptions: {
                         label: 'Befattningen är en Tf roll',
@@ -398,8 +430,9 @@
                         label: 'Välj Befattning, roll och behörighet',
                         options: autocomplete.getBefattningOptions()
                     }
+                }, {
+                    type: 'signature'
                 }]
-
             }];
 
             showErrors(specific);
@@ -415,8 +448,8 @@
                     key: 'personuppgifter',
                     controller: function($scope) {
                         $scope.model[$scope.options.key] = {
-                            'Personnummer': model.person.personnummer,
-                            'Namn': model.person.namn,
+                            'Personnummer': model.person ? model.person.personnummer : null,
+                            'Namn': model.person ? model.person.namn : null,
                             'Tjänsteställets besöksadress': autocomplete.getTjanstestalleBesokAdress(model.person['huvud-RE']),
                             'Tjänsteställets postadress': autocomplete.getTjanstestallePostAdress(model.person['huvud-RE']),
                             'Anställningsinformation': getAnstallning(model.person['anställningsform']),
@@ -538,7 +571,7 @@
                             Resultatenhet: parentModel.person['huvud-RE'],
                             Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
                         };
-                        $scope.model.Kontaktperson = {
+                        $scope.model['Beställare'] = {
                             Namn: parentModel.orderPerson.namn,
                             Telefonnummer: parentModel.orderPerson.tel
                         };
@@ -642,7 +675,7 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    type: 'select',
+                    type: 'radio',
                     key: 'Vald formulär',
                     templateOptions: {
                         label: 'Välj ett formulär',
@@ -792,7 +825,7 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    type: 'select',
+                    type: 'radio',
                     key: 'Mobilt bredband ärende',
                     templateOptions: {
                         label: 'Välj ett formulär',
@@ -876,7 +909,7 @@
         // Nytt mobilt bredband formulär
         function getNewMobileBroadband(parentModel) {
             var specific = [{
-                className: 'row',
+                className: 'col-md-12',
                 fieldGroup: [{
                     type: 'radio',
                     key: 'Mobilt bredband ärende',
@@ -894,7 +927,9 @@
             }, {
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Nytt Mobilt bredband</b></div>',
+                    className: 'col-md-12',
+                    type: 'radio',
+                    key: 'Mobilt bredband för en existerande dator',
                     controller: function($scope) {
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.namn,
@@ -905,13 +940,9 @@
                                 Telefonnummer: parentModel.orderPerson.tel
                             }
                         };
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'radio',
-                    key: 'Mobilt bredband för en existerande dator',
+                    },
                     templateOptions: {
-                        label: 'Mobilt bredband för en existerande dator',
+                        label: 'Mobilt bredband för en existerande dator ?',
                         defaultOptions: 'Nej',
                         options: [{
                             name: 'Ja',
@@ -924,9 +955,9 @@
                 }, {
                     className: 'col-md-12',
                     type: 'input',
-                    key: 'Datorns serienummer',
+                    key: 'Datornamn',
                     templateOptions: {
-                        label: 'Ange serienummer för datorn ifrågan'
+                        label: 'Ange datornamn'
                     },
                     hideExpression: 'model["Mobilt bredband för en existerande dator"] !== "Ja"'
                 }, {
@@ -980,46 +1011,21 @@
         // Nytt telefonutrustning formulär
         function getOrderPhoneEquipmentForm(parentModel) {
             var specific = [{
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Faktureringsuppgifter</b></div>'
-                }, {
-                    className: 'col-md-6',
-                    type: 'autocomplete-select',
-                    key: 'Kostnadsbelastad resultatenhet',
-                    templateOptions: {
-                        label: 'RE-nr',
-                        placeholder: 'Kostnadsbelastad resultatenhet',
-                        required: true,
-                        options: autocomplete.getRE('All-re')
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Fakturaref',
-                    templateOptions: {
-                        label: 'Fakturaref',
-                        placeholder: 'Sign på den personen som har rollen som godkännare i Batlzar',
-                        required: true
-                    }
-                }]
-            }, {
                 template: '<div><b>Utrustning</b></div>',
                 controller: function($scope) {
                     $scope.model['Beställare'] = {
                         'Namn': parentModel.orderPerson.namn,
-                        'Tel': parentModel.orderPerson.tel,
-                        'Företag': 'AB Previa',
-                        'RE-nr': parentModel.orderPerson['resulat-enhet']
+                        'Tel': parentModel.orderPerson.tel
                     };
-
+                    $scope.model['Företag'] = 'AB Previa';
+                    $scope.model['RE som beställningen avser'] = parentModel.person['huvud-RE'];
                     $scope.model['Mottagare/Användare'] = {
                         'Namn': parentModel.person.namn,
                         'Tel': parentModel.person.telefoner,
                         'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE']),
                         'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
                     };
-
+                    $scope.model.Fakturaadress = dataSharing.get('Fakturaadress');
                     $scope.model['Dagens datum'] = new Date();
                 }
             }, {
@@ -1072,28 +1078,16 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Faktureringsuppgifter</b></div>'
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'Fakturareferens',
-                    templateOptions: {
-                        label: 'Fakturareferens',
-                        placeholder: '(Sign på den personen som har rollen som ”Godkännare” i Palette)'
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
                     template: '<div><b>Utrustning</b></div>',
                     controller: function($scope) {
-                        $scope.model['Beställare'] = parentModel.orderPerson;
+                        $scope.model['Beställare'] = parentModel.orderPerson.namn;
+                        $scope.model['RE som beställningen avser'] = parentModel.person['huvud-RE'];
                         $scope.model.Mottagare = {
                             Leveransmottagare: parentModel.person.namn,
                             Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE'])
                         };
-
                         $scope.model.Datum = new Date();
+                        $scope.model.Fakturareferens = dataSharing.get('Fakturareferens');
                     }
                 }, {
                     className: 'col-md-12',
@@ -1145,7 +1139,13 @@
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
-                    template: '<div><b>Faktureringsuppgifter</b></div>',
+                    className: 'col-md-12',
+                    key: 'Maskinvara',
+                    type: 'equipment-select',
+                    templateOptions: {
+                        label: 'Maskinvara',
+                        options: autocomplete.getCaretalkHardwareOptions()
+                    },
                     controller: function($scope) {
                         $scope.model['Beställare'] = {
                             Namn: parentModel.orderPerson.namn,
@@ -1164,34 +1164,7 @@
                         $scope.model.Fakturaadress = 'AB Previa';
                         $scope.model['Box/Postnr/Ort'] = 'PAA04220, FE 533 105 69, STOCKHOLM';
                         $scope.model['Dagens datum'] = new Date();
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Re-nr',
-                        placeholder: 'Kostnadsbelastad resultatenhet',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Fakturareferens',
-                    templateOptions: {
-                        label: 'Fakturareferens',
-                        placeholder: 'Sign på den personen som har rollen som "Godkännare" i Pallette',
-                        required: true
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    className: 'col-md-12',
-                    key: 'Maskinvara',
-                    type: 'equipment-select',
-                    templateOptions: {
-                        label: 'Maskinvara',
-                        options: autocomplete.getCaretalkHardwareOptions()
+                        $scope.model.Fakturareferens = dataSharing.get('Fakturareferens');
                     }
                 }, {
                     className: 'col-md-12',
@@ -1424,7 +1397,7 @@
                     }
                 }, {
                     className: 'col-md-4',
-                    type: 'select',
+                    type: 'radio',
                     key: 'Anställningsform',
                     templateOptions: {
                         label: 'Anställningsform',
