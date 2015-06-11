@@ -6,7 +6,7 @@
         .factory('autocomplete', exception);
 
     /*@ngInject*/
-    function exception() {
+    function exception($http) {
         var service = {
 
             getTjanstestalleOptions: getToptions,
@@ -41,7 +41,7 @@
 
         function getTPadress(id) {
             return {
-                'Gata/Box': id + ':: sdfsdfdsf',
+                'Gata/Box': 'exempelgatan',
                 Postnummer: '33333',
                 Ort: 'Stockholm'
             };
@@ -112,181 +112,44 @@
         }
 
         function getCaretalkAccessoriesOptions() {
-            return [{
-                name: 'Fotkontroll 536',
-                value: 'Fotkontroll 536',
-                price: '1025',
-                description: 'Med snabbspolning fram'
-            }, {
-                name: 'Handkontroll',
-                description: 'Start/stopp, backspolning',
-                price: '1125',
-                value: 'Handkontroll'
-            }, {
-                name: 'Hörlur 565',
-                value: 'Hörlur 565',
-                price: '625',
-                description: 'Bygel ovanpå huvudet'
-            }, {
-                name: 'Hörlur 568',
-                value: 'Hörlur 568',
-                price: '625',
-                description: 'Bygel under hakan'
-            }];
+            return $http.get('assets/equipment/careTalkTillbehor.json');
         }
 
         function getCaretalkHardwareOptions() {
-            return [{
-                name: 'Digta 422',
-                value: 'Digta 422',
-                description: 'Diktering och docka (Bärbar diktafon)',
-                price: '6150'
-            }, {
-                name: 'USB-mikrofon, Sonic Mic II',
-                value: 'USB-mikrofon, Sonic Mic II',
-                description: 'Fast diktafon med sladd',
-                price: '3325'
-            }, {
-                name: 'USB-soundbox',
-                value: 'USB-soundbox',
-                description: 'Används av sekreterare',
-                price: '2684'
-            }];
+            return $http.get('assets/equipment/careTalkHardvaror.json');
         }
 
         function getPhoneAccessoriesOptions() {
-            return [{
-                name: 'Reseladdare',
-                value: 'Reseladdare'
-            }, {
-                name: 'Billaddare',
-                value: 'Billaddare'
-            }, {
-                name: 'Bluetooth',
-                value: 'Bluetooth'
-            }, {
-                name: 'Hörlurar',
-                value: 'Hörlurar'
-            }];
+            return $http.get('assets/equipment/telefonutrustning-tillbehor.json');
         }
 
         function getConferencePhoneOptions() {
-            return [{
-                name: 'Konferenstelefon',
-                value: 'Konferenstelefon'
-            }];
+            return $http.get('assets/equipment/telefonutrustning-konferenstelefon.json');
         }
 
         function getHeadsetOptions() {
-            return [{
-                name: 'Kontorsheadset  Mono',
-                value: 'Kontorsheadset  Mono'
-            }, {
-                name: 'Kontorsheadset  Stereo',
-                value: 'Kontorsheadset  Stereo'
-            }, {
-                name: 'Mellankabel till Kontorsheadset',
-                value: 'Mellankabel till Kontorsheadset'
-            }];
+            return $http.get('assets/equipment/telefonutrustning-kontorsheadset.json');
         }
 
         function getPhoneOptions() {
-            return [{
-                name: 'Samsung GT-B2710, enkel knapptelefon',
-                value: 'Samsung GT-B2710, enkel knapptelefon'
-            }, {
-                name: 'iPhone 5C  16GB',
-                value: 'iPhone 5C  16GB'
-            }, {
-                name: 'Simkort passande till iPhone 5C',
-                value: 'Simkort passande till iPhone 5C'
-            }];
+            return $http.get('assets/equipment/telefonutrustning-telefoner.json');
         }
 
         function getComputerEquipmentNoLeasingOptions() {
-            return [{
-                name: 'Ryggsäck - Targus Backpack Black',
-                value: 'Ryggsäck - Targus Backpack Black'
-            }, {
-                name: 'Väska - Targus Notepac Black',
-                value: 'Väska - Targus Notepac Black'
-            }, {
-                name: 'Kabelansluten mus',
-                value: 'Kabelansluten mus'
-            }, {
-                name: 'Tangentbord',
-                value: 'Tangentbord'
-            }, {
-                name: 'USB-Hub 4 portar - Targus Travel USB 4-Port hub',
-                value: 'USB-Hub 4 portar - Targus Travel USB 4-Port hub'
-            }, {
-                name: 'Webbkamera - Logitech HD Webcam C270',
-                value: 'Webbkamera - Logitech HD Webcam C270'
-            }, {
-                name: 'Säkerhetslås till dator - Kensington Lås',
-                value: 'Säkerhetslås till dator - Kensington Lås'
-            }, {
-                name: 'Lokal skrivare - HP LaserJet Pro P1606dn',
-                value: 'Lokal skrivare - HP LaserJet Pro P1606dn'
-            }, {
-                name: 'Strömkabel HP EliteBook 2570p',
-                value: 'Strömkabel HP EliteBook 2570p'
-            }, {
-                name: 'Strömkabel HP EliteBook 8470p',
-                value: 'Strömkabel HP EliteBook 8470p'
-            }, {
-                name: 'Strömkabel HP EliteBook 820 G1',
-                value: 'Strömkabel HP EliteBook 820 G1'
-            }, {
-                name: 'Strömkabel HP EliteBook 840 G1',
-                value: 'Strömkabel HP EliteBook 840 G1'
-            }, {
-                name: 'DiplayPort-kabel till bildskärm',
-                value: 'DiplayPort-kabel till bildskärm'
-            }, {
-                name: 'Adapter Ipad - Adapter för projektor och skärm (till iPad)',
-                value: 'Adapter Ipad - Adapter för projektor och skärm (till iPad)'
-            }, {
-                name: 'Extern CD/DVD-spelare',
-                value: 'Extern CD/DVD-spelare'
-            }, {
-                name: 'Strömkabel HP-dator 90W',
-                value: 'Strömkabel HP-dator 90W'
-            }, {
-                name: 'Strömkabel HP-dator 65W',
-                value: 'Strömkabel HP-dator 65W'
-            }, {
-                name: 'Strömkabel HP-dator 45W',
-                value: 'Strömkabel HP-dator 45W'
-            }];
+            return $http.get('assets/equipment/datorTillbehorEjLeasing.json');
         }
 
 
         function getIpadLeasingOptions() {
-            return [{
-                name: 'iPad 3 förberedd för 3G och 4G (beroende på abonnemang)',
-                value: 'iPad 3 förberedd för 3G och 4G (beroende på abonnemang)'
-            }];
+            return $http.get('assets/equipment/ipadLeasing.json');
         }
 
         function getComputerEquipmentLeasingOptions() {
-            return [{
-                name: 'Projektor - NEC M311W',
-                value: 'Projektor - NEC M311W'
-            }, {
-                name: 'Bildskärm 23" - HP EliteDisplay E231',
-                value: 'Bildskärm 23" - HP EliteDisplay E231'
-            }];
+            return $http.get('assets/equipment/datorTillbehorLeasing.json');
         }
 
         function getComputerLeasingOptions() {
-            return [{
-                name: 'Liten bärbar inkl. docka',
-                value: 'Liten bärbar inkl. docka'
-            }, {
-                name: 'Liten bärbar exkl. docka',
-                value: 'Liten bärbar exkl. docka'
-            }];
+            return $http.get('assets/equipment/datorLeasing.json');
         }
 
         function getRE(MO) {

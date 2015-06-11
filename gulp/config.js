@@ -68,6 +68,11 @@ module.exports = function() {
             files: [appPath + '/*.{ico,txt}', appPath + '/.htaccess']
         },
 
+        equipment: {
+            files: [assets + '/equipment/**/*.json'],
+            dest: dist + '/assets/equipment'
+        },
+
         templatecache: {
             files: [
                 appPath + '/**/*.html',

@@ -1032,8 +1032,19 @@
                 type: 'equipment-select',
                 key: 'Telefoner – Produktbeskrivning finns i Previas Handbok',
                 templateOptions: {
-                    label: 'Telefoner – Produktbeskrivning finns i Previas Handbok',
-                    options: autocomplete.getPhoneOptions()
+                    label: 'Telefoner – Produktbeskrivning finns i Previas Handbok'
+                },
+                controller: function($scope, logger) {
+                    var promise = autocomplete.getPhoneOptions();
+                    promise.then(success, fail);
+
+                    function success(response) {
+                        $scope.to.options = response.data;
+                    }
+
+                    function fail(error) {
+                        logger.error('Något gick fel när telefoner data ska läsas in', error);
+                    }
                 }
             }, {
                 className: 'col-md-12',
@@ -1047,24 +1058,57 @@
                 key: 'Kontorsheadset',
                 templateOptions: {
                     label: 'Kontorsheadset',
-                    enableModelInput: true,
-                    options: autocomplete.getHeadsetOptions()
+                    enableModelInput: true
+                },
+                controller: function($scope, logger) {
+                    var promise = autocomplete.getHeadsetOptions();
+                    promise.then(success, fail);
+
+                    function success(response) {
+                        $scope.to.options = response.data;
+                    }
+
+                    function fail(error) {
+                        logger.error('Något gick fel när kontorsheadset data ska läsas in', error);
+                    }
                 }
             }, {
                 className: 'col-md-12',
                 type: 'equipment-select',
                 key: 'Konferenstelefon',
                 templateOptions: {
-                    label: 'Konferenstelefon',
-                    options: autocomplete.getConferencePhoneOptions()
+                    label: 'Konferenstelefon'
+                },
+                controller: function($scope, logger) {
+                    var promise = autocomplete.getConferencePhoneOptions();
+                    promise.then(success, fail);
+
+                    function success(response) {
+                        $scope.to.options = response.data;
+                    }
+
+                    function fail(error) {
+                        logger.error('Något gick fel när konferenstelefon data ska läsas in', error);
+                    }
                 }
             }, {
                 className: 'col-md-12',
                 type: 'equipment-select',
                 key: 'Tillbehör',
                 templateOptions: {
-                    label: 'Tillbehör',
-                    options: autocomplete.getPhoneAccessoriesOptions()
+                    label: 'Tillbehör'
+                },
+                controller: function($scope, logger) {
+                    var promise = autocomplete.getPhoneAccessoriesOptions();
+                    promise.then(success, fail);
+
+                    function success(response) {
+                        $scope.to.options = response.data;
+                    }
+
+                    function fail(error) {
+                        logger.error('Något gick fel när telefontillbehör data ska läsas in', error);
+                    }
                 }
             }];
 
@@ -1093,32 +1137,76 @@
                     type: 'equipment-select',
                     key: 'Dator – Leasing 36 mån',
                     templateOptions: {
-                        label: 'Dator – Leasing 36 mån',
-                        options: autocomplete.getComputerLeasingOptions()
+                        label: 'Dator – Leasing 36 mån'
+                    },
+                    controller: function($scope, logger) {
+                        var promise = autocomplete.getComputerLeasingOptions();
+                        promise.then(success, fail);
+
+                        function success(response) {
+                            $scope.to.options = response.data;
+                        }
+
+                        function fail(error) {
+                            logger.error('Något gick fel när dator-leasing data ska läsas in', error);
+                        }
                     }
                 }, {
                     className: 'col-md-12',
                     type: 'equipment-select',
                     key: 'iPad – Leasing 12 mån',
                     templateOptions: {
-                        label: 'iPad – Leasing 12 mån',
-                        options: autocomplete.getIpadLeasingOptions()
+                        label: 'iPad – Leasing 12 mån'
+                    },
+                    controller: function($scope, logger) {
+                        var promise = autocomplete.getIpadLeasingOptions();
+                        promise.then(success, fail);
+
+                        function success(response) {
+                            $scope.to.options = response.data;
+                        }
+
+                        function fail(error) {
+                            logger.error('Något gick fel när ipad-leasing data ska läsas in', error);
+                        }
                     }
                 }, {
                     className: 'col-md-12',
                     type: 'equipment-select',
                     key: 'Tillbehör – Leasing 36 mån',
                     templateOptions: {
-                        label: 'Tillbehör – Leasing 36 mån',
-                        options: autocomplete.getComputerEquipmentLeasingOptions()
+                        label: 'Tillbehör – Leasing 36 mån'
+                    },
+                    controller: function($scope, logger) {
+                        var promise = autocomplete.getComputerEquipmentLeasingOptions();
+                        promise.then(success, fail);
+
+                        function success(response) {
+                            $scope.to.options = response.data;
+                        }
+
+                        function fail(error) {
+                            logger.error('Något gick fel när datortillbehör leasing data ska läsas in', error);
+                        }
                     }
                 }, {
                     className: 'col-md-12',
                     type: 'equipment-select',
                     key: 'Tillbehör - EJ leasing',
                     templateOptions: {
-                        label: 'Tillbehör - EJ leasing',
-                        options: autocomplete.getComputerEquipmentOptions()
+                        label: 'Tillbehör - EJ leasing'
+                    },
+                    controller: function($scope, logger) {
+                        var promise = autocomplete.getComputerEquipmentOptions();
+                        promise.then(success, fail);
+
+                        function success(response) {
+                            $scope.to.options = response.data;
+                        }
+
+                        function fail(error) {
+                            logger.error('Något gick fel när dator-leasing data ska läsas in', error);
+                        }
                     }
                 }, {
                     className: 'col-md-12',
@@ -1142,10 +1230,11 @@
                     key: 'Maskinvara',
                     type: 'equipment-select',
                     templateOptions: {
-                        label: 'Maskinvara',
-                        options: autocomplete.getCaretalkHardwareOptions()
+                        label: 'Maskinvara'
                     },
-                    controller: function($scope) {
+                    controller: function($scope, logger) {
+                        var promise = autocomplete.getCaretalkHardwareOptions();
+                        promise.then(success, fail);
                         $scope.model['Beställare'] = {
                             Namn: parentModel.orderPerson.namn,
                             Tel: parentModel.orderPerson.tel,
@@ -1164,14 +1253,33 @@
                         $scope.model['Box/Postnr/Ort'] = 'PAA04220, FE 533 105 69, STOCKHOLM';
                         $scope.model['Dagens datum'] = new Date();
                         $scope.model.Fakturareferens = dataSharing.get('Fakturareferens');
+
+                        function success(response) {
+                            $scope.to.options = response.data;
+                        }
+
+                        function fail(error) {
+                            logger.error('Något gick fel när caretalk hårdvaror ska hämtas', error);
+                        }
                     }
                 }, {
                     className: 'col-md-12',
                     key: 'Tillbehör',
                     type: 'equipment-select',
                     templateOptions: {
-                        label: 'Tillbehör',
-                        options: autocomplete.getCaretalkAccessoriesOptions()
+                        label: 'Tillbehör'
+                    },
+                    controller: function($scope, logger) {
+                        var promise = autocomplete.getCaretalkAccessoriesOptions();
+                        promise.then(success, fail);
+
+                        function success(response) {
+                            $scope.to.options = response.data;
+                        }
+
+                        function fail(error) {
+                            logger.error('Något gick fel när caretalk tillbehör ska hämtas', error);
+                        }
                     }
                 }]
             }];

@@ -1,0 +1,21 @@
+[{
+    "name": "Fotkontroll 536",
+    "value": "Fotkontroll 536",
+    "price": "1025",
+    "description": "Med snabbspolning fram"
+}, {
+    "name": "Handkontroll",
+    "description": "Start/stopp, backspolning",
+    "price": "1125",
+    "value": "Handkontroll"
+}, {
+    "name": "Hörlur 565",
+    "value": "Hörlur 565",
+    "price": "625",
+    "description": "Bygel ovanpå huvudet"
+}, {
+    "name": "Hörlur 568",
+    "value": "Hörlur 568",
+    "price": "625",
+    "description": "Bygel under hakan"
+}]
