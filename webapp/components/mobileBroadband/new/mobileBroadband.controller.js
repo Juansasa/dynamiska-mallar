@@ -5,7 +5,7 @@
 
     /*@ngInject*/
     function mbCtrl($scope, $state, forms) {
-        if (!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee && !$scope.model.steps.existingEmployee && !$scope.model.steps.newEmployee) {
+        if (!$scope.model.steps || !$scope.model.steps.newEmployee) {
             $state.go('^');
         }
 

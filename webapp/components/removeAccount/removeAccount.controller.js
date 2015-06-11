@@ -4,7 +4,10 @@
         .controller('RemoveAccountController', mbCtrl);
 
     /*@ngInject*/
-    function mbCtrl($scope, forms) {
+    function mbCtrl($scope, forms, $state) {
+    	if (!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee) {
+            $state.go('^');
+        }
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};
         $scope.fields = forms.removeAccount($scope.model);

@@ -8,9 +8,9 @@
         modelReset();
 
         $scope.goToState = function(nextState) {            
-            //if($scope.form.$valid) {
+            if($scope.form.$valid) {
                 $state.go(nextState.route);
-            //}
+            }
         };
 
         $scope.isCurrent = function(state) {
