@@ -59,6 +59,7 @@
         function getAllEmployee() {
             return [{
                 'Anställningstyp': 'previa anställd',
+                'användarnamn': 'zqistf',
                 'namn': {
                     'förnamn': 'Juan',
                     'mellannamn': 'Von',
@@ -89,6 +90,7 @@
                 'egen bil i tjänsten': 'ja'
             }, {
                 'Anställningstyp': 'konsult',
+                'användarnamn': 'zkkfsgs',
                 'namn': {
                     'förnamn': 'Konsult',
                     'mellannamn': 'c',

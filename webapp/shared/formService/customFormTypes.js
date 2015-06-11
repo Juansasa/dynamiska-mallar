@@ -200,7 +200,7 @@
             name: 'formSelection',
             extends: 'multiCheckbox',
             wrapper: ['bootstrapHasError'],
-            controller: function($scope) {
+            controller: /*@ngInject*/ function($scope) {
                 const to = $scope.to;
                 const opts = $scope.options;
                 $scope.multiCheckbox = {
@@ -335,7 +335,7 @@
             extends: 'autoCompleteAdd',
             templateUrl: 'shared/formService/equipment-select.html',
             defaultOptions: {
-                controller: function($scope) {
+                controller: /*@ngInject*/ function($scope) {
                     $scope.to.ammountField = [{
                         type: 'input',
                         key: 'Antal',

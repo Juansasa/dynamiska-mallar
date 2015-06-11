@@ -446,7 +446,7 @@
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter</b></div>',
                     key: 'Ärende person',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model[$scope.options.key] = {
                             'Personnummer': model.person ? model.person.personnummer : null,
                             'Namn': model.person ? model.person.namn : null,
@@ -562,7 +562,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Nytt abonnemang</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
                             Namn: parentModel.person.namn,
@@ -604,7 +604,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
                             Namn: parentModel.person.namn,
@@ -690,7 +690,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
                             Namn: parentModel.person.namn,
@@ -753,7 +753,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Uppsägning av abonnemang</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
                             Resultatenhet: parentModel.person['huvud-RE']
@@ -840,7 +840,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.namn,
                             'Användarnamn': parentModel.person['användarnamn'],
@@ -873,7 +873,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Uppsägning av Mobilt bredband</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
                             Resultatenhet: parentModel.person['huvud-RE'],
                             Kontaktperson: {
@@ -928,7 +928,7 @@
                     className: 'col-md-12',
                     type: 'radio',
                     key: 'Mobilt bredband för en existerande dator',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.namn,
                             Resultatenhet: parentModel.person['huvud-RE'],
@@ -972,7 +972,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.namn,
                             'Användarnamn': parentModel.person['användarnamn'],
@@ -1011,7 +1011,7 @@
         function getOrderPhoneEquipmentForm(parentModel) {
             var specific = [{
                 template: '<div><b>Utrustning</b></div>',
-                controller: function($scope) {
+                controller: /*@ngInject*/ function($scope) {
                     $scope.model['Beställare'] = {
                         'Namn': parentModel.orderPerson.namn,
                         'Tel': parentModel.orderPerson.tel
@@ -1034,7 +1034,7 @@
                 templateOptions: {
                     label: 'Telefoner – Produktbeskrivning finns i Previas Handbok'
                 },
-                controller: function($scope, logger) {
+                controller: /*@ngInject*/ function($scope, logger) {
                     var promise = autocomplete.getPhoneOptions();
                     promise.then(success, fail);
 
@@ -1060,7 +1060,7 @@
                     label: 'Kontorsheadset',
                     enableModelInput: true
                 },
-                controller: function($scope, logger) {
+                controller: /*@ngInject*/ function($scope, logger) {
                     var promise = autocomplete.getHeadsetOptions();
                     promise.then(success, fail);
 
@@ -1079,7 +1079,7 @@
                 templateOptions: {
                     label: 'Konferenstelefon'
                 },
-                controller: function($scope, logger) {
+                controller: /*@ngInject*/ function($scope, logger) {
                     var promise = autocomplete.getConferencePhoneOptions();
                     promise.then(success, fail);
 
@@ -1098,7 +1098,7 @@
                 templateOptions: {
                     label: 'Tillbehör'
                 },
-                controller: function($scope, logger) {
+                controller: /*@ngInject*/ function($scope, logger) {
                     var promise = autocomplete.getPhoneAccessoriesOptions();
                     promise.then(success, fail);
 
@@ -1122,7 +1122,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Utrustning</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställare'] = parentModel.orderPerson.namn;
                         $scope.model['RE som beställningen avser'] = parentModel.person['huvud-RE'];
                         $scope.model.Mottagare = {
@@ -1139,7 +1139,7 @@
                     templateOptions: {
                         label: 'Dator – Leasing 36 mån'
                     },
-                    controller: function($scope, logger) {
+                    controller: /*@ngInject*/ function($scope, logger) {
                         var promise = autocomplete.getComputerLeasingOptions();
                         promise.then(success, fail);
 
@@ -1158,7 +1158,7 @@
                     templateOptions: {
                         label: 'iPad – Leasing 12 mån'
                     },
-                    controller: function($scope, logger) {
+                    controller: /*@ngInject*/ function($scope, logger) {
                         var promise = autocomplete.getIpadLeasingOptions();
                         promise.then(success, fail);
 
@@ -1177,7 +1177,7 @@
                     templateOptions: {
                         label: 'Tillbehör – Leasing 36 mån'
                     },
-                    controller: function($scope, logger) {
+                    controller: /*@ngInject*/ function($scope, logger) {
                         var promise = autocomplete.getComputerEquipmentLeasingOptions();
                         promise.then(success, fail);
 
@@ -1196,7 +1196,7 @@
                     templateOptions: {
                         label: 'Tillbehör - EJ leasing'
                     },
-                    controller: function($scope, logger) {
+                    controller: /*@ngInject*/ function($scope, logger) {
                         var promise = autocomplete.getComputerEquipmentOptions();
                         promise.then(success, fail);
 
@@ -1232,7 +1232,7 @@
                     templateOptions: {
                         label: 'Maskinvara'
                     },
-                    controller: function($scope, logger) {
+                    controller: /*@ngInject*/ function($scope, logger) {
                         var promise = autocomplete.getCaretalkHardwareOptions();
                         promise.then(success, fail);
                         $scope.model['Beställare'] = {
@@ -1269,7 +1269,7 @@
                     templateOptions: {
                         label: 'Tillbehör'
                     },
-                    controller: function($scope, logger) {
+                    controller: /*@ngInject*/ function($scope, logger) {
                         var promise = autocomplete.getCaretalkAccessoriesOptions();
                         promise.then(success, fail);
 
@@ -1303,7 +1303,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Ange ny tidsperiod</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
                         setTVisitAdress($scope.model, parentModel);
                         setTPostalAdress($scope.model, parentModel);
@@ -1355,9 +1355,9 @@
                         disabled: true,
                         placeholder: 'Huvud-RE'
                     },
-                    controller: function($scope, personInfo) {
-                        if (personInfo.get()) {
-                            $scope.model[$scope.options.key] = personInfo.get()['huvud-RE'];
+                    controller: /*@ngInject*/ function($scope) {
+                        if (parentModel.person) {
+                            $scope.model[$scope.options.key] = parentModel.person['huvud-RE'];
                         }
                     }
                 }, {
@@ -1408,10 +1408,10 @@
                             options.templateOptions.selectedValue = null;
                         },
                     },
-                    controller: function($scope, personInfo) {
-                        if (personInfo.person) {
+                    controller: /*@ngInject*/ function($scope) {
+                        if (parentModel.person) {
                             var options = [];
-                            angular.forEach(personInfo.person['Sekundär tjänsteställe'], function(value) {
+                            angular.forEach(parentModel.person['Sekundär tjänsteställe'], function(value) {
                                 options.push({
                                     name: value,
                                     value: value
@@ -1496,7 +1496,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
                         setTVisitAdress($scope.model, parentModel);
                         setTPostalAdress($scope.model, parentModel);
@@ -1551,9 +1551,9 @@
                         disabled: true,
                         placeholder: 'Huvud-RE'
                     },
-                    controller: function($scope, personInfo) {
-                        if (personInfo.get()) {
-                            $scope.model[$scope.options.key] = personInfo.get()['huvud-RE'];
+                    controller: /*@ngInject*/ function($scope) {
+                        if (parentModel.person) {
+                            $scope.model[$scope.options.key] = parentModel.person['huvud-RE'];
                         }
                     }
                 }, {
@@ -1604,10 +1604,10 @@
                             options.templateOptions.selectedValue = null;
                         },
                     },
-                    controller: function($scope, personInfo) {
-                        if (personInfo.person) {
+                    controller: /*@ngInject*/ function($scope) {
+                        if (parentModel.person) {
                             var options = [];
-                            angular.forEach(personInfo.person['Sekundär tjänsteställe'], function(value) {
+                            angular.forEach(parentModel.person['Sekundär tjänsteställe'], function(value) {
                                 options.push({
                                     name: value,
                                     value: value
@@ -1693,7 +1693,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Förläng konto</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Användarnamn'] = model.person['Användarnamn'];
                         $scope.model.Namn = model.person.namn;
                         $scope.model['Huvud-RE'] = model.person['huvud-RE'];
@@ -1732,19 +1732,11 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
                         $scope.model['Huvud-RE'] = parentModel.person['huvud-RE'];
                         $scope.model['Dagens datum'] = new Date();
                         $scope.model['Beställare'] = parentModel.orderPerson;
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    templateOptions: {
-                        label: 'Huvud-RE',
-                        disabled: true,
-                        placeholder: 'get from personuppgifter'
                     }
                 }, {
                     className: 'col-md-4',
@@ -1797,7 +1789,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Avsluta konto</b></div>',
-                    controller: function($scope) {
+                    controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
                         $scope['huvud-RE'] = parentModel.person['huvud-RE'];
                         $scope['Dagens datum'] = new Date();

@@ -4,7 +4,7 @@
         .controller('AendraController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, autocomplete, personInfo) {
+    function ctrl($scope, $state, autocomplete) {
 
         init();
 
@@ -13,8 +13,7 @@
         $scope.fields.formsSelection = getStepSelectOptions();
 
 
-        $scope.selected = function(person) {
-            personInfo.set(person);
+        $scope.selected = function() {
             resetSteps();
             $state.go('bestallning.andra.personinfo');
         };

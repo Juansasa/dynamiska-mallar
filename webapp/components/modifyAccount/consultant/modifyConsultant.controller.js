@@ -31,7 +31,7 @@
                     scope.init();
                 }
             },
-            controller: function($scope) {
+            controller: /*@ngInject*/ function($scope) {
                 init();
 
                 $scope.init = init;

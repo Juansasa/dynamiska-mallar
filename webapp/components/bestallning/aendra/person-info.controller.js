@@ -8,8 +8,6 @@
         if(!$scope.model.person || !$scope.model.person['Anställningstyp']){
             $state.go('^');
         }
-
-        // Ersätt med search call
         $scope.employees = autocomplete.getAllEmployee();
     }
 })();

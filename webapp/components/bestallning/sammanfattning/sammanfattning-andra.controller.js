@@ -23,6 +23,7 @@
                         'Konto ändring': model.andra.konto && model.andra.konto.konsult,
                         'Mobilt bredband': model.andra ? model.andra.mobilbredband : null,
                         'Telefoni': model.andra ? model.andra.abonnemang : null,
+                        'Avsluta konto': model.andra ? model.andra.avsluta : null,
                         //'Ändra anställningsförhållande': model.andra ? model.andra.anstallningsforhallande.konsult : null
                     };
                 case 'previa anställd':
@@ -30,6 +31,7 @@
                         'Konto ändring': model.andra.konto && model.andra.konto['anställd'],
                         'Mobilt bredband': model.andra ? model.andra.mobilbredband : null,
                         'Telefoni': model.andra ? model.andra.abonnemang : null,
+                        'Avsluta konto': model.andra ? model.andra.avsluta : null,
                         //'Ändra anställningsförhållande': model.andra ? model.andra.anstallningsforhallande.anstalld : null
                     };
                 default:

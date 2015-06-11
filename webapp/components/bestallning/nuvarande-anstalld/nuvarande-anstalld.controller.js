@@ -4,7 +4,7 @@
         .controller('NuvarandeAnstalldController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, autocomplete, personInfo) {
+    function ctrl($scope, $state, autocomplete) {
         init();
 
         $scope.fields.formsSelection = [{
@@ -60,11 +60,6 @@
                 }
             }]
         }];
-
-        $scope.selected = function(person) {
-            personInfo.set(person);
-        };
-
 
         $scope.$parent.getSteps = function() {
             if($scope.model.steps.existingEmployee.length === 2) {
