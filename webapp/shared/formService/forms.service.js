@@ -1357,6 +1357,9 @@
                     className: 'col-md-6',
                     type: 'autocomplete-select',
                     key: 'Ersätt nuvarande Huvud-RE till',
+                    templateOptions: {
+                        placeholder: 'Välj i listan'
+                    },
                     controller: /*@ngInject*/ function($scope) {
                         if (parentModel.person && parentModel.person.MO) {
                             $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person['huvud-RE'] + '" ' + 'till';
@@ -1941,7 +1944,7 @@
         }
 
         function setOrderPersonInfo(targetModel, parentModel) {
-            targetModel['Huvud-RE'] = parentModel.person['huvud-RE'];
+            targetModel['Nuvarande huvud-RE'] = parentModel.person['huvud-RE'];
             targetModel['Dagens datum'] = new Date();
             targetModel['Behörig beställare'] = parentModel.orderPerson;
         }
