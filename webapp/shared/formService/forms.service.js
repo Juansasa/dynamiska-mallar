@@ -151,7 +151,7 @@
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter<b></div>'
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-4',
                     type: 'autocomplete-select',
                     key: 'MO',
                     templateOptions: {
@@ -164,7 +164,7 @@
                         required: true
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-4',
                     type: 'autocomplete-select',
                     key: 'huvud-RE',
                     templateOptions: {
@@ -176,6 +176,17 @@
                         'templateOptions.options': function(v, m, s) {
                             return autocomplete.getRE(s.model.MO);
                         }
+                    }
+                }, {
+                    className: 'col-md-4',
+                    type: 'input',
+                    key: 'Tjänstgöringsgrad',
+                    templateOptions: {
+                        label: 'Tjänstgöringsgrad',
+                        type: 'number',
+                        min: 0,
+                        max: 100,
+                        placeholder: '%'
                     }
                 }, {
                     className: 'col-md-6',
@@ -311,7 +322,7 @@
                 fieldGroup: [{
                     template: '<div><b>Allmänna anställningsvillkor<b></div>'
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-6',
                     type: 'radio',
                     key: 'semesterrätt',
                     templateOptions: {
@@ -348,7 +359,7 @@
                         return scope.model['semesterrätt'] !== 25;
                     }
                 }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     key: 'egen bil i tjänsten',
                     type: 'radio',
                     templateOptions: {

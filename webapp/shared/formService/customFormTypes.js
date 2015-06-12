@@ -57,7 +57,7 @@
                             type: 'input',
                             key: 'efternamn',
                             templateOptions: {
-                                label: 'efternamn',
+                                label: 'Efternamn',
                                 required: true
                             },
                             validation: {
