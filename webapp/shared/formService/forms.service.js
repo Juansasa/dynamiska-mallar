@@ -393,14 +393,6 @@
                         options: autocomplete.getRE('All')
                     }
                 }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'Rapporterar till (chef)',
-                    templateOptions: {
-                        label: 'Rapporterar till (chef)',
-                        required: true
-                    }
-                }, {
                     template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
                 }, {
                     className: 'col-md-12',
@@ -912,7 +904,7 @@
                 hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
             }];
             showErrors(specific);
-            return specific;
+            return specific.concat(getOrderSignaturePart());
         }
 
         // Nytt mobilt bredband formulär
@@ -1748,7 +1740,7 @@
                         $scope.model['Beställare'] = parentModel.orderPerson;
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-12',
                     type: 'select',
                     key: 'Anställningsform',
                     templateOptions: {
@@ -1765,19 +1757,20 @@
                         }],
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'today-date',
                     key: 'Fr.o.m',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'today-date',
                     key: 'T.o.m',
                     templateOptions: {
                         label: 'T.o.m'
-                    }
+                    },
+                    hideExpression: 'model["Anställningsform"] === "Tillsvidareanställning"'
                 }, {
                     className: 'col-md-12',
                     type: 'textarea',
