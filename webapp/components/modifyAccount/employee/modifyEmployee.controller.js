@@ -37,12 +37,15 @@
                 $scope.init = init;
                 function init() {
                     var value = $scope.model[$scope.options.key];
-                    if (value) {
-                        if (value === 'Förändring Konto') {
+                    switch (value) {
+                        case 'Ändra Konto': 
                             $scope.to.data.setField(value, forms.modifyEmployeeAccount(getModel()));
-                        } else {
+                            break;
+                        case 'Förläng Konto':
                             $scope.to.data.setField(value, forms.extendEmployeeAccount(getModel()));
-                        }
+                            break;
+                        default:
+                            break;
                     }
                 }
             }

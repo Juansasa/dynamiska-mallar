@@ -1338,34 +1338,31 @@
                         }]
                     }
                 }, {
-                    className: 'col-md-12',
+                    className: 'col-md-6',
                     type: 'autocomplete-select',
                     key: 'Ersätt nuvarande MO till',
                     templateOptions: {
-                        label: 'Ersätt nuvarande MO till',
                         options: autocomplete.getAllMO(),
-                        onChange: 'model["Ersätt nuvarande Huvud-RE till"] = null'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Nuvarande Huvud-RE',
-                    templateOptions: {
-                        label: 'Nuvarande Huvud-RE',
-                        disabled: true,
-                        placeholder: 'Huvud-RE'
+                        onChange: 'model["Ersätt nuvarande Huvud-RE till"] = null',
+                        placeholder: 'Välj i listan'
                     },
                     controller: /*@ngInject*/ function($scope) {
-                        if (parentModel.person) {
-                            $scope.model[$scope.options.key] = parentModel.person['huvud-RE'];
+                        if (parentModel.person && parentModel.person.MO) {
+                            $scope.to.label = 'Ersätt nuvarande MO' + ': "' + parentModel.person.MO + '" ' + 'till';
+                        } else {
+                            $scope.to.label = 'Ersätt nuvarande MO till';
                         }
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'autocomplete-select',
                     key: 'Ersätt nuvarande Huvud-RE till',
-                    templateOptions: {
-                        label: 'Ersätt nuvarande Huvud-RE till',
+                    controller: /*@ngInject*/ function($scope) {
+                        if (parentModel.person && parentModel.person.MO) {
+                            $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person['huvud-RE'] + '" ' + 'till';
+                        } else {
+                            $scope.to.label = 'Ersätt nuvarande Huvud-RE till';
+                        }
                     },
                     expressionProperties: {
                         'templateOptions.placeholder': '!model["Ersätt nuvarande MO till"] ? "Var vänlig och välj ett MO": "Välj ett RE"',
@@ -1503,8 +1500,8 @@
                         setOrderPersonInfo($scope.model, parentModel);
                     }
                 }, {
-                    className: 'col-md-4',
-                    type: 'radio',
+                    className: 'col-md-12',
+                    type: 'autocomplete-select',
                     key: 'Anställningsform',
                     templateOptions: {
                         label: 'Anställningsform',
@@ -1517,43 +1514,40 @@
                         }, {
                             name: ' Tidsbegränsad anställning',
                             value: 'Tidsbegränsad anställning'
-                        }]
+                        }],
+                        placeholder: 'Välj i listan'
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'today-date',
                     key: 'Fr.o.m',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'today-date',
                     key: 'T.o.m',
                     templateOptions: {
                         label: 'T.o.m'
-                    }
-                }, {
-                    className: 'col-md-12',
+                    },
+                    hideExpression: 'model["Anställningsform"] === "Tillsvidareanställning"'
+                }]
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-6',
                     type: 'autocomplete-select',
                     key: 'Ersätt nuvarande MO till',
                     templateOptions: {
-                        label: 'Ersätt nuvarande MO till',
                         options: autocomplete.getAllMO(),
                         onChange: 'model["Ersätt nuvarande Huvud-RE till"] = null'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Nuvarande Huvud-RE',
-                    templateOptions: {
-                        label: 'Nuvarande Huvud-RE',
-                        disabled: true,
-                        placeholder: 'Huvud-RE'
                     },
                     controller: /*@ngInject*/ function($scope) {
-                        if (parentModel.person) {
-                            $scope.model[$scope.options.key] = parentModel.person['huvud-RE'];
+                        if (parentModel.person && parentModel.person.MO) {
+                            $scope.to.label = 'Ersätt nuvarande MO' + ': "' + parentModel.person.MO + '" ' + 'till';
+                        } else {
+                            $scope.to.label = 'Ersätt nuvarande MO till';
                         }
                     }
                 }, {
@@ -1562,6 +1556,13 @@
                     key: 'Ersätt nuvarande Huvud-RE till',
                     templateOptions: {
                         label: 'Ersätt nuvarande Huvud-RE till',
+                    },
+                    controller: /*@ngInject*/ function($scope) {
+                        if (parentModel.person && parentModel.person.MO) {
+                            $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person['huvud-RE'] + '" ' + 'till';
+                        } else {
+                            $scope.to.label = 'Ersätt nuvarande Huvud-RE till';
+                        }
                     },
                     expressionProperties: {
                         'templateOptions.placeholder': '!model["Ersätt nuvarande MO till"] ? "Var vänlig och välj ett MO": "Välj ett RE"',
@@ -1585,7 +1586,7 @@
                 }, {
                     className: 'col-md-6',
                     type: 'autoCompleteAdd',
-                    key: 'Borttag av RE',
+                    key: 'Borttag av existerande RE',
                     templateOptions: {
                         label: 'Borttag av RE',
                         onChange: function(v, options, scope) {

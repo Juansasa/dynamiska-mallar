@@ -6,7 +6,7 @@
     /*@ngInject*/
     function subCtrl($scope, $state, forms) {
         // Make sure to only use one model for all states
-        if(!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee){
+        if (!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee) {
             $state.go('^.^');
         }
 
@@ -35,14 +35,18 @@
                 init();
 
                 $scope.init = init;
+
                 function init() {
                     var value = $scope.model[$scope.options.key];
-                    if (value) {
-                        if (value === 'Förändring Konto') {
+                    switch (value) {
+                        case 'Ändra Konto':
                             $scope.to.data.setField(value, forms.modifyConsultantAccount(getModel()));
-                        } else {
+                            break;
+                        case 'Förläng Konto':
                             $scope.to.data.setField(value, forms.extendConsultantAccount(getModel()));
-                        }
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -56,7 +60,7 @@
         function setFormFields(option, fields) {
             $scope.formFields = fields;
             $scope.model.andra.konto['anställd'] = $scope.model.andra.konto['anställd'] || {};
-            if($scope.model.andra.konto['anställd']) {
+            if ($scope.model.andra.konto['anställd']) {
                 $scope.model.andra.konto['anställd']['Vald formulär'] = option;
             }
         }
