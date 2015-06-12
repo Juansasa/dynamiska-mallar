@@ -91,9 +91,9 @@
         };
 
         function init() {
+            $scope.model.person = null;
             $scope.employees = autocomplete.getAllEmployee();
-
-            $scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
+            $scope.model.steps.existingEmployee = [{
                 name: 'Sök',
                 route: 'bestallning.nuvarande'
             }, {

@@ -45,7 +45,8 @@
         };
 
         function init() {
-            $scope.model.steps.modifyExistingEmployee = $scope.model.steps.modifyExistingEmployee || [{
+            $scope.model.person = null;
+            $scope.model.steps.modifyExistingEmployee = [{
                 name: 'Start',
                 route: 'bestallning.andra.personinfo'
             }];
