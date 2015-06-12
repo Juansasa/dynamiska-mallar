@@ -665,7 +665,7 @@
                 hideExpression: 'model["Vald formulär"] !== "Flytt"'
             }];
             showErrors(specific);
-            return specific;
+            return specific.concat(getOrderSignaturePart());
         }
 
         // Modifiera abonnemang

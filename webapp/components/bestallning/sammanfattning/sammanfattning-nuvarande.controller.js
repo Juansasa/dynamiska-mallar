@@ -4,7 +4,7 @@
         .controller('SummaryExistingEmployeeController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, $filter, Mailto) {
+    function ctrl($scope, $state, $filter, Mailto, $window) {
         if (!$scope.model.steps || !$scope.model.steps.existingEmployee) {
             $state.go('^');
         }
@@ -18,12 +18,16 @@
 
 
         function getOrders(model) {
+            if(!model.nuvarande) {
+                return;
+            }
+
             return {
-                'Datorutrustning': model.nuvarande ? model.nuvarande.datorutrustning : null,
-                'Mobilt bredband': model.nuvarande ? model.nuvarande.mobilbredband : null,
-                'Telefonutrustning': model.nuvarande ? model.nuvarande.telefonutrustning : null,
-                'Telefoni': model.nuvarande ? model.nuvarande.abonnemang : null,
-                'Digital diktering': model.nuvarande ? model.nuvarande.digitaldiktering : null,
+                'Datorutrustning': model.nuvarande.datorutrustning,
+                'Mobilt bredband': model.nuvarande.mobilbredband,
+                'Telefonutrustning': model.nuvarande.telefonutrustning,
+                'Telefoni': model.nuvarande.abonnemang,
+                'Digital diktering': model.nuvarande.digitaldiktering,
             };
         }
 
@@ -63,13 +67,11 @@
             var options = {
                 cc: $scope.model.orderPerson.email,
                 //bcc: 'bcc.this.person@dontgohere.com',
-                subject: subject + '-' +new Date().getTime(),
+                subject: subject + '-' + new Date().getTime(),
                 body: convertJsonToMailString(order)
             };
 
-            var href = Mailto.url(recepient, options);
-
-            return href;
+            $window.location.href = Mailto.url(recepient, options);
         }
     }
 })();
