@@ -1048,12 +1048,6 @@
                 }
             }, {
                 className: 'col-md-12',
-                type: 'equipmentTable',
-                templateOptions: {
-
-                }
-            }, {
-                className: 'col-md-12',
                 type: 'equipment-select',
                 key: 'Kontorsheadset',
                 templateOptions: {

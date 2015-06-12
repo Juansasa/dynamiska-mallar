@@ -160,6 +160,7 @@
             wrapper: ['bootstrapLabel', 'bootstrapHasError'],
             defaultOptions: {
                 templateOptions: {
+                    placeholder: 'Välj i listan',
                     onChange: function(v, m, scope) {
                         scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
                             return option.value === m.value();
@@ -172,10 +173,10 @@
             templateUrl: 'shared/formService/roleSelect.html',
             wrapper: ['bootstrapLabel', 'bootstrapHasError'],
             defaultOptions: {
-
                 key: 'befattning',
                 templateOptions: {
-                    showPrevileges: true
+                    showPrevileges: true,
+                    placeholder: 'Välj i listan'
                 },
                 expressionProperties: {
                     'generateIndex': function(v, m, scope) {
@@ -189,9 +190,6 @@
             name: 'plainInput',
             template: '<input class="form-control" ng-model="model[options.key]">',
             wrapper: ['bootstrapHasError']
-        }, {
-            name: 'equipmentTable',
-            templateUrl: 'shared/formService/equipmentTable.html'
         }, {
             name: 'plainRadio',
             extends: 'radio',
