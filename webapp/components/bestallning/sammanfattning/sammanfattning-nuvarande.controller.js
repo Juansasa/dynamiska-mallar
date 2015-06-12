@@ -63,7 +63,7 @@
             var options = {
                 cc: $scope.model.orderPerson.email,
                 //bcc: 'bcc.this.person@dontgohere.com',
-                subject: subject,
+                subject: subject + '-' +new Date().getTime(),
                 body: convertJsonToMailString(order)
             };
 
