@@ -5,7 +5,7 @@
 
     /*@ngInject*/
     function subCtrl($scope, $state, forms) {
-        if (!$scope.model.steps || !$scope.model.steps.newEmployee || !$scope.model.steps.modifyExistingEmployee) {
+        if (!$scope.model.steps || !$scope.model.steps.existingEmployee && !$scope.model.steps.newEmployee) {
             $state.go('^');
         }
 
