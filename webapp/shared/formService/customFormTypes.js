@@ -300,7 +300,7 @@
                                 label: 'Fakturareferens',
                                 required: true,
                                 onBlur: function(v) {
-                                    if(v) {
+                                    if (v) {
                                         dataSharing.set('Fakturareferens', v);
                                     }
                                 }
@@ -333,8 +333,8 @@
             extends: 'autoCompleteAdd',
             templateUrl: 'shared/formService/equipment-select.html',
             defaultOptions: {
-                controller: /*@ngInject*/ function($scope) {
-                    $scope.to.ammountField = [{
+                templateOptions: {
+                    ammountField: [{
                         type: 'input',
                         key: 'Antal',
                         defaultValue: 1,
@@ -347,28 +347,26 @@
                         validation: {
                             show: true
                         }
-                    }];
-
-                    if ($scope.to.enableModelInput) {
-                        $scope.to.modelField = [{
-                            type: 'input',
-                            key: 'Telefonmodell',
-                            templateOptions: {
-                                label: 'Telefonmodell',
-                                required: true
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }];
-                    }
-                },
-                templateOptions: {
+                    }],
                     onChange: function(v, options, scope) {
+                        if (scope.to.enableModelInput) {
+                            scope.to.modelField = [{
+                                type: 'input',
+                                key: 'Telefonmodell',
+                                templateOptions: {
+                                    label: 'Telefonmodell',
+                                    required: true
+                                },
+                                validation: {
+                                    show: true
+                                }
+                            }];
+                        }
+
                         var selected = scope.$select.selected;
                         scope.$select.selected = null;
 
-                        if(!selected) {
+                        if (!selected) {
                             return;
                         }
 
@@ -393,8 +391,8 @@
 
                         model[options.key].push(modelVal);
 
-                        
-                        if(model[options.key] && model[options.key].length) {
+
+                        if (model[options.key] && model[options.key].length) {
                             scope.to.placeholder = 'välj och lägga till fler';
                         } else {
                             scope.to.placeholder = 'välj i listan';

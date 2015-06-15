@@ -10,7 +10,7 @@
             <td>
                 <formly-form model="value" fields="to.ammountField"></formly-form>
             </td>
-            <td ng-if="value.Antal && value.pris">
+            <td ng-if="value.pris">
                 <label class="control-label">Totalpris </label>
                 <span class="form-control"><b>{{value.pris * value.Antal}} kr</b></span>
             </td>
