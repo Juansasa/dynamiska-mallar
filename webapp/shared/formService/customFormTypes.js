@@ -199,17 +199,17 @@
             extends: 'multiCheckbox',
             wrapper: ['bootstrapHasError'],
             controller: /*@ngInject*/ function($scope) {
-                const to = $scope.to;
-                const opts = $scope.options;
+                var to = $scope.to;
+                var opts = $scope.options;
                 $scope.multiCheckbox = {
                     checked: [],
                     change: setModel
                 };
 
                 // initialize the checkboxes check property
-                const modelValue = $scope.model[opts.key];
+                var modelValue = $scope.model[opts.key];
                 if (angular.isArray(modelValue)) {
-                    const valueProp = to.valueProp || 'value';
+                    var valueProp = to.valueProp || 'value';
                     angular.forEach(to.options, function(v, index) {
                         var stepindex = _.findIndex(modelValue, function(step) {
                             return step.route === v[valueProp].route;
