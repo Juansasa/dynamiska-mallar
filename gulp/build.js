@@ -88,7 +88,7 @@ gulp.task('misc', function() {
 });
 
 gulp.task('clean', function(done) {
-    $.del([config.dist, config.tmp], done);
+    $.del([config.dist, config.tmp], {force: true}, done);
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'misc', 'equipments']);
