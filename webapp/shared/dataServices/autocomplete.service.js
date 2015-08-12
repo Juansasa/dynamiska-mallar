@@ -33,6 +33,7 @@
 
             getAllEmployee: getAllEmployee
         };
+        
         return service;
 
         function getTjanstestalleNamn(id) {

@@ -95,8 +95,8 @@ module.exports = function() {
         },
 
         proxies: [{
-            from: '/api/user',
-            to: 'http://test.com/user' // Just an example backend proxy
+            from: '/api/ad',
+            to: 'http://localhost:85/api/ad' // Just an example backend proxy
         }],
 
         wiredepOptions: {
