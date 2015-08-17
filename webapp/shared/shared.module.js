@@ -22,14 +22,22 @@
         'router',
         'data',
         'forms'
-    ]).run(['gettextCatalog',
-        function(gettextCatalog) {
-            gettextCatalog.currentLanguage = 'sv';
-            //gettextCatalog.debug = true;
+    ]).run(initStart);
 
-            String.prototype.endsWith = function(suffix) {
-                return this.indexOf(suffix, this.length - suffix.length) !== -1;
-            };
-        }
-    ]);
+    /*@ngInject*/
+    function initStart($rootScope, gettextCatalog, adService, $state) {
+        gettextCatalog.currentLanguage = 'sv';
+        //gettextCatalog.debug = true;
+
+        $rootScope.$on('$stateChangeStart', function(event, next) {
+            if(!adService.isAuthorized() && next.name !== 'authentication') {
+                event.preventDefault();
+                $state.go('authentication');
+            }
+        });
+
+        String.prototype.endsWith = function(suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
+    }
 })();

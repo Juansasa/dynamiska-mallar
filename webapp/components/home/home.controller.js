@@ -5,8 +5,6 @@
 
     /*@ngInject*/
     function homeCtrl($scope, adService) {
-        adService.getManager().then(function(response){
-            $scope.user = response;
-        })
+        $scope.user = adService.loggedUser;
     }
 })();

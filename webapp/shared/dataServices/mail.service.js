@@ -27,7 +27,7 @@
                                 }
                             ]
                         }
-            return $http.post('/api/ad/sendmail', payload);
+            return $http.post('/api/users/sendmail', payload);
         }
     }
 })();

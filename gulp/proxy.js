@@ -5,20 +5,29 @@
 // Configure proxy settings in config.proxies to enable correct routings
 //
 
-var url = require('url');
-var proxy = require('proxy-middleware');
+var proxyMiddleware = require('http-proxy-middleware');
 var config = require('./config')();
 
 function getMiddleware() {
 	var middlewares = [];
 	config.proxies.forEach(function(route) {
-        var settings = url.parse(route.to);
-        settings.route = route.from;
+        // configure proxy middleware 
+		var context = route.from                     // requests with this path will be proxied 
+		var options = {
+		        target: route.to,
+		        headers: ''
+		    };
+		 
+		// create the proxy 
+		var proxy = proxyMiddleware(context, options);
 
-        middlewares.push(proxy(settings));
+        middlewares.push(proxy);
     });
 
     return middlewares;
 }
 
 module.exports = getMiddleware() || [];
+
+
+ 
