@@ -7,7 +7,7 @@
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
         var state = [{
-            stateName: 'bestallning.andra.anstalld.forandring-konto',
+            stateName: 'bestallning.nuvarande.anstalld.forandring-konto',
             stateConfig: {
                 url: '/forandring-konto',
                 views: {

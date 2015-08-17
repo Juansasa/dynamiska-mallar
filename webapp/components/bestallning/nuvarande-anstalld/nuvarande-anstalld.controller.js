@@ -27,49 +27,75 @@
                         route: 'bestallning.nuvarande.sammanfattning'
                     },
                     options: [{
-                        name: 'Telefoni',
-                        value: {
                             name: 'Telefoni',
-                            route: 'bestallning.nuvarande.abonnemang'
-                        }
-                    }, {
-                        name: 'Mobilbredband',
-                        value: {
+                            value: {
+                                name: 'Telefoni',
+                                route: 'bestallning.nuvarande.abonnemang'
+                            }
+                        }, {
                             name: 'Mobilbredband',
-                            route: 'bestallning.nuvarande.mobilbredband'
-                        }
-                    }, {
-                        name: 'Datorutrustning',
-                        value: {
+                            value: {
+                                name: 'Mobilbredband',
+                                route: 'bestallning.nuvarande.mobilbredband'
+                            }
+                        }, {
                             name: 'Datorutrustning',
-                            route: 'bestallning.nuvarande.datorutrustning'
-                        }
-                    }, {
-                        name: 'Telefonutrustning',
-                        value: {
+                            value: {
+                                name: 'Datorutrustning',
+                                route: 'bestallning.nuvarande.datorutrustning'
+                            }
+                        }, {
                             name: 'Telefonutrustning',
-                            route: 'bestallning.nuvarande.telefoniutrustning'
-                        }
-                    }, {
-                        name: 'Digital diktering',
-                        value: {
+                            value: {
+                                name: 'Telefonutrustning',
+                                route: 'bestallning.nuvarande.telefoniutrustning'
+                            }
+                        }, {
                             name: 'Digital diktering',
-                            route: 'bestallning.nuvarande.digital-diktering'
+                            value: {
+                                name: 'Digital diktering',
+                                route: 'bestallning.nuvarande.digital-diktering'
+                            }
+                        },
+                        $scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
+                            name: 'Ändra konto',
+                            value: {
+                                name: 'Ändra konto',
+                                route: 'bestallning.nuvarande.anstalld.forandring-konto'
+                            }
+                        } : {
+                            name: 'Ändra konto',
+                            value: {
+                                name: 'Ändra konto',
+                                route: 'bestallning.nuvarande.konsult.forandring-konto'
+                            }
+                        }, {
+                            name: 'Avsluta konto',
+                            value: {
+                                name: 'Avsluta konto',
+                                route: 'bestallning.nuvarande.avsluta'
+                            }
+                        }, {
+                            name: 'Ändra anställningsförhållande',
+                            value: {
+                                name: 'Ändra anställningsförhållande',
+                                route: 'bestallning.andra.anstallningsforhallande'
+                            }
                         }
-                    }]
+                    ]
                 }
             }]
         }];
 
         $scope.$parent.getSteps = function() {
-            if($scope.model.steps.existingEmployee.length === 2) {
+            if ($scope.model.steps.existingEmployee.length === 2) {
                 return $scope.model.steps.existingEmployee.splice(1, 1);
             }
             return $scope.model.steps.existingEmployee;
         };
 
         $scope.$parent.next = function() {
-            var index = findStateIndex($state.current);            
+            var index = findStateIndex($state.current);
             if (index + 1 < $scope.model.steps.existingEmployee.length && $scope.form.$valid) {
                 $state.go($scope.model.steps.existingEmployee[index + 1].route);
             }

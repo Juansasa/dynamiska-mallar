@@ -7,14 +7,15 @@
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
         var state = [{
-            stateName: 'bestallning.andra.mobilbredband',
+            stateName: 'bestallning.nuvarande.mobilbredband',
             stateConfig: {
                 url: '/mobilbredband',
+                modelKey: 'nuvarande.mobilbredband',
                 views: {
                     'wizardContent@bestallning': {
-                        template: '<formly-form model="model.andra.mobilbredband" fields="fields"></formly-form>',
-                        title: gettext('Ändring/Uppsägning av mobilt bredband'),
-                        controller: 'ModifyMobileBroadbandController'
+                        template: '<formly-form model="model.nuvarande.mobilbredband" fields="fields"></formly-form>',
+                        title: gettext('New mobile broadband'),
+                        controller: 'NewMobileBroadbandController'
                     }
                 }
             }

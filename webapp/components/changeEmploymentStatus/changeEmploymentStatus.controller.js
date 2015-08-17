@@ -5,8 +5,8 @@
 
     /*@ngInject*/
     function ctrl($scope, $state, forms) {
-    	if(!$scope.model.steps || !$scope.model.steps.modifyExistingEmployee){
-            $state.go('^.^');
+    	if(!$scope.model.steps || !$scope.model.steps.existingEmployee){
+            $state.go('^');
         }
         // Make sure to only use one model for all states
         $scope.model = $scope.model || {};

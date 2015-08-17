@@ -7,7 +7,7 @@
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
         var state = [{
-            stateName: 'bestallning.andra.avsluta',
+            stateName: 'bestallning.nuvarande.avsluta',
             stateConfig: {
                 url: '/avsluta-konto',
                 views: {

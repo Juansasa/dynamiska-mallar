@@ -96,7 +96,7 @@ module.exports = function() {
 
         proxies: [{
             from: '/api',
-            to: 'http://z09ar1sas006.ad.previa.net:9000/api' // Just an example backend proxy
+            to: 'http://example.com' // Just an example backend proxy
         }],
 
         wiredepOptions: {
