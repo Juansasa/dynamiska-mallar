@@ -1,8 +1,18 @@
-<div class="container" id="print-content">
-	<h1><i>Info om beställningar</i></h1>
-	<p class="alert alert-danger">Här ska information om de olika beställningar finnas, och om behövs hänvisas till de olika vyerna
-
+<div class="container">
+	<h2 translate><b>Beställningar</b></h2>
+	<p class="alert alert-warning">Här ska information om de olika beställningar finnas, och om behövs hänvisas till de olika vyerna
 	För tillfället alla sök och autokomplete värdena är statiska och ska ersättas med tiktiga backend data nät de finns tillgängliga</p>
-
-	<pre> {{user | json}}</pre>
+	<div class="list-group">
+		<a class="list-group-item active">
+			<h4 class="list-group-item-heading">Beställingar och förändringar</h4>
+		</a>
+		<a class="list-group-item" ui-sref="bestallning.ny">
+			<h4 class="list-group-item-heading">Beställingsrutin för nyanställd eller konsult</h4>
+			<i class="list-group-item-text">Dynamiskt formulär för nyanställd eller konsult. Konto, dator, telefon etc. </i>
+		</a>
+		<a class="list-group-item" ui-sref="bestallning.nuvarande">
+			<h4 class="list-group-item-heading">Beställingsrutin för befintlig anställd eller konsult</h4>
+			<i class="list-group-item-text">Dynamiskt formulär för befintlig anställd eller konsult. Stäng av eller förändra konto, dator, telefon etc.</i>
+		</a>
+	</div>
 </div>

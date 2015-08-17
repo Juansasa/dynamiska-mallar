@@ -6,11 +6,11 @@
 
     /*@ngInject*/
     function setUpRoutes(routeHelper, gettext) {
-        var stateName = gettext('home');
+        var stateName = 'home';
         var stateConfig = {
-            url: '/home',
+            url: '/hem',
             templateUrl: 'components/home/home.html',
-            title: gettext('Home'),
+            title: gettext('Hem'),
             controller: 'HomeController',
             controllerAs: 'vm'
         };
