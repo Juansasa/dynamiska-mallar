@@ -59,10 +59,8 @@
 
         function setFormFields(option, fields) {
             $scope.formFields = fields;
-            $scope.model.andra.konto['anställd'] = $scope.model.andra.konto['anställd'] || {};
-            if ($scope.model.andra.konto['anställd']) {
-                $scope.model.andra.konto['anställd']['Vald formulär'] = option;
-            }
+            $scope.model.nuvarande.konsult.andraKonto = $scope.model.nuvarande.konsult.andraKonto || {};
+            $scope.model.nuvarande.konsult.andraKonto['Vald formulär'] = option;
         }
     }
 })();

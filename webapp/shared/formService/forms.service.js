@@ -22,13 +22,13 @@
             removeAccount: getOrderRemoveAccountForm,
 
             newSubscription: getNewOrderSubscriptionForm,
-            modifySubscription: getModifySubscriptionForm,
+            //modifySubscription: getModifySubscriptionForm,
 
             careTalk: getOrderCareTalkForm,
 
             computerAccessories: getOrderComputerAccessoriesForm,
 
-            modifyMobileBroadband: getModifyMobileBroadbandForm,
+            //modifyMobileBroadband: getModifyMobileBroadbandForm,
             newMobileBroadband: getNewMobileBroadband,
 
             changeEmploymentStatus: changeEmploymentStatus,
@@ -558,6 +558,9 @@
                         }, {
                             name: 'Flytt av abonnemang till annan användare',
                             value: 'Flytt'
+                        }, {
+                            name: 'Uppsägning av abonnemang',
+                            value: 'Uppsägning'
                         }]
                     }
                 }]
@@ -603,92 +606,6 @@
                     }
                 }],
                 hideExpression: 'model["Vald formulär"] !== "Nytt"'
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
-                    controller: /*@ngInject*/ function($scope) {
-                        $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
-                            Namn: parentModel.person.namn,
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
-                        };
-                        $scope.model.Kontaktperson = {
-                            Namn: parentModel.orderPerson.namn,
-                            Telefonnummer: parentModel.orderPerson.tel
-                        };
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'checkbox',
-                    key: 'Anknytning med tillhörande mobilnr',
-                    templateOptions: {
-                        label: 'Anknytning med tillhörande mobilnr'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Ny användare',
-                    templateOptions: {
-                        label: 'Ny användare',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Datum för flytt',
-                    templateOptions: {
-                        label: 'Datum för flytt'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'select',
-                    key: 'Behövs nytt simkort ?',
-                    templateOptions: {
-                        label: 'Behövs nytt simkort ?',
-                        required: true,
-                        options: [{
-                            name: 'Ja',
-                            value: 'Ja'
-                        }, {
-                            name: 'Nej',
-                            value: 'Nej'
-                        }]
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Anknytning',
-                    templateOptions: {
-                        label: 'Anknytning',
-                        required: true
-                    }
-                }],
-                hideExpression: 'model["Vald formulär"] !== "Flytt"'
-            }];
-            showErrors(specific);
-            return specific.concat(getOrderSignaturePart());
-        }
-
-        // Modifiera abonnemang
-        function getModifySubscriptionForm(parentModel) {
-            var specific = [{
-                className: 'row',
-                fieldGroup: [{
-                    type: 'radio',
-                    key: 'Vald formulär',
-                    templateOptions: {
-                        label: 'Välj ett formulär',
-                        options: [{
-                            name: 'Flytt av abonnemang till annan användare',
-                            value: 'Flytt'
-                        }, {
-                            name: 'Uppsägning av abonnemang',
-                            value: 'Uppsägning'
-                        }]
-                    }
-                }]
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -816,93 +733,6 @@
                 }],
                 hideExpression: 'model["Vald formulär"] !== "Uppsägning"'
             }];
-
-            showErrors(specific);
-            return specific;
-        }
-
-        // Modifiera existerande mobilt bredband
-        function getModifyMobileBroadbandForm(parentModel) {
-            var specific = [{
-                className: 'row',
-                fieldGroup: [{
-                    type: 'radio',
-                    key: 'Mobilt bredband ärende',
-                    templateOptions: {
-                        label: 'Välj ett formulär',
-                        options: [{
-                            name: 'Flytt av Mobilt bredband till annan användare',
-                            value: 'Flytt'
-                        }, {
-                            name: 'Uppsägning av Mobilt bredband',
-                            value: 'Uppsägning'
-                        }]
-                    }
-                }]
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>',
-                    controller: /*@ngInject*/ function($scope) {
-                        $scope.model.Abonnent = {
-                            Namn: parentModel.person.namn,
-                            'Användarnamn': parentModel.person['användarnamn'],
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE']),
-                            Kontaktperson: {
-                                Namn: parentModel.orderPerson.namn,
-                                Telefonnummer: parentModel.orderPerson.tel
-                            }
-                        };
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Datum för flytt',
-                    templateOptions: {
-                        label: 'Datum för flytt'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Telefonnummer',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        type: 'tel'
-                    }
-                }],
-                hideExpression: 'model["Mobilt bredband ärende"] !== "Flytt"'
-            }, {
-                className: 'row',
-                fieldGroup: [{
-                    template: '<div><b>Uppsägning av Mobilt bredband</b></div>',
-                    controller: /*@ngInject*/ function($scope) {
-                        $scope.model.Abonnent = {
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Kontaktperson: {
-                                Namn: parentModel.orderPerson.namn,
-                                Telefonnummer: parentModel.orderPerson.tel
-                            }
-                        };
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Datum för uppsägning',
-                    templateOptions: {
-                        label: 'Datum för uppsägning'
-                    }
-                }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Telefonnummer',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        type: 'tel'
-                    }
-                }],
-                hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
-            }];
             showErrors(specific);
             return specific.concat(getOrderSignaturePart());
         }
@@ -922,6 +752,9 @@
                         }, {
                             name: 'Flytt av Mobilt bredband till annan användare',
                             value: 'Flytt'
+                        }, {
+                            name: 'Uppsägning av Mobilt bredband',
+                            value: 'Uppsägning'
                         }]
                     }
                 }]
@@ -1004,6 +837,36 @@
                     }
                 }],
                 hideExpression: 'model["Mobilt bredband ärende"] !== "Flytt"'
+            }, {
+                className: 'row',
+                fieldGroup: [{
+                    template: '<div><b>Uppsägning av Mobilt bredband</b></div>',
+                    controller: /*@ngInject*/ function($scope) {
+                        $scope.model.Abonnent = {
+                            Resultatenhet: parentModel.person['huvud-RE'],
+                            Kontaktperson: {
+                                Namn: parentModel.orderPerson.namn,
+                                Telefonnummer: parentModel.orderPerson.tel
+                            }
+                        };
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'today-date',
+                    key: 'Datum för uppsägning',
+                    templateOptions: {
+                        label: 'Datum för uppsägning'
+                    }
+                }, {
+                    className: 'col-md-6',
+                    type: 'input',
+                    key: 'Telefonnummer',
+                    templateOptions: {
+                        label: 'Telefonnummer',
+                        type: 'tel'
+                    }
+                }],
+                hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
             }];
 
             showErrors(specific);
@@ -1729,6 +1592,7 @@
         }
 
         function getOrderExtendEmployeeAccountForm(parentModel) {
+            console.log('anställd');
             var specific = [{
                 className: 'row',
                 fieldGroup: [{

@@ -7,85 +7,89 @@
     function ctrl($scope, $state, autocomplete) {
         init();
 
-        $scope.fields.formsSelection = [{
-            className: 'row',
-            fieldGroup: [{
-                className: 'col-md-12',
-                template: '<div><b>Välj de formulär som ska genomföras</b></div>'
-            }, {
-                className: 'col-md-12',
-                type: 'formSelection',
-                key: 'existingEmployee',
-                templateOptions: {
-                    label: 'Välj beställningar som ska genomföras',
-                    pre: {
-                        name: 'Sök',
-                        route: 'bestallning.nuvarande'
-                    },
-                    post: {
-                        name: 'Sammanfattning',
-                        route: 'bestallning.nuvarande.sammanfattning'
-                    },
-                    options: [{
-                            name: 'Telefoni',
-                            value: {
-                                name: 'Telefoni',
-                                route: 'bestallning.nuvarande.abonnemang'
-                            }
-                        }, {
-                            name: 'Mobilbredband',
-                            value: {
-                                name: 'Mobilbredband',
-                                route: 'bestallning.nuvarande.mobilbredband'
-                            }
-                        }, {
-                            name: 'Datorutrustning',
-                            value: {
-                                name: 'Datorutrustning',
-                                route: 'bestallning.nuvarande.datorutrustning'
-                            }
-                        }, {
-                            name: 'Telefonutrustning',
-                            value: {
-                                name: 'Telefonutrustning',
-                                route: 'bestallning.nuvarande.telefoniutrustning'
-                            }
-                        }, {
-                            name: 'Digital diktering',
-                            value: {
-                                name: 'Digital diktering',
-                                route: 'bestallning.nuvarande.digital-diktering'
-                            }
+        $scope.personSelected = function() {
+            $scope.fields.formsSelection = [{
+                className: 'row',
+                fieldGroup: [{
+                    className: 'col-md-12',
+                    template: '<div><b>Välj de formulär som ska genomföras</b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'formSelection',
+                    key: 'existingEmployee',
+                    templateOptions: {
+                        label: 'Välj beställningar som ska genomföras',
+                        pre: {
+                            name: 'Sök',
+                            route: 'bestallning.nuvarande'
                         },
-                        $scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
-                            name: 'Ändra konto',
-                            value: {
+                        post: {
+                            name: 'Sammanfattning',
+                            route: 'bestallning.nuvarande.sammanfattning'
+                        },
+                        options: [{
+                                name: 'Telefoni',
+                                value: {
+                                    name: 'Telefoni',
+                                    route: 'bestallning.nuvarande.abonnemang'
+                                }
+                            }, {
+                                name: 'Mobilbredband',
+                                value: {
+                                    name: 'Mobilbredband',
+                                    route: 'bestallning.nuvarande.mobilbredband'
+                                }
+                            }, {
+                                name: 'Datorutrustning',
+                                value: {
+                                    name: 'Datorutrustning',
+                                    route: 'bestallning.nuvarande.datorutrustning'
+                                }
+                            }, {
+                                name: 'Telefonutrustning',
+                                value: {
+                                    name: 'Telefonutrustning',
+                                    route: 'bestallning.nuvarande.telefoniutrustning'
+                                }
+                            }, {
+                                name: 'Digital diktering',
+                                value: {
+                                    name: 'Digital diktering',
+                                    route: 'bestallning.nuvarande.digital-diktering'
+                                }
+                            },
+                            $scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
                                 name: 'Ändra konto',
-                                route: 'bestallning.nuvarande.anstalld.forandring-konto'
-                            }
-                        } : {
-                            name: 'Ändra konto',
-                            value: {
+                                value: {
+                                    name: 'Ändra konto',
+                                    route: 'bestallning.nuvarande.anstalld.forandring-konto'
+                                }
+                            } : {
                                 name: 'Ändra konto',
-                                route: 'bestallning.nuvarande.konsult.forandring-konto'
-                            }
-                        }, {
-                            name: 'Avsluta konto',
-                            value: {
+                                value: {
+                                    name: 'Ändra konto',
+                                    route: 'bestallning.nuvarande.konsult.forandring-konto'
+                                }
+                            }, {
                                 name: 'Avsluta konto',
-                                route: 'bestallning.nuvarande.avsluta'
-                            }
-                        }, {
-                            name: 'Ändra anställningsförhållande',
-                            value: {
+                                value: {
+                                    name: 'Avsluta konto',
+                                    route: 'bestallning.nuvarande.avsluta'
+                                }
+                            }, {
                                 name: 'Ändra anställningsförhållande',
-                                route: 'bestallning.andra.anstallningsforhallande'
+                                value: {
+                                    name: 'Ändra anställningsförhållande',
+                                    route: 'bestallning.andra.anstallningsforhallande'
+                                }
                             }
-                        }
-                    ]
-                }
-            }]
-        }];
+                        ]
+                    }
+                }]
+            }];
+        };
+
+
 
         $scope.$parent.getSteps = function() {
             if ($scope.model.steps.existingEmployee.length === 2) {
