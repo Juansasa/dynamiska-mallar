@@ -17,31 +17,18 @@
         $scope.getOrders = getOrders;
 
         function getOrders(model) {
-            switch (model.person['Anställningstyp']) {
-                case 'konsult':
-                    return {
-                        'Konto beställning': model.person ? model.person : null,
-                        'Datorutrustning': model.ny ? model.ny.datorutrustning: null,
-                        'Mobilt bredband': model.ny ? model.ny.mobilbredband: null,
-                        'Telefonutrustning': model.ny ? model.ny.telefonutrustning: null,
-                        'Telefoni': model.ny ? model.ny.abonnemang: null,
-                        'Digital diktering':model.ny ?  model.ny.digitaldiktering: null,
-                    };
-                case 'previa anställd':
-                    return {
-                        'Anställningsavtal': model.person ? model.person : null,
-                        'Konto beställning': model.ny && model.ny.anstalld ? model.ny.anstalld.nyttKonto: null,
-                        'Datorutrustning': model.ny ? model.ny.datorutrustning : null,
-                        'Mobilt bredband': model.ny ? model.ny.mobilbredband : null,
-                        'Telefonutrustning': model.ny ? model.ny.telefonutrustning: null,
-                        'Telefoni': model.ny ? model.ny.abonnemang: null,
-                        'Digital diktering': model.ny ? model.ny.digitaldiktering : null,
-                    };
-                default:
-                    break;
+            if (!model.ny) {
+                return;
             }
 
-            return [];
+            var summary = {};
+            _.each($scope.model.steps.newEmployee, function(step){
+                if(!(step.name === 'Sök' || step.name === 'Sammanfattning')) {
+                    summary[step.name] = step.model;
+                }
+            });
+
+            return summary;
         }
 
 

@@ -60,7 +60,7 @@
             return findStateIndex($state.current) === $scope.model.steps.newEmployee.length - 1;
         };
 
-        function init() {
+        function init() {            
             // initialize wizardsteps
             $scope.model.steps.newEmployee = $scope.model.steps.newEmployee || [{
                 name: 'Start',
@@ -98,6 +98,18 @@
                     }
                 }]
             }];
+
+            // init form model data
+            $scope.model.ny = $scope.model.ny || {
+                anstalld: {
+                    nyttKonto: {}
+                },
+                datorutrustning: {},
+                mobilbredband: {},
+                abonnemang: {},
+                telefonutrustning: {},
+                digitaldiktering: {}
+            };
         }
 
         function getPageDataByEmploymentType() {
@@ -110,16 +122,19 @@
                 $scope.fields.personinfo = forms.newConsultantPersonalInfo().concat(forms.newConsultantAccount());
                 wizardSteps = [{
                     name: 'Nytt konto',
-                    route: 'bestallning.ny'
+                    route: 'bestallning.ny',
+                    model: $scope.model.person
                 }];
             } else if ($scope.model.person['Anställningstyp'] === 'previa anställd') {
                 $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{
                     name: 'Anställningsavtal - HR',
-                    route: 'bestallning.ny'
+                    route: 'bestallning.ny',
+                    model: $scope.model.person
                 }, {
                     name: 'Nytt konto',
                     route: 'bestallning.ny.anstalld.nytt-konto',
+                    model: $scope.model.ny.anstalld.nyttKonto,
                     canSkip: true
                 }];
             } else {
@@ -138,23 +153,28 @@
             return [{
                 name: 'Datorutrustning',
                 route: 'bestallning.ny.datorutrustning',
-                canSkip: true
+                canSkip: true,
+                model: $scope.model.ny.datorutrustning
             }, {
                 name: 'Mobilbredband',
                 route: 'bestallning.ny.mobilbredband',
-                canSkip: true
+                canSkip: true,
+                model: $scope.model.ny.mobilbredband
             }, {
                 name: 'Telefoni',
                 route: 'bestallning.ny.abonnemang',
-                canSkip: true
+                canSkip: true,
+                model: $scope.model.ny.abonnemang
             }, {
                 name: 'Telefonutrustning',
                 route: 'bestallning.ny.telefoniutrustning',
-                canSkip: true
+                canSkip: true,
+                model: $scope.model.ny.telefonutrustning
             }, {
                 name: 'Digital diktering',
                 route: 'bestallning.ny.digital-diktering',
-                canSkip: true
+                canSkip: true,
+                model: $scope.model.ny.digitaldiktering
             }];
         }
 

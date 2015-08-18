@@ -22,7 +22,6 @@
                 return;
             }
 
-            console.log($scope.model.steps);
             var summary = {};
             _.each($scope.model.steps.existingEmployee, function(step){
                 if(!(step.name === 'Sök' || step.name === 'Sammanfattning')) {
