@@ -31,50 +31,58 @@
                                 name: 'Telefoni',
                                 value: {
                                     name: 'Telefoni',
-                                    route: 'bestallning.nuvarande.abonnemang'
+                                    route: 'bestallning.nuvarande.abonnemang',
+                                    model: $scope.model.nuvarande.abonnemang
                                 }
                             }, {
                                 name: 'Mobilbredband',
                                 value: {
                                     name: 'Mobilbredband',
-                                    route: 'bestallning.nuvarande.mobilbredband'
+                                    route: 'bestallning.nuvarande.mobilbredband',
+                                    model: $scope.model.nuvarande.mobilbredband
                                 }
                             }, {
                                 name: 'Datorutrustning',
                                 value: {
                                     name: 'Datorutrustning',
-                                    route: 'bestallning.nuvarande.datorutrustning'
+                                    route: 'bestallning.nuvarande.datorutrustning',
+                                    model: $scope.model.nuvarande.datorutrustning
                                 }
                             }, {
                                 name: 'Telefonutrustning',
                                 value: {
                                     name: 'Telefonutrustning',
-                                    route: 'bestallning.nuvarande.telefoniutrustning'
+                                    route: 'bestallning.nuvarande.telefoniutrustning',
+                                    model: $scope.model.nuvarande.telefonutrustning
                                 }
                             }, {
                                 name: 'Digital diktering',
                                 value: {
                                     name: 'Digital diktering',
-                                    route: 'bestallning.nuvarande.digital-diktering'
+                                    route: 'bestallning.nuvarande.digital-diktering',
+                                    model: $scope.model.nuvarande.digitaldiktering
                                 }
                             },
                             $scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
                                 name: 'Ändra konto',
                                 value: {
                                     name: 'Ändra konto',
-                                    route: 'bestallning.nuvarande.anstalld.forandring-konto'
+                                    route: 'bestallning.nuvarande.anstalld.forandring-konto',
+                                    model: $scope.model.nuvarande.anstalld.andraKonto
                                 }
                             } : {
                                 name: 'Ändra konto',
                                 value: {
                                     name: 'Ändra konto',
-                                    route: 'bestallning.nuvarande.konsult.forandring-konto'
+                                    route: 'bestallning.nuvarande.konsult.forandring-konto',
+                                    model: $scope.model.nuvarande.konsult.andraKonto
                                 }
                             }, {
                                 name: 'Avsluta konto',
                                 value: {
                                     name: 'Avsluta konto',
-                                    route: 'bestallning.nuvarande.avsluta'
+                                    route: 'bestallning.nuvarande.avsluta',
+                                    model: $scope.model.nuvarande.avsluta
                                 }
                             }, {
                                 name: 'Ändra anställningsförhållande',
@@ -88,8 +96,6 @@
                 }]
             }];
         };
-
-
 
         $scope.$parent.getSteps = function() {
             if ($scope.model.steps.existingEmployee.length === 2) {
@@ -121,6 +127,20 @@
         };
 
         function init() {
+            $scope.model.nuvarande = $scope.model.nuvarande || {
+                konsult: {
+                    andraKonto: {}
+                },
+                anstalld: {
+                    andraKonto: {}
+                },
+                abonnemang: {},
+                mobilbredband: {},
+                datorutrustning: {},
+                telefonutrustning: {},
+                digitaldiktering: {},
+                avsluta: {}
+            };
             $scope.employees = autocomplete.getAllEmployee();
             $scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
                 name: 'Sök',

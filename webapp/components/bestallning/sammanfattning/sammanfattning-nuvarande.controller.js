@@ -18,17 +18,19 @@
 
 
         function getOrders(model) {
-            if(!model.nuvarande) {
+            if (!model.nuvarande) {
                 return;
             }
 
-            return {
-                'Datorutrustning': model.nuvarande.datorutrustning,
-                'Mobilt bredband': model.nuvarande.mobilbredband,
-                'Telefonutrustning': model.nuvarande.telefonutrustning,
-                'Telefoni': model.nuvarande.abonnemang,
-                'Digital diktering': model.nuvarande.digitaldiktering,
-            };
+            console.log($scope.model.steps);
+            var summary = {};
+            _.each($scope.model.steps.existingEmployee, function(step){
+                if(!(step.name === 'Sök' || step.name === 'Sammanfattning')) {
+                    summary[step.name] = step.model;
+                }
+            });
+
+            return summary;
         }
 
         function isOrderDefined(order) {
