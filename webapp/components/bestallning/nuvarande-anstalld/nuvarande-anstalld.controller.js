@@ -94,13 +94,14 @@
                                     route: 'bestallning.nuvarande.avsluta',
                                     model: $scope.model.nuvarande.avsluta
                                 }
-                            }, {
-                                name: 'Ändra anställningsförhållande',
-                                value: {
-                                    name: 'Ändra anställningsförhållande',
-                                    route: 'bestallning.andra.anstallningsforhallande'
-                                }
                             }
+                            // , {
+                            //     name: 'Ändra anställningsförhållande',
+                            //     value: {
+                            //         name: 'Ändra anställningsförhållande',
+                            //         route: 'bestallning.andra.anstallningsforhallande'
+                            //     }
+                            // }
                         ]
                     }
                 }]

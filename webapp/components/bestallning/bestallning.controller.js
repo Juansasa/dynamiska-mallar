@@ -4,7 +4,7 @@
         .controller('BestallningController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, manager) {
+    function ctrl($scope, $state, adService) {
         modelReset();
 
         $scope.goToState = function(nextState) {
@@ -28,9 +28,7 @@
                 }
             };
 
-            manager.get().then(function(resp) {
-                $scope.model.orderPerson = resp.data;
-            }); // Chef information
+            $scope.model.orderPerson = adService.loggedUser;
         }
     }
 })();

@@ -19,7 +19,6 @@
     "animate.css": "~3.2.0",
     "api-check": "~7.2.3",
     "es5-shim": "~3.1.0",
-    "fuse.js": "~1.2.2",
     "html2canvas": "https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js",
     "jquery": "~2.1.4",
     "json3": "~3.3.1",

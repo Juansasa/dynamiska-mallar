@@ -5,7 +5,7 @@
             <ui-select-match placeholder="Personal sökning">{{$select.selected.name.firstname + ' ' + $select.selected.name.lastname}}</ui-select-match>
             <ui-select-choices repeat="option in employees track by $index"
                 refresh="refreshUserList($select.search)"
-                refresh-delay="0">
+                refresh-delay="1000">
                 <div ng-bind-html="option.name.firstname + ' ' + option.name.lastname | highlight: $select.search"></div>
             </ui-select-choices>
         </ui-select>

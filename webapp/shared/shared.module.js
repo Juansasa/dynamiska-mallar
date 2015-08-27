@@ -30,6 +30,7 @@
         //gettextCatalog.debug = true;
 
         $rootScope.$on('$stateChangeStart', function(event, next) {
+                    
             if(!adService.isAuthorized() && next.name !== 'authentication') {
                 event.preventDefault();
                 $state.go('authentication');

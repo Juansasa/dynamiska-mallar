@@ -982,7 +982,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Utrustning</b></div>',
-                    controller: /*@ngInject*/ function($scope) {
+                    controller: /*@ngInject*/ function($scope) {                        
                         $scope.model['Beställare'] = parentModel.orderPerson.name;
                         $scope.model['RE som beställningen avser'] = parentModel.person.RE;
                         $scope.model.Mottagare = {
