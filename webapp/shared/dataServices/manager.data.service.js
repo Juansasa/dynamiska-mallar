@@ -13,7 +13,7 @@
         return service;
 
         function getManager() {
-            return $http.get('api/ad/current');
+            return $http.get('/api/ad/current');
         }
     }
 })();

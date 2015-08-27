@@ -17,9 +17,7 @@
             });
         };
 
-        $scope.personSelected = function() {
-            console.log($scope.model);
-            
+        $scope.personSelected = function() {            
             $scope.fields.formsSelection = [{
                 className: 'row',
                 fieldGroup: [{
