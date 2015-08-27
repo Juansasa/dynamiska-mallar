@@ -18,5 +18,6 @@
         routeHelper.registerState(stateName, stateConfig);
         //routeHelper.setDefaultState(stateConfig.url);
     }
+    
     setUpRoutes.$inject = ['routeHelper', 'gettext'];
 })();

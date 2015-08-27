@@ -4,7 +4,7 @@
         .controller('SummaryExistingEmployeeController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, $filter, Mailto, $window) {
+    function ctrl($scope, $state, $filter, Mailto, $window, mailService) {
         if (!$scope.model.steps || !$scope.model.steps.existingEmployee) {
             $state.go('^');
         }
@@ -15,6 +15,14 @@
         $scope.isOrderDefined = isOrderDefined;
         $scope.getMailURL = getMailURL;
         $scope.getOrders = getOrders;
+
+
+        mailService.sendMail().then(
+            function (resp) {
+                console.log(resp);
+            }, function (err) {
+                console.log(err);
+            });
 
 
         function getOrders(model) {

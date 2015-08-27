@@ -8,6 +8,7 @@
         adService.getManager().then(success, error);
         $scope.authMessage = 'Verifiera access...';
 
+
         function success(response) {
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             usSpinnerService.stop('auth-spinner');
@@ -15,14 +16,10 @@
             $state.go('home');
         }
 
-        function error(error) {
+        function error(err) {
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
             usSpinnerService.stop('auth-spinner');
-            $scope.authMessage = 'Du har inte behörighet att använda tjänsten';
-        }
-
-        function isAuthorized() {
-        	return adService.isAuthorized();
+            $scope.authMessage = 'Du har inte behörighet att använda tjänsten, följande fel uppstod: ' + err;
         }
     }
 })();

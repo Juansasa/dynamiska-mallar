@@ -10,6 +10,7 @@
         var loggedUser = null;
         var service = {
             getManager: getManager,
+            searchUser: searchUser,
             isAuthorized: isAuthorized,
             loggedUser: loggedUser
         };
@@ -21,7 +22,26 @@
         }
 
         function getManager() {
-            return $http.get('/api/users/current');
+            return $http.get('/api/ad/current');
+        }
+
+        function searchUser(queryString) {
+            return $http({
+                url: '/api/ad/search/' + queryString,
+                method: 'GET',
+                transformResponse: appendTransform($http.defaults.transformResponse, transformUsersListResponse)
+            });
+        }
+
+        function appendTransform(defaults, transform) {
+            defaults = angular.isArray(defaults) ? defaults : [defaults];
+            return defaults.concat(transform);
+        }
+
+        function transformUsersListResponse(response) {
+            return response;
         }
     }
 })();
+
+

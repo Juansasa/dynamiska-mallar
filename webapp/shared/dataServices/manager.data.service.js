@@ -6,19 +6,14 @@
         .factory('manager', exception);
 
         /*@ngInject*/
-        function exception() {
+        function exception($http) {
         var service = {
             get: getManager
         };
         return service;
 
         function getManager() {
-            return {
-                    namn: 'Bosse Blom',
-                    email: 'Bosee.Blom@fortet.se',
-                    'resulat-enhet': 'Chef RE',
-                    tel: '0370-44433'
-                };
+            return $http.get('api/ad/current');
         }
     }
 })();

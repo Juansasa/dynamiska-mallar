@@ -4,7 +4,7 @@
         .controller('HomeController', homeCtrl);
 
     /*@ngInject*/
-    function homeCtrl($scope, adService) {
-        $scope.user = adService.loggedUser;
+    function homeCtrl($scope) {
+        
     }
 })();

@@ -4,32 +4,18 @@
     angular.module('forms')
         .filter('propsFilter', function() {
             return function(items, props) {
-                var out = [];
+                var keys = props.keys;
+                var term = props.term;
+                var options = {
+                    keys: keys,
+                    caseSensitive: false,
+                    threshold: 0.4
+                };
 
-                if (angular.isArray(items)) {
-                    items.forEach(function(item) {
-                        var itemMatches = false;
+                var f = new Fuse(items, options);
+                var result = f.search(term).slice(0, 10);
 
-                        var keys = Object.keys(props);
-                        for (var i = 0; i < keys.length; i++) {
-                            var prop = keys[i];
-                            var text = props[prop].toLowerCase();
-                            if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-                                itemMatches = true;
-                                break;
-                            }
-                        }
-
-                        if (itemMatches) {
-                            out.push(item);
-                        }
-                    });
-                } else {
-                    // Let the output be the input untouched
-                    out = items;
-                }
-
-                return out;
+                return result;
             };
         });
 })();

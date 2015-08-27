@@ -7,8 +7,8 @@
     function ctrl($scope, $state, manager) {
         modelReset();
 
-        $scope.goToState = function(nextState) {            
-            if($scope.form.$valid) {
+        $scope.goToState = function(nextState) {
+            if ($scope.form.$valid) {
                 $state.go(nextState.route);
             }
         };
@@ -22,12 +22,15 @@
             $scope.fields = {};
             $scope.model = $scope.model || {
                 person: null, // Personinformation
-                orderPerson: manager.get(), // Chef information
                 steps: {
                     newEmployee: null,
                     modifyExistingEmployee: null
                 }
             };
+
+            manager.get().then(function(resp) {
+                $scope.model.orderPerson = resp.data;
+            }); // Chef information
         }
     }
 })();

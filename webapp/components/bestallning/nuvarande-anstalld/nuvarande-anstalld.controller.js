@@ -4,10 +4,22 @@
         .controller('NuvarandeAnstalldController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, autocomplete) {
+    function ctrl($scope, $state, autocomplete, adService) {
         init();
 
+        $scope.refreshUserList = function (queryString) {
+            if(!queryString) {
+                return;
+            }
+
+            return adService.searchUser(queryString).then(function (resp) {
+                $scope.employees = resp.data;
+            });
+        };
+
         $scope.personSelected = function() {
+            console.log($scope.model);
+            
             $scope.fields.formsSelection = [{
                 className: 'row',
                 fieldGroup: [{
@@ -141,7 +153,6 @@
                 digitaldiktering: {},
                 avsluta: {}
             };
-            $scope.employees = autocomplete.getAllEmployee();
             $scope.model.steps.existingEmployee = $scope.model.steps.existingEmployee || [{
                 name: 'Sök',
                 route: 'bestallning.nuvarande'

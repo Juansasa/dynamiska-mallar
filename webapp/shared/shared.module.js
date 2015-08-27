@@ -29,12 +29,12 @@
         gettextCatalog.currentLanguage = 'sv';
         //gettextCatalog.debug = true;
 
-        // $rootScope.$on('$stateChangeStart', function(event, next) {
-        //     if(!adService.isAuthorized() && next.name !== 'authentication') {
-        //         event.preventDefault();
-        //         $state.go('authentication');
-        //     }
-        // });
+        $rootScope.$on('$stateChangeStart', function(event, next) {
+            if(!adService.isAuthorized() && next.name !== 'authentication') {
+                event.preventDefault();
+                $state.go('authentication');
+            }
+        });
 
         String.prototype.endsWith = function(suffix) {
             return this.indexOf(suffix, this.length - suffix.length) !== -1;

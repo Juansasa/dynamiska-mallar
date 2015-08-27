@@ -571,13 +571,13 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
-                            Namn: parentModel.person.namn,
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                            Namn: parentModel.person.name,
+                            Resultatenhet: parentModel.person.RE,
+                            Postadress: parentModel.person.address
                         };
                         $scope.model['Beställare'] = {
-                            Namn: parentModel.orderPerson.namn,
-                            Telefonnummer: parentModel.orderPerson.tel
+                            Namn: parentModel.orderPerson.name,
+                            Telefonnummer: parentModel.orderPerson.telephones
                         };
                     }
                 }, {
@@ -613,13 +613,13 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
-                            Namn: parentModel.person.namn,
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                            Namn: parentModel.person.name,
+                            Resultatenhet: parentModel.person.RE,
+                            Postadress: parentModel.person.address
                         };
                         $scope.model.Kontaktperson = {
-                            Namn: parentModel.orderPerson.namn,
-                            Telefonnummer: parentModel.orderPerson.tel
+                            Namn: parentModel.orderPerson.name,
+                            Telefonnummer: parentModel.orderPerson.telephonesephones
                         };
                     }
                 }, {
@@ -676,11 +676,11 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
                         $scope.model.Abonent = {
-                            Resultatenhet: parentModel.person['huvud-RE']
+                            Resultatenhet: parentModel.person.RE
                         };
                         $scope.model.Kontaktperson = {
-                            Namn: parentModel.orderPerson.namn,
-                            Telefonnummer: parentModel.orderPerson.tel
+                            Namn: parentModel.orderPerson.name,
+                            Telefonnummer: parentModel.orderPerson.telephones
                         };
                     }
                 }, {
@@ -766,14 +766,14 @@
                     key: 'Mobilt bredband för en existerande dator',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
-                            Namn: parentModel.person.namn,
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                            Namn: parentModel.person.name,
+                            Resultatenhet: parentModel.person.RE,
+                            Postadress: parentModel.person.address
                         };
 
                         $scope.model.Kontaktperson = {
-                            Namn: parentModel.orderPerson.namn,
-                            Telefonnummer: parentModel.orderPerson.tel
+                            Namn: parentModel.orderPerson.name,
+                            Telefonnummer: parentModel.orderPerson.telephones
                         };
                     },
                     templateOptions: {
@@ -810,14 +810,14 @@
                     template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
-                            Namn: parentModel.person.namn,
-                            'Användarnamn': parentModel.person['användarnamn'],
-                            Resultatenhet: parentModel.person['huvud-RE'],
-                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE'])
+                            Namn: parentModel.person.name,
+                            'Användarnamn': parentModel.person.username,
+                            Resultatenhet: parentModel.person.RE,
+                            Postadress: parentModel.person.address
                         };
                         $scope.model.Kontaktperson = {
-                            Namn: parentModel.orderPerson.namn,
-                            Telefonnummer: parentModel.orderPerson.tel
+                            Namn: parentModel.orderPerson.name,
+                            Telefonnummer: parentModel.orderPerson.telephones
                         };
                     }
                 }, {
@@ -843,10 +843,10 @@
                     template: '<div><b>Uppsägning av Mobilt bredband</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
-                            Resultatenhet: parentModel.person['huvud-RE'],
+                            Resultatenhet: parentModel.person.RE,
                             Kontaktperson: {
-                                Namn: parentModel.orderPerson.namn,
-                                Telefonnummer: parentModel.orderPerson.tel
+                                Namn: parentModel.orderPerson.name,
+                                Telefonnummer: parentModel.orderPerson.telephonesephones
                             }
                         };
                     }
@@ -879,15 +879,15 @@
                 template: '<div><b>Utrustning</b></div>',
                 controller: /*@ngInject*/ function($scope) {
                     $scope.model['Beställare'] = {
-                        'Namn': parentModel.orderPerson.namn,
-                        'Tel': parentModel.orderPerson.tel
+                        'Namn': parentModel.orderPerson.name,
+                        'Tel': parentModel.orderPerson.telephones
                     };
                     $scope.model['Företag'] = 'AB Previa';
-                    $scope.model['RE som beställningen avser'] = parentModel.person['huvud-RE'];
+                    $scope.model['RE som beställningen avser'] = parentModel.person.RE;
                     $scope.model['Mottagare/Användare'] = {
-                        'Namn': parentModel.person.namn,
+                        'Namn': parentModel.person.name,
                         'Tel': parentModel.person.telefoner,
-                        'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE']),
+                        'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE),
                         'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
                     };
                     $scope.model.Fakturaadress = dataSharing.get('Fakturaadress');
@@ -983,11 +983,11 @@
                 fieldGroup: [{
                     template: '<div><b>Utrustning</b></div>',
                     controller: /*@ngInject*/ function($scope) {
-                        $scope.model['Beställare'] = parentModel.orderPerson.namn;
-                        $scope.model['RE som beställningen avser'] = parentModel.person['huvud-RE'];
+                        $scope.model['Beställare'] = parentModel.orderPerson.name;
+                        $scope.model['RE som beställningen avser'] = parentModel.person.RE;
                         $scope.model.Mottagare = {
-                            Leveransmottagare: parentModel.person.namn,
-                            Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE'])
+                            Leveransmottagare: parentModel.person.name,
+                            Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE)
                         };
                         $scope.model.Datum = new Date();
                         $scope.model.Fakturareferens = dataSharing.get('Fakturareferens');
@@ -1096,16 +1096,16 @@
                         var promise = autocomplete.getCaretalkHardwareOptions();
                         promise.then(success, fail);
                         $scope.model['Beställare'] = {
-                            Namn: parentModel.orderPerson.namn,
-                            Tel: parentModel.orderPerson.tel,
+                            Namn: parentModel.orderPerson.name,
+                            Tel: parentModel.orderPerson.telephones,
                             Mailadress: parentModel.orderPerson.email
                         };
 
                         $scope.model.Leveransuppgifter = {
                             'Leveransadress 1': 'AB Previa',
                             Leveransmottagare: {
-                                Namn: parentModel.person.namn,
-                                'Leveransadress 2': autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE'])
+                                Namn: parentModel.person.name,
+                                'Leveransadress 2': autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE)
                             }
                         };
 
@@ -1150,11 +1150,11 @@
 
 
         function setTVisitAdress(targetModel, parentModel) {
-            targetModel['Tjänsteställets besöksadress'] = autocomplete.getTjanstestalleBesokAdress(parentModel.person['huvud-RE']);
+            targetModel['Tjänsteställets besöksadress'] = autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE);
         }
 
         function setTPostalAdress(targetModel, parentModel) {
-            targetModel['Tjänsteställets postadress'] = autocomplete.getTjanstestallePostAdress(parentModel.person['huvud-RE']);
+            targetModel['Tjänsteställets postadress'] = parentModel.person.address;
 
         }
 
@@ -1222,7 +1222,7 @@
                     },
                     controller: /*@ngInject*/ function($scope) {
                         if (parentModel.person && parentModel.person.MO) {
-                            $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person['huvud-RE'] + '" ' + 'till';
+                            $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person.RE + '" ' + 'till';
                         } else {
                             $scope.to.label = 'Ersätt nuvarande Huvud-RE till';
                         }
@@ -1422,7 +1422,7 @@
                     },
                     controller: /*@ngInject*/ function($scope) {
                         if (parentModel.person && parentModel.person.MO) {
-                            $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person['huvud-RE'] + '" ' + 'till';
+                            $scope.to.label = 'Ersätt nuvarande Huvud-RE' + ': "' + parentModel.person.RE + '" ' + 'till';
                         } else {
                             $scope.to.label = 'Ersätt nuvarande Huvud-RE till';
                         }
@@ -1599,7 +1599,7 @@
                     template: '<div><b>Tjänsteuppgifter</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
-                        $scope.model['Huvud-RE'] = parentModel.person['huvud-RE'];
+                        $scope.model['Huvud-RE'] = parentModel.person.RE;
                         $scope.model['Dagens datum'] = new Date();
                         $scope.model['Beställare'] = parentModel.orderPerson;
                     }
@@ -1657,7 +1657,7 @@
                     template: '<div><b>Avsluta konto</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
-                        $scope['huvud-RE'] = parentModel.person['huvud-RE'];
+                        $scope['huvud-RE'] = parentModel.person.RE;
                         $scope['Dagens datum'] = new Date();
                         $scope['Beställare'] = parentModel.orderPerson;
                     }
@@ -1802,11 +1802,11 @@
 
         function setPersonInfo(targetModel, parentModel) {
             targetModel['Användarnamn'] = parentModel.person['användarnamn'];
-            targetModel.Namn = parentModel.person.namn;
+            targetModel.Namn = parentModel.person.name;
         }
 
         function setOrderPersonInfo(targetModel, parentModel) {
-            targetModel['Nuvarande huvud-RE'] = parentModel.person['huvud-RE'];
+            targetModel['Nuvarande huvud-RE'] = parentModel.person.RE;
             targetModel['Dagens datum'] = new Date();
             targetModel['Behörig beställare'] = parentModel.orderPerson;
         }
