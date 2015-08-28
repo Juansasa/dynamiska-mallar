@@ -35,7 +35,7 @@
         }
 
         function sendMail() {
-            console.log('implement me !');
+            mailService.sendMail($scope.summary, $scope.model.orderPerson, $scope.model.person);
         }
 
         function isSummary() {

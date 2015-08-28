@@ -6,26 +6,29 @@
         .factory('mailService', mailService);
 
     /*@ngInject*/
-    function mailService($http) {
+    function mailService($http, $filter) {
         var service = {
             sendMail: send
         };
         return service;
 
-        function send(payload) {
-            var example = {
-                "email": [{
-                    "fromAddress": "quavun@gmail.com",
-                    "toAddress": "nickiewooster@gmail.com",
-                    "subject": "My First WebAPI",
-                    "body": "Hohohohoho",
-                    "toAddressCC": "quang.vu@r2m.se",
+        function send(payload, orderer, formPerson) {
+            var emails = [];
+            _.forEach(payload, function(form, key) {
+                emails.push({
+                    "fromAddress": orderer.email,
+                    "toAddress": form.reciever,
+                    "subject": key,
+                    "body": $filter('json')(form),
+                    "toAddressCC": formPerson.email,
                     "toAddressBCC": "",
-                    "emailTemplate": "ErrorsTable",
-                    "locale": "fr-CA"
-                }]
-            };
-            return $http.post('/api/ad/sendmail', example);
+                    "emailTemplate": ""
+                });
+            });
+
+            console.log(emails);
+            
+            //return $http.post('/api/ad/sendmail', emails);
         }
     }
 })();
