@@ -287,7 +287,6 @@
                     }
                 }
             }
-
         }, {
             name: 'autocomplete-select',
             templateUrl: 'shared/formService/autocompleteSelect.html',

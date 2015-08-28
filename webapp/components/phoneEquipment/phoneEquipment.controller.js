@@ -10,6 +10,7 @@
             $state.go('^');
         }
 
+        $state.current.skip = false;
         $scope.model = $scope.model || {};
         $scope.fields = forms.phoneEquipment($scope.model);
     }

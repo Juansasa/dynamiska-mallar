@@ -30,10 +30,15 @@
         //gettextCatalog.debug = true;
 
         $rootScope.$on('$stateChangeStart', function(event, next) {
-                    
+
             if(!adService.isAuthorized() && next.name !== 'authentication') {
                 event.preventDefault();
                 $state.go('authentication');
+            }
+
+            // If go to state previously skipped, reenable it
+            if(next.skip) {
+                next.skip = false;
             }
         });
 

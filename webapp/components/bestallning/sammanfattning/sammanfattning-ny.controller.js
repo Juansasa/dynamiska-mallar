@@ -17,13 +17,14 @@
         $scope.getOrders = getOrders;
 
         function getOrders(model) {
+
             if (!model.ny) {
                 return;
             }
 
             var summary = {};
             _.each($scope.model.steps.newEmployee, function(step){
-                if(!(step.name === 'Sök' || step.name === 'Sammanfattning')) {
+                if(!(step.name === 'Sök' || step.name === 'Sammanfattning' || $state.get(step.route).skip)) {
                     summary[step.name] = step.model;
                 }
             });
