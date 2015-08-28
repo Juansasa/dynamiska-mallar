@@ -19,7 +19,7 @@
         return service;
 
         function isAuthorized() {
-            return true;//service.loggedUser !== null && service.loggedUser.isManager;
+            return service.loggedUser !== null && service.loggedUser.isManager;
         }
 
         function  getManagers() {

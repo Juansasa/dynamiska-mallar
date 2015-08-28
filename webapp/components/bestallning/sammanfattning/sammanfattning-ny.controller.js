@@ -9,29 +9,45 @@
             $state.go('^');
         }
 
+        init();
+
         $scope.isPrimitive = isPrimitive;
         $scope.isDate = isDate;
         $scope.extractValue = extractValue;
         $scope.isOrderDefined = isOrderDefined;
         $scope.getMailURL = getMailURL;
-        $scope.getOrders = getOrders;
+        
+        $scope.$parent.isSummary = isSummary;
+        $scope.$parent.sendMail = sendMail;
+        $scope.$parent.removeForm = removeForm;
 
-        function getOrders(model) {
+        function init() {
 
-            if (!model.ny) {
+            if (!$scope.model.ny) {
                 return;
             }
 
-            var summary = {};
+            $scope.summary = {};
             _.each($scope.model.steps.newEmployee, function(step){
                 if(!(step.name === 'Sök' || step.name === 'Sammanfattning' || $state.get(step.route).skip)) {
-                    summary[step.name] = step.model;
+                    $scope.summary[step.name] = step.model;
                 }
             });
 
-            return summary;
+            return $scope.summary;
         }
 
+        function sendMail() {
+            console.log('implement me !');
+        }
+
+        function isSummary() {
+            return $state.current.name === 'bestallning.ny.sammanfattning' || $state.current.name === 'bestallning.nuvarande.sammanfattning';
+        }
+
+        function removeForm(key) {
+            $scope.summary[key] = null;
+        }
 
         function isOrderDefined(order) {
             return order && !_.isEmpty(order);

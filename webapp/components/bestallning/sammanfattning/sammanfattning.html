@@ -1,6 +1,6 @@
 <h1 class="row">Beställningar</h1>
 <hr>
-<div class="well clearfix" ng-repeat="(key, order) in getOrders(model)" ng-if="isOrderDefined(order)">
+<div class="well clearfix" ng-repeat="(key, order) in summary" ng-if="isOrderDefined(order)">
     <h3>{{key}}</h3>
     <div class="col-md-12" ng-repeat="(key, value) in order">
         <div class="col-md-12">
@@ -17,5 +17,5 @@
             </div>
         </div>
     </div>
-    <a ng-click="getMailURL(order, key)" class="btn btn-success pull-right"><i class="fa fa-envelope"></i> Skicka</a>
+    <a ng-click="removeForm(key)" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Tabort</a>
 </div>

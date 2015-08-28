@@ -28,17 +28,6 @@
                     }
                 }
             }
-        }, {
-            stateName: 'bestallning.andra.sammanfattning',
-            stateConfig: {
-                url: '/sammanfattning',
-                views: {
-                    'wizardContent@bestallning': {
-                        templateUrl: 'components/bestallning/sammanfattning/sammanfattning.html',
-                        controller: 'SummaryAndraEmployeeController'
-                    }
-                }
-            }
         }];
 
         routeHelper.registerStates(states);

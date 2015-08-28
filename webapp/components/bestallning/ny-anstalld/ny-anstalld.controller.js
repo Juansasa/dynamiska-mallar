@@ -26,21 +26,8 @@
         $scope.$parent.skip = function() {
 
             // Clear model-data and mark model as disabled
-            var path = $state.current.modelKey;
-            var model = $scope.model;
             var index = findStateIndex($state.current);
             $state.current.skip = true;
-
-            // if (path && model) {
-            //     var stack = path.split('.');
-            //     while (stack.length > 1) {
-            //         model = model[stack.shift()];
-            //     }
-
-            //     model[stack.shift()] = null;
-
-            // }
-
             if (index + 1 < $scope.model.steps.newEmployee.length) {
                 $state.go($scope.model.steps.newEmployee[index + 1].route);
             }
