@@ -12,6 +12,7 @@
             getManager: getManager,
             searchUser: searchUser,
             isAuthorized: isAuthorized,
+            getAllManagers: getManagers,
             loggedUser: loggedUser
         };
 
@@ -19,6 +20,10 @@
 
         function isAuthorized() {
             return service.loggedUser !== null && service.loggedUser.isManager;
+        }
+
+        function  getManagers() {
+            return $http.get('/api/ad/managerlist');
         }
 
         function getManager() {

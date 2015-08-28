@@ -4,7 +4,6 @@
         .controller('HomeController', homeCtrl);
 
     /*@ngInject*/
-    function homeCtrl($scope) {
-        
+    function homeCtrl($scope, adService) {
     }
 })();

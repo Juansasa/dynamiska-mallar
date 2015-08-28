@@ -5,11 +5,29 @@
         .run(register);
 
     /*@ngInject*/
-    function register(formlyConfig, $filter, gettext, dataSharing) {
+    function register(formlyConfig, $filter, gettext, dataSharing, adService) {
         formlyConfig.setType([{
             name: 'infoList',
             wrapper: ['bootstrapLabel'],
             templateUrl: 'shared/formService/infoList.html'
+        }, {
+            name: 'async-ui-select',
+            extends: 'select',
+            templateUrl: 'async-ui-select-type.html',
+            defaultOptions: {
+                validation: {
+                    show: true
+                }
+            }
+        }, {
+            name: 'ui-select',
+            extends: 'select',
+            templateUrl: 'shared/formService/ui-select.html',
+            defaultOptions: {
+                validation: {
+                    show: true
+                }
+            }
         }, {
             name: 'personNo',
             extends: 'input',
@@ -283,14 +301,27 @@
                         className: 'row',
                         fieldGroup: [{
                             className: 'col-md-6',
-                            type: 'input',
+                            type: 'ui-select',
                             key: 'Rapporterar till (chef)',
                             templateOptions: {
+                                placeholder: 'Välj i listan',
                                 label: 'Rapporterar till (chef)',
+                                options: [],
                                 required: true
                             },
-                            validation: {
-                                show: true
+                            controller: /*@ngInject*/ function($scope) {
+                                adService.getAllManagers().then(function(resp) {
+                                    var options = [];
+                                    _.forEach(resp.data, function(item) {
+                                        var name = item.name.firstname + ' ' + item.name.lastname;
+                                        options.push({
+                                            name: name,
+                                            value: name
+                                        });
+                                    });
+
+                                    $scope.to.options = options;
+                                });
                             }
                         }, {
                             className: 'col-md-6',
@@ -298,12 +329,7 @@
                             key: 'Fakturareferens',
                             templateOptions: {
                                 label: 'Fakturareferens',
-                                required: true,
-                                onBlur: function(v) {
-                                    if (v) {
-                                        dataSharing.set('Fakturareferens', v);
-                                    }
-                                }
+                                required: true
                             },
                             validation: {
                                 show: true
