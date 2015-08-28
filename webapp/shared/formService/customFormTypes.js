@@ -12,8 +12,7 @@
             templateUrl: 'shared/formService/infoList.html'
         }, {
             name: 'async-ui-select',
-            extends: 'select',
-            templateUrl: 'async-ui-select-type.html',
+            templateUrl: 'shared/formService/async-ui-select.html',
             defaultOptions: {
                 validation: {
                     show: true

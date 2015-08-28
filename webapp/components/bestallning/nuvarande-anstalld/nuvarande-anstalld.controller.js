@@ -7,17 +7,10 @@
     function ctrl($scope, $state, autocomplete, adService) {
         init();
 
-        $scope.refreshUserList = function (queryString) {
-            if(!queryString) {
-                return;
-            }
+        $scope.personSelected = personSelected;
+        $scope.refreshUserList = refreshUserList;
 
-            return adService.searchUser(queryString).then(function (resp) {
-                $scope.employees = resp.data;
-            });
-        };
-
-        $scope.personSelected = function() {            
+        function personSelected() {
             $scope.fields.formsSelection = [{
                 className: 'row',
                 fieldGroup: [{
@@ -106,7 +99,7 @@
                     }
                 }]
             }];
-        };
+        }
 
         $scope.$parent.getSteps = function() {
             if ($scope.model.steps.existingEmployee.length === 2) {
@@ -159,6 +152,21 @@
                 name: 'Sammanfattning',
                 route: 'bestallning.nuvarande.sammanfattning'
             }];
+        }
+
+        function refreshUserList(queryString) {
+            if (!queryString) {
+                return;
+            }
+
+            var employees = [];
+            return adService.searchUser(queryString).then(function(resp) {
+                _.forEach(resp.data, function(item) {
+                    employees.push(item);
+                });
+
+                $scope.employees = employees;
+            });
         }
 
         function findStateIndex(state) {
