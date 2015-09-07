@@ -4,7 +4,7 @@
         .controller('SummaryExistingEmployeeController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $compile, $state, $filter, Mailto, $window, mailService) {
+    function ctrl($scope, $state, mailService) {
         if (!$scope.model.steps || !$scope.model.steps.existingEmployee) {
             $state.go('^');
         }
