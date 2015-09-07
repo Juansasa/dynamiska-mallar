@@ -5,7 +5,22 @@
 
     /*@ngInject*/
     function authenticationCtrl($rootScope, $scope, adService, usSpinnerService, $state, AUTH_EVENTS) {
-        adService.getManager().then(success, error);
+        //adService.getManager().then(success, error);
+        success({
+            data: {
+                "name": {
+                    "firstname": "Quang",
+                    "lastname": "Vu"
+                },
+                "email": null,
+                "telephones": {
+                    "mobile": "0733709517",
+                    "phone": null
+                },
+                "re": null,
+                "isManager": true
+            }
+        });
         $scope.authMessage = 'Verifiera access...';
 
 

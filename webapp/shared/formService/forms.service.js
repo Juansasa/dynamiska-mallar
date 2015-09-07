@@ -554,13 +554,13 @@
                         label: 'Välj ett formulär',
                         options: [{
                             name: 'Nytt abonnemang',
-                            value: 'Nytt'
+                            value: 'Nytt abonnemang'
                         }, {
                             name: 'Flytt av abonnemang till annan användare',
-                            value: 'Flytt'
+                            value: 'Flytt av abonnemang till annan användare'
                         }, {
                             name: 'Uppsägning av abonnemang',
-                            value: 'Uppsägning'
+                            value: 'Uppsägning av abonnemang'
                         }]
                     }
                 }]
@@ -605,7 +605,7 @@
                         }]
                     }
                 }],
-                hideExpression: 'model["Vald formulär"] !== "Nytt"'
+                hideExpression: 'model["Vald formulär"] !== "Nytt abonnemang"'
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -668,7 +668,7 @@
                         required: true
                     }
                 }],
-                hideExpression: 'model["Vald formulär"] !== "Flytt"'
+                hideExpression: 'model["Vald formulär"] !== "Flytt av abonnemang till annan användare"'
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -731,7 +731,7 @@
                         label: 'Datum för uppsägning'
                     }
                 }],
-                hideExpression: 'model["Vald formulär"] !== "Uppsägning"'
+                hideExpression: 'model["Vald formulär"] !== "Uppsägning av abonnemang"'
             }];
             showErrors(specific);
             return specific.concat(getOrderSignaturePart());

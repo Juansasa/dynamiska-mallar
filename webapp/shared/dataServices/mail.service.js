@@ -15,20 +15,22 @@
         function send(payload, orderer, formPerson) {
             var emails = [];
             _.forEach(payload, function(form, key) {
-                emails.push({
-                    "fromAddress": orderer.email,
-                    "toAddress": form.reciever,
-                    "subject": key,
-                    "body": $filter('json')(form),
-                    "toAddressCC": formPerson.email,
-                    "toAddressBCC": "",
-                    "emailTemplate": ""
-                });
+                if (form) {
+                    emails.push({
+                        "fromAddress": 'quavun@gmail.com', //orderer.email,
+                        "toAddress": 'nickiewooster@gmail.com', //form.reciever,
+                        "subject": key,
+                        "body": $filter('jsonToHtml')(form),
+                        "toAddressCC": "",//formPerson.email,
+                        "toAddressBCC": "",
+                        "emailTemplate": ""
+                    });
+                }
             });
 
-            console.log(emails);
-            
-            //return $http.post('/api/ad/sendmail', emails);
+            return $http.post('/api/ad/sendmail', {
+                email: emails
+            });
         }
     }
 })();

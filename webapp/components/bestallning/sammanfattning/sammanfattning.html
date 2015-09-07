@@ -2,20 +2,6 @@
 <hr>
 <div class="well clearfix" ng-repeat="(key, order) in summary" ng-if="isOrderDefined(order)">
     <h3>{{key}}</h3>
-    <div class="col-md-12" ng-repeat="(key, value) in order">
-        <div class="col-md-12">
-            <span><b class="text-capitalize">{{key}}</b><i ng-if="isPrimitive(value)">: {{extractValue(value)}}</i></span>
-            <div class="col-md-12" ng-if="!isPrimitive(value)">
-                <div ng-repeat="(nk, nval) in value">
-                    <span><b class="text-capitalize">{{nk}}</b><i ng-if="isPrimitive(nval)">: {{extractValue(nval)}}</i></span>
-                    <div class="col-md-12" ng-if="!isPrimitive(nval)">
-                        <div ng-repeat="(nnk, nnval) in nval">
-                            <span><b class="text-capitalize">{{nnk}}</b><i ng-if="isPrimitive(nnval)">: {{extractValue(nnval)}}</i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div ng-bind-html="order | jsonToHtml"></div>
     <a ng-click="removeForm(key)" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Tabort</a>
 </div>
