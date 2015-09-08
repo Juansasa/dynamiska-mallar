@@ -4,7 +4,7 @@
         .controller('SummaryNewEmployeeController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, $filter, mailService) {
+    function ctrl($scope, $state, $filter, mailService, usSpinnerService, $modal) {
         if (!$scope.model.steps || !$scope.model.steps.newEmployee) {
             $state.go('^');
         }
@@ -33,7 +33,30 @@
         }
 
         function sendMail() {
-            mailService.sendMail($scope.summary, $scope.model.orderPerson, $scope.model.person);
+            usSpinnerService.spin('sendmail-spinner');
+            mailService.sendMail($scope.summary, $scope.model.orderPerson, $scope.model.person)
+            .then(function(response) {
+                usSpinnerService.stop('sendmail-spinner');
+                var confirmModal = $modal.open({
+                    animation: true,
+                    size: 'lg',
+                    templateUrl: 'components/bestallning/sammanfattning/confirmationModal.html',
+                    resolve: {
+                        mails: function () {
+                            return response.data.email;
+                        }
+                    },
+                    controller: 'ConfirmationModalController'
+                });
+
+                confirmModal.result.then(modalClosed, modalClosed);
+            });
+        }
+
+        function modalClosed() {
+            $scope.summary = {};
+            $scope.model.steps = [];
+            $state.go('^');
         }
 
         function isSummary() {

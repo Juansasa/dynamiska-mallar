@@ -17,13 +17,12 @@
             _.forEach(payload, function(form, key) {
                 if (form) {
                     emails.push({
-                        "fromAddress": 'quavun@gmail.com', //orderer.email,
-                        "toAddress": 'nickiewooster@gmail.com', //form.reciever,
+                        "fromAddress": orderer.email,
+                        "toAddress": form.reciever,
                         "subject": key,
                         "body": $filter('jsonToHtml')(form),
-                        "toAddressCC": "",//formPerson.email,
-                        "toAddressBCC": "",
-                        "emailTemplate": ""
+                        "toAddressCC": formPerson.email,
+                        "toAddressBCC": ""
                     });
                 }
             });
