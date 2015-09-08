@@ -1,7 +1,8 @@
 <h1 class="row">Beställningar</h1>
 <hr>
-<div class="well clearfix" ng-repeat="(key, order) in summary" ng-if="isOrderDefined(order)">
+<div ng-hide="confirmation" class="well clearfix" ng-repeat="(key, order) in summary">
     <h3>{{key}}</h3>
     <div ng-bind-html="order | jsonToHtml"></div>
     <a ng-click="removeForm(key)" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Tabort</a>
 </div>
+<span us-spinner spinner-key="sendmail-spinner"></span>

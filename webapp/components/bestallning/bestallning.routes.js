@@ -16,7 +16,6 @@
             }
         }];
 
-        //routeHelper.redirect('/existing', 'existing/start');
         routeHelper.registerStates(states);
     }
 })();

@@ -1,0 +1,15 @@
+<div class="modal-header">
+	<h3 class="modal-title">Följande beställningar är nu skickade</h3>
+</div>
+<div class="modal-body">
+	<ul class="list-group" ng-repeat="(key, mail) in mails">
+		<li class="list-group-item">
+			<h4>{{mail.subject}} <i class="fa fa-check"></i></h4>
+			<div><b>Från: </b> {{mail.fromAddress}}</div>
+			<div><b>Till: </b> {{mail.toAddress}}</div>
+		</li>
+	</ul>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success" ng-click="ok()"><i class="fa fa-chevron-left"></i> Tillbaka</button>
+</div>

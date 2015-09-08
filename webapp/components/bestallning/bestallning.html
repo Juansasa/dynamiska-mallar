@@ -23,7 +23,6 @@
                 <div ui-view="wizardContent"></div>
                 <hr>
                 <div class="wizard-footer col-md-12">
-                    {{isSummary}}
                     <button type="submit" ng-disabled="checkGoBack()" ng-click="previous()" class="btn btn-success pull-left" translate>Förregående</button>
                     <button type="submit" ng-if="!isSummary()" ng-disabled="checkGoForward()" ng-click="next()" class="btn btn-success pull-right" translate>Nästa</button>
                     <button type="submit" ng-if="isSummary()" ng-click="sendMail()" class="btn btn-success pull-right" translate><i class="fa fa-envelope"></i> Skicka</button>

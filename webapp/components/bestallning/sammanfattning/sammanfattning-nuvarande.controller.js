@@ -4,14 +4,13 @@
         .controller('SummaryExistingEmployeeController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, mailService) {
+    function ctrl($scope, $state, $modal, mailService, usSpinnerService) {
         if (!$scope.model.steps || !$scope.model.steps.existingEmployee) {
             $state.go('^');
         }
 
         init();
 
-        $scope.isOrderDefined = isOrderDefined;
         $scope.$parent.isSummary = isSummary;
         $scope.$parent.sendMail = sendMail;
         $scope.$parent.removeForm = removeForm;
@@ -23,14 +22,37 @@
 
             $scope.summary = {};
             _.each($scope.model.steps.existingEmployee, function(step) {
-                if (!(step.name === 'Sök' || step.name === 'Sammanfattning')) {
+                if (!(_.keys(step.model).length < 1 || step.name === 'Sök' || step.name === 'Sammanfattning')) {
                     $scope.summary[step.name] = step.model;
                 }
             });
         }
 
         function sendMail() {
-            mailService.sendMail($scope.summary, $scope.model.orderPerson, $scope.model.person);
+            usSpinnerService.spin('sendmail-spinner');
+            mailService.sendMail($scope.summary, $scope.model.orderPerson, $scope.model.person)
+            .then(function(response) {
+                usSpinnerService.stop('sendmail-spinner');
+                var confirmModal = $modal.open({
+                    animation: true,
+                    size: 'lg',
+                    templateUrl: 'components/bestallning/sammanfattning/confirmationModal.html',
+                    resolve: {
+                        mails: function () {
+                            return response.data.email;
+                        }
+                    },
+                    controller: 'ConfirmationModalController'
+                });
+
+                confirmModal.result.then(modalClosed, modalClosed);
+            });
+        }
+
+        function modalClosed() {
+            $scope.summary = {};
+            $scope.model.steps = [];
+            $state.go('^');
         }
 
         function isSummary() {
@@ -39,10 +61,6 @@
 
         function removeForm(key) {
             $scope.summary[key] = null;
-        }
-
-        function isOrderDefined(order) {
-            return order && !_.isEmpty(order);
         }
     }
 })();
