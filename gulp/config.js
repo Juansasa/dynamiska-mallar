@@ -61,11 +61,12 @@ module.exports = function() {
 
         fonts: {
             files: [assets + '/fonts/**', bowerDir + '/**'],
-            dest: dist + '/fonts/'
+            dev: tmp + '/fonts',
+            dest: dist + '/fonts'
         },
 
         misc: {
-            files: [appPath + '/*.{ico,txt}', appPath + '/.htaccess']
+            files: [appPath + '/*.{ico,txt}', appPath + '/.htaccess', assets + '/fonts']
         },
 
         equipment: {
