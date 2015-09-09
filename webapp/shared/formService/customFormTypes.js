@@ -10,6 +10,9 @@
                 name: 'employeeSearch',
                 wrapper: ['bootstrapLabel'],
                 templateUrl: 'shared/formService/employeeSearch.html',
+                defaultOptions: {
+                    className: 'has-feedback has-feedback-right',
+                },
                 controller: /*@ngInject*/ function($scope) {
                     $scope.getPersons = getPersons;
 
