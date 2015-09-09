@@ -1,0 +1,9 @@
+<input type="text"
+		ng-model="model[options.key]"
+		placeholder="{{to.placeholder}}"
+		typeahead="person as person.name.firstname + ' ' + person.name.lastname for person in getPersons($viewValue)"
+		typeahead-loading="isLoading"
+		typeahead-wait-ms="200"
+		typeahead-on-select="addPerson($item); selectedPerson = ''" 
+		class="form-control">
+<i class="fa fa-spinner fa-pulse form-control-feedback" ng-show="isLoading"></i>
