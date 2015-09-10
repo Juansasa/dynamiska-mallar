@@ -56,7 +56,7 @@
                     template: '<div><b>Anställningsperiod</b></div>'
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Anställd Fr o m',
                     templateOptions: {
                         label: 'Fr o m',
@@ -64,7 +64,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Anställd T o m',
                     templateOptions: {
                         label: 'T o m',
@@ -236,7 +236,7 @@
                     }
                 }, {
                     className: 'col-md-3',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'fr o m',
                     templateOptions: {
                         label: 'fr o m',
@@ -244,7 +244,7 @@
                     }
                 }, {
                     className: 'col-md-3',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 't o m',
                     hideExpression: function(vv, mv, scope) {
                         return scope.model['anställningsform'] === 'tillsvidareanställning';
@@ -582,7 +582,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum abonnemanget ska börja gälla',
                     templateOptions: {
                         label: 'Datum abonnemanget ska börja gälla'
@@ -639,7 +639,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för flytt',
                     templateOptions: {
                         label: 'Datum för flytt'
@@ -725,7 +725,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för uppsägning',
                     templateOptions: {
                         label: 'Datum för uppsägning'
@@ -797,7 +797,7 @@
                     hideExpression: 'model["Mobilt bredband för en existerande dator"] !== "Ja"'
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum då abonnemanget ska börja gälla',
                     templateOptions: {
                         label: 'Datum då abonnemanget ska börja gälla'
@@ -822,7 +822,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för flytt',
                     templateOptions: {
                         label: 'Datum för flytt'
@@ -852,7 +852,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för uppsägning',
                     templateOptions: {
                         label: 'Datum för uppsägning'
@@ -1171,14 +1171,14 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Fr.o.m',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'T.o.m',
                     templateOptions: {
                         label: 'T.o.m'
@@ -1382,14 +1382,14 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Fr.o.m',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'T.o.m',
                     templateOptions: {
                         label: 'T.o.m'
@@ -1566,14 +1566,14 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Fr.o.m',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'T.o.m',
                     templateOptions: {
                         label: 'T.o.m'
@@ -1622,14 +1622,14 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Fr.o.m',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'T.o.m',
                     templateOptions: {
                         label: 'T.o.m'
@@ -1663,7 +1663,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Kontot avslutas fr.o.m',
                     templateOptions: {
                         label: 'Kontot avslutas fr.o.m',
@@ -1742,7 +1742,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum som anger när ändringen skall gälla',
                     templateOptions: {
                         label: 'Datum som anger när ändringen skall gälla',

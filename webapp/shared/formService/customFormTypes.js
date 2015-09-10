@@ -6,6 +6,63 @@
 
     /*@ngInject*/
     function register(formlyConfig, $filter, gettext, dataSharing, adService) {
+        function getDatepickerNgattrs() {
+            var attributes = [
+                'show-weeks',
+                'starting-day',
+                'min-mode',
+                'max-mode',
+                'format-day',
+                'format-month',
+                'format-year',
+                'format-day-header',
+                'format-day-title',
+                'format-month-title',
+                'year-range',
+                'shortcut-propagation',
+                'datepicker-popup',
+                'show-button-bar',
+                'current-text',
+                'clear-text',
+                'close-text',
+                'close-on-date-selection',
+                'datepicker-append-to-body'
+            ];
+
+            var bindings = [
+                'datepicker-mode',
+                'min-date',
+                'max-date'
+            ];
+
+            var statement = [
+                'date-disabled',
+                'custom-class'
+            ];
+
+            var ngModelAttrs = {};
+
+            angular.forEach(attributes, function(attr) {
+                ngModelAttrs[_.camelCase(attr)] = {
+                    attribute: attr
+                };
+            });
+
+            angular.forEach(bindings, function(binding) {
+                ngModelAttrs[_.camelCase(binding)] = {
+                    bound: binding
+                };
+            });
+
+            angular.forEach(statement, function(binding) {
+                ngModelAttrs[_.camelCase(binding)] = {
+                    statement: binding
+                };
+            });
+
+            return ngModelAttrs;
+        }
+
         formlyConfig.setType([{
                 name: 'employeeSearch',
                 wrapper: ['bootstrapLabel'],
@@ -27,6 +84,75 @@
                     function error(err) {
                         $scope.isLoading = false;
                         return err.message;
+                    }
+                }
+            }, {
+                name: 'managerSearch',
+                wrapper: ['bootstrapLabel'],
+                templateUrl: 'shared/formService/managerSearch.html',
+                defaultOptions: {
+                    className: 'has-feedback has-feedback-right',
+                },
+                controller: /*@ngInject*/ function($scope) {
+                    init();
+
+                    $scope.byFullName = byFullName;
+
+                    function byFullName(value) {
+                        var input = $scope.model[$scope.options.key];
+                        var name = value.name.firstname + ' ' + value.name.lastname;
+
+                        return name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+                    }
+
+                    function init(queryString) {
+                        return adService.getAllManagers(queryString).then(success, error);
+                    }
+
+                    function success(response) {
+                        $scope.managers = response.data;
+                    }
+
+                    function error(err) {
+                        $scope.isLoading = false;
+                        return err.message;
+                    }
+                }
+            }, {
+                name: 'datepicker',
+                templateUrl: 'shared/formService/datepicker.html',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                defaultOptions: {
+                    ngModelAttrs: getDatepickerNgattrs(),
+                    templateOptions: {
+                        datepickerPopup: 'dd/MMMM/yyyy'
+                    }
+                },
+                controller: /*@ngInject*/ function($scope) {
+                    $scope.model[$scope.options.key] = new Date();
+                    $scope.datepicker = {
+                        opened: false
+                    };
+
+                    $scope.datepicker.open = function() {
+                        $scope.datepicker.opened = true;
+                    };
+                }
+            }, {
+                name: 'personNo',
+                extends: 'input',
+                defaultOptions: {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Personnummer',
+                    templateOptions: {
+                        label: gettext('Personnummer'),
+                        required: true,
+                        placeholder: 'ååmmdd-xxxx',
+                        pattern: '[0-9]{6}-[0-9]{4}'
+                    },
+                    validation: {
+                        show: true
                     }
                 }
             },
@@ -56,23 +182,6 @@
                 extends: 'select',
                 templateUrl: 'shared/formService/ui-select.html',
                 defaultOptions: {
-                    validation: {
-                        show: true
-                    }
-                }
-            }, {
-                name: 'personNo',
-                extends: 'input',
-                defaultOptions: {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'Personnummer',
-                    templateOptions: {
-                        label: gettext('Personnummer'),
-                        required: true,
-                        placeholder: 'ååmmdd-xxxx',
-                        pattern: '[0-9]{6}-[0-9]{4}'
-                    },
                     validation: {
                         show: true
                     }
@@ -375,14 +484,6 @@
                                 }
                             }]
                         }]
-                    }
-                }
-            }, {
-                name: 'today-date',
-                extends: 'input',
-                defaultOptions: {
-                    templateOptions: {
-                        type: 'date'
                     }
                 }
             }, {
