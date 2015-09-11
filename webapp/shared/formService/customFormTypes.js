@@ -65,10 +65,13 @@
 
         formlyConfig.setType([{
                 name: 'employeeSearch',
-                wrapper: ['bootstrapLabel'],
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
                 templateUrl: 'shared/formService/employeeSearch.html',
                 defaultOptions: {
                     className: 'has-feedback has-feedback-right',
+                    templateOptions: {
+                        placeholder: 'Fyll i namn på personen du leta efter'
+                    }
                 },
                 controller: /*@ngInject*/ function($scope) {
                     $scope.getPersons = getPersons;
@@ -88,10 +91,16 @@
                 }
             }, {
                 name: 'managerSearch',
-                wrapper: ['bootstrapLabel'],
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
                 templateUrl: 'shared/formService/managerSearch.html',
                 defaultOptions: {
                     className: 'has-feedback has-feedback-right',
+                    templateOptions: {
+                        placeholder: 'Fyll i namn på personen du leta efter'
+                    },
+                    validation: {
+                        show: true
+                    }
                 },
                 controller: /*@ngInject*/ function($scope) {
                     init();
@@ -120,12 +129,15 @@
                 }
             }, {
                 name: 'datepicker',
-                templateUrl: 'shared/formService/datepicker.html',
+                templateUrl: 'shared/formService/datepickerTpl.html',
                 wrapper: ['bootstrapLabel', 'bootstrapHasError'],
                 defaultOptions: {
                     ngModelAttrs: getDatepickerNgattrs(),
                     templateOptions: {
                         datepickerPopup: 'dd/MMMM/yyyy'
+                    },
+                    validation: {
+                        show: true
                     }
                 },
                 controller: /*@ngInject*/ function($scope) {
@@ -169,23 +181,6 @@
                 name: 'infoList',
                 wrapper: ['bootstrapLabel'],
                 templateUrl: 'shared/formService/infoList.html'
-            }, {
-                name: 'async-ui-select',
-                templateUrl: 'shared/formService/async-ui-select.html',
-                defaultOptions: {
-                    validation: {
-                        show: true
-                    }
-                }
-            }, {
-                name: 'ui-select',
-                extends: 'select',
-                templateUrl: 'shared/formService/ui-select.html',
-                defaultOptions: {
-                    validation: {
-                        show: true
-                    }
-                }
             }, {
                 name: 'personName',
                 template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
@@ -441,27 +436,12 @@
                             className: 'row',
                             fieldGroup: [{
                                 className: 'col-md-6',
-                                type: 'ui-select',
+                                type: 'managerSearch',
                                 key: 'Rapporterar till (chef)',
                                 templateOptions: {
                                     placeholder: 'Välj i listan',
                                     label: 'Rapporterar till (chef)',
-                                    options: [],
                                     required: true
-                                },
-                                controller: /*@ngInject*/ function($scope) {
-                                    adService.getAllManagers().then(function(resp) {
-                                        var options = [];
-                                        _.forEach(resp.data, function(item) {
-                                            var name = item.name.firstname + ' ' + item.name.lastname;
-                                            options.push({
-                                                name: name,
-                                                value: name
-                                            });
-                                        });
-
-                                        $scope.to.options = options;
-                                    });
                                 }
                             }, {
                                 className: 'col-md-6',

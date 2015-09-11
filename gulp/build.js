@@ -2,64 +2,45 @@
 
 var gulp = require('gulp');
 var config = require('./config')();
-var $ = require('gulp-load-plugins')({
+var gulpSequence = require('gulp-sequence');
+var del = require('del');
+var plugins = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-gulp.task('partials', function() {
-    return gulp.src(config.templatecache.files)
-        .pipe($.minifyHtml({
-            empty: true,
-            spare: true,
-            quotes: true
-        }))
-        .pipe($.angularTemplatecache('templateCacheHtml.js', {
-            module: config.templatecache.moduleName
-        }))
-        .pipe(gulp.dest(config.templatecache.dest));
-});
+gulp.task('html', ['inject'], function() {
 
-gulp.task('html', ['inject', 'partials'], function() {
-    var partialsInjectFile = gulp.src(config.templatecache.dest + '/*.js', {
-        read: false
-    });
-    var partialsInjectOptions = {
-        starttag: '<!-- inject:partials -->',
-        ignorePath: config.templatecache.dest,
-        addRootSlash: false
-    };
 
-    var htmlFilter = $.filter('*.html');
-    var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
+    var htmlFilter = plugins.filter('*.html');
+    var jsFilter = plugins.filter('**/*.js');
+    var cssFilter = plugins.filter('**/*.css');
     var assets;
 
     return gulp.src(config.serve + '/*.html')
-        .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-        .pipe(assets = $.useref.assets())
-        .pipe($.rev())
+        .pipe(assets = plugins.useref.assets())
+        .pipe(plugins.rev())
         .pipe(jsFilter)
-        .pipe($.ngAnnotate())
-        //.pipe($.uglify({
-          //  preserveComments: $.uglifySaveLicense
-        //}))
+        .pipe(plugins.ngAnnotate())
+        // .pipe(plugins.uglify({
+        //     preserveComments: plugins.uglifySaveLicense
+        // }))
         .pipe(jsFilter.restore())
         .pipe(cssFilter)
-        .pipe($.replace('../bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
-        .pipe($.csso())
+        .pipe(plugins.replace('../bootstrap-sass-official/assets/fonts/bootstrap', '../fonts'))
+        .pipe(plugins.csso())
         .pipe(cssFilter.restore())
         .pipe(assets.restore())
-        .pipe($.useref())
-        .pipe($.revReplace())
+        .pipe(plugins.useref())
+        .pipe(plugins.revReplace())
         .pipe(htmlFilter)
-        .pipe($.minifyHtml({
+        .pipe(plugins.minifyHtml({
             empty: true,
             spare: true,
             quotes: true
         }))
         .pipe(htmlFilter.restore())
         .pipe(gulp.dest(config.dist))
-        .pipe($.size({
+        .pipe(plugins.size({
             title: config.dist,
             showFiles: true
         }));
@@ -72,12 +53,12 @@ gulp.task('images', function() {
 
 gulp.task('fonts-dev', function() {
     return gulp.src(config.fonts.files)
-        .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
-        .pipe($.flatten())
+        .pipe(plugins.filter('**/*.{eot,svg,ttf,woff,woff2}'))
+        .pipe(plugins.flatten())
         .pipe(gulp.dest(config.fonts.dev));
 });
 
-gulp.task('fonts-prod',['fonts-dev'], function() {
+gulp.task('fonts-prod', ['fonts-dev'], function() {
     return gulp.src([config.fonts.dev + '/**'])
         .pipe(gulp.dest(config.fonts.dest));
 });
@@ -93,7 +74,9 @@ gulp.task('misc', function() {
 });
 
 gulp.task('clean', function(done) {
-    $.del([config.dist, config.tmp], {force: true}, done);
+    return del([config.dist + '/**', config.tmp + '/**'], {
+        force: true
+    }, done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts-prod', 'misc', 'equipments']);
+gulp.task('build', gulpSequence('clean', ['html', 'images', 'fonts-prod', 'misc', 'equipments']));

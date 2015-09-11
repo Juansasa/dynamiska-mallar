@@ -9,8 +9,19 @@
 
         $scope.personSelected = personSelected;
         $scope.refreshUserList = refreshUserList;
+        $scope.employeeSearch = [{
+            key: 'person',
+            type: 'employeeSearch',
+            templateOptions: {
+                label: 'Personalsökning',
+                placeholder: 'Fyll i namn på personen du leta efter',
+                personSelected: personSelected()
+            }
+        }];
 
         function personSelected() {
+            console.log('selected');
+            
             $scope.fields.formsSelection = [{
                 className: 'row',
                 fieldGroup: [{

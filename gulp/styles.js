@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var config = require('./config')();
 var wiredep = require('wiredep').stream;
-var $ = require('gulp-load-plugins')();
+var plugins = require('gulp-load-plugins')();
 
 //
 // Import and compile SCSS files to CSS. The order of files is assumed to be
@@ -52,13 +52,13 @@ function injectOptions(setting) {
 
 gulp.task('styles', function() {
     return gulp.src(config.scss.main)
-        .pipe($.inject(configFiles(), injectOptions('configurations')))
+        .pipe(plugins.inject(configFiles(), injectOptions('configurations')))
         .pipe(wiredep(config.wiredepOptions))
-        .pipe($.inject(helpersFiles(), injectOptions('helpers')))
-        .pipe($.inject(componentsFiles(), injectOptions('components')))
+        .pipe(plugins.inject(helpersFiles(), injectOptions('helpers')))
+        .pipe(plugins.inject(componentsFiles(), injectOptions('components')))
         .pipe(gulp.dest(config.scss.dest))
-        .pipe($.sass(sassCompilerOptions))
-        .pipe($.autoprefixer())
+        .pipe(plugins.sass(sassCompilerOptions))
+        .pipe(plugins.autoprefixer())
         .on('error', function handleError(err) {
             console.error(err.toString());
             this.emit('end');

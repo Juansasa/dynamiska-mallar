@@ -18,14 +18,15 @@
             type: 'managerSearch',
             templateOptions: {
                 label: 'Chefsökning',
-                placeholder: 'Fyll i namn på personen du leta efter'
+                placeholder: 'Fyll i namn på personen du leta efter',
+                required: true
             }
         }, {
-            key: 'date',
+            key: 'date avslutas',
             type: 'datepicker',
             templateOptions: {
                 label: 'Date',
-                type: 'text',
+                required: true,
                 datepickerPopup: 'dd/MMMM/yyyy',
                 minDate: new Date(),
                 showWeeks: false,

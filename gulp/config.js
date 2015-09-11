@@ -6,7 +6,7 @@ var appModuleName = require('./../package').name;
 module.exports = function() {
     var appPath = 'webapp';
     var tmp = '.tmp';
-    var dist = 'X:';
+    var dist = 'x:';
     var assets = appPath + '/assets';
     var bowerDir = './bower_components';
     var serveDir = tmp;
@@ -104,7 +104,7 @@ module.exports = function() {
             bowerJson: require('./../bower.json'),
             directory: bowerDir,
             devDependencies: true,
-            //exclude: [ /bootstrap-sass/, /bootstrap\.css/, /bootstrap\.css/, /foundation\.css/]
+            exclude: [ /*/bootstrap-sass/,*/ /bootstrap\.css/] // Since we use sass
         }
     };
 

@@ -470,11 +470,11 @@
                             };
                             switch (type) {
                                 case 'tillsvidareanställning':
-                                    retval['Fr.o.m'] = model.person['fr o m'];
+                                    retval.From = model.person['fr o m'];
                                     break;
                                 default:
-                                    retval['Fr.o.m'] = model.person['fr o m'];
-                                    retval['T.o.m'] = model.person['t o m'];
+                                    retval.From = model.person['fr o m'];
+                                    retval.Tom = model.person['t o m'];
                                     break;
                             }
 
@@ -570,7 +570,7 @@
                     template: '<div><b>Nytt abonnemang</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
+                        $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
                             Postadress: parentModel.person.address
@@ -612,7 +612,7 @@
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
+                        $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
                             Postadress: parentModel.person.address
@@ -675,7 +675,7 @@
                     template: '<div><b>Uppsägning av abonnemang</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
+                        $scope.model.Abonnent = {
                             Resultatenhet: parentModel.person.RE
                         };
                         $scope.model.Kontaktperson = {
@@ -1172,14 +1172,14 @@
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Fr.o.m',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'T.o.m',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     }
@@ -1338,7 +1338,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'input',
+                    type: 'managerSearch',
                     key: 'Rapportera till chef',
                     templateOptions: {
                         label: 'Rapportera till chef',
@@ -1383,14 +1383,14 @@
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Fr.o.m',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'T.o.m',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     },
@@ -1539,7 +1539,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'input',
+                    type: 'managerSearch',
                     key: 'Rapportera till chef',
                     templateOptions: {
                         label: 'Rapportera till chef',
@@ -1567,14 +1567,14 @@
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Fr.o.m',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'T.o.m',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     }
@@ -1623,14 +1623,14 @@
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Fr.o.m',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'T.o.m',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     },
@@ -1664,7 +1664,7 @@
                 }, {
                     className: 'col-md-12',
                     type: 'datepicker',
-                    key: 'Kontot avslutas fr.o.m',
+                    key: 'Kontot avslutas from',
                     templateOptions: {
                         label: 'Kontot avslutas fr.o.m',
                         required: true
