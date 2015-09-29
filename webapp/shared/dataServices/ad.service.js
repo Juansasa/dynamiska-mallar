@@ -31,7 +31,6 @@
         }
 
         function searchUser(queryString) {
-            console.log('adas');
             return $http({
                 url: '/api/ad/search/' + queryString,
                 method: 'GET',

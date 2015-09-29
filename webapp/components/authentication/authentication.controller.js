@@ -17,8 +17,9 @@
                     "mobile": "0733709517",
                     "phone": null
                 },
-                "re": null,
-                "isManager": true
+                "RE": null,
+                "isManager": true,
+                "username": "zquavu"
             }
         });
         $scope.authMessage = 'Verifiera access...';

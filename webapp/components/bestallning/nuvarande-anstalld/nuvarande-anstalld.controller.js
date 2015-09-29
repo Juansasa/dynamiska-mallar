@@ -15,13 +15,11 @@
             templateOptions: {
                 label: 'Personalsökning',
                 placeholder: 'Fyll i namn på personen du leta efter',
-                personSelected: personSelected()
+                personSelected: personSelected
             }
         }];
 
-        function personSelected() {
-            console.log('selected');
-            
+        function personSelected() {            
             $scope.fields.formsSelection = [{
                 className: 'row',
                 fieldGroup: [{

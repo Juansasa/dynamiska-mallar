@@ -16,7 +16,7 @@
                     return;
                 }
 
-                formattedHtml += '<li><b>' + _.capitalize(key) + '</b>';
+                formattedHtml += '<li><b>' + _.capitalize(mapKeyValue(key)) + '</b>';
 
                 if (isPrimitive(value)) {
                     formattedHtml += ': ' + extractValue(value);
@@ -58,6 +58,23 @@
 
         function isDate(obj) {
             return _.isDate(obj);
+        }
+
+        function mapKeyValue(key) {
+            if(!_.isString(key)) {
+                if(_.isNumber(key)) {
+                    return key + 1;
+                }
+                return key;
+            }
+
+            var knownKeys = {
+                firstname: 'förnamn',
+                lastname: 'efternamn',
+                pris: 'pris (kr/st)'
+            };
+
+            return knownKeys[key.toLowerCase()] || key;
         }
     }
 })();

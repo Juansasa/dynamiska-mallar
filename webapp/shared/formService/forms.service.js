@@ -6,7 +6,7 @@
         .factory('forms', exception);
 
     /*@ngInject*/
-    function exception(FORMKEYS, gettext, autocomplete, dataSharing) {
+    function exception(FORMKEYS, gettext, autocomplete) {
         var service = {
             newConsultantPersonalInfo: getNewConsultantPersonalInfo,
             newEmployeePersonalInfo: getNewPreviaEmployeePersonalInfo,
@@ -1011,7 +1011,8 @@
                             Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE)
                         };
                         $scope.model.Datum = new Date();
-                        $scope.model.Fakturareferens = dataSharing.get('Fakturareferens');
+                        $scope.model.Fakturareferens = parentModel.orderPerson.username;
+                        console.log(parentModel.orderPerson);
                     }
                 }, {
                     className: 'col-md-12',
@@ -1133,7 +1134,7 @@
                         $scope.model.Fakturaadress = 'AB Previa';
                         $scope.model['Box/Postnr/Ort'] = 'PAA04220, FE 533 105 69, STOCKHOLM';
                         $scope.model['Dagens datum'] = new Date();
-                        $scope.model.Fakturareferens = dataSharing.get('Fakturareferens');
+                        $scope.model.Fakturareferens = parentModel.orderPerson.username;
 
                         function success(response) {
                             $scope.to.options = response.data;
