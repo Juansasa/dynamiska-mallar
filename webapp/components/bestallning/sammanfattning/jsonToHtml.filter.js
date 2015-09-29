@@ -12,6 +12,10 @@
         function jsonToHtml(jsonData, noMargin) {
             var formattedHtml = noMargin ? '<ul style="list-style: none; margin: 0;">' : '<ul style="list-style: none; margin: 0 1em;">';
             _.forEach(jsonData, function(value, key) {
+                if(key === '$$hashKey') {
+                    return;
+                }
+
                 if (noMargin) {
                     formattedHtml += '<li><b>' + key + '</b>';
                 } else {

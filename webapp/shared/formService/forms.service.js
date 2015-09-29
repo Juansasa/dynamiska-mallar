@@ -544,12 +544,14 @@
 
         // Nyt abonnemang
         function getNewOrderSubscriptionForm(parentModel) {
+            var formTypeKey = 'Beställningen gäller';
+
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
                     className: 'col-md-12',
                     type: 'radio',
-                    key: 'Vald formulär',
+                    key: formTypeKey,
                     templateOptions: {
                         label: 'Välj ett formulär',
                         options: [{
@@ -561,7 +563,17 @@
                         }, {
                             name: 'Uppsägning av abonnemang',
                             value: 'Uppsägning av abonnemang'
-                        }]
+                        }],
+
+                        onChange: function (v, opts, s) {
+                            // Clear out old model data
+                            _.forIn(s.model, function(value, key) {
+                                if(!(key === formTypeKey || key === 'Abonnent' || 
+                                    key === 'Beställare' || key === 'Beställnings datum')) {
+                                    delete s.model[key];
+                                }
+                            });
+                        }
                     }
                 }]
             }, {
@@ -605,7 +617,7 @@
                         }]
                     }
                 }],
-                hideExpression: 'model["Vald formulär"] !== "Nytt abonnemang"'
+                hideExpression: 'model["' + formTypeKey + '"] !== "Nytt abonnemang"'
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -619,7 +631,7 @@
                         };
                         $scope.model.Kontaktperson = {
                             Namn: parentModel.orderPerson.name,
-                            Telefonnummer: parentModel.orderPerson.telephonesephones
+                            Telefonnummer: parentModel.orderPerson.telephones
                         };
                     }
                 }, {
@@ -668,7 +680,7 @@
                         required: true
                     }
                 }],
-                hideExpression: 'model["Vald formulär"] !== "Flytt av abonnemang till annan användare"'
+                hideExpression: 'model["' + formTypeKey + '"] !== "Flytt av abonnemang till annan användare"'
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -731,7 +743,7 @@
                         label: 'Datum för uppsägning'
                     }
                 }],
-                hideExpression: 'model["Vald formulär"] !== "Uppsägning av abonnemang"'
+                hideExpression: 'model["' + formTypeKey + '"] !== "Uppsägning av abonnemang"'
             }];
             showErrors(specific);
             return specific.concat(getOrderSignaturePart());
@@ -856,7 +868,7 @@
                             Resultatenhet: parentModel.person.RE,
                             Kontaktperson: {
                                 Namn: parentModel.orderPerson.name,
-                                Telefonnummer: parentModel.orderPerson.telephonesephones
+                                Telefonnummer: parentModel.orderPerson.telephones
                             }
                         };
                     }
@@ -900,7 +912,6 @@
                         'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE),
                         'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
                     };
-                    $scope.model.Fakturaadress = dataSharing.get('Fakturaadress');
                     $scope.model['Dagens datum'] = new Date();
                 }
             }, {
@@ -919,7 +930,7 @@
                     }
 
                     function fail(error) {
-                        logger.error('Något gick fel när telefoner data ska läsas in', error);
+                        logger.error('Något gick fel när telefonlista ska läsas in', error);
                     }
                 }
             }, {
@@ -939,7 +950,7 @@
                     }
 
                     function fail(error) {
-                        logger.error('Något gick fel när kontorsheadset data ska läsas in', error);
+                        logger.error('Något gick fel när kontorsheadsetlista ska läsas in', error);
                     }
                 }
             }, {
@@ -958,7 +969,7 @@
                     }
 
                     function fail(error) {
-                        logger.error('Något gick fel när konferenstelefon data ska läsas in', error);
+                        logger.error('Något gick fel när konferenstelefonlista ska läsas in', error);
                     }
                 }
             }, {
