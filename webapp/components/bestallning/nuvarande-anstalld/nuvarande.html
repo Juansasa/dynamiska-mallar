@@ -1,14 +1,7 @@
 <div class="employee-search row">
     <div class="col-md-12">
         <h4>Personal sök</h4>
-        <ui-select on-select="personSelected()" ng-model="model.person" theme="bootstrap" ng-disabled="disabled" reset-search-input="false">
-            <ui-select-match placeholder="Personal sökning">{{$select.selected.name.firstname + ' ' + $select.selected.name.lastname}}</ui-select-match>
-            <ui-select-choices repeat="option in employees track by $index"
-                refresh="refreshUserList($select.search)"
-                refresh-delay="100">
-                <div ng-bind-html="option.name.firstname + ' ' + option.name.lastname | highlight: $select.search"></div>
-            </ui-select-choices>
-        </ui-select>
+        <formly-form model="model" fields="employeeSearch"></formly-form>
     </div>
 </div>
 <div ng-if="model.person">

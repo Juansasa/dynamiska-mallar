@@ -6,424 +6,539 @@
 
     /*@ngInject*/
     function register(formlyConfig, $filter, gettext, dataSharing, adService) {
-        formlyConfig.setType([{
-            name: 'infoList',
-            wrapper: ['bootstrapLabel'],
-            templateUrl: 'shared/formService/infoList.html'
-        }, {
-            name: 'async-ui-select',
-            templateUrl: 'shared/formService/async-ui-select.html',
-            defaultOptions: {
-                validation: {
-                    show: true
-                }
-            }
-        }, {
-            name: 'ui-select',
-            extends: 'select',
-            templateUrl: 'shared/formService/ui-select.html',
-            defaultOptions: {
-                validation: {
-                    show: true
-                }
-            }
-        }, {
-            name: 'personNo',
-            extends: 'input',
-            defaultOptions: {
-                className: 'col-md-12',
-                type: 'input',
-                key: 'Personnummer',
-                templateOptions: {
-                    label: gettext('Personnummer'),
-                    required: true,
-                    placeholder: 'ååmmdd-xxxx',
-                    pattern: '[0-9]{6}-[0-9]{4}'
-                },
-                validation: {
-                    show: true
-                }
-            }
-        }, {
-            name: 'personName',
-            template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
-            defaultOptions: {
-                data: {
-                    forms: [{
-                        className: 'row',
-                        fieldGroup: [{
-                            className: 'col-md-4',
-                            type: 'input',
-                            key: 'förnamn',
-                            templateOptions: {
-                                label: 'Förnamn',
-                                required: true
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }, {
-                            className: 'col-md-4',
-                            type: 'input',
-                            key: 'mellannamn',
-                            templateOptions: {
-                                label: 'Mellannamn'
-                            }
-                        }, {
-                            className: 'col-md-4',
-                            type: 'input',
-                            key: 'efternamn',
-                            templateOptions: {
-                                label: 'Efternamn',
-                                required: true
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }]
-                    }]
-                }
-            }
-        }, {
-            name: 'adress',
-            template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
-            defaultOptions: {
-                data: {
-                    forms: [{
-                        className: 'row',
-                        fieldGroup: [{
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'gata',
-                            templateOptions: {
-                                label: 'Hemadress',
-                                required: true
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }, {
-                            className: 'col-md-3',
-                            type: 'input',
-                            key: 'postnummer',
-                            templateOptions: {
-                                type: 'number',
-                                required: true,
-                                label: 'Postnummer',
-                                pattern: '\\d{5}'
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }, {
-                            className: 'col-md-3',
-                            type: 'input',
-                            key: 'ort',
-                            templateOptions: {
-                                label: 'Ort',
-                                required: true
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }]
-                    }, {
-                        className: 'col-md-12',
-                        type: 'input',
-                        key: 'c/o',
-                        templateOptions: {
-                            label: 'Ev c/o adress'
-                        },
-                        validation: {
-                            show: true
-                        }
-                    }]
-                }
-            }
-        }, {
-            name: 'telefon',
-            template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
-            defaultOptions: {
-                data: {
-                    forms: [{
-                        className: 'row',
-                        fieldGroup: [{
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'hem',
-                            templateOptions: {
-                                label: 'Hem telefon',
-                                type: 'tel',
-                                placeholder: 'xxxx-xxxxx',
-                                pattern: '[0-9]{0,4}-[0-9]{5,8}'
-                            }
-                        }, {
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'mobil',
-                            templateOptions: {
-                                label: 'Mobil',
-                                type: 'tel',
-                                placeholder: 'xxxx-xxxxx',
-                                pattern: '[0-9]{0,4}-[0-9]{5,8}'
-                            }
-                        }]
-                    }]
-                }
-            }
-        }, {
-            name: 'tjanstestalleSelect',
-            templateUrl: 'shared/formService/tjanstestalle.html',
-            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-            defaultOptions: {
-                templateOptions: {
-                    placeholder: 'Välj i listan',
-                    onChange: function(v, m, scope) {
-                        scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
-                            return option.value === m.value();
-                        });
-                    }
-                }
-            }
-        }, {
-            name: 'roleSelect',
-            templateUrl: 'shared/formService/roleSelect.html',
-            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-            defaultOptions: {
-                key: 'befattning',
-                templateOptions: {
-                    showPrevileges: true,
-                    placeholder: 'Välj i listan'
-                },
-                expressionProperties: {
-                    'generateIndex': function(v, m, scope) {
-                        scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
-                            return option.value === m;
-                        });
-                    }
-                }
-            }
-        }, {
-            name: 'plainInput',
-            template: '<input class="form-control" ng-model="model[options.key]">',
-            wrapper: ['bootstrapHasError']
-        }, {
-            name: 'plainRadio',
-            extends: 'radio',
-            wrapper: ['bootstrapHasError']
-        }, {
-            name: 'formSelection',
-            extends: 'multiCheckbox',
-            wrapper: ['bootstrapHasError'],
-            controller: /*@ngInject*/ function($scope) {
-                var to = $scope.to;
-                var opts = $scope.options;
-                $scope.multiCheckbox = {
-                    checked: [],
-                    change: setModel
+        function getDatepickerNgattrs() {
+            var attributes = [
+                'show-weeks',
+                'starting-day',
+                'min-mode',
+                'max-mode',
+                'format-day',
+                'format-month',
+                'format-year',
+                'format-day-header',
+                'format-day-title',
+                'format-month-title',
+                'year-range',
+                'shortcut-propagation',
+                'datepicker-popup',
+                'show-button-bar',
+                'current-text',
+                'clear-text',
+                'close-text',
+                'close-on-date-selection',
+                'datepicker-append-to-body'
+            ];
+
+            var bindings = [
+                'datepicker-mode',
+                'min-date',
+                'max-date'
+            ];
+
+            var statement = [
+                'date-disabled',
+                'custom-class'
+            ];
+
+            var ngModelAttrs = {};
+
+            angular.forEach(attributes, function(attr) {
+                ngModelAttrs[_.camelCase(attr)] = {
+                    attribute: attr
                 };
+            });
 
-                // initialize the checkboxes check property
-                var modelValue = $scope.model[opts.key];
-                if (angular.isArray(modelValue)) {
-                    var valueProp = to.valueProp || 'value';
-                    angular.forEach(to.options, function(v, index) {
-                        var stepindex = _.findIndex(modelValue, function(step) {
-                            return step.route === v[valueProp].route;
-                        });
-                        $scope.multiCheckbox.checked[index] = stepindex > -1;
-                    });
-                }
+            angular.forEach(bindings, function(binding) {
+                ngModelAttrs[_.camelCase(binding)] = {
+                    bound: binding
+                };
+            });
 
-                function setModel() {
-                    var checked = [];
-                    angular.forEach($scope.multiCheckbox.checked, function(checkbox, index) {
-                        if (checkbox) {
-                            checked.push(to.options[index][to.valueProp || 'value']);
-                        }
-                    });
+            angular.forEach(statement, function(binding) {
+                ngModelAttrs[_.camelCase(binding)] = {
+                    statement: binding
+                };
+            });
 
-                    if (to.pre) {
-                        checked = [to.pre].concat(checked);
+            return ngModelAttrs;
+        }
+
+        formlyConfig.setType([{
+                name: 'employeeSearch',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                templateUrl: 'shared/formService/employeeSearch.html',
+                defaultOptions: {
+                    className: 'has-feedback has-feedback-right',
+                    templateOptions: {
+                        placeholder: 'Fyll i namn på personen du leta efter'
+                    }
+                },
+                controller: /*@ngInject*/ function($scope) {
+                    $scope.getPersons = getPersons;
+
+                    function getPersons(queryString) {
+                        return adService.searchUser(queryString).then(success, error);
                     }
 
-                    if (to.post) {
-                        checked = checked.concat(to.post);
+                    function success(response) {
+                        return _.take(response.data, 15);
                     }
-                    $scope.model[opts.key] = checked;
+
+                    function error(err) {
+                        $scope.isLoading = false;
+                        return err.message;
+                    }
                 }
-            }
-        }, {
-            name: 'autoCompleteAdd',
-            extends: 'tjanstestalleSelect',
-            templateUrl: 'shared/formService/select-add.html',
-            wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-            defaultOptions: {
-                templateOptions: {
-                    placeholder: 'Välj i listan',
-                    onChange: function(v, options, scope) {
-                        var model = scope.model;
-                        model[options.key] = model[options.key] || [];
-
-                        var index = _.findIndex(scope.model[options.key], function(item) {
-                            return item === scope.to.selectedValue.name;
-                        });
-
-                        if (index > -1) {
-                            return;
-                        }
-
-                        model[options.key].push(options.templateOptions.selectedValue.name);
-                        options.templateOptions.selectedValue = null;
+            }, {
+                name: 'managerSearch',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                templateUrl: 'shared/formService/managerSearch.html',
+                defaultOptions: {
+                    className: 'has-feedback has-feedback-right',
+                    templateOptions: {
+                        placeholder: 'Fyll i namn på personen du leta efter'
                     },
-                    removeCallback: function(elem, key, model) {
-                        _.remove(model[key], function(v) {
-                            return v === elem;
-                        });
+                    validation: {
+                        show: true
+                    }
+                },
+                controller: /*@ngInject*/ function($scope) {
+                    init();
 
-                        // Perhaps its better to pass in the templateOptions instance instead
-                        this.selectedValue = null;
+                    $scope.byFullName = byFullName;
+
+                    function byFullName(value) {
+                        var input = $scope.model[$scope.options.key];
+                        var name = value.name.firstname + ' ' + value.name.lastname;
+
+                        return name.toLowerCase().indexOf(input.toLowerCase()) > -1;
+                    }
+
+                    function init(queryString) {
+                        return adService.getAllManagers(queryString).then(success, error);
+                    }
+
+                    function success(response) {
+                        $scope.managers = response.data;
+                    }
+
+                    function error(err) {
+                        $scope.isLoading = false;
+                        return err.message;
                     }
                 }
-            }
-        }, {
-            name: 'autocomplete-select',
-            templateUrl: 'shared/formService/autocompleteSelect.html',
-            wrapper: ['bootstrapLabel', 'bootstrapHasError']
-        }, {
-            name: 'signature',
-            templateUrl: 'shared/formService/signature.html',
-            defaultOptions: {
-                templateOptions: {
-                    formfields: [{
-                        className: 'row',
-                        fieldGroup: [{
-                            className: 'col-md-6',
-                            type: 'ui-select',
-                            key: 'Rapporterar till (chef)',
-                            templateOptions: {
-                                placeholder: 'Välj i listan',
-                                label: 'Rapporterar till (chef)',
-                                options: [],
-                                required: true
-                            },
-                            controller: /*@ngInject*/ function($scope) {
-                                adService.getAllManagers().then(function(resp) {
-                                    var options = [];
-                                    _.forEach(resp.data, function(item) {
-                                        var name = item.name.firstname + ' ' + item.name.lastname;
-                                        options.push({
-                                            name: name,
-                                            value: name
-                                        });
-                                    });
+            }, {
+                name: 'datepicker',
+                templateUrl: 'shared/formService/datepickerTpl.html',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                defaultOptions: {
+                    ngModelAttrs: getDatepickerNgattrs(),
+                    templateOptions: {
+                        datepickerPopup: 'dd/MMMM/yyyy'
+                    },
+                    validation: {
+                        show: true
+                    }
+                },
+                controller: /*@ngInject*/ function($scope) {
+                    $scope.model[$scope.options.key] = new Date();
+                    $scope.datepicker = {
+                        opened: false
+                    };
 
-                                    $scope.to.options = options;
-                                });
-                            }
-                        }, {
-                            className: 'col-md-6',
-                            type: 'input',
-                            key: 'Fakturareferens',
-                            templateOptions: {
-                                label: 'Fakturareferens',
-                                required: true
-                            },
-                            validation: {
-                                show: true
-                            }
-                        }, {
-                            className: 'col-md-12',
-                            type: 'textarea',
-                            key: 'Övrig information',
-                            templateOptions: {
-                                label: 'Övrig information',
-                                placeholder: 'Övriga information'
-                            }
-                        }]
-                    }]
+                    $scope.datepicker.open = function() {
+                        $scope.datepicker.opened = true;
+                    };
                 }
-            }
-        }, {
-            name: 'today-date',
-            extends: 'input',
-            defaultOptions: {
-                templateOptions: {
-                    type: 'date'
+            }, {
+                name: 'personNo',
+                extends: 'input',
+                defaultOptions: {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'Personnummer',
+                    templateOptions: {
+                        label: gettext('Personnummer'),
+                        required: true,
+                        placeholder: 'ååmmdd-xxxx',
+                        pattern: '[0-9]{6}-[0-9]{4}'
+                    },
+                    validation: {
+                        show: true
+                    }
                 }
-            }
-        }, {
-            name: 'equipment-select',
-            extends: 'autoCompleteAdd',
-            templateUrl: 'shared/formService/equipment-select.html',
-            defaultOptions: {
-                templateOptions: {
-                    ammountField: [{
-                        type: 'input',
-                        key: 'Antal',
-                        defaultValue: 1,
-                        templateOptions: {
-                            label: 'Antal',
-                            type: 'number',
-                            required: true,
-                            min: 1
-                        },
-                        validation: {
-                            show: true
-                        }
-                    }],
-                    onChange: function(v, options, scope) {
-                        if (scope.to.enableModelInput) {
-                            scope.to.modelField = [{
+            },
+
+
+
+
+
+
+
+
+
+            {
+                name: 'infoList',
+                wrapper: ['bootstrapLabel'],
+                templateUrl: 'shared/formService/infoList.html'
+            }, {
+                name: 'personName',
+                template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
+                defaultOptions: {
+                    data: {
+                        forms: [{
+                            className: 'row',
+                            fieldGroup: [{
+                                className: 'col-md-4',
                                 type: 'input',
-                                key: 'Telefonmodell',
+                                key: 'förnamn',
                                 templateOptions: {
-                                    label: 'Telefonmodell',
+                                    label: 'Förnamn',
                                     required: true
                                 },
                                 validation: {
                                     show: true
                                 }
-                            }];
+                            }, {
+                                className: 'col-md-4',
+                                type: 'input',
+                                key: 'mellannamn',
+                                templateOptions: {
+                                    label: 'Mellannamn'
+                                }
+                            }, {
+                                className: 'col-md-4',
+                                type: 'input',
+                                key: 'efternamn',
+                                templateOptions: {
+                                    label: 'Efternamn',
+                                    required: true
+                                },
+                                validation: {
+                                    show: true
+                                }
+                            }]
+                        }]
+                    }
+                }
+            }, {
+                name: 'adress',
+                template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
+                defaultOptions: {
+                    data: {
+                        forms: [{
+                            className: 'row',
+                            fieldGroup: [{
+                                className: 'col-md-6',
+                                type: 'input',
+                                key: 'gata',
+                                templateOptions: {
+                                    label: 'Hemadress',
+                                    required: true
+                                },
+                                validation: {
+                                    show: true
+                                }
+                            }, {
+                                className: 'col-md-3',
+                                type: 'input',
+                                key: 'postnummer',
+                                templateOptions: {
+                                    type: 'number',
+                                    required: true,
+                                    label: 'Postnummer',
+                                    pattern: '\\d{5}'
+                                },
+                                validation: {
+                                    show: true
+                                }
+                            }, {
+                                className: 'col-md-3',
+                                type: 'input',
+                                key: 'ort',
+                                templateOptions: {
+                                    label: 'Ort',
+                                    required: true
+                                },
+                                validation: {
+                                    show: true
+                                }
+                            }]
+                        }, {
+                            className: 'col-md-12',
+                            type: 'input',
+                            key: 'c/o',
+                            templateOptions: {
+                                label: 'Ev c/o adress'
+                            },
+                            validation: {
+                                show: true
+                            }
+                        }]
+                    }
+                }
+            }, {
+                name: 'telefon',
+                template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',
+                defaultOptions: {
+                    data: {
+                        forms: [{
+                            className: 'row',
+                            fieldGroup: [{
+                                className: 'col-md-6',
+                                type: 'input',
+                                key: 'hem',
+                                templateOptions: {
+                                    label: 'Hem telefon',
+                                    type: 'tel',
+                                    placeholder: 'xxxx-xxxxx',
+                                    pattern: '[0-9]{0,4}-[0-9]{5,8}'
+                                }
+                            }, {
+                                className: 'col-md-6',
+                                type: 'input',
+                                key: 'mobil',
+                                templateOptions: {
+                                    label: 'Mobil',
+                                    type: 'tel',
+                                    placeholder: 'xxxx-xxxxx',
+                                    pattern: '[0-9]{0,4}-[0-9]{5,8}'
+                                }
+                            }]
+                        }]
+                    }
+                }
+            }, {
+                name: 'tjanstestalleSelect',
+                templateUrl: 'shared/formService/tjanstestalle.html',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                defaultOptions: {
+                    templateOptions: {
+                        placeholder: 'Välj i listan',
+                        onChange: function(v, m, scope) {
+                            scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
+                                return option.value === m.value();
+                            });
                         }
-
-                        var selected = scope.$select.selected;
-                        scope.$select.selected = null;
-
-                        if (!selected) {
-                            return;
+                    }
+                }
+            }, {
+                name: 'roleSelect',
+                templateUrl: 'shared/formService/roleSelect.html',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                defaultOptions: {
+                    key: 'befattning',
+                    templateOptions: {
+                        showPrevileges: true,
+                        placeholder: 'Välj i listan'
+                    },
+                    expressionProperties: {
+                        'generateIndex': function(v, m, scope) {
+                            scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
+                                return option.value === m;
+                            });
                         }
+                    }
+                }
+            }, {
+                name: 'plainInput',
+                template: '<input class="form-control" ng-model="model[options.key]">',
+                wrapper: ['bootstrapHasError']
+            }, {
+                name: 'plainRadio',
+                extends: 'radio',
+                wrapper: ['bootstrapHasError']
+            }, {
+                name: 'formSelection',
+                extends: 'multiCheckbox',
+                wrapper: ['bootstrapHasError'],
+                controller: /*@ngInject*/ function($scope) {
+                    var to = $scope.to;
+                    var opts = $scope.options;
+                    $scope.multiCheckbox = {
+                        checked: [],
+                        change: setModel
+                    };
 
-                        var model = scope.model;
-                        model[options.key] = model[options.key] || [];
+                    // initialize the checkboxes check property
+                    var modelValue = $scope.model[opts.key];
+                    if (angular.isArray(modelValue)) {
+                        var valueProp = to.valueProp || 'value';
+                        angular.forEach(to.options, function(v, index) {
+                            var stepindex = _.findIndex(modelValue, function(step) {
+                                return step.route === v[valueProp].route;
+                            });
+                            $scope.multiCheckbox.checked[index] = stepindex > -1;
+                        });
+                    }
 
-                        var index = _.findIndex(scope.model[options.key], function(item) {
-                            return item.beteckning === selected.name;
+                    function setModel() {
+                        var checked = [];
+                        angular.forEach($scope.multiCheckbox.checked, function(checkbox, index) {
+                            if (checkbox) {
+                                checked.push(to.options[index][to.valueProp || 'value']);
+                            }
                         });
 
-                        if (index > -1) {
-                            return;
+                        if (to.pre) {
+                            checked = [to.pre].concat(checked);
                         }
 
-                        var modelVal = {
-                            'beteckning': selected.name
-                        };
-
-                        if (selected.price) {
-                            modelVal.pris = selected.price;
+                        if (to.post) {
+                            checked = checked.concat(to.post);
                         }
+                        $scope.model[opts.key] = checked;
+                    }
+                }
+            }, {
+                name: 'autoCompleteAdd',
+                extends: 'tjanstestalleSelect',
+                templateUrl: 'shared/formService/select-add.html',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+                defaultOptions: {
+                    templateOptions: {
+                        placeholder: 'Välj i listan',
+                        onChange: function(v, options, scope) {
+                            var model = scope.model;
+                            model[options.key] = model[options.key] || [];
 
-                        model[options.key].push(modelVal);
+                            var index = _.findIndex(scope.model[options.key], function(item) {
+                                return item === scope.to.selectedValue.name;
+                            });
 
+                            if (index > -1) {
+                                return;
+                            }
 
-                        if (model[options.key] && model[options.key].length) {
-                            scope.to.placeholder = 'välj och lägga till fler';
-                        } else {
-                            scope.to.placeholder = 'välj i listan';
+                            model[options.key].push(options.templateOptions.selectedValue.name);
+                            options.templateOptions.selectedValue = null;
+                        },
+                        removeCallback: function(elem, key, model) {
+                            _.remove(model[key], function(v) {
+                                return v === elem;
+                            });
+
+                            // Perhaps its better to pass in the templateOptions instance instead
+                            this.selectedValue = null;
                         }
-                    },
+                    }
+                }
+            }, {
+                name: 'autocomplete-select',
+                templateUrl: 'shared/formService/autocompleteSelect.html',
+                wrapper: ['bootstrapLabel', 'bootstrapHasError']
+            }, {
+                name: 'signature',
+                templateUrl: 'shared/formService/signature.html',
+                defaultOptions: {
+                    templateOptions: {
+                        formfields: [{
+                            className: 'row',
+                            fieldGroup: [{
+                                className: 'col-md-6',
+                                type: 'managerSearch',
+                                key: 'Rapporterar till (chef)',
+                                templateOptions: {
+                                    placeholder: 'Välj i listan',
+                                    label: 'Rapporterar till (chef)',
+                                    required: true
+                                }
+                            }, {
+                                className: 'col-md-6',
+                                type: 'input',
+                                key: 'Fakturareferens',
+                                templateOptions: {
+                                    label: 'Fakturareferens',
+                                    required: true
+                                },
+                                validation: {
+                                    show: true
+                                }
+                            }, {
+                                className: 'col-md-12',
+                                type: 'textarea',
+                                key: 'Övrig information',
+                                templateOptions: {
+                                    label: 'Övrig information',
+                                    placeholder: 'Övriga information'
+                                }
+                            }]
+                        }]
+                    }
+                }
+            }, {
+                name: 'equipment-select',
+                extends: 'autoCompleteAdd',
+                templateUrl: 'shared/formService/equipment-select.html',
+                defaultOptions: {
+                    templateOptions: {
+                        ammountField: [{
+                            type: 'input',
+                            key: 'Antal',
+                            defaultValue: 1,
+                            templateOptions: {
+                                label: 'Antal',
+                                type: 'number',
+                                required: true,
+                                min: 1
+                            },
+                            validation: {
+                                show: true
+                            }
+                        }],
+                        onChange: function(v, options, scope) {
+                            if (scope.to.enableModelInput) {
+                                scope.to.modelField = [{
+                                    type: 'input',
+                                    key: 'Telefonmodell',
+                                    templateOptions: {
+                                        label: 'Telefonmodell',
+                                        required: true
+                                    },
+                                    validation: {
+                                        show: true
+                                    }
+                                }];
+                            }
+
+                            var selected = scope.$select.selected;
+                            scope.$select.selected = null;
+
+                            if (!selected) {
+                                return;
+                            }
+
+                            var model = scope.model;
+                            model[options.key] = model[options.key] || [];
+
+                            var index = _.findIndex(scope.model[options.key], function(item) {
+                                return item.beteckning === selected.name;
+                            });
+
+                            if (index > -1) {
+                                return;
+                            }
+
+                            var modelVal = {
+                                'beteckning': selected.name
+                            };
+
+                            if (selected.price) {
+                                modelVal.pris = selected.price;
+                            }
+
+                            model[options.key].push(modelVal);
+
+
+                            if (model[options.key] && model[options.key].length) {
+                                scope.to.placeholder = 'välj och lägga till fler';
+                            } else {
+                                scope.to.placeholder = 'välj i listan';
+                            }
+                        },
+                    }
                 }
             }
-        }]);
+        ]);
     }
 })();

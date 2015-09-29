@@ -1,0 +1,8 @@
+<input type="text"
+		ng-model="model[options.key]"
+		placeholder="{{to.placeholder}}"
+		typeahead="person as person.name.firstname + ' ' + person.name.lastname for person in managers | filter: byFullName"
+		typeahead-wait-ms="200"
+		typeahead-on-select="addPerson($item); selectedItem = ''"
+		required="to.required"
+		class="form-control">

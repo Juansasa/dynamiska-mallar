@@ -56,7 +56,7 @@
                     template: '<div><b>Anställningsperiod</b></div>'
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Anställd Fr o m',
                     templateOptions: {
                         label: 'Fr o m',
@@ -64,7 +64,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Anställd T o m',
                     templateOptions: {
                         label: 'T o m',
@@ -236,7 +236,7 @@
                     }
                 }, {
                     className: 'col-md-3',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'fr o m',
                     templateOptions: {
                         label: 'fr o m',
@@ -244,7 +244,7 @@
                     }
                 }, {
                     className: 'col-md-3',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 't o m',
                     hideExpression: function(vv, mv, scope) {
                         return scope.model['anställningsform'] === 'tillsvidareanställning';
@@ -470,11 +470,11 @@
                             };
                             switch (type) {
                                 case 'tillsvidareanställning':
-                                    retval['Fr.o.m'] = model.person['fr o m'];
+                                    retval.From = model.person['fr o m'];
                                     break;
                                 default:
-                                    retval['Fr.o.m'] = model.person['fr o m'];
-                                    retval['T.o.m'] = model.person['t o m'];
+                                    retval.From = model.person['fr o m'];
+                                    retval.Tom = model.person['t o m'];
                                     break;
                             }
 
@@ -570,7 +570,7 @@
                     template: '<div><b>Nytt abonnemang</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
+                        $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
                             Postadress: parentModel.person.address
@@ -582,7 +582,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum abonnemanget ska börja gälla',
                     templateOptions: {
                         label: 'Datum abonnemanget ska börja gälla'
@@ -612,7 +612,7 @@
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
+                        $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
                             Postadress: parentModel.person.address
@@ -639,7 +639,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för flytt',
                     templateOptions: {
                         label: 'Datum för flytt'
@@ -675,7 +675,7 @@
                     template: '<div><b>Uppsägning av abonnemang</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonent = {
+                        $scope.model.Abonnent = {
                             Resultatenhet: parentModel.person.RE
                         };
                         $scope.model.Kontaktperson = {
@@ -725,7 +725,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för uppsägning',
                     templateOptions: {
                         label: 'Datum för uppsägning'
@@ -807,7 +807,7 @@
                     hideExpression: 'model["Mobilt bredband för en existerande dator"] !== "Ja"'
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum då abonnemanget ska börja gälla',
                     templateOptions: {
                         label: 'Datum då abonnemanget ska börja gälla'
@@ -832,7 +832,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för flytt',
                     templateOptions: {
                         label: 'Datum för flytt'
@@ -862,7 +862,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum för uppsägning',
                     templateOptions: {
                         label: 'Datum för uppsägning'
@@ -1181,15 +1181,15 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Fr.o.m',
+                    type: 'datepicker',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'T.o.m',
+                    type: 'datepicker',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     }
@@ -1348,7 +1348,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'input',
+                    type: 'managerSearch',
                     key: 'Rapportera till chef',
                     templateOptions: {
                         label: 'Rapportera till chef',
@@ -1392,15 +1392,15 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Fr.o.m',
+                    type: 'datepicker',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'T.o.m',
+                    type: 'datepicker',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     },
@@ -1549,7 +1549,7 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'input',
+                    type: 'managerSearch',
                     key: 'Rapportera till chef',
                     templateOptions: {
                         label: 'Rapportera till chef',
@@ -1576,15 +1576,15 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Fr.o.m',
+                    type: 'datepicker',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'T.o.m',
+                    type: 'datepicker',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     }
@@ -1632,15 +1632,15 @@
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'Fr.o.m',
+                    type: 'datepicker',
+                    key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
                     }
                 }, {
                     className: 'col-md-6',
-                    type: 'today-date',
-                    key: 'T.o.m',
+                    type: 'datepicker',
+                    key: 'Tom',
                     templateOptions: {
                         label: 'T.o.m'
                     },
@@ -1673,8 +1673,8 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
-                    key: 'Kontot avslutas fr.o.m',
+                    type: 'datepicker',
+                    key: 'Kontot avslutas from',
                     templateOptions: {
                         label: 'Kontot avslutas fr.o.m',
                         required: true
@@ -1752,7 +1752,7 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'today-date',
+                    type: 'datepicker',
                     key: 'Datum som anger när ändringen skall gälla',
                     templateOptions: {
                         label: 'Datum som anger när ändringen skall gälla',

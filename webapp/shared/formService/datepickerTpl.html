@@ -1,0 +1,16 @@
+<p class="input-group">
+    <input  
+        type="text"
+        id="{{::id}}"
+        name="{{::id}}"
+        ng-model="model[options.key]"
+        class="form-control"
+        ng-click="datepicker.open($event)"
+        required="to.required"
+        is-open="datepicker.opened"
+    />
+
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="fa fa-calendar"></i></button>
+    </span>
+</p>
