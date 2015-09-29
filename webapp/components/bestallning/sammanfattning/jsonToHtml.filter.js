@@ -16,11 +16,7 @@
                     return;
                 }
 
-                if (noMargin) {
-                    formattedHtml += '<li><b>' + key + '</b>';
-                } else {
-                    formattedHtml += '<li><b>' + key + '</b>';
-                }
+                formattedHtml += '<li><b>' + _.capitalize(key) + '</b>';
 
                 if (isPrimitive(value)) {
                     formattedHtml += ': ' + extractValue(value);
