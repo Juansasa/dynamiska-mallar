@@ -739,23 +739,33 @@
 
         // Nytt mobilt bredband formulär
         function getNewMobileBroadband(parentModel) {
+            var formTypeKey = 'Bäställningen gäller';
+
             var specific = [{
                 className: 'col-md-12',
                 fieldGroup: [{
                     type: 'radio',
-                    key: 'Mobilt bredband ärende',
+                    key: formTypeKey,
                     templateOptions: {
                         label: 'Välj ett formulär',
                         options: [{
                             name: 'Nytt Mobilt bredband',
-                            value: 'Nytt'
+                            value: 'Nytt Mobilt bredband'
                         }, {
                             name: 'Flytt av Mobilt bredband till annan användare',
-                            value: 'Flytt'
+                            value: 'Flytt av Mobilt bredband till annan användare'
                         }, {
                             name: 'Uppsägning av Mobilt bredband',
-                            value: 'Uppsägning'
-                        }]
+                            value: 'Uppsägning av Mobilt bredband'
+                        }],
+                        onChange: function(v, o, s) {
+                            // Clear out old model data
+                            _.forIn(s.model, function(value, key) {
+                                if(!(key === formTypeKey || key === 'Abonnent' || key === 'Kontaktperson')) {
+                                    delete s.model[key];
+                                }
+                            });
+                        }
                     }
                 }]
             }, {
@@ -803,7 +813,7 @@
                         label: 'Datum då abonnemanget ska börja gälla'
                     }
                 }],
-                hideExpression: 'model["Mobilt bredband ärende"] !== "Nytt"'
+                hideExpression: 'model["' + formTypeKey + '"] !== "Nytt Mobilt bredband"'
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -836,7 +846,7 @@
                         type: 'tel'
                     }
                 }],
-                hideExpression: 'model["Mobilt bredband ärende"] !== "Flytt"'
+                hideExpression: 'model["' + formTypeKey + '"] !== "Flytt av Mobilt bredband till annan användare"'
             }, {
                 className: 'row',
                 fieldGroup: [{
@@ -866,7 +876,7 @@
                         type: 'tel'
                     }
                 }],
-                hideExpression: 'model["Mobilt bredband ärende"] !== "Uppsägning"'
+                hideExpression: 'model["' + formTypeKey + '"] !== "Uppsägning av Mobilt bredband"'
             }];
 
             showErrors(specific);
@@ -982,7 +992,7 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Utrustning</b></div>',
-                    controller: /*@ngInject*/ function($scope) {                        
+                    controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställare'] = parentModel.orderPerson.name;
                         $scope.model['RE som beställningen avser'] = parentModel.person.RE;
                         $scope.model.Mottagare = {
