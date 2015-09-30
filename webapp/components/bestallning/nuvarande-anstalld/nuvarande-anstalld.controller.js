@@ -75,7 +75,7 @@
                                     model: $scope.model.nuvarande.digitaldiktering
                                 }
                             },
-                            $scope.model.person && $scope.model.person['Anställningstyp'] === 'previa anställd' ? {
+                            $scope.model.person && $scope.model.person.employmentType === 'Anställd' ? {
                                 name: 'Ändra konto',
                                 value: {
                                     name: 'Ändra konto',

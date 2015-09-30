@@ -12,6 +12,7 @@
         'ngSanitize',
         'ngResource',
         'ui.bootstrap',
+        'ui.bootstrap.fontawesome',
         'angularSpinner',
         'formly',
         'formlyBootstrap',
