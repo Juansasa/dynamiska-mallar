@@ -565,10 +565,10 @@
                             value: 'Uppsägning av abonnemang'
                         }],
 
-                        onChange: function (v, opts, s) {
+                        onChange: function(v, opts, s) {
                             // Clear out old model data
                             _.forIn(s.model, function(value, key) {
-                                if(!(key === formTypeKey || key === 'Abonnent' || 
+                                if (!(key === formTypeKey || key === 'Abonnent' ||
                                     key === 'Beställare' || key === 'Beställnings datum')) {
                                     delete s.model[key];
                                 }
@@ -773,7 +773,7 @@
                         onChange: function(v, o, s) {
                             // Clear out old model data
                             _.forIn(s.model, function(value, key) {
-                                if(!(key === formTypeKey || key === 'Abonnent' || key === 'Kontaktperson')) {
+                                if (!(key === formTypeKey || key === 'Abonnent' || key === 'Kontaktperson')) {
                                     delete s.model[key];
                                 }
                             });
@@ -908,7 +908,7 @@
                     $scope.model['RE som beställningen avser'] = parentModel.person.RE;
                     $scope.model['Mottagare/Användare'] = {
                         'Namn': parentModel.person.name,
-                        'Tel': parentModel.person.telefoner,
+                        'Tel': parentModel.person.telephones,
                         'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE),
                         'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
                     };
@@ -1012,7 +1012,7 @@
                         };
                         $scope.model.Datum = new Date();
                         $scope.model.Fakturareferens = parentModel.orderPerson.username;
-                        console.log(parentModel.orderPerson);
+                        
                     }
                 }, {
                     className: 'col-md-12',
@@ -1565,7 +1565,14 @@
                     key: 'Rapportera till chef',
                     templateOptions: {
                         label: 'Rapportera till chef',
-                        required: true
+                        required: true,
+                        managerSelected: function(item, model) {
+                                       _.forEach(model, function (val, key) {
+                                if(key.toLowerCase() !== 'name') {
+                                    delete model[key];
+                                }
+                            });
+                        }
                     }
                 }]
             }];
@@ -1580,7 +1587,7 @@
                 fieldGroup: [{
                     template: '<div><b>Förläng konto</b></div>',
                     controller: /*@ngInject*/ function($scope) {
-                        $scope.model['Användarnamn'] = model.person['Användarnamn'];
+                        $scope.model['Användarnamn'] = model.person.username;
                         $scope.model.Namn = model.person.namn;
                         $scope.model['Huvud-RE'] = model.person['huvud-RE'];
                         $scope.model['Dagens datum'] = new Date();
@@ -1614,7 +1621,6 @@
         }
 
         function getOrderExtendEmployeeAccountForm(parentModel) {
-            console.log('anställd');
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -1693,12 +1699,19 @@
                     }
                 }, {
                     className: 'col-md-12',
-                    type: 'input',
                     key: 'Mailbox och H: kopieras till följande person',
+                    type: 'employeeSearch',
                     templateOptions: {
-                        label: 'Mailbox och H: kopieras till följande person',
-                        description: 'Mailbox behålls i 90 dagar, sedan raderas den automatiskt',
-                        required: true
+                        label: 'Personalsökning',
+                        placeholder: 'Fyll i namn på personen du leta efter',
+                        required: true,
+                        personSelected: function (item, model) {
+                            _.forEach(model, function (val, key) {
+                                if(key !== 'name') {
+                                    delete model[key];
+                                }
+                            });
+                        }
                     }
                 }, {
                     className: 'col-md-12',
@@ -1823,14 +1836,17 @@
         // 
 
         function setPersonInfo(targetModel, parentModel) {
-            targetModel['Användarnamn'] = parentModel.person['användarnamn'];
+            targetModel['Användarnamn'] = parentModel.person.username;
             targetModel.Namn = parentModel.person.name;
         }
 
         function setOrderPersonInfo(targetModel, parentModel) {
             targetModel['Nuvarande huvud-RE'] = parentModel.person.RE;
             targetModel['Dagens datum'] = new Date();
-            targetModel['Behörig beställare'] = parentModel.orderPerson;
+            targetModel['Behörig beställare'] = {
+                Namn: parentModel.orderPerson.name,
+                Epost: parentModel.orderPerson.email
+            };
         }
     }
 })();

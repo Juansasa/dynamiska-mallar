@@ -12,7 +12,8 @@
         function jsonToHtml(jsonData, noMargin) {
             var formattedHtml = noMargin ? '<ul style="list-style: none; margin: 0;">' : '<ul style="list-style: none; margin: 0 1em;">';
             _.forEach(jsonData, function(value, key) {
-                if(key === '$$hashKey') {
+                // Ignore all keys that starts with $
+                if(_.startsWith(key, '$')) {
                     return;
                 }
 
@@ -69,9 +70,11 @@
             }
 
             var knownKeys = {
+                name: 'namn',
                 firstname: 'förnamn',
                 lastname: 'efternamn',
-                pris: 'pris (kr/st)'
+                pris: 'pris (kr/st)',
+                explanations: 'Tillhörande behörigheter'
             };
 
             return knownKeys[key.toLowerCase()] || key;

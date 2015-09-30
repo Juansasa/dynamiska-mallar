@@ -4,7 +4,7 @@
         .controller('HomeController', homeCtrl);
 
     /*@ngInject*/
-    function homeCtrl($scope) {
+    function homeCtrl($scope, autocomplete) {
 
         $scope.testFields = [{
             key: 'test',
@@ -31,6 +31,14 @@
                 minDate: new Date(),
                 showWeeks: false,
                 startingDay: 2
+            }
+        }, {
+            className: 'col-md-12',
+            type: 'roleSelect',
+            key: 'Befattning',
+            templateOptions: {
+                label: 'Välj Befattning, roll och behörighet',
+                options: autocomplete.getBefattningOptions(true)
             }
         }];
     }

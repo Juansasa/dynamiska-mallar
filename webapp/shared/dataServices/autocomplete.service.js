@@ -161,7 +161,6 @@
             }
             return [{
                 name: MO + '-' + '124124214',
-                value: MO + '-' + '124124214'
             }, {
                 name: MO + '-' + '141432535',
                 value: MO + '-' + '141432535'
@@ -223,78 +222,63 @@
         function getBefattningOptions(isEmployee) {
             return [{
                     name: 'Account Manager',
-                    value: 'accountManager',
-                    explanations: [
+                    $explanations: [
                         'Försäljningsrapportering och försäljningsstatistik',
                         'CRM'
                     ]
                 }, {
                     name: 'Affärscontroller',
-                    value: 'Affärscontroller',
-                    explanations: [
+                    $explanations: [
                         'Visma', 'Mercur', 'Adm access till kuben'
                     ]
                 }, {
                     name: 'Affärsutvecklingschef',
-                    value: 'Affärsutvecklingschef',
-                    explanations: [
+                    $explanations: [
                         'Visma', 'Mercur', 'Agda PS'
                     ]
                 }, {
                     name: 'Affärsområdeschef',
-                    value: 'Affärsområdeschef',
-                    explanations: [
+                    $explanations: [
                         'Visma', 'Mercur', 'Agda PS'
                     ]
                 }, {
                     name: 'Affärsstöd - Admin & Service',
-                    value: 'Affärsstöd - Admin & Service',
-                    explanations: [
+                    $explanations: [
                         'Visma', 'Mercur', 'Agda PS'
                     ]
                 }, {
                     name: 'Affärsstöd – Ekonomi',
-                    value: 'Affärsstöd – Ekonomi',
-                    explanations: [
+                    $explanations: [
                         'Visma', 'Mercur', 'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
                     ]
                 }, {
                     name: 'Affärsstöd - Sälj & Marknad',
-                    value: 'Affärsstöd - Sälj & Marknad',
-                    explanations: [
+                    $explanations: [
                         'Option administratörs behörighet 3Q ( efter genomgången utbildning)'
                     ]
                 }, {
                     name: 'Affärsutvecklingschef',
-                    value: 'Affärsutvecklingschef'
                 }, {
                     name: 'Anbudsansvarig',
-                    value: 'Anbudsansvarig'
                 }, {
                     name: 'Anbudskoordinator',
-                    value: 'Anbudskoordinator'
                 }, {
                     name: 'Arbetsmiljöingenjör',
-                    value: 'Arbetsmiljöingenjör'
                 }, {
                     name: 'Arbetsmiljökonsult',
-                    value: 'Arbetsmiljökonsult'
                 }, {
                     name: 'Arbetsmiljötekniker',
-                    value: 'Arbetsmiljötekniker'
                 }, {
                     name: 'Barnmorska – Ej obligatorisk förskrivarkod',
-                    value: 'Barnmorska – Ej obligatorisk förskrivarkod',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ]
                 }, {
                     name: 'Beteendevetare',
-                    value: 'Beteendevetare',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Beteendevetare-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
@@ -303,56 +287,47 @@
                     }]
                 }, {
                     name: 'Callcenteragent',
-                    value: 'Callcenteragent',
-                    explanations: [
+                    $explanations: [
                         'Se specifik lista för roller inom KSC'
                     ]
                 }, {
                     name: 'CFO',
-                    value: 'CFO',
-                    explanations: [
+                    $explanations: [
                         'Agda PS', 'Visma', 'Mercur'
                     ]
                 }, {
                     name: 'Chef Previa Trygghetstjänster',
-                    value: 'Chef Previa Trygghetstjänster'
                 }, {
                     name: 'Drift och förvaltningsansvarig',
-                    value: 'Drift och förvaltningsansvarig',
-                    explanations: [
+                    $explanations: [
                         'IT Kontakt'
                     ]
                 }, {
                     name: 'Drogterapeut',
-                    value: 'Drogterapeut',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ]
                 }, {
                     name: 'Ekonomiassistent',
-                    value: 'Ekonomiassistent',
-                    explanations: [
+                    $explanations: [
                         'Visma'
                     ]
                 }, {
                     name: 'Ekonomichef',
-                    value: 'Ekonomichef',
-                    explanations: [
+                    $explanations: [
                         'Agda PS', 'Visma', 'Mercur'
                     ]
                 }, {
                     name: 'Faktureringsekonom',
-                    value: 'Faktureringsekonom',
-                    explanations: [
+                    $explanations: [
                         'Visma'
                     ]
                 }, {
                     name: 'Fysioterapeut',
-                    value: 'Fysioterapeut',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Fysioterapeut-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
@@ -361,12 +336,11 @@
                     }]
                 }, {
                     name: 'Företagsläkare',
-                    value: 'Företagsläkare',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis', 'Cardio Controll - EKG/Spiro (OBS! Se handboken för installationsinstruktion)',
                         'CareTalk - Digital diktering (OBS! Se handboken för installationsinstruktion)'
                     ],
-                    subInput: [{
+                    $subInput: [{
                         type: 'input',
                         key: 'Obligatorisk förskrivarkod',
                         templateOptions: {
@@ -377,18 +351,17 @@
                     }]
                 }, {
                     name: 'Företagssköterska',
-                    value: 'Företagssköterska',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis', 'Mobilus (kostnad)', 'Vidar - Video- och datorbaserad arbetsanalys för sjukgymnaster (kostnad)'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Företagssköterska-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
                             label: ' CareTalk - Digital diktering (kostnad) (OBS! Se handboken för installationsinstruktion)'
                         }
                     }],
-                    subInput: [{
+                    $subInput: [{
                         type: 'input',
                         key: 'Obligatorisk förskrivarkod',
                         templateOptions: {
@@ -398,8 +371,7 @@
                     }]
                 }, {
                     name: 'Försäljnings- och Marknadschef (FMC)',
-                    value: 'Försäljnings- och Marknadschef (FMC)',
-                    explanations: [
+                    $explanations: [
                         'Försäljningsrapportering och försäljningsstatistik',
                         'Agda PS',
                         'CRM',
@@ -408,8 +380,7 @@
                     ]
                 }, {
                     name: 'Försäljningschef',
-                    value: 'Försäljningschef',
-                    explanations: [
+                    $explanations: [
                         'Försäljningsrapportering och försäljningsstatistik',
                         'Agda PS',
                         'Mercur',
@@ -417,36 +388,31 @@
                     ]
                 }, {
                     name: 'HR-ansvarig',
-                    value: 'HR-ansvarig',
-                    explanations: [
+                    $explanations: [
                         'Agda PS'
                     ]
                 }, {
                     name: 'HR-chef',
-                    value: 'HR-chef',
-                    explanations: [
+                    $explanations: [
                         'Agda PS',
                         'Mercur',
                         'Visma'
                     ]
                 }, {
                     name: 'Hälsoutvecklare',
-                    value: 'Hälsoutvecklare',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ]
                 }, {
                     name: 'Informationschef',
-                    value: 'Informationschef',
-                    explanations: [
+                    $explanations: [
                         'Agda PS',
                         'Mercur',
                         'Visma'
                     ]
                 }, {
                     name: 'IT-chef',
-                    value: 'IT-chef',
-                    explanations: [
+                    $explanations: [
                         'Agda PS',
                         'Mercur',
                         'Visma'
@@ -454,44 +420,36 @@
                 },
                 isEmployee ? {
                     name: 'IT-koordinator',
-                    value: 'IT-koordinator'
                 } : {
                     name: 'IT-konsult',
-                    value: 'IT-konsult'
                 }, {
                     name: 'Key Account Manager',
-                    value: 'Key Account Manager',
-                    explanations: [
+                    $explanations: [
                         'Försäljningsrapportering och försäljningsstatistik',
                         'CRM'
                     ]
                 }, {
                     name: 'Kundservicehandläggare',
-                    value: 'Kundservicehandläggare',
-                    explanations: [
+                    $explanations: [
                         'Se specifik lista för roller inom KSC'
                     ]
                 }, {
                     name: 'Konsultchef',
-                    value: 'Konsultchef',
-                    explanations: [
+                    $explanations: [
                         'Agda PS',
                         'Mercur',
                         'Visma'
                     ]
                 }, {
                     name: 'Kvalitets- och miljösamordnare',
-                    value: 'Kvalitets- och miljösamordnare'
                 }, {
                     name: 'Kvalitets-och miljöansvarig',
-                    value: 'Kvalitets-och miljöansvarig'
                 }, {
                     name: 'Leg psykolog',
-                    value: 'Leg psykolog',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Leg psykolog-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
@@ -500,22 +458,19 @@
                     }]
                 }, {
                     name: 'Löneadministratör',
-                    value: 'Löneadministratör',
-                    explanations: [
+                    $explanations: [
                         'Agda PS'
                     ]
                 }, {
                     name: 'Marknadsområdeschef (MOC)',
-                    value: 'Marknadsområdeschef (MOC)',
-                    explanations: [
+                    $explanations: [
                         'Agda PS',
                         'Mercur',
                         'Visma'
                     ]
                 }, {
                     name: 'Operativ samordnare',
-                    value: 'Operativ samordnare',
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Operativ samordnare option',
                         type: 'checkbox',
                         templateOptions: {
@@ -524,11 +479,10 @@
                     }]
                 }, {
                     name: 'Organisationskonsult',
-                    value: 'Organisationskonsult',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Organisationskonsult-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
@@ -537,20 +491,16 @@
                     }]
                 }, {
                     name: 'Produktionsplanerare',
-                    value: 'Produktionsplanerare'
                 }, {
                     name: 'Projektledare',
-                    value: 'Projektledare'
                 }, {
                     name: 'Projektsamordnare',
-                    value: 'Projektsamordnare'
                 }, {
                     name: 'PTP-psykolog',
-                    value: 'PTP-psykolog',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'PTP-psykolog-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
@@ -559,8 +509,7 @@
                     }]
                 }, {
                     name: 'Receptionist',
-                    value: 'Receptionist',
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Receptionist-option',
                         type: 'checkbox',
                         templateOptions: {
@@ -569,40 +518,34 @@
                     }]
                 }, {
                     name: 'Redovisningscontroller',
-                    value: 'Redovisningscontroller',
-                    explanations: [
+                    $explanations: [
                         'Visma'
                     ]
                 }, {
                     name: 'Sales Executive',
-                    value: 'Sales Executive',
-                    explanations: [
+                    $explanations: [
                         'Försäljningsrapportering och försäljningsstatistik',
                         'CRM'
                     ]
                 }, {
                     name: 'S&F Agent',
-                    value: 'S&F Agent',
-                    explanations: [
+                    $explanations: [
                         'Se specifik lista för roller inom KSC'
                     ]
                 }, {
                     name: 'Systemkoordinator',
-                    value: 'Systemkoordinator'
                 }, {
                     name: 'Telefonsjuksköterska',
-                    value: 'Telefonsjuksköterska',
-                    explanations: [
+                    $explanations: [
                         'Se specifik lista för roller inom KSC'
                     ]
                 }, {
                     name: 'Undersköterska',
-                    value: 'Undersköterska',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis',
                         'Cardio Controll - EKG/Spiro'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Undersköterska-CareTalk',
                         type: 'checkbox',
                         templateOptions: {
@@ -611,27 +554,23 @@
                     }]
                 }, {
                     name: 'Vaktmästare',
-                    value: 'Vaktmästare'
                 }, {
                     name: 'VD',
-                    value: 'VD',
-                    explanations: [
+                    $explanations: [
                         'Agda PS'
                     ]
                 }, {
                     name: 'Växeltelefonist',
-                    value: 'Växeltelefonist',
-                    explanations: [
+                    $explanations: [
                         'Se specifik lista för roller inom KSC'
                     ]
                 }, {
                     name: 'Övrig kontorspersonal',
-                    value: 'Övrig kontorspersonal',
-                    explanations: [
+                    $explanations: [
                         'Quid Agis',
                         'Cardio Controll - EKG/Spiro'
                     ],
-                    subOptions: [{
+                    $subOptions: [{
                         key: 'Övrig kontorspersonal-option',
                         type: 'checkbox',
                         templateOptions: {

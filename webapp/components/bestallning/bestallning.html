@@ -16,8 +16,9 @@
             <div class="panel-heading" ng-if="model.person.name">
                 <h4><b>Ärende person</b></h4>
                 <span><b>Namn:</b> <i>{{model.person.name.firstname + ' ' + model.person.name.lastname}}</i></span>
-                <span><b>Huvud-RE:</b> <i>{{model.person.RE}}</i></span>
-                <span><b>Tjänsteställe:</b> <i>{{model.person.workplace}}</i></span>
+                <span><b>Anställning:</b> <i>{{model.person.employmentType || 'uppgift saknas'}}</i></span>
+                <span><b>Huvud-RE:</b> <i>{{model.person.RE || 'uppgift saknas'}}</i></span>
+                <span><b>Tjänsteställe:</b> <i>{{model.person.workplace || 'uppgift saknas'}}</i></span>
             </div>
             <div class="panel-body">
                 <div ui-view="wizardContent"></div>
