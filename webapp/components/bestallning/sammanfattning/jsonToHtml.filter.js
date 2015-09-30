@@ -71,6 +71,7 @@
 
             var knownKeys = {
                 name: 'namn',
+                employmenttype: 'anställningstyp',
                 firstname: 'förnamn',
                 lastname: 'efternamn',
                 pris: 'pris (kr/st)',

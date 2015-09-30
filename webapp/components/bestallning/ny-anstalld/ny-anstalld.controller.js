@@ -55,7 +55,7 @@
                 route: $state.current.name
             }];
 
-            if ($scope.model.person && $scope.model.person['Anställningstyp']) {
+            if ($scope.model.person && $scope.model.person.employmentType) {
                 getPageDataByEmploymentType();
             }
 
@@ -67,19 +67,19 @@
                 }, {
                     className: 'col-md-12',
                     type: 'radio',
-                    key: 'Anställningstyp',
+                    key: 'employmentType',
                     templateOptions: {
-                        label: 'Anställningstyp',
+                        label: 'employmentType',
                         options: [{
                             name: 'Previa anställd',
-                            value: 'previa anställd'
+                            value: 'anställd'
                         }, {
                             name: 'Konsult',
                             value: 'konsult'
                         }],
                         required: true,
                         onChange: function() {
-                            if ($scope.model.person['Anställningstyp']) {
+                            if ($scope.model.person.employmentType.toLowerCase()) {
                                 getPageDataByEmploymentType();
                             }
                         }
@@ -106,14 +106,14 @@
             }
 
             var wizardSteps = [];
-            if ($scope.model.person['Anställningstyp'] === 'konsult') {
+            if ($scope.model.person.employmentType.toLowerCase() === 'konsult') {
                 $scope.fields.personinfo = forms.newConsultantPersonalInfo().concat(forms.newConsultantAccount());
                 wizardSteps = [{
                     name: 'Nytt konto',
                     route: 'bestallning.ny',
                     model: $scope.model.person
                 }];
-            } else if ($scope.model.person['Anställningstyp'] === 'previa anställd') {
+            } else if ($scope.model.person.employmentType.toLowerCase() === 'anställd') {
                 $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{
                     name: 'Anställningsavtal - HR',

@@ -75,15 +75,15 @@
                                     model: $scope.model.nuvarande.digitaldiktering
                                 }
                             },
-                            $scope.model.person && $scope.model.person.employmentType === 'Anställd' ? {
+                            $scope.model.person && $scope.model.person.employmentType && $scope.model.person.employmentType.toLowerCase() === 'anställd' ? {
                                 name: 'Ändra konto',
                                 value: {
-                                    name: 'Ändra konto',
+                                    name: 'Ändra konto (Previa anställd)',
                                     route: 'bestallning.nuvarande.anstalld.forandring-konto',
                                     model: $scope.model.nuvarande.anstalld.andraKonto
                                 }
                             } : {
-                                name: 'Ändra konto',
+                                name: 'Ändra konto (Konsult)',
                                 value: {
                                     name: 'Ändra konto',
                                     route: 'bestallning.nuvarande.konsult.forandring-konto',

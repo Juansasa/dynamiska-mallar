@@ -180,7 +180,10 @@
             {
                 name: 'infoList',
                 wrapper: ['bootstrapLabel'],
-                templateUrl: 'shared/formService/infoList.html'
+                templateUrl: 'shared/formService/infoList.html',
+                controller: /*@ngInject*/ function($scope) {
+                    $scope.model['Standardbehörighet för samtliga roller och befattningar'] = $scope.to.options;
+                }
             }, {
                 name: 'personName',
                 template: '<formly-form model="model[options.key]" fields="options.data.forms"></form-form>',

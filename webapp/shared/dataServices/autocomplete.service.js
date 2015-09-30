@@ -33,7 +33,7 @@
 
             getAllEmployee: getAllEmployee
         };
-        
+
         return service;
 
         function getTjanstestalleNamn(id) {
@@ -373,6 +373,9 @@
                             label: 'Obligatorisk förskrivarkod',
                             required: true,
                             placeholder: 'Förskrivarkod xxx-xxxxx'
+                        },
+                        validation: {
+                            show: true
                         }
                     }]
                 }, {
