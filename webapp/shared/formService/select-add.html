@@ -12,7 +12,7 @@
 </table>
 <ui-select ng-model="to.selectedValue" theme="bootstrap" ng-disabled="to.disabled" reset-search-input="false">
     <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
-    <ui-select-choices repeat="option in to.options | propsFilter: {name: $select.search}">
+    <ui-select-choices repeat="option in to.options | filter: $select.search">
         <div ng-bind-html="option.name | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>

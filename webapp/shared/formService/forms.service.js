@@ -1352,19 +1352,26 @@
                         options: autocomplete.getBefattningOptions(false)
                     }
                 }, {
-                    className: 'col-md-6',
-                    type: 'textarea',
-                    key: 'Övrig information',
-                    templateOptions: {
-                        label: 'Övrig information'
-                    }
-                }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'managerSearch',
                     key: 'Rapportera till chef',
                     templateOptions: {
                         label: 'Rapportera till chef',
-                        required: true
+                        required: true,
+                        managerSelected: function(item, model) {
+                                       _.forEach(model, function (val, key) {
+                                if(key.toLowerCase() !== 'name') {
+                                    delete model[key];
+                                }
+                            });
+                        }
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information'
                     }
                 }]
             }];
@@ -1553,14 +1560,7 @@
                         options: autocomplete.getBefattningOptions(true)
                     }
                 }, {
-                    className: 'col-md-6',
-                    type: 'textarea',
-                    key: 'Övrig information',
-                    templateOptions: {
-                        label: 'Övrig information'
-                    }
-                }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'managerSearch',
                     key: 'Rapportera till chef',
                     templateOptions: {
@@ -1573,6 +1573,13 @@
                                 }
                             });
                         }
+                    }
+                }, {
+                    className: 'col-md-12',
+                    type: 'textarea',
+                    key: 'Övrig information',
+                    templateOptions: {
+                        label: 'Övrig information'
                     }
                 }]
             }];

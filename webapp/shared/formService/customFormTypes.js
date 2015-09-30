@@ -332,6 +332,17 @@
                         showPrevileges: true,
                         placeholder: 'Välj i listan'
                     },
+                    expressionProperties: {
+                        'generateIndex': function(v, m, scope) {
+                            if(!m) {
+                                return;
+                            }
+                            
+                            scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
+                                return option.value === m.name;
+                            });
+                        }
+                    }
                 }
             }, {
                 name: 'plainInput',

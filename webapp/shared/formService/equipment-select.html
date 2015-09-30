@@ -22,7 +22,7 @@
 </table>
 <ui-select ng-model="to.selectedValue" theme="bootstrap" ng-disabled="to.disabled" reset-search-input="false">
     <ui-select-match placeholder="{{to.placeholder}}">{{$select.selected.name}}</ui-select-match>
-    <ui-select-choices repeat="option in to.options | propsFilter: {name: $select.search}">
+    <ui-select-choices repeat="option in to.options | filter: $select.search">
         <div style="font-weight: bold" ng-bind-html="option.name | highlight: $select.search"></div>
         <div class="row" ng-if="option.description">
             <span class="col-md-6"><i>Beskrivning: {{option.description}}</i></span>

@@ -40,6 +40,26 @@
                 label: 'Välj Befattning, roll och behörighet',
                 options: autocomplete.getBefattningOptions(true)
             }
-        }];
+        }, {
+                className: 'col-md-12',
+                type: 'equipment-select',
+                key: 'Kontorsheadset',
+                templateOptions: {
+                    label: 'Kontorsheadset',
+                    enableModelInput: true
+                },
+                controller: /*@ngInject*/ function($scope, logger) {
+                    var promise = autocomplete.getHeadsetOptions();
+                    promise.then(success, fail);
+
+                    function success(response) {
+                        $scope.to.options = response.data;
+                    }
+
+                    function fail(error) {
+                        logger.error('Något gick fel när kontorsheadsetlista ska läsas in', error);
+                    }
+                }
+            }];
     }
 })();

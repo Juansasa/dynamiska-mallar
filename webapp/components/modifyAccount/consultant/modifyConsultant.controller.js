@@ -18,11 +18,11 @@
             templateOptions: {
                 label: 'Välj en formulär',
                 options: [{
-                    name: 'Ändra Konto',
-                    value: 'Ändra Konto'
+                    name: 'Ändring av konto',
+                    value: 'Ändring av konto'
                 }, {
-                    name: 'Förläng Konto',
-                    value: 'Förläng Konto'
+                    name: 'Förlängning av konto',
+                    value: 'Förlängning av konto'
                 }],
                 data: {
                     setField: setFormFields
@@ -39,10 +39,10 @@
                 function init() {
                     var value = $scope.model[$scope.options.key];
                     switch (value) {
-                        case 'Ändra Konto':
+                        case 'Ändring av konto':
                             $scope.to.data.setField(value, forms.modifyConsultantAccount(getModel()));
                             break;
-                        case 'Förläng Konto':
+                        case 'Förlängning av konto':
                             $scope.to.data.setField(value, forms.extendConsultantAccount(getModel()));
                             break;
                         default:
@@ -60,7 +60,7 @@
         function setFormFields(option, fields) {
             $scope.formFields = fields;
             $scope.model.nuvarande.konsult.andraKonto = $scope.model.nuvarande.konsult.andraKonto || {};
-            $scope.model.nuvarande.konsult.andraKonto['Vald formulär'] = option;
+            $scope.model.nuvarande.konsult.andraKonto['Beställningen avser'] = option;
         }
     }
 })();
