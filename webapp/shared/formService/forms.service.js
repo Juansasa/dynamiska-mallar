@@ -48,7 +48,7 @@
                     key: 'personnummer'
                 }, {
                     type: 'personName',
-                    key: 'namn'
+                    key: 'name'
                 }]
             }, {
                 className: 'row',
@@ -452,7 +452,7 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model[$scope.options.key] = {
                             'Personnummer': model.person ? model.person.personnummer : null,
-                            'Namn': model.person ? model.person.namn : null,
+                            'Namn': model.person ? model.person.nam : null,
                             'Tjänsteställets besöksadress': autocomplete.getTjanstestalleBesokAdress(model.person['huvud-RE']),
                             'Tjänsteställets postadress': autocomplete.getTjanstestallePostAdress(model.person['huvud-RE']),
                             'Anställningsinformation': getAnstallning(model.person['anställningsform']),
@@ -1595,10 +1595,13 @@
                     template: '<div><b>Förläng konto</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Användarnamn'] = model.person.username;
-                        $scope.model.Namn = model.person.namn;
+                        $scope.model.Namn = model.person.name;
                         $scope.model['Huvud-RE'] = model.person['huvud-RE'];
                         $scope.model['Dagens datum'] = new Date();
-                        $scope.model['Behörig beställare'] = model.orderPerson;
+                        $scope.model['Behörig beställare'] = {
+                            Namn: model.orderPerson.name,
+                            Epost: model.orderPerson.email
+                        };
                     }
                 }, {
                     className: 'col-md-6',
@@ -1636,7 +1639,10 @@
                         setPersonInfo($scope.model, parentModel);
                         $scope.model['Huvud-RE'] = parentModel.person.RE;
                         $scope.model['Dagens datum'] = new Date();
-                        $scope.model['Beställare'] = parentModel.orderPerson;
+                        $scope.model['Behöring beställare'] = {
+                            Namn: parentModel.orderPerson.name,
+                            Epost: parentModel.orderPerson.email
+                        };
                     }
                 }, {
                     className: 'col-md-12',

@@ -48,7 +48,7 @@
             return findStateIndex($state.current) === $scope.model.steps.newEmployee.length - 1;
         };
 
-        function init() {            
+        function init() {
             // initialize wizardsteps
             $scope.model.steps.newEmployee = $scope.model.steps.newEmployee || [{
                 name: 'Start',
@@ -78,7 +78,15 @@
                             value: 'konsult'
                         }],
                         required: true,
-                        onChange: function() {
+                        onChange: function(v, o, scope) {
+                            // Reset model data
+
+                            _.forEach(scope.model, function(val, key) {
+                                if (key !== 'employmentType') {
+                                    delete scope.model[key];
+                                }
+                            });
+                            
                             if ($scope.model.person.employmentType.toLowerCase()) {
                                 getPageDataByEmploymentType();
                             }

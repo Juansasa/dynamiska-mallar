@@ -337,10 +337,10 @@
                     },
                     expressionProperties: {
                         'generateIndex': function(v, m, scope) {
-                            if(!m) {
+                            if (!m) {
                                 return;
                             }
-                            
+
                             scope.to.selectedValueIndex = _.findIndex(scope.to.options, function(option) {
                                 return option.value === m.name;
                             });
@@ -444,11 +444,17 @@
                             fieldGroup: [{
                                 className: 'col-md-6',
                                 type: 'managerSearch',
-                                key: 'Rapporterar till (chef)',
+                                key: 'Rapportera till chef',
                                 templateOptions: {
-                                    placeholder: 'Välj i listan',
-                                    label: 'Rapporterar till (chef)',
-                                    required: true
+                                    label: 'Rapportera till chef',
+                                    required: true,
+                                    managerSelected: function(item, model) {
+                                        _.forEach(model, function(val, key) {
+                                            if (key.toLowerCase() !== 'name') {
+                                                delete model[key];
+                                            }
+                                        });
+                                    }
                                 }
                             }, {
                                 className: 'col-md-6',

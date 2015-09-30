@@ -28,6 +28,13 @@
                     setField: setFormFields
                 },
                 onChange: function(value, options, scope) {
+                    // Clear old data
+                    _.forEach(scope.model, function(val, key) {
+                        if(key !== 'Beställningen avser') {
+                            delete scope.model[key];
+                        }
+                    });
+                    
                     scope.init();
                 }
             },
