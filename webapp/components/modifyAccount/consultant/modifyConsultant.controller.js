@@ -14,7 +14,7 @@
         $scope.formSelectfields = [{
             className: 'col-md-12',
             type: 'radio',
-            key: 'Vald formulär',
+            key: 'Beställningen avser',
             templateOptions: {
                 label: 'Välj en formulär',
                 options: [{

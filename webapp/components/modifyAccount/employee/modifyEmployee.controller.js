@@ -14,7 +14,7 @@
         $scope.formSelectfields = [{
             className: 'col-md-12',
             type: 'radio',
-            key: 'Vald formulär',
+            key: 'Beställningen avser',
             templateOptions: {
                 label: 'Välj en formulär',
                 options: [{
@@ -28,6 +28,12 @@
                     setField: setFormFields
                 },
                 onChange: function(value, options, scope) {
+                    // Clear old data
+                    _.forEach(scope.model, function(val, key) {
+                        if(key !== 'Beställningen avser') {
+                            delete scope.model[key];
+                        }
+                    });
                     scope.init();
                 }
             },
@@ -37,6 +43,7 @@
                 $scope.init = init;
                 function init() {
                     var value = $scope.model[$scope.options.key];
+
                     switch (value) {
                         case 'Ändring av konto': 
                             $scope.to.data.setField(value, forms.modifyEmployeeAccount(getModel()));

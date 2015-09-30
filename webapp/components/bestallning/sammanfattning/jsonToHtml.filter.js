@@ -64,7 +64,7 @@
         function mapKeyValue(key) {
             if(!_.isString(key)) {
                 if(_.isNumber(key)) {
-                    return key + 1;
+                    return '+';
                 }
                 return key;
             }
@@ -75,7 +75,9 @@
                 firstname: 'förnamn',
                 lastname: 'efternamn',
                 pris: 'pris (kr/st)',
-                explanations: 'Tillhörande behörigheter'
+                explanations: 'Tillhörande behörigheter',
+                mobile: 'mobil',
+                phone: 'telefon'
             };
 
             return knownKeys[key.toLowerCase()] || key;

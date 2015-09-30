@@ -1012,7 +1012,7 @@
                         };
                         $scope.model.Datum = new Date();
                         $scope.model.Fakturareferens = parentModel.orderPerson.username;
-                        
+
                     }
                 }, {
                     className: 'col-md-12',
@@ -1359,8 +1359,8 @@
                         label: 'Rapportera till chef',
                         required: true,
                         managerSelected: function(item, model) {
-                                       _.forEach(model, function (val, key) {
-                                if(key.toLowerCase() !== 'name') {
+                            _.forEach(model, function(val, key) {
+                                if (key.toLowerCase() !== 'name') {
                                     delete model[key];
                                 }
                             });
@@ -1567,8 +1567,8 @@
                         label: 'Rapportera till chef',
                         required: true,
                         managerSelected: function(item, model) {
-                                       _.forEach(model, function (val, key) {
-                                if(key.toLowerCase() !== 'name') {
+                            _.forEach(model, function(val, key) {
+                                if (key.toLowerCase() !== 'name') {
                                     delete model[key];
                                 }
                             });
@@ -1712,9 +1712,9 @@
                         label: 'Personalsökning',
                         placeholder: 'Fyll i namn på personen du leta efter',
                         required: true,
-                        personSelected: function (item, model) {
-                            _.forEach(model, function (val, key) {
-                                if(key !== 'name') {
+                        personSelected: function(item, model) {
+                            _.forEach(model, function(val, key) {
+                                if (key !== 'name') {
                                     delete model[key];
                                 }
                             });

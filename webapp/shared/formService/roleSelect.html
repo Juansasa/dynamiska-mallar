@@ -5,7 +5,9 @@
             <div ng-bind-html="option.name | highlight: $select.search"></div>
         </ui-select-choices>
     </ui-select>
-    <div ng-if="to.showPrevileges && (to.selectedValueIndex > -1)" class="alert alert-info">
+    <div ng-if="to.showPrevileges && (to.selectedValueIndex > -1) && 
+        (to.options[to.selectedValueIndex].explanations || to.options[to.selectedValueIndex].subInput || to.options[to.selectedValueIndex].subOptions)" 
+        class="alert alert-info">
         <div class="subinput" ng-if="to.options[to.selectedValueIndex].subInput">
             <formly-form model="model[options.key]" fields="to.options[to.selectedValueIndex].subInput">
             </formly-form>

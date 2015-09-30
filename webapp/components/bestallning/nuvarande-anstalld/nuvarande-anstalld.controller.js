@@ -76,7 +76,7 @@
                                 }
                             },
                             $scope.model.person && $scope.model.person.employmentType && $scope.model.person.employmentType.toLowerCase() === 'anställd' ? {
-                                name: 'Ändra konto',
+                                name: 'Ändra konto (Previa anställd)',
                                 value: {
                                     name: 'Ändra konto (Previa anställd)',
                                     route: 'bestallning.nuvarande.anstalld.forandring-konto',
@@ -85,7 +85,7 @@
                             } : {
                                 name: 'Ändra konto (Konsult)',
                                 value: {
-                                    name: 'Ändra konto',
+                                    name: 'Ändra konto (Konsult)',
                                     route: 'bestallning.nuvarande.konsult.forandring-konto',
                                     model: $scope.model.nuvarande.konsult.andraKonto
                                 }
