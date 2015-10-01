@@ -69,7 +69,7 @@
                     type: 'radio',
                     key: 'employmentType',
                     templateOptions: {
-                        label: 'employmentType',
+                        label: 'Anställningstyp',
                         options: [{
                             name: 'Previa anställd',
                             value: 'anställd'
@@ -86,7 +86,7 @@
                                     delete scope.model[key];
                                 }
                             });
-                            
+
                             if ($scope.model.person.employmentType.toLowerCase()) {
                                 getPageDataByEmploymentType();
                             }
@@ -109,7 +109,7 @@
         }
 
         function getPageDataByEmploymentType() {
-            if (!$scope.model.person) {
+            if (!$scope.model.person || !$scope.model.person.employmentType) {
                 return;
             }
 
@@ -121,7 +121,7 @@
                     route: 'bestallning.ny',
                     model: $scope.model.person
                 }];
-            } else if ($scope.model.person.employmentType.toLowerCase() === 'anställd') {
+            } else {
                 $scope.fields.personinfo = forms.newEmployeePersonalInfo();
                 wizardSteps = [{
                     name: 'Anställningsavtal - HR',
@@ -133,8 +133,6 @@
                     model: $scope.model.ny.anstalld.nyttKonto,
                     canSkip: true
                 }];
-            } else {
-                return;
             }
 
             $scope.model.steps.newEmployee = wizardSteps

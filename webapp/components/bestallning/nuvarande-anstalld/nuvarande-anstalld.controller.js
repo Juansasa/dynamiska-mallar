@@ -19,7 +19,7 @@
             }
         }];
 
-        function personSelected() {            
+        function personSelected() {
             $scope.fields.formsSelection = [{
                 className: 'row',
                 fieldGroup: [{
@@ -75,19 +75,19 @@
                                     model: $scope.model.nuvarande.digitaldiktering
                                 }
                             },
-                            $scope.model.person && $scope.model.person.employmentType && $scope.model.person.employmentType.toLowerCase() === 'anställd' ? {
-                                name: 'Ändra konto (Previa anställd)',
-                                value: {
-                                    name: 'Ändra konto (Previa anställd)',
-                                    route: 'bestallning.nuvarande.anstalld.forandring-konto',
-                                    model: $scope.model.nuvarande.anstalld.andraKonto
-                                }
-                            } : {
+                            $scope.model.person && $scope.model.person.employmentType && $scope.model.person.employmentType.toLowerCase() === 'konsult' ? {
                                 name: 'Ändra konto (Konsult)',
                                 value: {
                                     name: 'Ändra konto (Konsult)',
                                     route: 'bestallning.nuvarande.konsult.forandring-konto',
                                     model: $scope.model.nuvarande.konsult.andraKonto
+                                }
+                            } : {
+                                name: 'Ändra konto (Previa anställd)',
+                                value: {
+                                    name: 'Ändra konto (Previa anställd)',
+                                    route: 'bestallning.nuvarande.anstalld.forandring-konto',
+                                    model: $scope.model.nuvarande.anstalld.andraKonto
                                 }
                             }, {
                                 name: 'Avsluta konto',

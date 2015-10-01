@@ -7,6 +7,8 @@
 			<h4>{{mail.subject}} <i class="fa fa-check"></i></h4>
 			<div><b>Från: </b> {{mail.fromAddress}}</div>
 			<div><b>Till: </b> {{mail.toAddress}}</div>
+			<div><b>CC: </b> <i ng-repeat="cc in mail.toAddressCC">{{cc + ($index === mail.toAddressCC.length - 1 ? '' : ', ')}} </i></div>
+			<div><b>BCC: </b> <i ng-repeat="bcc in mail.toAddressBCC">{{bcc + ($index === mail.toAddressBCC.length - 1 ? '' : ', ')}}</i></div>
 		</li>
 	</ul>
 </div>

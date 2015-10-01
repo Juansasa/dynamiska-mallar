@@ -42,7 +42,7 @@
 
         function getTPadress(id) {
             return {
-                'Gata/Box': 'exempelgatan',
+                'Gata/Box': id + ' exempel postadress gatan',
                 Postnummer: '33333',
                 Ort: 'Stockholm'
             };
@@ -51,7 +51,7 @@
 
         function getTBadress(id) {
             return {
-                Gata: id + ':: St eriks-gata 12',
+                Gata: id + ' - exempel besökgatan',
                 Postnummer: '33333',
                 Ort: 'Stockholm'
             };
@@ -160,17 +160,17 @@
                 return [];
             }
             return [{
-                name: MO + '-' + '124124214',
-                value: MO + '-' + '124124214'
+                name: MO + '-' + '-RE-124124214',
+                value: MO + '-' + '-RE-124124214'
             }, {
-                name: MO + '-' + '141432535',
-                value: MO + '-' + '141432535'
+                name: MO + '-' + '-RE-141432535',
+                value: MO + '-' + '-RE-141432535'
             }, {
-                name: MO + '-' + '452252',
-                value: MO + '-' + '452252'
+                name: MO + '-' + '-RE-452252',
+                value: MO + '-' + '-RE-452252'
             }, {
-                name: MO + '-' + '324523552',
-                value: MO + '-' + '324523552'
+                name: MO + '-' + '-RE-324523552',
+                value: MO + '-' + '-RE-324523552'
             }];
         }
 

@@ -94,14 +94,14 @@
                         placeholder: 'Välj ett marknadsåmråde',
                         options: autocomplete.getAllMO(),
                         onChange: function(v, m, s) {
-                            s.model['huvud-RE'] = null;
+                            s.model.RE = null;
                         },
                         required: true
                     }
                 }, {
                     className: 'col-md-4',
                     type: 'tjanstestalleSelect',
-                    key: 'Tjänsteställe (Primärt)',
+                    key: 'workplace', 
                     templateOptions: {
                         label: gettext('Tjänsteställe'),
                         placeholder: 'Välj ett tjänsteställe',
@@ -111,7 +111,7 @@
                 }, {
                     className: 'col-md-4',
                     type: 'autocomplete-select',
-                    key: 'huvud-RE',
+                    key: 'RE',
                     templateOptions: {
                         label: 'Huvud-RE',
                         placeholder: 'Välj en RE',
@@ -138,13 +138,21 @@
                     key: 'personnummer'
                 }, {
                     type: 'personName',
-                    key: 'namn'
+                    key: 'name'
                 }, {
                     type: 'adress',
-                    key: 'adress'
+                    key: 'address'
                 }, {
                     type: 'telefon',
-                    key: 'telefoner'
+                    key: 'telephones'
+                }, {
+                    className: 'col-md-12',
+                    type: 'input',
+                    key: 'email',
+                    templateOptions: {
+                        label: 'Email',
+                        type: 'email'
+                    }
                 }]
             }, {
                 className: 'row',
@@ -159,14 +167,14 @@
                         placeholder: 'Välj ett marknadsåmråde',
                         options: autocomplete.getAllMO(),
                         onChange: function(v, m, s) {
-                            s.model['huvud-RE'] = null;
+                            s.model.RE = null;
                         },
                         required: true
                     }
                 }, {
                     className: 'col-md-4',
                     type: 'autocomplete-select',
-                    key: 'huvud-RE',
+                    key: 'RE',
                     templateOptions: {
                         label: 'Huvud-RE',
                         placeholder: 'Välj en RE',
@@ -191,7 +199,7 @@
                 }, {
                     className: 'col-md-6',
                     type: 'autocomplete-select',
-                    key: 'Tjänsteställe (Primärt)',
+                    key: 'workplace',
                     templateOptions: {
                         label: 'Tjänsteställe (Primärt)',
                         placeholder: 'Välj från listan',
@@ -283,9 +291,9 @@
                 }, {
                     className: 'col-md-6',
                     type: 'input',
-                    key: 'Månadslön, heltid',
+                    key: 'Månadslön, heltid (kr)',
                     templateOptions: {
-                        label: 'Månadslön, heltid',
+                        label: 'Månadslön, heltid (kr)',
                         required: true
                     },
                     hideExpression: function(vv, mv, scope) {
@@ -452,16 +460,17 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model[$scope.options.key] = {
                             'Personnummer': model.person ? model.person.personnummer : null,
-                            'Namn': model.person ? model.person.nam : null,
-                            'Tjänsteställets besöksadress': autocomplete.getTjanstestalleBesokAdress(model.person['huvud-RE']),
-                            'Tjänsteställets postadress': autocomplete.getTjanstestallePostAdress(model.person['huvud-RE']),
+                            'Namn': model.person ? model.person.name : null,
+                            'Tjänsteställets besöksadress': autocomplete.getTjanstestalleBesokAdress(model.person.RE),
+                            'Tjänsteställets postadress': autocomplete.getTjanstestallePostAdress(model.person.RE),
                             'Anställningsinformation': getAnstallning(model.person['anställningsform']),
                             'MO (Marknadsområde)': model.person.MO,
-                            'Huvud-RE': model.person['huvud-RE'],
-                            'Tillhör även RE': model.person['Sekundär tjänsteställe'],
-                            'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person['huvud-RE']),
+                            'Huvud-RE': model.person.RE,
+                            'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person.RE),
                         };
-                        $scope.model['Beställare'] = model.orderPerson;
+                        $scope.model['Beställare'] = {
+                            namn: model.orderPerson.name
+                        };
                         $scope.model['Dagens datum'] = new Date();
 
                         function getAnstallning(type) {
@@ -484,12 +493,13 @@
                 }, {
                     className: 'col-md-12',
                     type: 'autoCompleteAdd',
-                    key: 'Sekundär tjänsteställe',
+                    key: 'Tillhör även RE',
                     templateOptions: {
                         label: gettext('Tillhör även RE'),
                         placeholder: 'Lägga till en eller fler RE',
                         options: autocomplete.getRE('All')
-                    }
+                    },
+
                 }, {
                     template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
                 }, {
@@ -568,8 +578,7 @@
                         onChange: function(v, opts, s) {
                             // Clear out old model data
                             _.forIn(s.model, function(value, key) {
-                                if (!(key === formTypeKey || key === 'Abonnent' ||
-                                    key === 'Beställare' || key === 'Beställnings datum')) {
+                                if (!(key === formTypeKey || key === 'Beställnings datum')) {
                                     delete s.model[key];
                                 }
                             });
@@ -585,9 +594,9 @@
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
-                            Postadress: parentModel.person.address
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person.RE)
                         };
-                        $scope.model['Beställare'] = {
+                        $scope.model.Kontaktperson = {
                             Namn: parentModel.orderPerson.name,
                             Telefonnummer: parentModel.orderPerson.telephones
                         };
@@ -627,7 +636,7 @@
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
-                            Postadress: parentModel.person.address
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person.RE)
                         };
                         $scope.model.Kontaktperson = {
                             Namn: parentModel.orderPerson.name,
@@ -790,7 +799,7 @@
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
-                            Postadress: parentModel.person.address
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person.RE)
                         };
 
                         $scope.model.Kontaktperson = {
@@ -835,7 +844,7 @@
                             Namn: parentModel.person.name,
                             'Användarnamn': parentModel.person.username,
                             Resultatenhet: parentModel.person.RE,
-                            Postadress: parentModel.person.address
+                            Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person.RE)
                         };
                         $scope.model.Kontaktperson = {
                             Namn: parentModel.orderPerson.name,
@@ -909,10 +918,11 @@
                     $scope.model['Mottagare/Användare'] = {
                         'Namn': parentModel.person.name,
                         'Tel': parentModel.person.telephones,
-                        'Leveransadress': autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE),
+                        'Leveransadress': autocomplete.getTjanstestallePostAdress(parentModel.person.RE),
                         'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
                     };
                     $scope.model['Dagens datum'] = new Date();
+                    $scope.model.Fakturareferens = parentModel.orderPerson.username;
                 }
             }, {
                 className: 'col-md-12',
@@ -1176,7 +1186,7 @@
         }
 
         function setTPostalAdress(targetModel, parentModel) {
-            targetModel['Tjänsteställets postadress'] = parentModel.person.address;
+            targetModel['Tjänsteställets postadress'] = autocomplete.getTjanstestallePostAdress(parentModel.person.RE);
 
         }
 
@@ -1596,7 +1606,7 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Användarnamn'] = model.person.username;
                         $scope.model.Namn = model.person.name;
-                        $scope.model['Huvud-RE'] = model.person['huvud-RE'];
+                        $scope.model.RE = model.person.RE;
                         $scope.model['Dagens datum'] = new Date();
                         $scope.model['Behörig beställare'] = {
                             Namn: model.orderPerson.name,
@@ -1637,7 +1647,7 @@
                     template: '<div><b>Tjänsteuppgifter</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
-                        $scope.model['Huvud-RE'] = parentModel.person.RE;
+                        $scope.model.RE = parentModel.person.RE;
                         $scope.model['Dagens datum'] = new Date();
                         $scope.model['Behöring beställare'] = {
                             Namn: parentModel.orderPerson.name,
@@ -1698,7 +1708,7 @@
                     template: '<div><b>Avsluta konto</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
-                        $scope['huvud-RE'] = parentModel.person.RE;
+                        $scope.RE = parentModel.person.RE;
                         $scope['Dagens datum'] = new Date();
                         $scope['Beställare'] = parentModel.orderPerson;
                     }
