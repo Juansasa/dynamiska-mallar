@@ -8,22 +8,17 @@
     /*@ngInject*/
     function mailService($http, $filter) {
         var DMServiceDeskAndHK = [
-            'quavun@gmail.com',
-            'nickiewooster@gmail.com',
-
-            // 'ServiceDesk@previa.se',
-            // 'Support.telecomputing.se@previa.se',
-            // 'Support@previa.se',
-            // 'DMHKKontohantering@previa.se',
-            // 'DMHRKontohantering@previa.se'
+            'ServiceDesk@previa.se',
+            'Support.telecomputing.se@previa.se',
+            'Support@previa.se',
+            'DMHKKontohantering@previa.se',
+            'DMHRKontohantering@previa.se'
         ];
         var DMITOrder = [
-            'nickiewooster@gmail.com',
-            // 'ITOrder@previa.se'
+            'ITOrder@previa.se'
         ];
         var DMTelefoni = [
-            'quavun@gmail.com',
-            // 'telefoni@previa.se'
+            'telefoni@previa.se'
         ];
 
 
@@ -60,7 +55,7 @@
                         "toAddress": _.first(recievers),
                         "subject": key + ' beställning',
                         "body": $filter('jsonToHtml')(form),
-                        "toAddressCC": _.without([formPerson.email/*, orderer.email*/], null, undefined),
+                        "toAddressCC": _.without([formPerson.email, orderer.email], null, undefined),
                         "toAddressBCC": _.rest(recievers)
                     });
                 }
