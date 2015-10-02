@@ -115,9 +115,9 @@
 
             var wizardSteps = [];
             if ($scope.model.person.employmentType.toLowerCase() === 'konsult') {
-                $scope.fields.personinfo = forms.newConsultantPersonalInfo().concat(forms.newConsultantAccount());
+                $scope.fields.personinfo = forms.newConsultantPersonalInfo($scope.model).concat(forms.newConsultantAccount($scope.model));
                 wizardSteps = [{
-                    name: 'Nytt konto',
+                    name: 'Nytt konto (Konsult)',
                     route: 'bestallning.ny',
                     model: $scope.model.person
                 }];
@@ -128,7 +128,7 @@
                     route: 'bestallning.ny',
                     model: $scope.model.person
                 }, {
-                    name: 'Nytt konto',
+                    name: 'Nytt konto (Previa anställd)',
                     route: 'bestallning.ny.anstalld.nytt-konto',
                     model: $scope.model.ny.anstalld.nyttKonto,
                     canSkip: true

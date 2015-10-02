@@ -57,17 +57,17 @@
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Anställd Fr o m',
+                    key: 'Anställd From',
                     templateOptions: {
-                        label: 'Fr o m',
+                        label: 'From',
                         required: true
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Anställd T o m',
+                    key: 'Anställd Tom',
                     templateOptions: {
-                        label: 'T o m',
+                        label: 'Tom',
                         required: true
                     }
                 }, {
@@ -101,7 +101,7 @@
                 }, {
                     className: 'col-md-4',
                     type: 'tjanstestalleSelect',
-                    key: 'workplace', 
+                    key: 'workplace',
                     templateOptions: {
                         label: gettext('Tjänsteställe'),
                         placeholder: 'Välj ett tjänsteställe',
@@ -245,20 +245,20 @@
                 }, {
                     className: 'col-md-3',
                     type: 'datepicker',
-                    key: 'fr o m',
+                    key: 'from',
                     templateOptions: {
-                        label: 'fr o m',
+                        label: 'from',
                         required: true
                     }
                 }, {
                     className: 'col-md-3',
                     type: 'datepicker',
-                    key: 't o m',
+                    key: 'tom',
                     hideExpression: function(vv, mv, scope) {
                         return scope.model['anställningsform'] === 'tillsvidareanställning';
                     },
                     templateOptions: {
-                        label: 't o m',
+                        label: 'tom',
                         required: true
                     }
                 }, {
@@ -388,7 +388,7 @@
         }
 
         // Nytt konto för ny konsult
-        function getOrderConsultantAccountForm() {
+        function getOrderConsultantAccountForm(parentModel) {
             var specific = [{
                 className: 'row',
                 fieldGroup: [{
@@ -401,7 +401,16 @@
                         options: autocomplete.getRE('All')
                     }
                 }, {
-                    template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>'
+                    template: '<div><b>Befattning / Roll / Behörighet / Lincenser</b></div>',
+                    controller: /*ngInject*/ function($scope) {
+
+                        // Initialize the model
+                        $scope.model['Dagens datum'] = new Date();
+                        $scope.model['Behörig beställare'] = {
+                            name: parentModel.orderPerson.name,
+                            email: parentModel.orderPerson.email
+                        };
+                    },
                 }, {
                     className: 'col-md-12',
                     type: 'radio',
@@ -468,8 +477,9 @@
                             'Huvud-RE': model.person.RE,
                             'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person.RE),
                         };
-                        $scope.model['Beställare'] = {
-                            namn: model.orderPerson.name
+                        $scope.model['Behörig beställare'] = {
+                            namn: model.orderPerson.name,
+                            email: model.orderPerson.email
                         };
                         $scope.model['Dagens datum'] = new Date();
 
@@ -479,11 +489,11 @@
                             };
                             switch (type) {
                                 case 'tillsvidareanställning':
-                                    retval.From = model.person['fr o m'];
+                                    retval.From = model.person.from;
                                     break;
                                 default:
-                                    retval.From = model.person['fr o m'];
-                                    retval.Tom = model.person['t o m'];
+                                    retval.From = model.person.from;
+                                    retval.Tom = model.person.tom;
                                     break;
                             }
 
@@ -633,7 +643,7 @@
                     template: '<div><b>Flytt av abonnemang till annan användare</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonnent = {
+                        $scope.model['Ny användare'] = {
                             Namn: parentModel.person.name,
                             Resultatenhet: parentModel.person.RE,
                             Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person.RE)
@@ -651,15 +661,7 @@
                         label: 'Anknytning med tillhörande mobilnr'
                     }
                 }, {
-                    className: 'col-md-6',
-                    type: 'input',
-                    key: 'Ny användare',
-                    templateOptions: {
-                        label: 'Ny användare',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-6',
+                    className: 'col-md-12',
                     type: 'datepicker',
                     key: 'Datum för flytt',
                     templateOptions: {
@@ -696,9 +698,7 @@
                     template: '<div><b>Uppsägning av abonnemang</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model['Beställnings datum'] = new Date();
-                        $scope.model.Abonnent = {
-                            Resultatenhet: parentModel.person.RE
-                        };
+                        $scope.model.Resultatenhet = parentModel.person.RE;
                         $scope.model.Kontaktperson = {
                             Namn: parentModel.orderPerson.name,
                             Telefonnummer: parentModel.orderPerson.telephones
@@ -722,27 +722,21 @@
                         }]
                     }
                 }, {
-                    className: 'col-md-4',
-                    type: 'input',
-                    key: 'Telefonnummer',
-                    templateOptions: {
-                        label: 'Telefonnummer',
-                        required: true
-                    }
-                }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'input',
                     key: 'Anknytning',
                     templateOptions: {
                         label: 'Anknytning',
+                        required: true
                     }
                 }, {
-                    className: 'col-md-4',
+                    className: 'col-md-6',
                     type: 'input',
                     key: 'Mobilnummer',
                     templateOptions: {
                         label: 'Mobilnummer',
                         type: 'tel',
+                        required: true
                     }
                 }, {
                     className: 'col-md-12',
@@ -798,6 +792,7 @@
                     controller: /*@ngInject*/ function($scope) {
                         $scope.model.Abonnent = {
                             Namn: parentModel.person.name,
+                            'Användarnamn': parentModel.person.username,
                             Resultatenhet: parentModel.person.RE,
                             Postadress: autocomplete.getTjanstestallePostAdress(parentModel.person.RE)
                         };
@@ -806,6 +801,8 @@
                             Namn: parentModel.orderPerson.name,
                             Telefonnummer: parentModel.orderPerson.telephones
                         };
+
+                        $scope.model['Beställningsdatum'] = new Date();
                     },
                     templateOptions: {
                         label: 'Mobilt bredband för en existerande dator ?',
@@ -840,7 +837,7 @@
                 fieldGroup: [{
                     template: '<div><b>Flytt av Mobilt bredband till annan användare</b></div>',
                     controller: /*@ngInject*/ function($scope) {
-                        $scope.model.Abonnent = {
+                        $scope.model['Ny abonnent'] = {
                             Namn: parentModel.person.name,
                             'Användarnamn': parentModel.person.username,
                             Resultatenhet: parentModel.person.RE,
@@ -873,12 +870,10 @@
                 fieldGroup: [{
                     template: '<div><b>Uppsägning av Mobilt bredband</b></div>',
                     controller: /*@ngInject*/ function($scope) {
-                        $scope.model.Abonnent = {
-                            Resultatenhet: parentModel.person.RE,
-                            Kontaktperson: {
-                                Namn: parentModel.orderPerson.name,
-                                Telefonnummer: parentModel.orderPerson.telephones
-                            }
+                        $scope.model.Resultatenhet = parentModel.person.RE;
+                        $scope.model.Kontaktperson = {
+                            Namn: parentModel.orderPerson.name,
+                            Telefonnummer: parentModel.orderPerson.telephones
                         };
                     }
                 }, {
@@ -921,7 +916,7 @@
                         'Leveransadress': autocomplete.getTjanstestallePostAdress(parentModel.person.RE),
                         'Fakturaadress': 'AB Previa, PAA04220, FE 533, 105 69, STOCKHOLM'
                     };
-                    $scope.model['Dagens datum'] = new Date();
+                    $scope.model['Beställningsdatum'] = new Date();
                     $scope.model.Fakturareferens = parentModel.orderPerson.username;
                 }
             }, {
@@ -1014,8 +1009,11 @@
                 fieldGroup: [{
                     template: '<div><b>Utrustning</b></div>',
                     controller: /*@ngInject*/ function($scope) {
-                        $scope.model['Beställare'] = parentModel.orderPerson.name;
-                        $scope.model['RE som beställningen avser'] = parentModel.person.RE;
+                        $scope.model['Beställare'] = {
+                            name: parentModel.orderPerson.name,
+                            RE: parentModel.orderPerson.RE,
+                            email: parentModel.orderPerson.email
+                        };
                         $scope.model.Mottagare = {
                             Leveransmottagare: parentModel.person.name,
                             Leveransadress: autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE)
@@ -1137,6 +1135,7 @@
                             'Leveransadress 1': 'AB Previa',
                             Leveransmottagare: {
                                 Namn: parentModel.person.name,
+                                Tel: parentModel.person.telephones,
                                 'Leveransadress 2': autocomplete.getTjanstestalleBesokAdress(parentModel.person.RE)
                             }
                         };
@@ -1145,6 +1144,7 @@
                         $scope.model['Box/Postnr/Ort'] = 'PAA04220, FE 533 105 69, STOCKHOLM';
                         $scope.model['Dagens datum'] = new Date();
                         $scope.model.Fakturareferens = parentModel.orderPerson.username;
+                        $scope.model['Resultatenhet som beställningen avser'] = parentModel.orderPerson.RE;
 
                         function success(response) {
                             $scope.to.options = response.data;
@@ -1200,20 +1200,31 @@
                         setTVisitAdress($scope.model, parentModel);
                         setTPostalAdress($scope.model, parentModel);
                         setOrderPersonInfo($scope.model, parentModel);
+                        $scope.model['Ange ny tidsperiod'] = {
+                            From: new Date(),
+                            Tom: new Date()
+                        };
+                        $scope.model['Tjänsteställe / Enhetens namn'] = parentModel.person.workplace;
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'From',
+                    key: '$From',
                     templateOptions: {
-                        label: 'Fr.o.m'
+                        label: 'Fr.o.m',
+                        onChange: function(v, o, s) {
+                            s.model['Ange ny tidsperiod'].From = v;
+                        }
                     }
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
-                    key: 'Tom',
+                    key: '$Tom',
                     templateOptions: {
-                        label: 'T.o.m'
+                        label: 'T.o.m',
+                        onChange: function(v, o, s) {
+                            s.model['Ange ny tidsperiod'].Tom = v;
+                        }
                     }
                 }, {
                     className: 'col-md-12',
@@ -1400,6 +1411,7 @@
                         setTVisitAdress($scope.model, parentModel);
                         setTPostalAdress($scope.model, parentModel);
                         setOrderPersonInfo($scope.model, parentModel);
+                        $scope.model['Tjänsteställe / Enhetens namn'] = parentModel.person.workplace;
                     }
                 }, {
                     className: 'col-md-12',
@@ -1417,7 +1429,12 @@
                             name: ' Tidsbegränsad anställning',
                             value: 'Tidsbegränsad anställning'
                         }],
-                        placeholder: 'Välj i listan'
+                        placeholder: 'Välj i listan',
+                        onChange: function(v, o, s) {
+                            if(v === 'Tillsvidareanställning' || !s.model['Anställningsform']) {
+                                delete s.model.Tom;
+                            }
+                        }
                     }
                 }, {
                     className: 'col-md-6',
@@ -1425,7 +1442,8 @@
                     key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
-                    }
+                    },
+                    hideExpression: '!model["Anställningsform"]'
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
@@ -1433,7 +1451,7 @@
                     templateOptions: {
                         label: 'T.o.m'
                     },
-                    hideExpression: 'model["Anställningsform"] === "Tillsvidareanställning"'
+                    hideExpression: '!model["Anställningsform"] || model["Anställningsform"] === "Tillsvidareanställning"'
                 }]
             }, {
                 className: 'row',
@@ -1670,6 +1688,12 @@
                             name: ' Tidsbegränsad anställning',
                             value: 'Tidsbegränsad anställning'
                         }],
+
+                        onChange: function(v, o, s) {
+                            if(v === 'Tillsvidareanställning') {
+                                delete s.model.Tom;
+                            }
+                        }
                     }
                 }, {
                     className: 'col-md-6',
@@ -1677,7 +1701,8 @@
                     key: 'From',
                     templateOptions: {
                         label: 'Fr.o.m'
-                    }
+                    },
+                     hideExpression: '!model["Anställningsform"]'
                 }, {
                     className: 'col-md-6',
                     type: 'datepicker',
@@ -1685,7 +1710,7 @@
                     templateOptions: {
                         label: 'T.o.m'
                     },
-                    hideExpression: 'model["Anställningsform"] === "Tillsvidareanställning"'
+                    hideExpression: '!model["Anställningsform"] || model["Anställningsform"] === "Tillsvidareanställning"'
                 }, {
                     className: 'col-md-12',
                     type: 'textarea',
@@ -1708,9 +1733,12 @@
                     template: '<div><b>Avsluta konto</b></div>',
                     controller: /*@ngInject*/ function($scope) {
                         setPersonInfo($scope.model, parentModel);
-                        $scope.RE = parentModel.person.RE;
-                        $scope['Dagens datum'] = new Date();
-                        $scope['Beställare'] = parentModel.orderPerson;
+                        $scope.model.RE = parentModel.person.RE;
+                        $scope.model['Dagens datum'] = new Date();
+                        $scope.model['Behörig beställare'] = {
+                            name: parentModel.orderPerson.name,
+                            email: parentModel.orderPerson.email
+                        };
                     }
                 }, {
                     className: 'col-md-12',
@@ -1725,7 +1753,7 @@
                     key: 'Mailbox och H: kopieras till följande person',
                     type: 'employeeSearch',
                     templateOptions: {
-                        label: 'Personalsökning',
+                        label: 'Mailbox och H: kopieras till följande person',
                         placeholder: 'Fyll i namn på personen du leta efter',
                         required: true,
                         personSelected: function(item, model) {

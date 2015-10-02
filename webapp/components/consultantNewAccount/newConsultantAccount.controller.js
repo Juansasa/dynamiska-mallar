@@ -11,6 +11,6 @@
         // Make sure to only use one model for all states
         $state.current.skip = false;
         $scope.model = $scope.model || {};
-        $scope.fields = forms.newConsultantAccount();
+        $scope.fields = forms.newConsultantAccount($scope.model);
     }
 })();
