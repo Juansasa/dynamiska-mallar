@@ -1,5 +1,5 @@
 <form name="form">
-    <div class="wizard container-fluid">
+    <div class="wizard container-fluid" id="wizard-control">
         <table>
             <tbody>
                 <tr>
@@ -12,6 +12,7 @@
     </div>
 
     <div class="container">
+        <alert id="{{'alert-' + $index}}" dismiss-on-timeout="3000" ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">{{alert.msg}}</alert>
         <div class="panel panel-success">
             <div class="panel-heading" ng-if="model.person.name">
                 <h4><b>Ärende person</b></h4>

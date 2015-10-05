@@ -4,7 +4,7 @@
         .controller('SummaryExistingEmployeeController', ctrl);
 
     /*@ngInject*/
-    function ctrl($scope, $state, $modal, mailService, usSpinnerService) {
+    function ctrl($rootScope, $scope, $state, $modal, mailService, usSpinnerService) {
         if (!$scope.model.steps || !$scope.model.steps.existingEmployee) {
             $state.go('^');
         }
@@ -31,21 +31,31 @@
         function sendMail() {
             usSpinnerService.spin('sendmail-spinner');
             mailService.sendMail($scope.summary, $scope.model.orderPerson, $scope.model.person)
-            .then(function(response) {
-                usSpinnerService.stop('sendmail-spinner');
-                var confirmModal = $modal.open({
-                    animation: true,
-                    size: 'lg',
-                    templateUrl: 'components/bestallning/sammanfattning/confirmationModal.html',
-                    resolve: {
-                        mails: function () {
-                            return response.data.email;
-                        }
-                    },
-                    controller: 'ConfirmationModalController'
-                });
+                .then(mailSent, mailsendingfailed);
+        }
 
-                confirmModal.result.then(modalClosed, modalClosed);
+        function mailSent(response) {
+            usSpinnerService.stop('sendmail-spinner');
+            var confirmModal = $modal.open({
+                animation: true,
+                size: 'lg',
+                templateUrl: 'components/bestallning/sammanfattning/confirmationModal.html',
+                resolve: {
+                    mails: function() {
+                        return response.data.email;
+                    }
+                },
+                controller: 'ConfirmationModalController'
+            });
+
+            confirmModal.result.then(modalClosed, modalClosed);
+        }
+
+        function mailsendingfailed(error) {
+            usSpinnerService.stop('sendmail-spinner');
+            $rootScope.addAlert({
+                type: 'danger',
+                msg: 'Mailutskick misslyckades'
             });
         }
 

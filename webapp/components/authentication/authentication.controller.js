@@ -19,7 +19,11 @@
         function error(err) {
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
             usSpinnerService.stop('auth-spinner');
-            $scope.authMessage = 'Du har inte behörighet att använda tjänsten, följande fel uppstod: ' + err;
+
+            $rootScope.addAlert({
+                type: 'danger',
+                msg: 'Verifieringen av dina behörigheter misslyckades, va god och försök igen senare'
+            });
         }
     }
 })();
