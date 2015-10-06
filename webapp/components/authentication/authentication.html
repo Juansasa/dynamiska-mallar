@@ -1,2 +1,3 @@
 <span us-spinner spinner-key="auth-spinner" spinner-start-active="true"></span>
+<alert class="authAlert" id="{{'alert-' + $index}}" ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">{{alert.msg}}</alert>
 <h3 class="spinner-message">{{authMessage}}</h3>

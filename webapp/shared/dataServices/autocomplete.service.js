@@ -176,11 +176,15 @@
 
         function getMO() {
             return [{
-                name: 'MO 1'
+                name: 'MO öst'
             }, {
-                name: 'MO 2'
+                name: 'MO norr'
             }, {
-                name: 'MO 3'
+                name: 'MO väst'
+            }, {
+                name: 'MO stockholm'
+            }, {
+                name: 'MO sydväst'
             }];
         }
 

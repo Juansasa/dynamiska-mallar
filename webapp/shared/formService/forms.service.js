@@ -33,7 +33,7 @@
 
             changeEmploymentStatus: changeEmploymentStatus,
 
-            phoneEquipment: getOrderPhoneEquipmentForm,
+            phoneEquipment: getOrderPhoneEquipmentForm
         };
 
         return service;
@@ -158,6 +158,14 @@
                 className: 'row',
                 fieldGroup: [{
                     template: '<div><b>Tjänsteuppgifter<b></div>'
+                }, {
+                    className: 'col-md-12',
+                    type: 'roleSelect',
+                    key: 'Befattning',
+                    templateOptions: {
+                        label: 'Välj Befattning, roll och behörighet',
+                        options: autocomplete.getBefattningOptions(true)
+                    }
                 }, {
                     className: 'col-md-4',
                     type: 'autocomplete-select',
@@ -339,9 +347,6 @@
                             name: '25',
                             value: 25
                         }, {
-                            name: '28',
-                            value: 28
-                        }, {
                             name: '30',
                             value: 30
                         }]
@@ -410,7 +415,7 @@
                             name: parentModel.orderPerson.name,
                             email: parentModel.orderPerson.email
                         };
-                    },
+                    }
                 }, {
                     className: 'col-md-12',
                     type: 'radio',
@@ -543,14 +548,6 @@
                             'Access till Kuben',
                             'Lync'
                         ]
-                    }
-                }, {
-                    className: 'col-md-12',
-                    type: 'roleSelect',
-                    key: 'Befattning',
-                    templateOptions: {
-                        label: 'Välj Befattning, roll och behörighet',
-                        options: autocomplete.getBefattningOptions(true)
                     }
                 }, {
                     type: 'signature'

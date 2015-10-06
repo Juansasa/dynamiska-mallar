@@ -21,9 +21,9 @@ gulp.task('html', ['inject'], function() {
         .pipe(plugins.rev())
         .pipe(jsFilter)
         .pipe(plugins.ngAnnotate())
-        // .pipe(plugins.uglify({
-        //     preserveComments: plugins.uglifySaveLicense
-        // }))
+        .pipe(plugins.uglify({
+            preserveComments: plugins.uglifySaveLicense
+        }))
         .pipe(jsFilter.restore())
         .pipe(cssFilter)
         .pipe(plugins.replace('../bootstrap-sass-official/assets/fonts/bootstrap', '../fonts'))

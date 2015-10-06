@@ -5,7 +5,7 @@
         .run(register);
 
     /*@ngInject*/
-    function register(formlyConfig, $filter, gettext, dataSharing, adService) {
+    function register(formlyConfig, $filter, gettext, adService) {
         function getDatepickerNgattrs() {
             var attributes = [
                 'show-weeks',

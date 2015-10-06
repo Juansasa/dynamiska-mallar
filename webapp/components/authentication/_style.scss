@@ -5,3 +5,11 @@
   	transform: translate(-50%,0);
   	padding-top: 1em;
 }
+
+.authAlert {
+	text-align: center;
+	margin: auto 30%;
+    position: absolute;
+    top: 25%; bottom: 25%; left: 0; right: 0;
+    max-height: 4em;
+}
