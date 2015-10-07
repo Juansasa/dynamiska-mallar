@@ -23,7 +23,7 @@
         ];
 
         var HR = [
-            'quang.vu@r2m.com'
+            'helena.thuresson@previa.se'
         ];
 
 
@@ -74,7 +74,7 @@
 
                 emails.push({
                     "fromAddress": orderer.email,
-                    "toAddress": orderer.email, //recievers,
+                    "toAddress": [orderer.email], //recievers,
                     "subject": key + ' beställning',
                     "body": $filter('jsonToHtml')(form),
                     "toAddressCC": null, //_.without([formPerson.email, orderer.email], null, undefined),

@@ -145,14 +145,6 @@
                 }, {
                     type: 'telefon',
                     key: 'telephones'
-                }, {
-                    className: 'col-md-12',
-                    type: 'input',
-                    key: 'email',
-                    templateOptions: {
-                        label: 'Email',
-                        type: 'email'
-                    }
                 }]
             }, {
                 className: 'row',
