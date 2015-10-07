@@ -185,6 +185,10 @@
                 name: 'MO stockholm'
             }, {
                 name: 'MO sydväst'
+            }, {
+                name: 'HR'
+            }, {
+                name: 'KSC'
             }];
         }
 

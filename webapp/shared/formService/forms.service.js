@@ -481,6 +481,7 @@
                             'MO (Marknadsområde)': model.person.MO,
                             'Huvud-RE': model.person.RE,
                             'Tjänsteställe / Enhetens namn': autocomplete.getTjanstestalleNamn(model.person.RE),
+                            Befattning: model.person.Befattning
                         };
                         $scope.model['Behörig beställare'] = {
                             namn: model.orderPerson.name,

@@ -8,20 +8,22 @@
         adService.getManager().then(success, error);
         $scope.authMessage = 'Verifiera access...';
 
-        // [{
-        //     "name": {
-        //         "firstname": "Helena",
-        //         "lastname": "Thuresson"
-        //     },
-        //     "email": "Helena.Thuresson@previa.se",
-        //     "telephones": {
-        //         "mobile": "0703389067",
-        //         "phone": "086274303"
-        //     },
-        //     "RE": "707 / Personal",
-        //     "isManager": true,
-        //     "username": "helthu"
-        // }]
+        success({
+            data: [{
+                "name": {
+                    "firstname": "Helena",
+                    "lastname": "Thuresson"
+                },
+                "email": "Helena.Thuresson@previa.se",
+                "telephones": {
+                    "mobile": "0703389067",
+                    "phone": "086274303"
+                },
+                "RE": "707 / Personal",
+                "isManager": true,
+                "username": "helthu"
+            }]
+        });
 
         function success(response) {
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);

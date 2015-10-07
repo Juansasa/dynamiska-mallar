@@ -205,13 +205,6 @@
                             }, {
                                 className: 'col-md-4',
                                 type: 'input',
-                                key: 'mellannamn',
-                                templateOptions: {
-                                    label: 'Mellannamn'
-                                }
-                            }, {
-                                className: 'col-md-4',
-                                type: 'input',
                                 key: 'efternamn',
                                 templateOptions: {
                                     label: 'Efternamn',
