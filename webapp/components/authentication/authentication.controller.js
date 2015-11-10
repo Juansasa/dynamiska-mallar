@@ -5,11 +5,11 @@
 
     /*@ngInject*/
     function authenticationCtrl($rootScope, $scope, $location, $anchorScroll, adService, usSpinnerService, $state, AUTH_EVENTS) {
-        adService.getManager().then(success, error);
+        //adService.getManager().then(success, error);
         $scope.authMessage = 'Verifiera access...';
 
         success({
-            data: [{
+            data: {
                 "name": {
                     "firstname": "Helena",
                     "lastname": "Thuresson"
@@ -22,13 +22,13 @@
                 "RE": "707 / Personal",
                 "isManager": true,
                 "username": "helthu"
-            }]
+            }
         });
 
         function success(response) {
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             usSpinnerService.stop('auth-spinner');
-            adService.loggedUser = _.first(response.data);
+            adService.loggedUser = response.data;
             $state.go('home');
         }
 

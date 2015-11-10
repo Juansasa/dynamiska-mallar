@@ -192,7 +192,7 @@
                         forms: [{
                             className: 'row',
                             fieldGroup: [{
-                                className: 'col-md-4',
+                                className: 'col-md-6',
                                 type: 'input',
                                 key: 'förnamn',
                                 templateOptions: {
@@ -203,7 +203,7 @@
                                     show: true
                                 }
                             }, {
-                                className: 'col-md-4',
+                                className: 'col-md-6',
                                 type: 'input',
                                 key: 'efternamn',
                                 templateOptions: {
